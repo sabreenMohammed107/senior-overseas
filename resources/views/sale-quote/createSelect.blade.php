@@ -54,9 +54,9 @@
                                         <option value="">Select ...</option>
                                             @foreach ($airs as $type)
                                             <option value='{{$type->id}}'>
-											@if($type->carrier)
-                                    {{$type->carrier->carrier_name}}
-                                    @endif
+											
+                                    {{$type->carrier_name}}
+                                 
                                              </option>
                                             @endforeach
                                         </select>
@@ -98,9 +98,9 @@
                                         <option value="">Select ...</option>
                                             @foreach ($oceans as $type)
                                             <option value='{{$type->id}}'>
-											@if($type->carrier)
-												{{ $type->carrier->carrier_name}}
-											@endif</option>
+										
+												{{ $type->carrier_name}}
+											</option>
                                             @endforeach
                                         </select>
                                     </div>

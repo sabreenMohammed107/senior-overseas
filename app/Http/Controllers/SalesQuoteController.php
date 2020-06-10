@@ -63,12 +63,12 @@ class SalesQuoteController extends Controller
     {
 
         //airs
-        $airs = Air_rate::all();
+        $airs = Carrier::all();
         $aols = Port::all();
         $aods = Port::all();
         $ranges=Air_rate::pluck('slide_range')->toArray();
         //ocean
-        $oceans = Ocean_freight_rate::all();
+        $oceans = Carrier::all();
         $containers = Container::all();
 
         //tracking
