@@ -269,7 +269,7 @@ class SalesQuoteController extends Controller
                 $truck = Trucking_rate::where('id', '=', $tracking)->first();
                 $currency = $truck->car_currency_id;
                 $x = array_search(('car_price' . $tracking), $request->all());
-                if ($request->input('price' . $tracking)[0] != $truck->price) {
+              
                     $input = [
                         'trucking_rate_id' => $tracking,
                         'sale_quote_id' => $Sale_quote->id,
@@ -277,7 +277,7 @@ class SalesQuoteController extends Controller
                         'car_price' => $request->input('car_price' . $tracking)[0],
                     ];
                     Sale_quote_trucking::create($input);
-                }
+               
             }
         });
 
