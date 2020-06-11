@@ -76,6 +76,7 @@
                                        
                                         <th> Pol</th>
                                         <th> Pod</th>
+                                        <th>Transit Time (Days</th>
                                         <th> Notes</th>
                                         @endif
                                         <th>Price</th>
@@ -112,6 +113,7 @@
                                         <td>@if($filter->ocean->pod)
                                             {{$filter->ocean->pod->port_name}} - {{$filter->ocean->pod->country->country_name}}
                                             @endif</td>
+                                            <td> {{$row->transit_time}}</td>
                                         <td>{{$filter->ocean->notes}}</td>
 
                                         @endif
@@ -141,6 +143,7 @@
                                                     <th> Pol</th>
                                                     <th> Pod</th>
                                                     <th> Car</th>
+                                                    <th>Transit Time (Days</th>
                                                     <th>Notes</th>
                                                     <th>Price</th>
                                                     <th>Ckecked box</th>
@@ -163,7 +166,7 @@
                                                     <td>@if($track->truck->car)
                                                         {{$track->truck->car->car_type}}
                                                         @endif</td>
-                                                   
+                                                        <td>{{$row->transit_time}}</td>
                                                     <td>{{$track->truck->notes}}</td>
                                                     <td>
                                                         <input disabled name='car_price{{$track->id}}[]' type="number" value="<?php echo $trackings[$index]->car_price; ?>">

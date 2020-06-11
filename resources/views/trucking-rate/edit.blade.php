@@ -86,6 +86,12 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
+                                    <div class="form-group">
+                                        <label class="exampleInputPassword1" for="exampleCheck1">Transit Time (Days)</label>
+                                        <input type="number" name="transit_time" value="{{$row->transit_time}}" class="form-control" placeholder="Transit Time (Days)">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
                                     <div class="ui-widget form-group">
                                         <label>Car Currency</label>
                                         <select name="car_currency_id" class="form-control" data-live-search="true">

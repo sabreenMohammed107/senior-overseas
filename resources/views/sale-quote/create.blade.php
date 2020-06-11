@@ -63,10 +63,12 @@
 										<th>Range</th>
 										<th> Aol</th>
 										<th> Aod</th>
+										
 										<th> Note</th>
 										@else
 										<th> Pol</th>
 										<th> Pod</th>
+										<th>Transit Time (Days</th>
 										<th> Note</th>
 										@endif
 										<th>Price</th>
@@ -89,6 +91,7 @@
 										<td>@if($row->aod)
 											{{$row->aod->port_name}} - {{$row->aod->country->country_name}}
 											@endif</td>
+											
 											<td>{{$row->notes}}</td>
 										@else
 										<td>@if($row->pol)
@@ -97,6 +100,7 @@
 										<td>@if($row->pod)
 											{{$row->pod->port_name}} - {{$row->pod->country->country_name}}
 											@endif</td>
+											<td> {{$row->transit_time}}</td>
 											<td>{{$row->notes}}</td>
 										@endif
 
@@ -123,6 +127,7 @@
 													<th> Pol</th>
 													<th> Pod</th>
 													<th> Car</th>
+													<th>Transit Time (Days</th>
                                                     <th>Notes</th>
 													<th>Price</th>
 													<th>Ckecked box</th>
@@ -145,7 +150,7 @@
 														<td>@if($row->car)
 														{{$row->car->car_type}} 
 														@endif</td>
-													
+														<td>{{$row->transit_time}}</td>
                                                     <td>{{$row->notes}}</td>
 													<td>
 														<input name='car_price{{$row->id}}[]' type="number" value="<?php echo $trackings[$index]->car_price; ?>">
