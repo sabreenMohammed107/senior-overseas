@@ -113,7 +113,7 @@
                                         <td>@if($filter->ocean->pod)
                                             {{$filter->ocean->pod->port_name}} - {{$filter->ocean->pod->country->country_name}}
                                             @endif</td>
-                                            <td> {{$row->ocean->transit_time}}</td>
+                                            <td> {{$filter->ocean->transit_time}}</td>
                                         <td>{{$filter->ocean->notes}}</td>
 
                                         @endif
