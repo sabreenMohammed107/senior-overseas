@@ -139,7 +139,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
-                                                    <th> supplier</th>
+                                                    <!-- <th> supplier</th> -->
                                                     <th> Pol</th>
                                                     <th> Pod</th>
                                                     <th> Car</th>
@@ -154,9 +154,9 @@
                                                 @foreach($trackings as $index => $track)
                                                 <tr>
                                                     <td>{{$index+1}}</td>
-                                                    <td>@if($track->truck->supplier)
+                                                    <!-- <td>@if($track->truck->supplier)
                                                         {{$track->truck->supplier->supplier_name}}
-                                                        @endif</td>
+                                                        @endif</td> -->
                                                     <td>@if($track->truck->pol)
                                                         {{$track->truck->pol->port_name}} - {{$track->truck->pol->country->country_name}}
                                                         @endif</td>
