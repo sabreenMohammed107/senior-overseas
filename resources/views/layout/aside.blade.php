@@ -70,7 +70,7 @@
 </a>
 <ul id="operationdropdown" class="collapse" aria-labelledby="basic-elements" data-parent="#side-nav-accordion">
 
-<li> <a href="_operation.html">Operations</a> </li>
+<li> <a href="{{ route('operations.index') }}">Operations</a> </li>
 
 </ul>
 

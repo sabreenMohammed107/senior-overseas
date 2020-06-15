@@ -101,6 +101,8 @@ Schema::table('air_rates', function (Blueprint $table) {
         
         //  This is Realations for the sale_quotes Table ..
         Schema::table('sale_quotes', function (Blueprint $table) {
+            $table->foreign('client_id')->references('id')->on('clients');
+            $table->foreign('supplier_id')->references('id')->on('suppliers');
             $table->foreign('clearance_currency_id')->references('id')->on('currencies');
             $table->foreign('door_door_currency_id')->references('id')->on('currencies');
         });

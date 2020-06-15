@@ -58,3 +58,6 @@ Route::get('fetchAir', 'SalesQuoteController@fetchAir')->name('fetchAir');
 Route::get('fetchOcean', 'SalesQuoteController@fetchOcean')->name('fetchOcean');
 Route::get('fetchTrucking', 'SalesQuoteController@fetchTrucking')->name('fetchTrucking');
 Route::post('gotosave', 'SalesQuoteController@gotosave')->name('gotosave');
+//------------------------------operations-------------------------
+// ----------------------------supplier------------------
+Route::resource('/operations', 'OperationsController');

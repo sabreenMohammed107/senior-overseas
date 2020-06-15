@@ -75,6 +75,7 @@ class SalesQuoteController extends Controller
         $suppliers = Supplier::all();
         $carriers = Carrier::all();
         $cars = Car_type::all();
+//clearance
 
 
         return view($this->viewName . 'createSelect', compact(
@@ -170,8 +171,9 @@ class SalesQuoteController extends Controller
         $clients = Client::all();
         $clearances = Currency::all();
         $doors = Currency::all();
+        $clearancesSuppliers=Supplier::where('supplier_type_id','=',2)->get();
 
-        return view($this->viewName . 'create', compact('typeTesting', 'type', 'filtters', 'trackings', 'clients', 'clearances', 'doors'));
+        return view($this->viewName . 'create', compact('typeTesting', 'type', 'filtters', 'trackings', 'clients', 'clearancesSuppliers','clearances', 'doors'));
     }
     /**
      * Store a newly created resource in storage.
@@ -197,6 +199,10 @@ class SalesQuoteController extends Controller
         if ($request->input('client_id')) {
 
             $data['client_id'] = $request->input('client_id');
+        }
+        if ($request->input('supplier_id')) {
+
+            $data['supplier_id'] = $request->input('supplier_id');
         }
         if ($request->input('clearance_currency_id')) {
 
@@ -325,7 +331,8 @@ class SalesQuoteController extends Controller
          $clients = Client::all();
          $clearances = Currency::all();
          $doors = Currency::all();
-        return view($this->viewName . 'edit', compact('row','typeTesting',  'filtters', 'trackings', 'clients', 'clearances', 'doors'));
+         $clearancesSuppliers=Supplier::where('supplier_type_id','=',2)->get();
+        return view($this->viewName . 'edit', compact('row','typeTesting',  'filtters', 'trackings', 'clients','clearancesSuppliers', 'clearances', 'doors'));
     }
 
     /**

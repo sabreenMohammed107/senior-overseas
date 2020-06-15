@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Sale_quote extends Model
 {
     protected $fillable = [
-        'quote_date', 'quote_code', 'client_id','ocean_air_type',
+        'quote_date', 'quote_code', 'client_id','ocean_air_type','supplier_id',
        
         'clearance_price', 'clearance_currency_id','clearance_notes',
          'door_door_price','door_door_currency_id','door_door_notes'
@@ -16,6 +16,11 @@ class Sale_quote extends Model
     public function client()
     {
         return $this->belongsTo('App\Models\Client','client_id');
+
+    }
+    public function supplier()
+    {
+        return $this->belongsTo('App\Models\Supplier','supplier_id');
 
     }
     public function clearance()
