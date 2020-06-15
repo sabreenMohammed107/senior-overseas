@@ -191,7 +191,7 @@
                                 <div class="col-md-6 mb-3">
 										<div class="ui-widget form-group">
 											<label>Clearance Suppliers</label>
-											<select name="supplier_id" class="form-control" data-live-search="true">
+											<select name="supplier_id" disabled class="form-control" data-live-search="true">
 												<option value="">Select ...</option>
 												@foreach ($clearancesSuppliers as $type)
 												<option value='{{$type->id}}' {{ $type->id == $row->supplier_id ? 'selected' : '' }}>
