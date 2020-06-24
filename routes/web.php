@@ -36,6 +36,8 @@ Route::resource('/employee', 'EmployeeController');
 Route::resource('/bank-account', 'BankAccountController');
 // ----------------------------currency------------------
 Route::resource('/currency', 'CurrencyController');
+// ----------------------------commodity------------------
+Route::resource('/commodity', 'CommodityController');
 // ---------------------------country------------------
 Route::resource('/country', 'CountryController');
 // ---------------------------ocean-freight------------------

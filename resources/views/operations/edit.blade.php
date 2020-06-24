@@ -419,14 +419,25 @@
 				  	<form action="">
 				  		<div style="border-bottom:solid #0094ff 2px;"><h2>Operations Data</h2></div><br />
 				  		<div class="ms-auth-container row">
-				  			<div class="col-md-6 mb-3">
+						  <div class="col-md-6 mb-3">
 				  				<div class="ui-widget form-group">
 				  					<label>Consignee</label>
-				  					<select class=" form-control" data-live-search="true">
+				  					<select class="form-control" data-live-search="true">
 				  						<option>Select ...</option>
-				  						<option>Consignee 1</option>
-				  						<option>Consignee 2</option>
-				  						<option>Consignee 3</option>
+				  						<option>Client 1</option>
+				  						<option>Client 2</option>
+				  						<option>Client 3</option>
+				  					</select>
+				  				</div>
+							  </div>
+							  <div class="col-md-6 mb-3">
+				  				<div class="ui-widget form-group">
+				  					<label>Notify</label>
+				  					<select class="form-control" data-live-search="true">
+				  						<option>Select ...</option>
+				  						<option>Client 1</option>
+				  						<option>Client 2</option>
+				  						<option>Client 3</option>
 				  					</select>
 				  				</div>
 				  			</div>
@@ -461,6 +472,7 @@
 				  	<form action="">
 				  		<div style="border-bottom:solid #0094ff 2px;"><h2>Policy Data</h2></div><br />
 				  		<div class="ms-auth-container row">
+						 
 				  			<div class="col-md-6 mb-3">
 				  				<div class="form-group">
 				  					<label class="exampleInputPassword1" for="exampleCheck1">PL No</label>
@@ -478,7 +490,24 @@
 				  			<label class="exampleInputPassword1" for="exampleCheck1">Booking No</label>
 				  			<input type="text" class="form-control" placeholder="Booking No">
 				  		</div>
-				  	</div>
+					  </div>
+					  <div class="col-md-6 mb-3">
+				  				<div class="form-group">
+				  					<label class="exampleInputPassword1" for="exampleCheck1">Commodity</label>
+				  					<select class="form-control" data-live-search="true">
+				  						<option>Select ...</option>
+				  						<option>commodity 1</option>
+				  						<option>commodity 2</option>
+				  						<option>commodity 3</option>
+				  					</select>
+				  				</div>
+							  </div>
+							  <div class="col-md-6 mb-3">
+				  				<div class="form-group">
+				  					<label class="exampleInputPassword1" for="exampleCheck1">cut-off date</label>
+				  					<input type="date" class="form-control" placeholder="cut-off date">
+				  				</div>
+				  			</div>
 				  		</div>
 				  	</form>
 				  	<div class="input-group d-flex justify-content-end text-center">
