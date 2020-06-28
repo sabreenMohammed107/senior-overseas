@@ -45,7 +45,7 @@
 											<option value="">Select ...</option>
 											@foreach ($qouts as $type)
 											<option value='{{$type->id}}'>
-												{{$type->door_door_notes}}</option>
+												{{$type->quote_code}}</option>
 											@endforeach
 										</select>
 									</div>
@@ -57,7 +57,7 @@
 											<option value="">Select ...</option>
 											@foreach ($qoutsFake as $type)
 											<option value='{{$type->id}}'>
-												{{$type->door_door_notes}}</option>
+												{{$type->quote_code}}</option>
 											@endforeach
 										</select>
 									</div>
