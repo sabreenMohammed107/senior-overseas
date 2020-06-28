@@ -41,7 +41,7 @@
                                 <td>{{$index+1}}</td>
                               
                                 <td>{{$row->operation_code}}</td>
-                                <td><?php $date = date_create($row->operation_code) ?>
+                                <td><?php $date = date_create($row->operation_date) ?>
 									{{ date_format($date,'Y-m-d') }}</td>
                                 <td>@if($row->shipper)
 									{{$row->shipper->client_name}}
