@@ -89,7 +89,7 @@ function existing() {
 	
 	document.getElementById('exist').style.display = 'block';
 	document.getElementById('fake').style.display = 'none';
-	// $('select[name="sales_quote_id"]').val('');
+	$('select[name="sales_quote_id"]').val('');
 	
 }
 
@@ -97,7 +97,7 @@ function fake() {
 
 	document.getElementById('exist').style.display = 'none';
 	document.getElementById('fake').style.display = 'block';
-	// $('select[name="sales_quote_id"]').val('');
+	$('select[name="sales_quote_id"]').val('');
 }
 	$(document).ready(function() {
 
