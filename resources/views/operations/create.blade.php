@@ -89,7 +89,7 @@ function existing() {
 	
 	document.getElementById('exist').style.display = 'block';
 	document.getElementById('fake').style.display = 'none';
-	 $('#fakeselect').val('');
+	 
 	
 }
 
@@ -97,7 +97,7 @@ function fake() {
 
 	document.getElementById('exist').style.display = 'none';
 	document.getElementById('fake').style.display = 'block';
-	$('#existselect').val('');
+	
 }
 	$(document).ready(function() {
 
