@@ -140,9 +140,13 @@ class OperationsController extends Controller
 
 
         ];
-        if ($request->input('sales_quote_id')) {
+        if ($request->input('sales_quote_id_fake')) {
 
-            $data['sales_quote_id'] = $request->input('sales_quote_id');
+            $data['sales_quote_id'] = $request->input('sales_quote_id_fake');
+        }
+        if ($request->input('sales_quote_id_exist')) {
+
+            $data['sales_quote_id'] = $request->input('sales_quote_id_exist');
         }
         if ($request->input('consignee_id')) {
 

@@ -41,7 +41,7 @@
 								<div class="col-md-6 mb-3 " id="exist">
 									<div class="ui-widget form-group">
 										<label>Read From Exiting Quote</label>
-										<select id="existselect" name="sales_quote_id" class="form-control dynamic" data-dependent="allData" data-show-subtext="true" data-live-search="true" id="exist">
+										<select id="existselect" name="sales_quote_id_exist" class="form-control dynamic" data-dependent="allData" data-show-subtext="true" data-live-search="true" id="exist">
 											<option value="">Select ...</option>
 											@foreach ($qouts as $type)
 											<option value='{{$type->id}}'>
@@ -53,7 +53,7 @@
 								<div class="col-md-6 mb-3">
 									<div class="ui-widget form-group fake" id="fake">
 										<label>Read From Fake Quote</label>
-										<select id="fakeselect" name="sales_quote_id" class=" form-control" data-live-search="true">
+										<select id="fakeselect" name="sales_quote_id_fake" class=" form-control" data-live-search="true">
 											<option value="">Select ...</option>
 											@foreach ($qoutsFake as $type)
 											<option value='{{$type->id}}'>
@@ -89,7 +89,7 @@ function existing() {
 	
 	document.getElementById('exist').style.display = 'block';
 	document.getElementById('fake').style.display = 'none';
-	 
+	 $('#fakeselect').val('');
 	
 }
 
@@ -97,7 +97,7 @@ function fake() {
 
 	document.getElementById('exist').style.display = 'none';
 	document.getElementById('fake').style.display = 'block';
-	
+	$('#existselect').val('');
 }
 	$(document).ready(function() {
 
