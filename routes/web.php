@@ -63,3 +63,4 @@ Route::post('gotosave', 'SalesQuoteController@gotosave')->name('gotosave');
 //------------------------------operations-------------------------
 // ----------------------------supplier------------------
 Route::resource('/operations', 'OperationsController');
+Route::get('dynamicdependentexist/fetch', 'OperationsController@fetExist')->name('dynamicdependentexist.fetch');

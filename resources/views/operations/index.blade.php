@@ -31,17 +31,21 @@
                                 <th>#</th>
                                 <th>Operation Code</th>
                                 <th>Operation Date</th>
-                                <th>Client</th>
+                                <th>Shipper</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-
+                            @foreach($rows as $index => $row)
                             <tr>
-                                <td>#</td>
-                                <td>Operation Code</td>
-                                <td>Operation Date</td>
-                                <td>Client</td>
+                                <td>{{$index+1}}</td>
+                              
+                                <td>{{$row->operation_code}}</td>
+                                <td><?php $date = date_create($row->operation_code) ?>
+									{{ date_format($date,'Y-m-d') }}</td>
+                                <td>@if($row->shipper)
+									{{$row->shipper->client_name}}
+									@endif</td>
                                 <td>
                                     <?php
                                     $row = 1;
@@ -51,6 +55,7 @@
                                     <a href="#" onclick="delette('ٌRound')" class="btn d-inline-block btn-danger">delete</a>
                                 </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -139,4 +144,12 @@
     </div>
 </div>
 <!-- /Add new Modal -->
+@endsection
+@section('scripts')
+
+<script>
+    $(document).ready(function() {
+
+    });
+</script>
 @endsection

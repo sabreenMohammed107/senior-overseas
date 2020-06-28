@@ -183,6 +183,7 @@ class SalesQuoteController extends Controller
      */
     public function store(Request $request)
     {
+        
 
         //first get data 
         $data = [

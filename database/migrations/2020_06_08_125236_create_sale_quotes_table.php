@@ -26,6 +26,7 @@ class CreateSaleQuotesTable extends Migration
             $table->text('clearance_notes')->nullable();
             $table->double('door_door_price')->nullable();
             $table->integer('door_door_currency_id')->unsigned()->nullable();
+            $table->integer('sale_quotes_type_id')->unsigned()->nullable();
             $table->text('door_door_notes')->nullable();
             $table->timestamps();
           
