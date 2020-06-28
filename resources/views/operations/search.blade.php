@@ -3,7 +3,7 @@
 	<div class="col-md-6 mb-3">
 		<div class="form-group">
 			<label class="exampleInputPassword1" for="exampleCheck1">Client ( Shipper )</label>
-			<input type="text"  class="form-control" value="{{$sale_qoute->client->client_name ?? 'Client ( Shipper )' }}" placeholder="Client ( Shipper )" readonly>
+			<input type="text"  class="form-control" value="{{$sale_qoute->client->id ?? 'Client ( Shipper )' }}" placeholder="Client ( Shipper )" readonly>
 		</div>
 	</div>
 	<div class="col-md-6 mb-3">
