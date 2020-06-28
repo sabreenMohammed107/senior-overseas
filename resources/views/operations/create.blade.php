@@ -101,7 +101,27 @@ function fake() {
 }
 	$(document).ready(function() {
 
-		$('select[name="sales_quote_id"]').on('change', function() {
+		$('select[name="sales_quote_id_fake"]').on('change', function() {
+			var buildings_id = $(this).val();
+
+			if (buildings_id) {
+			
+				$.ajax({
+					url: "{{route('dynamicdependentexist.fetch')}}",
+					method: "get",
+					data: {
+						buildings_id: buildings_id,
+
+					},
+					success: function(result) {
+						$('#main').html(result);
+					}
+				});
+			} else {
+
+			}
+		});
+		$('select[name="sales_quote_id_exist"]').on('change', function() {
 			var buildings_id = $(this).val();
 
 			if (buildings_id) {
