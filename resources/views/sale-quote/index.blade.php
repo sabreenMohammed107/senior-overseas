@@ -25,7 +25,7 @@
 						<thead>
 							<tr>
 								<th>#</th>
-								<!-- <th> Quote Code</th> -->
+								<th> Quote Code</th>
 								<th> Quote Date</th>
 								<th> Quote Client</th>
 								<th> Validity Date</th>
@@ -37,7 +37,7 @@
 							@foreach($rows as $index => $row)
 							<tr>
 								<td>{{$index+1}}</td>
-								<!-- <td>{{$row->quote_code}}</td> -->
+								<td>{{$row->quote_code}}</td>
 								<td> <?php $date = date_create($row->quote_date) ?>
 									{{ date_format($date,'Y-m-d') }}</td>
 								<td>@if($row->client)
