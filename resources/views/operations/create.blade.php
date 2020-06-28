@@ -103,7 +103,7 @@ function fake() {
 
 		$('select[name="sales_quote_id_fake"]').on('change', function() {
 			var xx = $(this).val();
-alert('cc'+xx)
+
 			if (xx) {
 			
 				$.ajax({
