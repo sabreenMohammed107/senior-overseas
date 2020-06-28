@@ -102,15 +102,15 @@ function fake() {
 	$(document).ready(function() {
 
 		$('select[name="sales_quote_id_fake"]').on('change', function() {
-			var buildings_id = $(this).val();
-
-			if (buildings_id) {
+			var xx = $(this).val();
+alert('cc'+xx)
+			if (xx) {
 			
 				$.ajax({
 					url: "{{route('dynamicdependentexist.fetch')}}",
 					method: "get",
 					data: {
-						buildings_id: buildings_id,
+						buildings_id: xx,
 
 					},
 					success: function(result) {
@@ -121,6 +121,7 @@ function fake() {
 
 			}
 		});
+
 		$('select[name="sales_quote_id_exist"]').on('change', function() {
 			var buildings_id = $(this).val();
 
