@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Client;
+use App\Models\Commodity;
 use App\Models\Country;
 use File;
 use DB;
 use Log;
 use Carbon\Carbon;
 use Illuminate\Database\QueryException;
+
 class CommodityController extends Controller
 {
     protected $object;
@@ -19,7 +20,7 @@ class CommodityController extends Controller
     protected $message;
     protected $errormessage;
 
-    public function __construct(Client $object)
+    public function __construct(Commodity $object)
     {
         // $this->middleware('auth');
 
@@ -36,9 +37,10 @@ class CommodityController extends Controller
      */
     public function index()
     {
-     
 
-        return view($this->viewName . 'index');
+        $rows = Commodity::orderBy("created_at", "Desc")->get();
+
+        return view($this->viewName . 'index', compact('rows',));
     }
 
     /**
@@ -59,7 +61,13 @@ class CommodityController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = [
+            'name' => $request->input('name'),
+        ];
+
+        $this->object::create($data);
+
+        return redirect()->route($this->routeName . 'index')->with('flash_success', $this->message);
     }
 
     /**
@@ -81,7 +89,9 @@ class CommodityController extends Controller
      */
     public function edit($id)
     {
-        return view($this->viewName . 'edit');
+        $row = Commodity::where('id', '=', $id)->first();
+      
+        return view($this->viewName . 'edit', compact('row', ));
     }
 
     /**
@@ -93,7 +103,17 @@ class CommodityController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = [
+            'name' => $request->input('name'),
+          
+           
+
+        ];
+       
+       
+        $this->object::findOrFail($id)->update($data);
+
+        return redirect()->route($this->routeName . 'index')->with('flash_success', $this->message);
     }
 
     /**
@@ -104,6 +124,16 @@ class CommodityController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $row = Commodity::where('id', '=', $id)->first();
+       
+        try {
+            $row->delete();
+          
+        } catch (QueryException $q) {
+
+            return redirect()->back()->with('flash_danger', 'You cannot delete related with another...');
+        }
+
+        return redirect()->route($this->routeName . 'index')->with('flash_success', 'Data Has Been Deleted Successfully !');
     }
 }

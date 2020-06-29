@@ -66,7 +66,7 @@ class SalesQuoteController extends Controller
         $airs = Carrier::all();
         $aols = Port::all();
         $aods = Port::all();
-        $ranges=Air_rate::pluck('slide_range')->toArray();
+        $ranges = Air_rate::pluck('slide_range')->toArray();
         //ocean
         $oceans = Carrier::all();
         $containers = Container::all();
@@ -75,16 +75,18 @@ class SalesQuoteController extends Controller
         $suppliers = Supplier::all();
         $carriers = Carrier::all();
         $cars = Car_type::all();
-//clearance
+        //clearance
 
 
         return view($this->viewName . 'createSelect', compact(
 
-            'carriers','ranges',
+            'carriers',
+            'ranges',
             'aols',
             'aods',
             'containers',
-            'airs','cars',
+            'airs',
+            'cars',
             'oceans',
             'suppliers',
 
@@ -171,9 +173,9 @@ class SalesQuoteController extends Controller
         $clients = Client::all();
         $clearances = Currency::all();
         $doors = Currency::all();
-        $clearancesSuppliers=Supplier::where('supplier_type_id','=',2)->get();
+        $clearancesSuppliers = Supplier::where('supplier_type_id', '=', 2)->get();
 
-        return view($this->viewName . 'create', compact('typeTesting', 'type', 'filtters', 'trackings', 'clients', 'clearancesSuppliers','clearances', 'doors'));
+        return view($this->viewName . 'create', compact('typeTesting', 'type', 'filtters', 'trackings', 'clients', 'clearancesSuppliers', 'clearances', 'doors'));
     }
     /**
      * Store a newly created resource in storage.
@@ -183,12 +185,21 @@ class SalesQuoteController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $max = Sale_quote::orderBy('id', 'desc')->value('quote_code');
 
-        //first get data 
+        if ($max >= 100) {
+
+            $max = $max + 1;
+        } else {
+
+            $max = 100;
+        }
+
+
+       //first get data 
         $data = [
             'quote_date' => $request->input('quote_date'),
-            'quote_code' => $request->input('quote_code'),
+            'quote_code' => $max,
             'ocean_air_type' => $request->input('savingType'),
             'clearance_price' => $request->input('clearance_price'),
             'clearance_notes' => $request->input('clearance_notes'),
@@ -242,16 +253,15 @@ class SalesQuoteController extends Controller
                     $air = Air_rate::where('id', '=', $all)->first();
                     $currency = $air->currency_id;
                     $x = array_search(('price' . $all), $request->all());
-                   
-                        $input = [
-                            'air_rate_id' => $all,
-                            'sale_quote_id' => $Sale_quote->id,
-                            'currency_id' => $currency,
-                            'price' => $request->input('price' . $all)[0],
-                        ];
-                      
-                        Sale_quote_air::create($input);
-                  
+
+                    $input = [
+                        'air_rate_id' => $all,
+                        'sale_quote_id' => $Sale_quote->id,
+                        'currency_id' => $currency,
+                        'price' => $request->input('price' . $all)[0],
+                    ];
+
+                    Sale_quote_air::create($input);
                 }
             } else {
                 //ocean
@@ -259,15 +269,14 @@ class SalesQuoteController extends Controller
                     $ocean = Ocean_freight_rate::where('id', '=', $all)->first();
                     $currency = $ocean->currency_id;
                     $x = array_search(('price' . $all), $request->all());
-                   
-                        $input = [
-                            'ocean_rate_id' => $all,
-                            'sale_quote_id' => $Sale_quote->id,
-                            'currency_id' => $currency,
-                            'price' => $request->input('price' . $all)[0],
-                        ];
-                        Sale_quote_ocean::create($input);
-                   
+
+                    $input = [
+                        'ocean_rate_id' => $all,
+                        'sale_quote_id' => $Sale_quote->id,
+                        'currency_id' => $currency,
+                        'price' => $request->input('price' . $all)[0],
+                    ];
+                    Sale_quote_ocean::create($input);
                 }
             }
 
@@ -276,15 +285,14 @@ class SalesQuoteController extends Controller
                 $truck = Trucking_rate::where('id', '=', $tracking)->first();
                 $currency = $truck->car_currency_id;
                 $x = array_search(('car_price' . $tracking), $request->all());
-              
-                    $input = [
-                        'trucking_rate_id' => $tracking,
-                        'sale_quote_id' => $Sale_quote->id,
-                        'currency_id' => $currency,
-                        'car_price' => $request->input('car_price' . $tracking)[0],
-                    ];
-                    Sale_quote_trucking::create($input);
-               
+
+                $input = [
+                    'trucking_rate_id' => $tracking,
+                    'sale_quote_id' => $Sale_quote->id,
+                    'currency_id' => $currency,
+                    'car_price' => $request->input('car_price' . $tracking)[0],
+                ];
+                Sale_quote_trucking::create($input);
             }
         });
 
@@ -321,19 +329,19 @@ class SalesQuoteController extends Controller
         $row = Sale_quote::where('id', '=', $id)->first();
         $filtters = [];
         if ($row->ocean_air_type == 0) {
-            $filtters = Sale_quote_air::where('sale_quote_id','=',$id)->orderBy("created_at", "Desc")->get();
-  $typeTesting=0;
+            $filtters = Sale_quote_air::where('sale_quote_id', '=', $id)->orderBy("created_at", "Desc")->get();
+            $typeTesting = 0;
         } else {
-            $filtters = Sale_quote_ocean::where('sale_quote_id','=',$id)->orderBy("created_at", "Desc")->get();
-            $typeTesting=1;
+            $filtters = Sale_quote_ocean::where('sale_quote_id', '=', $id)->orderBy("created_at", "Desc")->get();
+            $typeTesting = 1;
         }
-        $trackings = Sale_quote_trucking::where('sale_quote_id','=',$id)->orderBy("created_at", "Desc")->get();
-         //all Data
-         $clients = Client::all();
-         $clearances = Currency::all();
-         $doors = Currency::all();
-         $clearancesSuppliers=Supplier::where('supplier_type_id','=',2)->get();
-        return view($this->viewName . 'edit', compact('row','typeTesting',  'filtters', 'trackings', 'clients','clearancesSuppliers', 'clearances', 'doors'));
+        $trackings = Sale_quote_trucking::where('sale_quote_id', '=', $id)->orderBy("created_at", "Desc")->get();
+        //all Data
+        $clients = Client::all();
+        $clearances = Currency::all();
+        $doors = Currency::all();
+        $clearancesSuppliers = Supplier::where('supplier_type_id', '=', 2)->get();
+        return view($this->viewName . 'edit', compact('row', 'typeTesting',  'filtters', 'trackings', 'clients', 'clearancesSuppliers', 'clearances', 'doors'));
     }
 
     /**
@@ -345,8 +353,8 @@ class SalesQuoteController extends Controller
      */
     public function update(Request $request, $id)
     {
-         //first get data 
-         $data = [
+        //first get data 
+        $data = [
             'quote_date' => $request->input('quote_date'),
             'quote_code' => $request->input('quote_code'),
             'ocean_air_type' => $request->input('savingType'),
@@ -390,30 +398,29 @@ class SalesQuoteController extends Controller
         }
 
         //passing parameter to transaction
-        DB::transaction(function () use ($id,$data, $all_ids, $tracking_ids, $request) {
-            $Sale_quote =Sale_quote::findOrFail($id)->update($data);
-       
+        DB::transaction(function () use ($id, $data, $all_ids, $tracking_ids, $request) {
+            $Sale_quote = Sale_quote::findOrFail($id)->update($data);
+
             //air
             if ($data['ocean_air_type'] == 0) {
                 foreach ($all_ids as $all) {
-              $air=Sale_quote_air::where('id','=',$all)->first();
+                    $air = Sale_quote_air::where('id', '=', $all)->first();
                     if ($request->input('price' . $all)[0] != $air->price) {
                         $input = [
-                          
+
                             'price' => $request->input('price' . $all)[0],
                         ];
-                        
+
                         Sale_quote_air::findOrFail($all)->update($input);
                     }
                 }
-            } else 
-            {
+            } else {
                 //ocean
                 foreach ($all_ids as $all) {
-                    $ocean=Sale_quote_ocean::where('id','=',$all)->first();
+                    $ocean = Sale_quote_ocean::where('id', '=', $all)->first();
                     if ($request->input('price' . $all)[0] != $ocean->price) {
                         $input = [
-                          
+
                             'price' => $request->input('price' . $all)[0],
                         ];
                         Sale_quote_ocean::findOrFail($all)->update($input);
@@ -423,10 +430,10 @@ class SalesQuoteController extends Controller
 
 
             foreach ($tracking_ids as $tracking) {
-                $truck=Sale_quote_trucking::where('id','=',$all)->first();
+                $truck = Sale_quote_trucking::where('id', '=', $all)->first();
                 if ($request->input('price' . $tracking)[0] != $truck->price) {
                     $input = [
-                    
+
                         'car_price' => $request->input('car_price' . $tracking)[0],
                     ];
                     Sale_quote_trucking::findOrFail($tracking)->update($input);
@@ -449,18 +456,16 @@ class SalesQuoteController extends Controller
      */
     public function destroy($id)
     {
-    $row = Sale_quote::where('id', '=', $id)->first();
-       
+        $row = Sale_quote::where('id', '=', $id)->first();
 
-    try {
-        $row->delete();
-      
-    } catch (QueryException $q) {
 
-        return redirect()->back()->with('flash_danger', 'You cannot delete related with another...');
+        try {
+            $row->delete();
+        } catch (QueryException $q) {
+
+            return redirect()->back()->with('flash_danger', 'You cannot delete related with another...');
+        }
+
+        return redirect()->route($this->routeName . 'index')->with('flash_success', 'Data Has Been Deleted Successfully !');
     }
-
-    return redirect()->route($this->routeName . 'index')->with('flash_success', 'Data Has Been Deleted Successfully !');
-}
-
 }

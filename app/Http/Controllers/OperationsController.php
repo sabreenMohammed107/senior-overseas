@@ -123,11 +123,22 @@ class OperationsController extends Controller
      */
     public function store(Request $request)
     {
+        $max = Operation::orderBy('id', 'desc')->value('operation_code');
+
+        if ($max >= 100) {
+
+            $max = $max + 1;
+        } else {
+
+            $max = 100;
+        }
+
+
 
         //first get data 
         $data = [
             'shipper_id' => $request->input('shipper_id'),
-            'operation_code' =>mt_rand(100, 9999),
+            'operation_code' =>$max,
             'operation_date' => Carbon::parse($request->input('operation_date')),
             'container_counts' => $request->input('container_counts'),
             'container_name' => $request->input('container_name'),
