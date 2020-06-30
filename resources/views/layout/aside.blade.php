@@ -23,9 +23,9 @@
       <span><i class="material-icons fs-16">build</i>Setup</span>
     </a>
     <ul id="create" class="collapse" aria-labelledby="tables" data-parent="#side-nav-accordion">
-    @if (Auth::user()->role==null)
-    <li> <a href="{{ route('role.index') }}">Roles</a> </li>
-    @endif
+    <!-- @if (Auth::user()->role==null) -->
+    <!-- <li> <a href="{{ route('role.index') }}">Roles</a> </li> -->
+    <!-- @endif -->
       <li> <a href="{{ route('client.index') }}">Clients</a> </li>
       <li> <a href="{{ route('supplier.index') }}">Suppliers</a> </li>
       <li> <a href="{{ route('port.index') }}">Ports</a> </li>
