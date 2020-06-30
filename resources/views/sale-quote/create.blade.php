@@ -49,6 +49,17 @@
 								<input type="date" class="form-control" name="quote_date" placeholder="Quote Date">
 							</div>
 						</div>
+						<div class="col-md-4 mb-3">
+						<div class="form-group">
+				  					<label class="exampleInputPassword1" for="exampleCheck1">qoute type</label>
+				  					<select class="form-control" name="sale_quotes_type_id" data-live-search="true" required>
+				  						<option>Select ...</option>
+				  						<option value="1">Fake</option>
+				  						<option value="2">Exist</option>
+				  						
+									  </select>
+						</div>
+				  				</div>
 					</div>
 
 					<div class="ms-auth-container row no-gutters">

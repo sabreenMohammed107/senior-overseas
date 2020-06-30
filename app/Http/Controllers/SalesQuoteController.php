@@ -205,6 +205,7 @@ class SalesQuoteController extends Controller
             'clearance_notes' => $request->input('clearance_notes'),
             'door_door_price' => $request->input('door_door_price'),
             'door_door_notes' => $request->input('door_door_notes'),
+            'sale_quotes_type_id'=>$request->input('sale_quotes_type_id'),
 
 
         ];
