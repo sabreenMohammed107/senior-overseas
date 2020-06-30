@@ -50,7 +50,7 @@ class OperationsController extends Controller
      */
     public function index()
     {
-        $rows = Operation::orderBy("created_at", "Desc")->get();
+        $rows = Operation::orderBy("id", "Desc")->get();
         return view($this->viewName . 'index', compact('rows'));
     }
 
