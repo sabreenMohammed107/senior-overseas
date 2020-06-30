@@ -21,7 +21,7 @@ class BankAccountController extends Controller
 
     public function __construct(Bank_account $object)
     {
-        // $this->middleware('auth');
+        $this->middleware('auth');
 
         $this->object = $object;
         $this->viewName = 'bank-account.';

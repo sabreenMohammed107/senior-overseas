@@ -25,7 +25,7 @@ class OceanFreightController extends Controller
 
     public function __construct(Ocean_freight_rate $object)
     {
-        // $this->middleware('auth');
+        $this->middleware('auth');
 
         $this->object = $object;
         $this->viewName = 'ocean-freight.';

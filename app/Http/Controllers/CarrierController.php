@@ -23,7 +23,7 @@ class CarrierController extends Controller
 
     public function __construct(Carrier $object)
     {
-        // $this->middleware('auth');
+        $this->middleware('auth');
 
         $this->object = $object;
         $this->viewName = 'carrier.';

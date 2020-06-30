@@ -22,7 +22,7 @@ class PortController extends Controller
 
     public function __construct(Port $object)
     {
-        // $this->middleware('auth');
+        $this->middleware('auth');
 
         $this->object = $object;
         $this->viewName = 'port.';

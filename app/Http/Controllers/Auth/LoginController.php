@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-
+use Illuminate\Http\Request;
+use App\User;
 class LoginController extends Controller
 {
     /*
@@ -18,14 +19,16 @@ class LoginController extends Controller
     |
     */
 
-    use AuthenticatesUsers;
+    use AuthenticatesUsers {
+        logout as performLogout;
+    }
 
     /**
      * Where to redirect users after login.
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -36,4 +39,27 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+//to login without inception
+    protected function attemptLogin(Request $request)
+    
+    {
+        $user = User::where('email', $request->email)
+            ->where('password', $request->password)
+            ->first();
+    
+        if(!isset($user)){
+            return false;
+        }
+    
+        \Auth::login($user);
+    
+        return true;
+    }
+
+    public function logout(Request $request)
+{
+    $this->performLogout($request);
+    return redirect('/');
+}
 }

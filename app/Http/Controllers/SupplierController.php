@@ -22,7 +22,7 @@ class SupplierController extends Controller
 
     public function __construct(Supplier $object)
     {
-        // $this->middleware('auth');
+        $this->middleware('auth');
 
         $this->object = $object;
         $this->viewName = 'supplier.';

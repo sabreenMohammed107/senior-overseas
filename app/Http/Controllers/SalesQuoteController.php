@@ -34,7 +34,7 @@ class SalesQuoteController extends Controller
 
     public function __construct(Sale_quote $object)
     {
-        // $this->middleware('auth');
+        $this->middleware('auth');
 
         $this->object = $object;
         $this->viewName = 'sale-quote.';

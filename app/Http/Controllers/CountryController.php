@@ -21,7 +21,7 @@ class CountryController extends Controller
 
     public function __construct(Country $object)
     {
-        // $this->middleware('auth');
+        $this->middleware('auth');
 
         $this->object = $object;
         $this->viewName = 'country.';

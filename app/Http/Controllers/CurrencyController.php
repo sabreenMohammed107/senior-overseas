@@ -21,7 +21,7 @@ class CurrencyController extends Controller
 
     public function __construct(Currency $object)
     {
-        // $this->middleware('auth');
+        $this->middleware('auth');
 
         $this->object = $object;
         $this->viewName = 'currency.';

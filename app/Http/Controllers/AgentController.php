@@ -21,7 +21,7 @@ class AgentController extends Controller
 
     public function __construct(Agent $object)
     {
-        // $this->middleware('auth');
+        $this->middleware('auth');
 
         $this->object = $object;
         $this->viewName = 'agent.';

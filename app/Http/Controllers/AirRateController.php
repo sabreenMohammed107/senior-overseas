@@ -25,7 +25,7 @@ class AirRateController extends Controller
 
     public function __construct(Air_rate $object)
     {
-        // $this->middleware('auth');
+        $this->middleware('auth');
 
         $this->object = $object;
         $this->viewName = 'air-rate.';

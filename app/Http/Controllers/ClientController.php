@@ -22,7 +22,7 @@ class ClientController extends Controller
 
     public function __construct(Client $object)
     {
-        // $this->middleware('auth');
+        $this->middleware('auth');
 
         $this->object = $object;
         $this->viewName = 'client.';

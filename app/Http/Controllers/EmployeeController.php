@@ -21,7 +21,7 @@ class EmployeeController extends Controller
 
     public function __construct(Employee $object)
     {
-        // $this->middleware('auth');
+        $this->middleware('auth');
 
         $this->object = $object;
         $this->viewName = 'employee.';

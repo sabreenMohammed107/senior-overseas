@@ -3,15 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Commodity;
-use App\Models\Country;
-use File;
-use DB;
-use Log;
-use Carbon\Carbon;
+use App\Models\Role;
 use Illuminate\Database\QueryException;
-
-class CommodityController extends Controller
+class RolesController extends Controller
 {
     protected $object;
 
@@ -20,13 +14,13 @@ class CommodityController extends Controller
     protected $message;
     protected $errormessage;
 
-    public function __construct(Commodity $object)
+    public function __construct(Role $object)
     {
         $this->middleware('auth');
 
         $this->object = $object;
-        $this->viewName = 'commodity.';
-        $this->routeName = 'commodity.';
+        $this->viewName = 'role.';
+        $this->routeName = 'role.';
         $this->message = 'The Data has been saved';
         $this->errormessage = 'check Your Data ';
     }
@@ -37,8 +31,7 @@ class CommodityController extends Controller
      */
     public function index()
     {
-
-        $rows = Commodity::orderBy("created_at", "Desc")->get();
+        $rows = Role::orderBy("created_at", "Desc")->get();
 
         return view($this->viewName . 'index', compact('rows',));
     }
@@ -89,7 +82,7 @@ class CommodityController extends Controller
      */
     public function edit($id)
     {
-        $row = Commodity::where('id', '=', $id)->first();
+        $row = Role::where('id', '=', $id)->first();
       
         return view($this->viewName . 'edit', compact('row', ));
     }
@@ -124,7 +117,7 @@ class CommodityController extends Controller
      */
     public function destroy($id)
     {
-        $row = Commodity::where('id', '=', $id)->first();
+        $row = Role::where('id', '=', $id)->first();
        
         try {
             $row->delete();

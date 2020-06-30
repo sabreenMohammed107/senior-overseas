@@ -35,7 +35,7 @@ class OperationsController extends Controller
 
     public function __construct(Operation $object)
     {
-        // $this->middleware('auth');
+        $this->middleware('auth');
 
         $this->object = $object;
         $this->viewName = 'operations.';

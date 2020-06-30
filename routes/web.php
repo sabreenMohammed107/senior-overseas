@@ -11,9 +11,25 @@
 |
 */
 
-Route::get('/', function () {
-    return view('dashboard');
-});
+Auth::routes();
+
+Route::get('/', 'HomeController@index')->name('home');
+
+// Route::get('registerTest', function () {
+//     return view('auth.register');
+// });
+Route::post('reg', 'Auth\TestController@create')->name('reg');
+/*-----------------------------------------------------------*/
+Route::resource('/usersList', 'UserListController');
+Route::get('/registerTest', 'UserListController@registerTest')->name('registerTest');
+Route::get('/resetPassword/{id}', 'UserListController@resetPassword')->name('resetPassword');
+Route::post('editUserPassword', 'UserListController@editUserPassword')->name('editUserPassword');
+
+/*-------------------------------------------------------*/
+
+// Route::get('/', function () {
+//     return view('dashboard');
+// });
 
 // ----------------------------client------------------
 Route::resource('/client', 'ClientController');
@@ -46,6 +62,9 @@ Route::resource('/ocean-freight', 'OceanFreightController');
 Route::resource('/trucking-rate', 'TruckingRateController');
 // ---------------------------air-rate------------------
 Route::resource('/air-rate', 'AirRateController');
+
+// ----------------------------role------------------
+Route::resource('/role', 'RolesController');
 // ---------------------------sale_quote------------------
 // Route::resource('/sale-quote', 'SalesQuoteController');
 // Route::get('fetchAir', 'SalesQuoteController@fetchAir')->name('fetchAir');

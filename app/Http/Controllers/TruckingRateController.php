@@ -25,7 +25,7 @@ class TruckingRateController extends Controller
 
     public function __construct(Trucking_rate $object)
     {
-        // $this->middleware('auth');
+        $this->middleware('auth');
 
         $this->object = $object;
         $this->viewName = 'trucking-rate.';
