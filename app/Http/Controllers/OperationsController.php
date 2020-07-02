@@ -224,8 +224,9 @@ class OperationsController extends Controller
         $Commodity = Commodity::all();
         $doors = Currency::all();
         // get expenses
+        $expenses = Operation_expense::where('operation_id','=',$id)->orderBy("id", "Desc")->get();
 
-        return view($this->viewName . 'view', compact('row', 'qouts', 'consinee', 'notify', 'clearances', 'doors', 'typeTesting', 'Commodity', 'trackings', 'filtters'));
+        return view($this->viewName . 'view', compact('row', 'qouts', 'consinee', 'notify', 'expenses','clearances', 'doors', 'typeTesting', 'Commodity', 'trackings', 'filtters'));
     }
 
     /**
@@ -254,7 +255,7 @@ class OperationsController extends Controller
         $Commodity = Commodity::all();
         $doors = Currency::all();
         // get expenses
-        $expenses = Operation_expense::orderBy("id", "Desc")->get();
+        $expenses = Operation_expense::where('operation_id','=',$id)->orderBy("id", "Desc")->get();
         $providers = Expenses_provider_type::all();
         $expenseTypes = Expense::all();
         $expenseCurrency = Currency::all();
