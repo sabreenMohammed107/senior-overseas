@@ -17,6 +17,7 @@ use App\Models\Supplier;
 use App\Models\Sale_quote_air;
 use App\Models\Sale_quote_ocean;
 use App\Models\Sale_quote_trucking;
+use App\Models\Employee;
 use File;
 use DB;
 use Log;
@@ -174,8 +175,9 @@ class SalesQuoteController extends Controller
         $clearances = Currency::all();
         $doors = Currency::all();
         $clearancesSuppliers = Supplier::where('supplier_type_id', '=', 2)->get();
+        $employees=Employee::all();
 
-        return view($this->viewName . 'create', compact('typeTesting', 'type', 'filtters', 'trackings', 'clients', 'clearancesSuppliers', 'clearances', 'doors'));
+        return view($this->viewName . 'create', compact('typeTesting', 'type', 'employees','filtters', 'trackings', 'clients', 'clearancesSuppliers', 'clearances', 'doors'));
     }
     /**
      * Store a newly created resource in storage.
@@ -212,6 +214,10 @@ class SalesQuoteController extends Controller
         if ($request->input('client_id')) {
 
             $data['client_id'] = $request->input('client_id');
+        }
+        if ($request->input('sale_person_id')) {
+
+            $data['sale_person_id'] = $request->input('sale_person_id');
         }
         if ($request->input('supplier_id')) {
 
@@ -341,8 +347,9 @@ class SalesQuoteController extends Controller
         $clients = Client::all();
         $clearances = Currency::all();
         $doors = Currency::all();
+        $employees=Employee::all();
         $clearancesSuppliers = Supplier::where('supplier_type_id', '=', 2)->get();
-        return view($this->viewName . 'edit', compact('row', 'typeTesting',  'filtters', 'trackings', 'clients', 'clearancesSuppliers', 'clearances', 'doors'));
+        return view($this->viewName . 'edit', compact('row', 'typeTesting','employees',  'filtters', 'trackings', 'clients', 'clearancesSuppliers', 'clearances', 'doors'));
     }
 
     /**
@@ -357,6 +364,7 @@ class SalesQuoteController extends Controller
         //first get data 
         $data = [
             'quote_date' => $request->input('quote_date'),
+
             'quote_code' => $request->input('quote_code'),
             'ocean_air_type' => $request->input('savingType'),
             'clearance_price' => $request->input('clearance_price'),
@@ -366,6 +374,10 @@ class SalesQuoteController extends Controller
 
 
         ];
+        if ($request->input('sale_person_id')) {
+
+            $data['sale_person_id'] = $request->input('sale_person_id');
+        }
         if ($request->input('client_id')) {
 
             $data['client_id'] = $request->input('client_id');

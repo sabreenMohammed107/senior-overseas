@@ -60,6 +60,12 @@
 								</div>
 								<div class="col-md-6 mb-3">
 									<div class="form-group">
+										<label class="exampleInputPassword1" for="exampleCheck1">Sale Person</label>
+										<input type="text" class="form-control" value="{{$row->sale->employee->employee_name ?? 'Sale person' }}" placeholder="Sale Person" readonly>
+									</div>
+								</div>
+								<div class="col-md-6 mb-3">
+									<div class="form-group">
 										<label class="exampleInputPassword1" for="exampleCheck1">Operation Date</label>
 
 										<?php $date = date_create($row->operation_date) ?>
@@ -72,7 +78,7 @@
 								<div class="col-md-6 mb-3">
 									<div class="form-group">
 										<label class="exampleInputPassword1" for="exampleCheck1">Import Export</label>
-										<select class="form-control" name="import_export_flag" data-live-search="true" disabled> 
+										<select class="form-control" name="import_export_flag" data-live-search="true" disabled>
 
 											<option>Select ...</option>
 											<option value='1' {{ 1 ==$row->import_export_flag ? 'selected' : '' }}>Import</option>
@@ -475,22 +481,134 @@
 																<th>Expense Type</th>
 																<th>Buy</th>
 																<th>Sale</th>
+																<th>Expense provider</th>
+																<th>Currency</th>
 																<th>Action</th>
 															</tr>
 														</thead>
 														<tbody>
 
+															@foreach($expenses as $index => $expense)
 															<tr>
-																<td>#</td>
-																<td>Expense Type</td>
-																<td>Buy</td>
-																<td>Sale</td>
+																<td>{{$index+1}}</td>
+																<td>@if($expense->type)
+																	{{$expense->type->expense_name}}
+																	@endif
+																</td>
+																<td>{{$expense->buy}}</td>
+																<td>{{$expense->sell}}</td>
+																<td>@if($expense->provider)
+																	{{$expense->provider->provider_type}}
+																	@endif</td>
+																<td>@if($expense->currency)
+																	{{$expense->currency->currency_name}}
+																	@endif</td>
 																<td>
-
-																	<a href="#" class="btn btn-info d-inline-block" data-toggle="modal" data-target="#addSubCat">edit</a>
-																	<a href="#" onclick="delette('ٌRound')" class="btn d-inline-block btn-danger">delete</a>
+																	<a href="#" class="btn btn-info d-inline-block" data-toggle="modal" data-target="#addSubCat{{$expense->id}}">edit</a> 
+																	<a href="#" onclick="destroy('expense','{{$expense->id}}')" class="btn d-inline-block btn-danger">delete</a>
+																	<form id="delete_{{$expense->id}}" action="{{ route('deleteOperationExpenses', $expense->id) }}" method="POST" style="display: none;">
+																		@csrf
+																	
+																		<button type="submit" value=""></button>
+																	</form>
 																</td>
 															</tr>
+															<!-- Add new Modal -->
+															<div class="modal fade" id="addSubCat{{$expense->id}}" tabindex="-1" role="dialog" aria-labelledby="addSubCat">
+																<div class="modal-dialog modal-lg " role="document">
+																	<div class="modal-content">
+																		<button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">X
+
+																		</button>
+																		<h3>Add Expenses</h3>
+																		<div class="modal-body">
+																			<div class="ms-auth-container row no-gutters">
+																				<div class="col-12 p-3">
+																					<form action="{{route('updateOperationExpenses')}}" method="POST">
+																						{{ csrf_field() }}
+
+
+																						<input type="hidden" name="operation_id" value="{{$row->id}}">
+																						<input type="hidden" name="expenses_id" value="{{$expense->id}}">
+																						<div class="ms-auth-container row">
+
+
+
+																							<div class="col-md-6 mb-3">
+																								<div class="ui-widget form-group">
+																									<label>Expense Type</label>
+																									<select name="expenses_type_id" class=" form-control" data-live-search="true">
+																										<option value="">Select ...</option>
+																										@foreach ($expenseTypes as $data)
+																										<option value='{{$data->id}}' {{ $data->id == $expense->expenses_type_id ? 'selected' : '' }}>
+																											{{$data->expense_name}}</option>
+																										@endforeach
+																									</select>
+
+
+																								</div>
+																							</div>
+																							<div class="col-md-6 mb-3">
+																								<div class="form-group">
+																									<label class="exampleInputPassword1" for="exampleCheck1">*Buy</label>
+																									<input name="buy" type="text" value="{{$expense->buy}}" class="form-control" placeholder="buy">
+																								</div>
+																							</div>
+																							<div class="col-md-6 mb-3">
+																								<div class="form-group">
+																									<label class="exampleInputPassword1" for="exampleCheck1">*Sale</label>
+																									<input name="sell" type="text" value="{{$expense->sell}}" class="form-control" placeholder="sell">
+																								</div>
+																							</div>
+																							<div class="col-md-6 mb-3">
+																								<div class="ui-widget form-group">
+																									<label>Expense Provider</label>
+																									<select name="provider_type_id" class=" form-control" data-live-search="true">
+																										<option value="">Select ...</option>
+																										@foreach ($providers as $data)
+																										<option value='{{$data->id}}' {{ $data->id == $expense->provider_type_id ? 'selected' : '' }}>
+																											{{$data->provider_type}}</option>
+																										@endforeach
+																									</select>
+
+
+																								</div>
+																							</div>
+																							<div class="col-md-6 mb-3">
+																								<div class="ui-widget form-group">
+																									<label>Currency</label>
+																									<select name="currency_id" class=" form-control" data-live-search="true">
+																										<option value="">Select ...</option>
+																										@foreach ($expenseCurrency as $data)
+																										<option value='{{$data->id}}' {{ $data->id == $expense->currency_id ? 'selected' : '' }}>
+																											{{$data->currency_name}}</option>
+																										@endforeach
+																									</select>
+
+
+																								</div>
+																							</div>
+																							<div class="col-md-6 mb-3">
+																								<div class="form-group">
+																									<label class="exampleInputPassword1" for="exampleCheck1">Notes</label>
+																									<textarea name="note" id="newClint" class="form-control" placeholder="Notes" rows="3">{{$expense->note}}</textarea>
+																								</div>
+																							</div>
+																						</div>
+																						<div class="input-group d-flex justify-content-end text-center">
+																							<input type="button" value="Cancel" class="btn btn-dark mx-2" data-dismiss="modal" aria-label="Close">
+																							<input type="submit" value="Add" class="btn btn-success ">
+																						</div>
+																					</form>
+																				</div>
+																			</div>
+																		</div>
+
+																	</div>
+																</div>
+															</div>
+															<!-- /Add new Modal -->
+															@endforeach
 														</tbody>
 													</table>
 												</div>
@@ -525,11 +643,13 @@
 			<button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">X
 
 			</button>
-			<h3>Add Agent</h3>
+			<h3>Add Expenses</h3>
 			<div class="modal-body">
 				<div class="ms-auth-container row no-gutters">
 					<div class="col-12 p-3">
-						<form action="">
+						<form action="{{route('addOperationExpenses')}}" method="POST">
+							@csrf
+							<input type="hidden" name="operation_id" value="{{$row->id}}">
 							<div class="ms-auth-container row">
 
 
@@ -537,11 +657,12 @@
 								<div class="col-md-6 mb-3">
 									<div class="ui-widget form-group">
 										<label>Expense Type</label>
-										<select class=" form-control" data-live-search="true">
-											<option>Select ...</option>
-											<option>Expense Type 1</option>
-											<option>Expense Type 2</option>
-											<option>Expense Type 3</option>
+										<select name="expenses_type_id" class=" form-control" data-live-search="true">
+											<option value="">Select ...</option>
+											@foreach ($expenseTypes as $data)
+											<option value='{{$data->id}}'>
+												{{$data->expense_name}}</option>
+											@endforeach
 										</select>
 
 
@@ -550,13 +671,47 @@
 								<div class="col-md-6 mb-3">
 									<div class="form-group">
 										<label class="exampleInputPassword1" for="exampleCheck1">*Buy</label>
-										<input type="text" class="form-control" placeholder="buy">
+										<input name="buy" type="text" class="form-control" placeholder="buy">
 									</div>
 								</div>
 								<div class="col-md-6 mb-3">
 									<div class="form-group">
 										<label class="exampleInputPassword1" for="exampleCheck1">*Sale</label>
-										<input type="text" class="form-control" placeholder="sale">
+										<input name="sell" type="text" class="form-control" placeholder="sell">
+									</div>
+								</div>
+								<div class="col-md-6 mb-3">
+									<div class="ui-widget form-group">
+										<label>Expense Provider</label>
+										<select name="provider_type_id" class=" form-control" data-live-search="true">
+											<option value="">Select ...</option>
+											@foreach ($providers as $data)
+											<option value='{{$data->id}}'>
+												{{$data->provider_type}}</option>
+											@endforeach
+										</select>
+
+
+									</div>
+								</div>
+								<div class="col-md-6 mb-3">
+									<div class="ui-widget form-group">
+										<label>Currency</label>
+										<select name="currency_id" class=" form-control" data-live-search="true">
+											<option value="">Select ...</option>
+											@foreach ($expenseCurrency as $data)
+											<option value='{{$data->id}}' >
+												{{$data->currency_name}}</option>
+											@endforeach
+										</select>
+
+
+									</div>
+								</div>
+								<div class="col-md-6 mb-3">
+									<div class="form-group">
+										<label class="exampleInputPassword1" for="exampleCheck1">Notes</label>
+										<textarea name="note" id="newClint" class="form-control" placeholder="Notes" rows="3"></textarea>
 									</div>
 								</div>
 							</div>

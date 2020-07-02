@@ -57,6 +57,12 @@
 								</div>
 								<div class="col-md-6 mb-3">
 									<div class="form-group">
+										<label class="exampleInputPassword1" for="exampleCheck1">Sale Person</label>
+										<input type="text" class="form-control" value="{{$row->sale->employee->employee_name ?? 'Sale person' }}" placeholder="Sale Person" readonly>
+									</div>
+								</div>
+								<div class="col-md-6 mb-3">
+									<div class="form-group">
 										<label class="exampleInputPassword1" for="exampleCheck1">Operation Date</label>
 
 										<?php $date = date_create($row->operation_date) ?>
@@ -472,22 +478,33 @@
 																<th>Expense Type</th>
 																<th>Buy</th>
 																<th>Sale</th>
+																<th>Expense provider</th>
+																<th>Currency</th>
 																<th>Action</th>
 															</tr>
 														</thead>
 														<tbody>
 
+														@foreach($expenses as $index => $expense)
 															<tr>
-																<td>#</td>
-																<td>Expense Type</td>
-																<td>Buy</td>
-																<td>Sale</td>
+																<td>{{$index+1}}</td>
+																<td>@if($expense->type)
+																	{{$expense->type->expense_name}}
+																	@endif
+																</td>
+																<td>{{$expense->buy}}</td>
+																<td>{{$expense->sell}}</td>
+																<td>@if($expense->provider)
+																	{{$expense->provider->provider_type}}
+																	@endif</td>
+																<td>@if($expense->currency)
+																	{{$expense->currency->currency_name}}
+																	@endif</td>
 																<td>
-
-																	<!-- <a href="#" class="btn btn-info d-inline-block" data-toggle="modal" data-target="#addSubCat">edit</a>
-																	<a href="#" onclick="delette('ٌRound')" class="btn d-inline-block btn-danger">delete</a> -->
+																	
 																</td>
 															</tr>
+															@endforeach
 														</tbody>
 													</table>
 												</div>

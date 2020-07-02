@@ -18,6 +18,9 @@ use App\Models\Supplier;
 use App\Models\Sale_quote_air;
 use App\Models\Sale_quote_ocean;
 use App\Models\Sale_quote_trucking;
+use App\Models\Operation_expense;
+use App\Models\Expenses_provider_type;
+use App\Models\Expense;
 use File;
 use DB;
 use Log;
@@ -74,7 +77,7 @@ class OperationsController extends Controller
         //all Data
         $sale_qoute = new Sale_quote();
         $clients = Client::all();
-        $clearances =Currency::all();
+        $clearances = Currency::all();
         $doors = Currency::all();
         $consinee = Client::all();
         $notify = Client::all();
@@ -209,20 +212,20 @@ class OperationsController extends Controller
         $filtters = [];
         if ($row->sales_quote_ocean_id) {
             $filtters = Sale_quote_ocean::where('id', '=', $row->sales_quote_ocean_id)->get();
-            $typeTesting=1;
+            $typeTesting = 1;
         } else {
             $filtters = Sale_quote_air::where('id', '=', $row->sales_quote_air_id)->get();
-            $typeTesting=0;
+            $typeTesting = 0;
         }
         $qouts = Sale_quote::all();
-        $clearances=Currency::all();
+        $clearances = Currency::all();
         $consinee = Client::all();
         $notify = Client::all();
         $Commodity = Commodity::all();
         $doors = Currency::all();
         // get expenses
-        
-        return view($this->viewName . 'view', compact('row','qouts', 'consinee', 'notify','clearances','doors', 'typeTesting','Commodity', 'trackings','filtters'));
+
+        return view($this->viewName . 'view', compact('row', 'qouts', 'consinee', 'notify', 'clearances', 'doors', 'typeTesting', 'Commodity', 'trackings', 'filtters'));
     }
 
     /**
@@ -239,22 +242,23 @@ class OperationsController extends Controller
         $filtters = [];
         if ($row->sales_quote_ocean_id) {
             $filtters = Sale_quote_ocean::where('id', '=', $row->sales_quote_ocean_id)->get();
-            $typeTesting=1;
+            $typeTesting = 1;
         } else {
             $filtters = Sale_quote_air::where('id', '=', $row->sales_quote_air_id)->get();
-            $typeTesting=0;
+            $typeTesting = 0;
         }
         $qouts = Sale_quote::all();
-        $clearances=Currency::all();
+        $clearances = Currency::all();
         $consinee = Client::all();
         $notify = Client::all();
         $Commodity = Commodity::all();
         $doors = Currency::all();
         // get expenses
-        
-        return view($this->viewName . 'edit', compact('row','qouts', 'consinee', 'notify','clearances','doors', 'typeTesting','Commodity', 'trackings','filtters'));
-
-       
+        $expenses = Operation_expense::orderBy("id", "Desc")->get();
+        $providers = Expenses_provider_type::all();
+        $expenseTypes = Expense::all();
+        $expenseCurrency = Currency::all();
+        return view($this->viewName . 'edit', compact('row', 'qouts', 'consinee', 'expenses', 'providers', 'expenseTypes', 'expenseCurrency', 'notify', 'clearances', 'doors', 'typeTesting', 'Commodity', 'trackings', 'filtters'));
     }
 
     /**
@@ -280,7 +284,7 @@ class OperationsController extends Controller
 
 
         ];
-   
+
         if ($request->input('consignee_id')) {
 
             $data['consignee_id'] = $request->input('consignee_id');
@@ -293,7 +297,7 @@ class OperationsController extends Controller
 
             $data['commodity_id'] = $request->input('commodity_id');
         }
-    
+
         $this->object::findOrFail($id)->update($data);
 
         return redirect()->route($this->routeName . 'index')->with('flash_success', $this->message);
@@ -319,5 +323,81 @@ class OperationsController extends Controller
 
         return redirect()->route($this->routeName . 'index')->with('flash_success', 'Data Has Been Deleted Successfully !');
     }
-    
+    /**
+     * Expenses
+     * 
+     */
+
+    public function addExpenses(Request $request)
+    {
+
+        $data = [
+            'operation_id' => $request->input('operation_id'),
+            'buy' => $request->input('buy'),
+            'sell' => $request->input('sell'),
+            'note' => $request->input('note'),
+
+        ];
+
+        if ($request->input('expenses_type_id')) {
+
+            $data['expenses_type_id'] = $request->input('expenses_type_id');
+        }
+        if ($request->input('provider_type_id')) {
+
+            $data['provider_type_id'] = $request->input('provider_type_id');
+        }
+        if ($request->input('currency_id')) {
+
+            $data['currency_id'] = $request->input('currency_id');
+        }
+        Operation_expense::create($data);
+
+
+        return redirect()->back()->with('flash_success', $this->message);
+    }
+
+    public function updateExpenses(Request $request)
+    {
+        $id = $request->input('expenses_id');
+        $data = [
+            'operation_id' => $request->input('operation_id'),
+            'buy' => $request->input('buy'),
+            'sell' => $request->input('sell'),
+            'note' => $request->input('note'),
+
+        ];
+
+        if ($request->input('expenses_type_id')) {
+
+            $data['expenses_type_id'] = $request->input('expenses_type_id');
+        }
+        if ($request->input('provider_type_id')) {
+
+            $data['provider_type_id'] = $request->input('provider_type_id');
+        }
+        if ($request->input('currency_id')) {
+
+            $data['currency_id'] = $request->input('currency_id');
+        }
+        Operation_expense::findOrFail($id)->update($data);
+
+        return redirect()->back()->with('flash_success', $this->message);
+    }
+
+
+    public function deleteExpenses($id)
+    {
+        $row = Operation_expense::where('id', '=', $id)->first();
+
+        try {
+
+            $row->delete();
+        } catch (QueryException $q) {
+
+            return redirect()->back()->with('flash_danger', 'You cannot delete related with another...');
+        }
+
+        return redirect()->back()->with('flash_success', 'Data Has Been Deleted Successfully !');
+    }
 }

@@ -19,6 +19,7 @@ class CreateSaleQuotesTable extends Migration
             $table->dateTime('quote_date', 6)->nullable();
             $table->string('quote_code', 250)->nullable();
             $table->integer('client_id')->unsigned()->nullable();
+            $table->integer('sale_person_id')->unsigned()->nullable();
             $table->integer('ocean_air_type')->nullable();
             $table->double('clearance_price')->nullable();
             $table->integer('supplier_id')->unsigned()->nullable();

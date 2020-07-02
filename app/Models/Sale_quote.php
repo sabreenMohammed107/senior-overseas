@@ -9,13 +9,18 @@ class Sale_quote extends Model
     protected $fillable = [
         'quote_date', 'quote_code', 'client_id','ocean_air_type','supplier_id','sale_quotes_type_id',
        
-        'clearance_price', 'clearance_currency_id','clearance_notes',
+        'clearance_price', 'clearance_currency_id','clearance_notes','sale_person_id',
          'door_door_price','door_door_currency_id','door_door_notes'
      
     ];
     public function client()
     {
         return $this->belongsTo('App\Models\Client','client_id');
+
+    }
+    public function employee()
+    {
+        return $this->belongsTo('App\Models\Employee','sale_person_id');
 
     }
     public function supplier()

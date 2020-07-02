@@ -8,6 +8,12 @@
 	</div>
 	<div class="col-md-6 mb-3">
 		<div class="form-group">
+			<label class="exampleInputPassword1" for="exampleCheck1">Sale Person</label>
+			<input type="text"  class="form-control" value="{{$sale_qoute->employee->employee_name ?? 'Sale person' }}" placeholder="Sale Person" readonly>
+		</div>
+	</div>
+	<div class="col-md-6 mb-3">
+		<div class="form-group">
 			<label class="exampleInputPassword1" for="exampleCheck1">Operation Date</label>
 			<input type="date" name="operation_date" class="form-control" placeholder="Operation Date">
 		</div>

@@ -54,6 +54,24 @@
               <input type="date" disabled name="quote_date" value="{{ date_format($date,'Y-m-d') }}" class="form-control" >
             </div>
           </div>
+          <div class="col-md-4 mb-3">
+							<div class="form-group">
+								<label class="exampleInputPassword1" for="exampleCheck1">Quote Code</label>
+								<input type="text" class="form-control" name="quote_code" placeholder="Quote code">
+							</div>
+						</div>
+          <div class="col-md-4 mb-3">
+							<div class="ui-widget form-group">
+								<label>Employee</label>
+								<select name="sale_person_id" class=" form-control"disabled data-live-search="true">
+									<option value="">Select ...</option>
+									@foreach ($employees as $type)
+                                    <option value='{{$type->id}}' {{ $type->id == $row->sale_person_id ? 'selected' : '' }}>
+										{{ $type->employee_name}}</option>
+									@endforeach
+								</select>
+							</div>
+						</div>
                     </div>
 
                     <div class="ms-auth-container row no-gutters">

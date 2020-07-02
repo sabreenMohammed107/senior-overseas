@@ -59,7 +59,20 @@
 				  						
 									  </select>
 						</div>
-				  				</div>
+								  </div>
+								  <div class="col-md-4 mb-3">
+							<div class="ui-widget form-group">
+								<label>Employee</label>
+								<select name="sale_person_id" class=" form-control" data-live-search="true">
+									<option value="">Select ...</option>
+									@foreach ($employees as $type)
+									<option value='{{$type->id}}'>
+										{{ $type->employee_name}}</option>
+									@endforeach
+								</select>
+							</div>
+						</div>
+
 					</div>
 
 					<div class="ms-auth-container row no-gutters">
