@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title><img src="{{ asset('adminasset/img/logo.png')}}" alt="logo"></title>
+    <title>Overseas</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>

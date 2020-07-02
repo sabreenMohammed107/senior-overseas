@@ -1,541 +1,466 @@
 @extends('layout.main')
 
 @section('crumb')
-    
+
 <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href=""><i class="material-icons"></i> {{ __(' Home') }} </a></li>
-    </ol>
-  </nav>
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href=""><i class="material-icons"></i> {{ __(' Home') }} </a></li>
+	</ol>
+</nav>
 
 @endsection
 
 @section('content')
 
 <div class="row">
-  			<div class="col-md-12">
-  				<div class="ms-panel">
-  					<div class="ms-panel-header d-flex justify-content-between">
-  						<h6>Operations</h6>
-  						<!-- <a href="add_cource.html" class="btn btn-dark" > add Course </a> -->
-  					</div>
-  					<div class="ms-panel-body">
-  						<div class="ms-auth-container row no-gutters">
-						  	<div class="col-12 p-3">
-					<form action="">
-						  			<div style="border-bottom:solid #0094ff 2px;"><h2>Read From Exiting Quote</h2></div><br />
-						  			<div class="ms-auth-container row">
-						  	<div class="col-md-6 mb-3">
-						  		<div class="form-group">
-						  			<label class="exampleInputPassword1" for="exampleCheck1">Operation Code</label>
-						  			<input type="text" class="form-control" placeholder="Operation Code" disabled>
-						  		</div>
-						  	</div>
-						  	<div class="col-md-6 mb-3">
-						  		<div class="form-group">
-						  			<label class="exampleInputPassword1" for="exampleCheck1">Operation Date</label>
-						  			<input type="text" class="form-control" placeholder="Operation Date" disabled>
-						  		</div>
-						  	</div>
-						  				<div class="col-md-6 mb-3">
-						  					<div class="ui-widget form-group">
-						  						<label>Quote Code</label>
-						  						<select class=" form-control" data-live-search="true"disabled>
-						  							<option>Select ...</option>
-						  							<option>Quote Code 1</option>
-						  							<option>Quote Code 2</option>
-						  							<option>Quote Code 3</option>
-						  						</select>
-						  					</div>
-						  				</div>
-						  				<div class="col-md-6 mb-3">
-						  					<div class="form-group">
-						  						<label class="exampleInputPassword1" for="exampleCheck1">Client ( Shipper )</label>
-						  						<input type="text" class="form-control" placeholder="Client ( Shipper )" disabled>
-						  					</div>
-						  				</div>
-						  				<div class="col-md-12 mb-3">
-						  					<div class="ms-panel ms-panel-fh">
-						  						<div class="ms-panel-body">
-						  							<div class="accordion has-gap ms-accordion-chevron" id="accordionExample2">
-						  								<div class="card">
-						  									<div class="card-header" data-toggle="collapse" role="button" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-						  										<span> Quote Data</span>
-						  									</div>
-						  									<div id="collapseSix" class="collapse" data-parent="#accordionExample2">
-						  										<div class="card-body">
-													  	<style>
-									.hide {
-										display: none;
-									}
-													  	</style>
-													  	<div class="row">
-													  		<div class="col-md-12">
-													  			<div class="ms-panel">
-													  				<div class="ms-panel-header d-flex justify-content-between">
-													  					<h6>Ocean Freight</h6>
-													  					<!-- <a href="add_cource.html" class="btn btn-dark" > add Course </a> -->
-													  				</div>
-													  				<div class="ms-panel-body">
-													  					<form>
-													  						<input type="radio" name="tab" value="igotnone" onclick="show1();" checked /> Air
-													  						<input type="radio" name="tab" value="igottwo" onclick="show2();" clicked="clicked" /> Ocean
-													  					</form>
-													  					<div class="ms-auth-container row no-gutters">
-													  						<div class="col-12 p-3">
-													  							<form action="" id="div2">
-													  								<div class="ms-auth-container row">
-													  									<div class="col-md-6 mb-3">
-													  										<div class="ui-widget form-group">
-													  											<label>Air Carrier</label>
-													  											<select class=" form-control" data-live-search="true" disabled>
-													  												<option>Select ...</option>
-													  												<option>Air Carrier 1</option>
-													  												<option>Air Carrier 2</option>
-													  												<option>Air Carrier 3</option>
-													  											</select>
-													  										</div>
-													  									</div>
-													  									<div class="col-md-6 mb-3">
-													  										<div class="ui-widget form-group">
-													  											<label>Currency</label>
-													  											<select class=" form-control" data-live-search="true" disabled>
-													  												<option>Select ...</option>
-													  												<option>Currency 1</option>
-													  												<option>Currency 2</option>
-													  												<option>Currency 3</option>
-													  											</select>
-													  										</div>
-													  									</div>
-													  									<div class="col-md-6 mb-3">
-													  										<div class="form-group">
-													  											<label class="exampleInputPassword1" for="exampleCheck1">Price</label>
-													  											<input type="text" class="form-control" placeholder="Price" disabled>
-													  										</div>
-													  									</div>
-													  									<div class="col-md-6 mb-3">
-													  										<div class="form-group">
-													  											<label class="exampleInputPassword1" for="exampleCheck1">Validitiy Date</label>
-													  											<input type="date" class="form-control" placeholder="Validitiy Date" disabled>
-													  										</div>
-													  									</div>
-													  									<div class="col-md-6 mb-3">
-													  										<div class="form-group">
-													  											<label class="exampleInputPassword1" for="exampleCheck1">Aol</label>
-													  											<input type="text" class="form-control" placeholder="Aol" disabled>
-													  										</div>
-													  									</div>
-													  									<div class="col-md-6 mb-3">
-													  										<div class="form-group">
-													  											<label class="exampleInputPassword1" for="exampleCheck1">Aod</label>
-													  											<input type="text" class="form-control" placeholder="Aod" disabled>
-													  										</div>
-													  									</div>
-													  									<div class="col-md-6 mb-3">
-													  										<div class="form-group">
-													  											<label class="exampleInputPassword1" for="exampleCheck1">Slide Range</label>
-													  											<input type="text" class="form-control" placeholder="Slide Range" disabled>
-													  										</div>
-													  									</div>
-													  									<div class="col-md-6 mb-3">
-													  										<div class="form-group">
-													  											<label class="exampleInputPassword1" for="exampleCheck1">Notes</label>
-													  											<textarea id="newClint" class="form-control"
-																				  placeholder="Notes" rows="3" disabled></textarea>
-													  										</div>
-													  									</div>
-													  								</div>
-													  							</form>
-													  							<form action="" id="div1" class="hide">
-													  								<div class="ms-auth-container row">
-													  									<div class="col-md-6 mb-3">
-													  										<div class="ui-widget form-group">
-													  											<label>Ocean Freigt Carrier</label>
-													  											<select class=" form-control" data-live-search="true" disabled>
-													  												<option>Select ...</option>
-													  												<option>Ocean Freigt Carrier 1</option>
-													  												<option>Ocean Freigt Carrier 2</option>
-													  												<option>Ocean Freigt Carrier 3</option>
-													  											</select>
-													  										</div>
-													  									</div>
-													  									<div class="col-md-6 mb-3">
-													  										<div class="ui-widget form-group">
-													  											<label>Currency</label>
-													  											<select class=" form-control" data-live-search="true" disabled>
-													  												<option>Select ...</option>
-													  												<option>Currency 1</option>
-													  												<option>Currency 2</option>
-													  												<option>Currency 3</option>
-													  											</select>
-													  										</div>
-													  									</div>
-													  									<div class="col-md-6 mb-3">
-													  										<div class="form-group">
-													  											<label class="exampleInputPassword1" for="exampleCheck1">Price</label>
-													  											<input type="text" class="form-control" placeholder="Price" disabled>
-													  										</div>
-													  									</div>
-													  									<div class="col-md-6 mb-3">
-													  										<div class="form-group">
-													  											<label class="exampleInputPassword1" for="exampleCheck1">Validitiy Date</label>
-													  											<input type="date" class="form-control" placeholder="Validitiy Date" disabled>
-													  										</div>
-													  									</div>
-													  									<div class="col-md-6 mb-3">
-													  										<div class="form-group">
-													  											<label class="exampleInputPassword1" for="exampleCheck1">Pol</label>
-													  											<input type="text" class="form-control" placeholder="Pol" disabled>
-													  										</div>
-													  									</div>
-													  									<div class="col-md-6 mb-3">
-													  										<div class="form-group">
-													  											<label class="exampleInputPassword1" for="exampleCheck1">Pod</label>
-													  											<input type="text" class="form-control" placeholder="Pod" disabled>
-													  										</div>
-													  									</div>
-													  									<div class="col-md-6 mb-3">
-													  										<div class="form-group">
-													  											<label class="exampleInputPassword1" for="exampleCheck1">Container</label>
-													  											<input type="text" class="form-control" placeholder="Container" disabled>
-													  										</div>
-													  									</div>
-													  									<div class="col-md-6 mb-3">
-													  										<div class="form-group">
-													  											<label class="exampleInputPassword1" for="exampleCheck1">Transit Time</label>
-													  											<input type="number" class="form-control" placeholder="Transit Time" disabled>
-													  										</div>
-													  									</div>
-													  									<div class="col-md-6 mb-3">
-													  										<div class="form-group">
-													  											<label class="exampleInputPassword1" for="exampleCheck1">Notes</label>
-													  											<textarea id="newClint" class="form-control"
-																				  placeholder="Notes" rows="3" disabled></textarea>
-													  										</div>
-													  									</div>
-													  								</div>
-													  							</form>
-													  							<form action="">
-													  								<div style="border-bottom:solid #0094ff 2px;margin-bottom:15px"></div>
-													  								<div class="ms-auth-container row">
-													  									<div class="col-md-6 mb-3">
-													  										<div class="ui-widget form-group">
-													  											<label>Trucking Rate</label>
-													  											<select class=" form-control" data-live-search="true" disabled>
-													  												<option>Select ...</option>
-													  												<option>Trucking Rate 1</option>
-													  												<option>Trucking Rate 2</option>
-													  												<option>Trucking Rate 3</option>
-													  											</select>
-													  										</div>
-													  									</div>
-													  									<div class="col-md-6 mb-3"></div>
-													  									<div class="col-md-6 mb-3">
-													  										<div class="form-group">
-													  											<label class="exampleInputPassword1" for="exampleCheck1">Trucking Company</label>
-													  											<input type="text" class="form-control" placeholder="Trucking Company" disabled>
-													  										</div>
-													  									</div>
-													  									<div class="col-md-6 mb-3">
-													  										<div class="form-group">
-													  											<label class="exampleInputPassword1" for="exampleCheck1">Validitiy Date</label>
-													  											<input type="date" class="form-control" placeholder="Validitiy Date" disabled>
-													  										</div>
-													  									</div>
-													  									<div class="col-md-6 mb-3">
-													  										<div class="form-group">
-													  											<label class="exampleInputPassword1" for="exampleCheck1">Pol</label>
-													  											<input type="text" class="form-control" placeholder="Pol" disabled>
-													  										</div>
-													  									</div>
-													  									<div class="col-md-6 mb-3">
-													  										<div class="form-group">
-													  											<label class="exampleInputPassword1" for="exampleCheck1">Pod</label>
-													  											<input type="text" class="form-control" placeholder="Pod" disabled>
-													  										</div>
-													  									</div>
-													  									<div class="col-md-6 mb-3">
-													  										<div class="form-group">
-													  											<label class="exampleInputPassword1" for="exampleCheck1">Notes</label>
-													  											<textarea id="newClint" class="form-control"
-																				  placeholder="Notes" rows="3" disabled></textarea>
-													  										</div>
-													  									</div><div class="col-md-6 mb-3"></div>
-													  									<div class="col-md-6 mb-3">
-													  										<div class="form-group">
-													  											<label class="exampleInputPassword1" for="exampleCheck1">*Faradany Price</label>
-													  											<input type="number" class="form-control" placeholder="Faradany Price" disabled>
-													  										</div>
-													  									</div>
-													  									<div class="col-md-6 mb-3">
-													  										<div class="form-group">
-													  											<label class="exampleInputPassword1" for="exampleCheck1">*Trailer Price</label>
-													  											<input type="number" class="form-control" placeholder="Trailer Price" disabled>
-													  										</div>
-													  									</div>
-													  									<div class="col-md-6 mb-3">
-													  										<div class="ui-widget form-group">
-													  											<label>Faradany Currency</label>
-													  											<select class=" form-control" data-live-search="true" disabled>
-													  												<option>Select ...</option>
-													  												<option>Faradany Currency 1</option>
-													  												<option>Faradany Currency 2</option>
-													  												<option>Faradany Currency 3</option>
-													  											</select>
-													  										</div>
-													  									</div>
-													  									<div class="col-md-6 mb-3">
-													  										<div class="ui-widget form-group">
-													  											<label>Trailer Currency</label>
-													  											<select class=" form-control" data-live-search="true" disabled>
-													  												<option>Select ...</option>
-													  												<option>Trailer Currency 1</option>
-													  												<option>Trailer Currency 2</option>
-													  												<option>Trailer Currency 3</option>
-													  											</select>
-													  										</div>
-													  									</div>
-													  									<div class="col-md-6 mb-3">
-													  										<div class="form-group">
-													  											<label class="exampleInputPassword1" for="exampleCheck1">*Grar Price</label>
-													  											<input type="number" class="form-control" placeholder="Grar Price" disabled>
-													  										</div>
-													  									</div>
-													  									<div class="col-md-6 mb-3">
-													  										<div class="form-group">
-													  											<label class="exampleInputPassword1" for="exampleCheck1">*HRF Price</label>
-													  											<input type="number" class="form-control" placeholder="HRF Price" disabled>
-													  										</div>
-													  									</div>
-													  									<div class="col-md-6 mb-3">
-													  										<div class="ui-widget form-group">
-													  											<label>Grar Currency</label>
-													  											<select class=" form-control" data-live-search="true" disabled>
-													  												<option>Select ...</option>
-													  												<option>Grar Currency 1</option>
-													  												<option>Grar Currency 2</option>
-													  												<option>Grar Currency 3</option>
-													  											</select>
-													  										</div>
-													  									</div>
-													  									<div class="col-md-6 mb-3">
-													  										<div class="ui-widget form-group">
-													  											<label>HRF Currency</label>
-													  											<select class=" form-control" data-live-search="true" disabled>
-													  												<option>Select ...</option>
-													  												<option>HRF Currency 1</option>
-													  												<option>HRF Currency 2</option>
-													  												<option>HRF Currency 3</option>
-													  											</select>
-													  										</div>
-													  									</div>
+	<div class="col-md-12">
+		<!--data from create-->
+		<div class="ms-panel">
+			<div class="ms-panel-header d-flex justify-content-between">
+				<h6>Operations</h6>
+				<!-- <a href="add_cource.html" class="btn btn-dark" > add Course </a> -->
+			</div>
+			<div class="ms-panel-body">
+				<div class="ms-auth-container row no-gutters">
+					<div class="col-12 p-3">
+						<form action="{{route('operations.update',$row->id)}}" method="POST">
 
-													  								</div>
-													  							</form>
-													  							<form>
-													  								<div style="border-bottom:solid #0094ff 2px;margin-bottom:15px"></div>
-													  								<div class="ms-auth-container row">
-													  									<div class="col-md-6 mb-3">
-													  										<div class="form-group">
-													  											<label class="exampleInputPassword1" for="exampleCheck1">*Clearance Price</label>
-													  											<input type="number" class="form-control" placeholder="Clearance Price" disabled>
-													  										</div>
-													  									</div>
-													  									<div class="col-md-6 mb-3">
-													  										<div class="ui-widget form-group">
-													  											<label>Currency</label>
-													  											<select class=" form-control" data-live-search="true" disabled>
-													  												<option>Select ...</option>
-													  												<option>Currency 1</option>
-													  												<option>Currency 2</option>
-													  												<option>Currency 3</option>
-													  											</select>
-													  										</div>
-													  									</div>
-													  									<div class="col-md-6 mb-3">
-													  										<div class="form-group">
-													  											<label class="exampleInputPassword1" for="exampleCheck1">Clearance Notes</label>
-													  											<textarea id="newClint" class="form-control"
-																				  placeholder="Notes" rows="3" disabled></textarea>
-													  										</div>
-													  									</div>
-													  								</div>
+							{{ csrf_field() }}
 
-													  							</form>
-													  							<form>
-													  								<div style="border-bottom:solid #0094ff 2px;margin-bottom:15px"></div>
-													  								<div class="ms-auth-container row">
-													  									<div class="col-md-6 mb-3">
-													  										<div class="form-group">
-													  											<label class="exampleInputPassword1" for="exampleCheck1">*Door to Door Price</label>
-													  											<input type="number" class="form-control" placeholder="Door to Door Price" disabled>
-													  										</div>
-													  									</div>
-													  									<div class="col-md-6 mb-3">
-													  										<div class="ui-widget form-group">
-													  											<label>Currency</label>
-													  											<select class=" form-control" data-live-search="true" disabled>
-													  												<option>Select ...</option>
-													  												<option>Currency 1</option>
-													  												<option>Currency 2</option>
-													  												<option>Currency 3</option>
-													  											</select>
-													  										</div>
-													  									</div>
-													  									<div class="col-md-6 mb-3">
-													  										<div class="form-group">
-													  											<label class="exampleInputPassword1" for="exampleCheck1">Door to Door notes</label>
-													  											<textarea id="newClint" class="form-control"
-																				  placeholder="Notes" rows="3" disabled></textarea>
-													  										</div>
-													  									</div>
-													  								</div>
+							@method('PUT')
 
-													  							</form>
-													  							<div class="input-group d-flex justify-content-end text-center">
-													  								<a href="{{ route('operations.index') }}" class="btn btn-dark mx-2"> Cancel</a>
-													  								<!-- <input type="button" value="Cancel" class="btn btn-dark mx-2" data-dismiss="modal" aria-label="Close"> -->
-													  								<input type="submit" value="Add" class="btn btn-success ">
-													  							</div>
+							<div class="ms-auth-container row">
+								<div class="col-md-6 mb-3">
+									<div class="form-group">
+										<label class="exampleInputPassword1" for="exampleCheck1">Operation Code</label>
+										<input type="text" class="form-control" name="operation_code" value="{{$row->operation_code}}" placeholder="code" readonly>
+									</div>
+								</div>
+								<div class="col-md-6 mb-3 " id="exist">
+									<div class="ui-widget form-group">
+										<label>Read Quote</label>
+										<select id="existselect" name="sales_quote_id" disabled class="form-control dynamic" data-dependent="allData" data-show-subtext="true" data-live-search="true" id="exist">
+											<option value="">Select ...</option>
+											@foreach ($qouts as $data)
+											<option value='{{$data->id}}' {{ $data->id == $row->sales_quote_id ? 'selected' : '' }}>
+												{{$data->quote_code}}</option>
+											@endforeach
+										</select>
+									</div>
+								</div>
 
-													  						</div>
-													  					</div>
-													  				</div>
-													  			</div>
-													  		</div>
-													  	</div>
+							</div>
+							<!--other data in search.blade-->
+							<div class="ms-auth-container row">
+								<div class="col-md-6 mb-3">
+									<div class="form-group">
+										<label class="exampleInputPassword1" for="exampleCheck1">Client ( Shipper )</label>
+										<input type="text" class="form-control" name="shipper_id" value="{{$row->shipper->client_name ?? 'Client ( Shipper )' }}" placeholder="Client ( Shipper )" readonly>
+									</div>
+								</div>
+								<div class="col-md-6 mb-3">
+									<div class="form-group">
+										<label class="exampleInputPassword1" for="exampleCheck1">Operation Date</label>
+
+										<?php $date = date_create($row->operation_date) ?>
+
+
+
+										<input type="date" name="operation_date" value="{{ date_format($date,'Y-m-d') }}" class="form-control" placeholder="Operation Code">
+									</div>
+								</div>
+								<div class="col-md-6 mb-3">
+									<div class="form-group">
+										<label class="exampleInputPassword1" for="exampleCheck1">Import Export</label>
+										<select class="form-control" name="import_export_flag" data-live-search="true" disabled> 
+
+											<option>Select ...</option>
+											<option value='1' {{ 1 ==$row->import_export_flag ? 'selected' : '' }}>Import</option>
+											<option value='2' {{ 2 == $row->import_export_flag ? 'selected' : '' }}>Export</option>
+
+										</select>
+									</div>
+								</div>
+								<div class="col-md-12 mb-3">
+									<div class="ms-panel ms-panel-fh">
+										<div class="ms-panel-body">
+											<div class="accordion has-gap ms-accordion-chevron" id="accordionExample2">
+												<div class="card">
+													<div class="card-header" data-toggle="collapse" role="button" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+														<span> Quote Data</span>
+													</div>
+													<div id="collapseSix" class="collapse" data-parent="#accordionExample2">
+														<div class="card-body">
+
+															<div class="row">
+																<div class="col-md-12">
+																	<div class="ms-panel">
+																		<div class="ms-panel-header d-flex justify-content-between">
+
+																		</div>
+																		<div class="ms-panel-body">
+
+																			<div class="ms-auth-container row no-gutters">
+																				<div class="col-12 p-3">
+
+																					<div class="ms-auth-container row">
+
+
+
+
+																						<div class="col-md-6 mb-3"></div>
+
+
+																						<div class="col-md-6 mb-3">
+																							<div class="form-group">
+																								<label class="exampleInputPassword1" for="exampleCheck1">*Clearance Price</label>
+																								<input type="number" value="{{ $row->sale->clearance_price ?? 'Clearance Price' }}" class="form-control" placeholder="Clearance Price" disabled>
+																							</div>
+																						</div>
+																						<div class="col-md-6 mb-3">
+																							<div class="ui-widget form-group">
+																								<label>Currency</label>
+																								<select class=" form-control" data-live-search="true" disabled>
+																									@foreach ($clearances as $type)
+																									<option value='{{$type->id}}' {{ $type->id == $row->sale->clearance_currency_id ? 'selected' : '' }}>
+																										{{ $type->currency_name}}</option>
+																									@endforeach
+																								</select>
+																							</div>
+																						</div>
+																						<div class="col-md-6 mb-3">
+																							<div class="form-group">
+																								<label class="exampleInputPassword1" for="exampleCheck1">Clearance Notes</label>
+																								<textarea id="newClint" class="form-control" placeholder="Notes" rows="3" disabled>{{$row->sale->clearance_notes}}</textarea>
+																							</div>
+																						</div>
+																					</div>
+
+
+																					<div style="border-bottom:solid #0094ff 2px;margin-bottom:15px"></div>
+																					<div class="ms-auth-container row">
+																						<div class="col-md-6 mb-3">
+																							<div class="form-group">
+																								<label class="exampleInputPassword1" for="exampleCheck1">*Door to Door Price</label>
+																								<input type="number" value="{{$row->sale->door_door_price ?? 'Door to Door Price' }}" class="form-control" placeholder="Door to Door Price" disabled>
+																							</div>
+																						</div>
+																						<div class="col-md-6 mb-3">
+																							<div class="ui-widget form-group">
+																								<label>Currency</label>
+																								<select class=" form-control" data-live-search="true" disabled>
+																									@foreach ($doors as $type)
+																									<option value='{{$type->id}}' {{ $type->id == $row->sale->door_door_currency_id ? 'selected' : '' }}>
+																										{{ $type->currency_name}}</option>
+																									@endforeach
+																								</select>
+																							</div>
+																						</div>
+																						<div class="col-md-6 mb-3">
+																							<div class="form-group">
+																								<label class="exampleInputPassword1" for="exampleCheck1">Door to Door notes</label>
+																								<textarea id="newClint" class="form-control" placeholder="Notes" rows="3" disabled>{{$row->sale->door_door_notes}}</textarea>
+																							</div>
+																						</div>
+																					</div>
+
+
+
+																				</div>
+																			</div>
+																		</div>
+																	</div>
 																</div>
-						  									</div>
-						  								</div>
-						  							</div>
-						  						</div>
-						  					</div>
-						  				</div>
-						  			</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- Data Table-->
+							<div class="ms-auth-container row no-gutters">
+								<div class="col-12 p-3">
+									<!--datatable select data -->
+									<table id="courseEval" class="dattable table table-striped thead-dark  w-100">
+										<thead>
+											<tr>
+												<th>#</th>
 
-						  		</form>
-				
+												<th> Carrier</th>
+												@if($typeTesting==0)
+												<th>Range</th>
+												<th> Aol</th>
+												<th> Aod</th>
 
-				  	<form action="">
-				  		<div style="border-bottom:solid #0094ff 2px;"><h2>Operations Data</h2></div><br />
-				  		<div class="ms-auth-container row">
-						  <div class="col-md-6 mb-3">
-				  				<div class="ui-widget form-group">
-				  					<label>Consignee</label>
-				  					<select class="form-control" data-live-search="true">
-				  						<option>Select ...</option>
-				  						<option>Client 1</option>
-				  						<option>Client 2</option>
-				  						<option>Client 3</option>
-				  					</select>
-				  				</div>
-							  </div>
-							  <div class="col-md-6 mb-3">
-				  				<div class="ui-widget form-group">
-				  					<label>Notify</label>
-				  					<select class="form-control" data-live-search="true">
-				  						<option>Select ...</option>
-				  						<option>Client 1</option>
-				  						<option>Client 2</option>
-				  						<option>Client 3</option>
-				  					</select>
-				  				</div>
-				  			</div>
-				  			<div class="col-md-6 mb-3">
-				  				<div class="form-group">
-				  					<label class="exampleInputPassword1" for="exampleCheck1">Containers Counts</label>
-				  					<input type="text" class="form-control" placeholder="Containers Counts">
-				  				</div>
-				  			</div>
-				  			<div class="col-md-6 mb-3">
-				  				<div class="form-group">
-				  					<label class="exampleInputPassword1" for="exampleCheck1">Container/s Names</label>
-				  					<textarea id="newClint" class="form-control"
-										placeholder="Container/s Names" rows="3"></textarea>
-				  				</div>
-				  			</div>
-				  			<div class="col-md-6 mb-3">
-				  				<div class="form-group">
-				  					<label class="exampleInputPassword1" for="exampleCheck1">Notes</label>
-				  					<textarea id="newClint" class="form-control"
-										placeholder="Notes" rows="3"></textarea>
-				  				</div>
-				  			</div>
-				  			<div class="col-md-6 mb-3">
-				  				<div class="form-group">
-				  					<label class="exampleInputPassword1" for="exampleCheck1">Loading Date</label>
-				  					<input type="date" class="form-control" placeholder="Loading Date">
-				  				</div>
-				  			</div>
-				  		</div>
-				  	</form>
-				  	<form action="">
-				  		<div style="border-bottom:solid #0094ff 2px;"><h2>Policy Data</h2></div><br />
-				  		<div class="ms-auth-container row">
-						 
-				  			<div class="col-md-6 mb-3">
-				  				<div class="form-group">
-				  					<label class="exampleInputPassword1" for="exampleCheck1">PL No</label>
-				  					<input type="text" class="form-control" placeholder="PL No">
-				  				</div>
-				  			</div>
-				  			<div class="col-md-6 mb-3">
-				  				<div class="form-group">
-				  					<label class="exampleInputPassword1" for="exampleCheck1">Vassel Name</label>
-				  					<input type="text" class="form-control" placeholder="Vassel Name">
-				  				</div>
-				  			</div>
-				  	<div class="col-md-6 mb-3">
-				  		<div class="form-group">
-				  			<label class="exampleInputPassword1" for="exampleCheck1">Booking No</label>
-				  			<input type="text" class="form-control" placeholder="Booking No">
-				  		</div>
-					  </div>
-					  <div class="col-md-6 mb-3">
-				  				<div class="form-group">
-				  					<label class="exampleInputPassword1" for="exampleCheck1">Commodity</label>
-				  					<select class="form-control" data-live-search="true">
-				  						<option>Select ...</option>
-				  						<option>commodity 1</option>
-				  						<option>commodity 2</option>
-				  						<option>commodity 3</option>
-				  					</select>
-				  				</div>
-							  </div>
-							  <div class="col-md-6 mb-3">
-				  				<div class="form-group">
-				  					<label class="exampleInputPassword1" for="exampleCheck1">cut-off date</label>
-				  					<input type="date" class="form-control" placeholder="cut-off date">
-				  				</div>
-				  			</div>
-				  		</div>
-				  	</form>
-				  	<div class="input-group d-flex justify-content-end text-center">
-				  		<a href="{{ route('operations.index') }}" class="btn btn-dark mx-2"> Cancel</a>
-				  		<!-- <input type="button" value="Cancel" class="btn btn-dark mx-2" data-dismiss="modal" aria-label="Close"> -->
-				  		<input type="submit" value="Add" class="btn btn-success ">
-				  	</div>
-				  	<form action="">
-				  	
-				  		<div class="ms-auth-container row">
-				  			<div class="col-md-12 mb-3">
-					  	<div class="tabbable-panel">
-					  		<div class="tabbable-line">
-					  			<ul class="nav nav-tabs " role="tablist">
-					  				<li class="btn btn-light test">
-					  					<a href="#tab_default_1" class="active" data-toggle="tab" role="tab">
+												<th> Note</th>
+												@else
+												<th> Pol</th>
+												<th> Pod</th>
+												<th>Transit Time (Days</th>
+												<th> Note</th>
+												@endif
+												<th>Price</th>
+
+												<th>Select</th>
+											</tr>
+										</thead>
+										<tbody>
+											@foreach($filtters as $index => $filter)
+											<tr>
+												<td>{{$index+1}}</td>
+
+
+												@if($typeTesting==0)
+												<td>@if($filter->air->carrier)
+													{{$filter->air->carrier->carrier_name}}
+													@endif</td>
+												<td>{{$filter->air->slide_range}}</td>
+
+												<td>@if($filter->air->aol)
+													{{$filter->air->aol->port_name}} - {{$filter->air->aol->country->country_name}}
+													@endif</td>
+												<td>@if($filter->air->aod)
+													{{$filter->air->aod->port_name}} - {{$filter->air->aod->country->country_name}}
+													@endif</td>
+												<td>{{$filter->air->notes}}</td>
+												@else
+												<td>@if($filter->ocean->carrier)
+													{{$filter->ocean->carrier->carrier_name}}
+													@endif</td>
+												<td>@if($filter->ocean->pol)
+													{{$filter->ocean->pol->port_name}} - {{$filter->ocean->pol->country->country_name}}
+													@endif</td>
+												<td>@if($filter->ocean->pod)
+													{{$filter->ocean->pod->port_name}} - {{$filter->ocean->pod->country->country_name}}
+													@endif</td>
+												<td> {{$filter->ocean->transit_time}}</td>
+												<td>{{$filter->ocean->notes}}</td>
+												@endif
+												<td>
+													<?php echo $trackings[$index]->car_price; ?>
+												</td>
+												<td scope="col">
+													@if($typeTesting==0)
+
+													<input name="airSelected" id="userSelected_1" type="radio" checked value="{{$filter->id}}">
+													@else
+													<input name="oceanSelected" id="userSelected_1" type="radio" checked value="{{$filter->id}}">
+
+													@endif
+												</td>
+
+
+											</tr>
+											@endforeach
+										</tbody>
+									</table>
+									<div>
+										<div style="border-bottom:solid 2px #0094ff;margin-bottom:20px"></div>
+										<div class="ms-auth-container row">
+											<!-- Tracking table -->
+											<div class="col-12 p-3">
+												<table id="courseEval" class="dattable table table-striped thead-dark  w-100">
+													<thead>
+														<tr>
+															<th>#</th>
+
+
+															<th> Pol</th>
+															<th> Pod</th>
+															<th> Car</th>
+															<th>Transit Time (Days</th>
+															<th>Notes</th>
+															<th>Price</th>
+															<th>Select</th>
+														</tr>
+													</thead>
+													<tbody>
+
+														@foreach($trackings as $index => $track)
+														<tr>
+															<td>{{$index+1}}</td>
+
+															<td>@if($track->truck->pol)
+																{{$track->truck->pol->port_name}} - {{$track->truck->pol->country->country_name}}
+																@endif</td>
+															<td>@if($track->truck->pod)
+																{{$track->truck->pod->port_name}} - {{$track->truck->pod->country->country_name}}
+																@endif</td>
+															<td>@if($track->truck->car)
+																{{$track->truck->car->car_type}}
+																@endif</td>
+															<td>{{$track->truck->transit_time}}</td>
+															<td>{{$track->truck->notes}}</td>
+															<td>
+																<?php echo $trackings[$index]->car_price; ?>
+															</td>
+															<td scope="col">
+																<input name="TrackingSelected" id="TrackingSelected" type="radio" checked value="{{$track->id}}">
+															</td>
+
+														</tr>
+														@endforeach
+
+													</tbody>
+												</table>
+											</div>
+											<!-- End Table -->
+
+
+										</div>
+									</div>
+
+
+								</div>
+							</div>
+							<!-- End Data Table-->
+							<div style="border-bottom:solid #0094ff 2px;">
+								<h2>Operations Data</h2>
+							</div><br />
+							<div class="ms-auth-container row">
+								<div class="col-md-6 mb-3">
+									<div class="ui-widget form-group">
+										<label>Consignee</label>
+										<select class="form-control" data-live-search="true" name="consignee_id">
+											<option value="">Select ...</option>
+											@foreach ($consinee as $type)
+											<option value='{{$type->id}}' {{ $type->id == $row->consignee_id ? 'selected' : '' }}>
+												{{ $type->client_name}}</option>
+											@endforeach
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6 mb-3">
+									<div class="ui-widget form-group">
+										<label>Notify</label>
+										<select class="form-control" data-live-search="true" name="notify_id">
+											<option value="">Select ...</option>
+											@foreach ($notify as $type)
+											<option value='{{$type->id}}' {{ $type->id == $row->notify_id ? 'selected' : '' }}>
+												{{ $type->client_name}}</option>
+											@endforeach
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6 mb-3">
+									<div class="form-group">
+										<label class="exampleInputPassword1" for="exampleCheck1">Containers Counts</label>
+										<input type="text" class="form-control" value="{{$row->container_counts}}" name="container_counts" placeholder="Containers Counts">
+									</div>
+								</div>
+								<div class="col-md-6 mb-3">
+									<div class="form-group">
+										<label class="exampleInputPassword1" for="exampleCheck1">Container/s Names</label>
+										<textarea id="newClint" class="form-control" name="container_name" placeholder="Container/s Names" rows="3">{{$row->container_name}}</textarea>
+									</div>
+								</div>
+								<!-- <div class="col-md-6 mb-3">
+									<div class="form-group">
+										<label class="exampleInputPassword1" for="exampleCheck1">Notes</label>
+										<textarea id="newClint" name="notes" class="form-control" placeholder="Notes" rows="3">{{$row->notes}}</textarea>
+									</div>
+								</div> -->
+								<div class="col-md-6 mb-3">
+									<div class="form-group">
+										<label class="exampleInputPassword1" for="exampleCheck1">Loading Date</label>
+										<?php
+										$date1 = date_create($row->loading_date)
+										?>
+										<input type="date" name="loading_date" value="{{ date_format($date1,'Y-m-d') }}" class="form-control" placeholder="Loading Date">
+									</div>
+								</div>
+							</div>
+
+							<div style="border-bottom:solid #0094ff 2px;">
+								<h2>Policy Data</h2>
+							</div><br />
+							<div class="ms-auth-container row">
+
+								<div class="col-md-6 mb-3">
+									<div class="form-group">
+										<label class="exampleInputPassword1" for="exampleCheck1">PL No</label>
+										<input type="text" value="{{$row->pl_no}}" name="pl_no" class="form-control" placeholder="PL No">
+									</div>
+								</div>
+								<div class="col-md-6 mb-3">
+									<div class="form-group">
+										<label class="exampleInputPassword1" for="exampleCheck1">Vassel Name</label>
+										<input type="text" value="{{$row->vassel_name}}" name="vassel_name" class="form-control" placeholder="Vassel Name">
+									</div>
+								</div>
+								<div class="col-md-6 mb-3">
+									<div class="form-group">
+										<label class="exampleInputPassword1" for="exampleCheck1">Booking No</label>
+										<input type="text" value="{{$row->booking_no}}" name="booking_no" class="form-control" placeholder="Booking No">
+									</div>
+								</div>
+
+								<div class="col-md-6 mb-3">
+									<div class="form-group">
+										<label class="exampleInputPassword1" for="exampleCheck1">Commodity</label>
+										<select class="form-control" name="commodity_id" data-live-search="true">
+											<option value="">Select ...</option>
+											@foreach ($Commodity as $type)
+											<option value='{{$type->id}}' {{ $type->id == $row->commodity_id ? 'selected' : '' }}>
+												{{ $type->name}}</option>
+											@endforeach
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6 mb-3">
+									<div class="form-group">
+										<label class="exampleInputPassword1" for="exampleCheck1">cut-off date</label>
+										<?php
+										$date2 = date_create($row->cut_off_date) ?>
+										<input type="date" name="cut_off_date" value="{{ date_format($date2,'Y-m-d') }}" class="form-control" placeholder="cut-off date">
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6 mb-3">
+								<div class="form-group">
+									<label class="exampleInputPassword1" for="exampleCheck1">Notes</label>
+									<textarea id="newClint" name="notes" class="form-control" placeholder="Notes" rows="3">{{$row->notes}}</textarea>
+								</div>
+							</div>
+							<div class="input-group d-flex justify-content-end text-center">
+								<a href="{{ route('operations.index') }}" class="btn btn-dark mx-2"> Cancel</a>
+								<!-- <input type="button" value="Cancel" class="btn btn-dark mx-2" data-dismiss="modal" aria-label="Close"> -->
+								<input type="submit" value="Add" class="btn btn-success ">
+							</div>
+						</form>
+
+						<!--End other data in search.blade-->
+
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--End Data-->
+
+		<div class="ms-auth-container row">
+			<div class="col-md-12 mb-3">
+				<div class="tabbable-panel">
+					<div class="tabbable-line">
+						<ul class="nav nav-tabs " role="tablist">
+							<li class="btn btn-light test">
+								<a href="#tab_default_1" class="active" data-toggle="tab" role="tab">
 									Expenses Data
-					  					</a>
+								</a>
 
-					  				</li>
-					  			</ul>
-					  			<div class="tab-content test ">
-					  				<div class="tab-pane active" id="tab_default_1">
-					  					<!-- Add Expenses -->
-					  					<div class="row">
-					  						<div class="col-md-12">
-										
-					  							<div class="ms-panel">
+							</li>
+						</ul>
+						<div class="tab-content test ">
+							<div class="tab-pane active" id="tab_default_1">
+								<!-- Add Expenses -->
+								<div class="row">
+									<div class="col-md-12">
+
+										<div class="ms-panel">
 											<div class="ms-panel-header d-flex justify-content-between">
 												<!-- <h6>Expenses Data</h6> -->
 												<a href="#" class="btn btn-dark" data-toggle="modal" data-target="#addSubCat"> add new </a>
@@ -561,7 +486,7 @@
 																<td>Buy</td>
 																<td>Sale</td>
 																<td>
-																	
+
 																	<a href="#" class="btn btn-info d-inline-block" data-toggle="modal" data-target="#addSubCat">edit</a>
 																	<a href="#" onclick="delette('ٌRound')" class="btn d-inline-block btn-danger">delete</a>
 																</td>
@@ -570,45 +495,45 @@
 													</table>
 												</div>
 											</div>
-					  							</div>
-					  						</div>
-					  					</div>
-					  					<!--End Expenses-->
-					  				</div>
-					  			</div>
-					  		</div>
-					  	</div>
-				  			</div>
-				  		</div>
-				  	</form>
-						  	</div>
-  						</div>
-  					</div>
-  				</div>
-  			</div>
-  		</div>
-  	</div>
-        <!-- /.row -->
+										</div>
+									</div>
+								</div>
+								<!--End Expenses-->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</form>
+	</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- /.row -->
 
 
 </div>
 
-  <!-- Add new Modal -->
-  <div class="modal fade" id="addSubCat" tabindex="-1" role="dialog" aria-labelledby="addSubCat">
-        <div class="modal-dialog modal-lg " role="document">
-          <div class="modal-content">
-            <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">X
-             
-            </button>
-            <h3>Add Agent</h3>
-            <div class="modal-body">
+<!-- Add new Modal -->
+<div class="modal fade" id="addSubCat" tabindex="-1" role="dialog" aria-labelledby="addSubCat">
+	<div class="modal-dialog modal-lg " role="document">
+		<div class="modal-content">
+			<button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">X
+
+			</button>
+			<h3>Add Agent</h3>
+			<div class="modal-body">
 				<div class="ms-auth-container row no-gutters">
 					<div class="col-12 p-3">
 						<form action="">
 							<div class="ms-auth-container row">
-							
-						
-								
+
+
+
 								<div class="col-md-6 mb-3">
 									<div class="ui-widget form-group">
 										<label>Expense Type</label>
@@ -642,10 +567,10 @@
 						</form>
 					</div>
 				</div>
-      </div>
+			</div>
 
-    </div>
-  </div>
-  </div>
-  <!-- /Add new Modal -->
+		</div>
+	</div>
+</div>
+<!-- /Add new Modal -->
 @endsection

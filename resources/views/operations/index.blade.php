@@ -47,12 +47,15 @@
 									{{$row->shipper->client_name}}
 									@endif</td>
                                 <td>
-                                    <?php
-                                    $row = 1;
-                                    ?>
-                                    <a href="{{ route('operations.show',$row) }}" class="btn btn-info d-inline-block">view</a>
-                                    <a href="{{ route('operations.edit',$row) }}" class="btn btn-info d-inline-block">edit</a>
-                                    <a href="#" onclick="delette('ٌRound')" class="btn d-inline-block btn-danger">delete</a>
+                                   
+                                    <a href="{{ route('operations.show',$row->id) }}" class="btn btn-info d-inline-block">view</a>
+                                    <a href="{{ route('operations.edit',$row->id) }}" class="btn btn-info d-inline-block">edit</a>
+                                    <a href="#" onclick="destroy('operations','{{$row->id}}')" class="btn d-inline-block btn-danger">delete</a>
+                                    <form id="delete_{{$row->id}}" action="{{ route('operations.destroy', $row->id) }}" method="POST" style="display: none;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" value=""></button>
+                                    </form>
                                 </td>
                             </tr>
                             @endforeach

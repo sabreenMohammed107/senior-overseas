@@ -8,8 +8,8 @@
 	</div>
 	<div class="col-md-6 mb-3">
 		<div class="form-group">
-			<label class="exampleInputPassword1" for="exampleCheck1">Operation Code</label>
-			<input type="date" name="operation_code" class="form-control" placeholder="Operation Code">
+			<label class="exampleInputPassword1" for="exampleCheck1">Operation Date</label>
+			<input type="date" name="operation_date" class="form-control" placeholder="Operation Date">
 		</div>
 	</div>
 	<div class="col-md-6 mb-3">
@@ -307,12 +307,12 @@
 			<textarea id="newClint" class="form-control" name="container_name" placeholder="Container/s Names" rows="3"></textarea>
 		</div>
 	</div>
-	<div class="col-md-6 mb-3">
+	<!-- <div class="col-md-6 mb-3">
 		<div class="form-group">
 			<label class="exampleInputPassword1" for="exampleCheck1">Notes</label>
 			<textarea id="newClint" name="notes" class="form-control" placeholder="Notes" rows="3"></textarea>
 		</div>
-	</div>
+	</div> -->
 	<div class="col-md-6 mb-3">
 		<div class="form-group">
 			<label class="exampleInputPassword1" for="exampleCheck1">Loading Date</label>
@@ -348,7 +348,7 @@
 	<div class="col-md-6 mb-3">
 		<div class="form-group">
 			<label class="exampleInputPassword1" for="exampleCheck1">Commodity</label>
-			<select class="form-control" data-live-search="true">
+			<select class="form-control" name="commodity_id" data-live-search="true">
 				<option value="">Select ...</option>
 				@foreach ($Commodity as $type)
 				<option value='{{$type->id}}'>

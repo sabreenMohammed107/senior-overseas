@@ -19,5 +19,21 @@ class Operation extends Model
         return $this->belongsTo('App\Models\Client','shipper_id');
 
     }
+    public function consignee()
+    {
+        return $this->belongsTo('App\Models\Client','consignee_id');
+
+    }
+    public function notify()
+    {
+        return $this->belongsTo('App\Models\Client','notify_id');
+
+    }
+
+    public function sale()
+    {
+        return $this->belongsTo('App\Models\Sale_quote','sales_quote_id');
+
+    }
     
 }

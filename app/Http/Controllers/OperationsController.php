@@ -62,8 +62,8 @@ class OperationsController extends Controller
     public function create()
     {
         $id = 1;
-        $qouts = Sale_quote::where('sale_quotes_type_id','=',2)->get();
-        $qoutsFake = Sale_quote::where('sale_quotes_type_id','=',1)->get();
+        $qouts = Sale_quote::where('sale_quotes_type_id', '=', 2)->get();
+        $qoutsFake = Sale_quote::where('sale_quotes_type_id', '=', 1)->get();
         $filtters = Sale_quote_air::where('sale_quote_id', '=', $id)->orderBy("created_at", "Desc")->get();
         $typeTesting = 0;
 
@@ -72,15 +72,15 @@ class OperationsController extends Controller
 
         $trackings = Sale_quote_trucking::where('sale_quote_id', '=', $id)->orderBy("created_at", "Desc")->get();
         //all Data
-        $sale_qoute=new Sale_quote();
+        $sale_qoute = new Sale_quote();
         $clients = Client::all();
-        $clearances = Currency::all();
+        $clearances =Currency::all();
         $doors = Currency::all();
-        $consinee=Client::all();
-        $notify=Client::all();
-        $Commodity= Commodity::all();
+        $consinee = Client::all();
+        $notify = Client::all();
+        $Commodity = Commodity::all();
         $clearancesSuppliers = Supplier::where('supplier_type_id', '=', 2)->get();
-        return view($this->viewName . 'create', compact('qouts','qoutsFake','sale_qoute','consinee','notify','Commodity', 'typeTesting',  'filtters', 'trackings', 'clients', 'clearancesSuppliers', 'clearances', 'doors'));
+        return view($this->viewName . 'create', compact('qouts', 'qoutsFake', 'sale_qoute', 'consinee', 'notify', 'Commodity', 'typeTesting',  'filtters', 'trackings', 'clients', 'clearancesSuppliers', 'clearances', 'doors'));
 
         // return view($this->viewName . 'create');
     }
@@ -91,7 +91,7 @@ class OperationsController extends Controller
         $rows = Operation::orderBy("created_at", "Desc")->get();
 
         $id = $request->input('buildings_id');
-       
+
         $row = Sale_quote::where('id', '=', $id)->first();
         $filtters = [];
         if ($row->ocean_air_type == 0) {
@@ -103,16 +103,16 @@ class OperationsController extends Controller
         }
         $trackings = Sale_quote_trucking::where('sale_quote_id', '=', $id)->orderBy("created_at", "Desc")->get();
         //all Data
-        $sale_qoute=Sale_quote::where('id','=',$id)->first();
+        $sale_qoute = Sale_quote::where('id', '=', $id)->first();
         $clients = Client::all();
         $clearances = Currency::all();
         $doors = Currency::all();
-        $consinee=Client::all();
-        $notify=Client::all();
-        $Commodity= Commodity::all();
+        $consinee = Client::all();
+        $notify = Client::all();
+        $Commodity = Commodity::all();
         $clearancesSuppliers = Supplier::where('supplier_type_id', '=', 2)->get();
 
-        return view($this->viewName . 'search', compact('row','consinee','notify','Commodity', 'sale_qoute','typeTesting',  'filtters', 'trackings', 'clients', 'clearancesSuppliers', 'clearances', 'doors'))->render();
+        return view($this->viewName . 'search', compact('row', 'consinee', 'notify', 'Commodity', 'sale_qoute', 'typeTesting',  'filtters', 'trackings', 'clients', 'clearancesSuppliers', 'clearances', 'doors'))->render();
     }
 
     /**
@@ -138,7 +138,7 @@ class OperationsController extends Controller
         //first get data 
         $data = [
             'shipper_id' => $request->input('shipper_id'),
-            'operation_code' =>$max,
+            'operation_code' => $max,
             'operation_date' => Carbon::parse($request->input('operation_date')),
             'container_counts' => $request->input('container_counts'),
             'container_name' => $request->input('container_name'),
@@ -193,7 +193,6 @@ class OperationsController extends Controller
 
 
         return redirect()->route($this->routeName . 'index')->with('flash_success', $this->message);
-      
     }
 
     /**
@@ -204,7 +203,26 @@ class OperationsController extends Controller
      */
     public function show($id)
     {
-        return view($this->viewName . 'view');
+        $row = Operation::where('id', '=', $id)->first();
+
+        $trackings = Sale_quote_trucking::where('id', '=', $row->sales_quote_tracking_id)->get();
+        $filtters = [];
+        if ($row->sales_quote_ocean_id) {
+            $filtters = Sale_quote_ocean::where('id', '=', $row->sales_quote_ocean_id)->get();
+            $typeTesting=1;
+        } else {
+            $filtters = Sale_quote_air::where('id', '=', $row->sales_quote_air_id)->get();
+            $typeTesting=0;
+        }
+        $qouts = Sale_quote::all();
+        $clearances=Currency::all();
+        $consinee = Client::all();
+        $notify = Client::all();
+        $Commodity = Commodity::all();
+        $doors = Currency::all();
+        // get expenses
+        
+        return view($this->viewName . 'view', compact('row','qouts', 'consinee', 'notify','clearances','doors', 'typeTesting','Commodity', 'trackings','filtters'));
     }
 
     /**
@@ -215,7 +233,28 @@ class OperationsController extends Controller
      */
     public function edit($id)
     {
-        return view($this->viewName . 'edit');
+        $row = Operation::where('id', '=', $id)->first();
+
+        $trackings = Sale_quote_trucking::where('id', '=', $row->sales_quote_tracking_id)->get();
+        $filtters = [];
+        if ($row->sales_quote_ocean_id) {
+            $filtters = Sale_quote_ocean::where('id', '=', $row->sales_quote_ocean_id)->get();
+            $typeTesting=1;
+        } else {
+            $filtters = Sale_quote_air::where('id', '=', $row->sales_quote_air_id)->get();
+            $typeTesting=0;
+        }
+        $qouts = Sale_quote::all();
+        $clearances=Currency::all();
+        $consinee = Client::all();
+        $notify = Client::all();
+        $Commodity = Commodity::all();
+        $doors = Currency::all();
+        // get expenses
+        
+        return view($this->viewName . 'edit', compact('row','qouts', 'consinee', 'notify','clearances','doors', 'typeTesting','Commodity', 'trackings','filtters'));
+
+       
     }
 
     /**
@@ -227,7 +266,37 @@ class OperationsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //first get data 
+        $data = [
+            'operation_date' => Carbon::parse($request->input('operation_date')),
+            'container_counts' => $request->input('container_counts'),
+            'container_name' => $request->input('container_name'),
+            'pl_no' => $request->input('pl_no'),
+            'loading_date' => Carbon::parse($request->input('loading_date')),
+            'vassel_name' => $request->input('vassel_name'),
+            'cut_off_date' => Carbon::parse($request->input('cut_off_date')),
+            'booking_no' => $request->input('booking_no'),
+            'notes' => $request->input('notes'),
+
+
+        ];
+   
+        if ($request->input('consignee_id')) {
+
+            $data['consignee_id'] = $request->input('consignee_id');
+        }
+        if ($request->input('notify_id')) {
+
+            $data['notify_id'] = $request->input('notify_id');
+        }
+        if ($request->input('commodity_id')) {
+
+            $data['commodity_id'] = $request->input('commodity_id');
+        }
+    
+        $this->object::findOrFail($id)->update($data);
+
+        return redirect()->route($this->routeName . 'index')->with('flash_success', $this->message);
     }
 
     /**
@@ -238,6 +307,17 @@ class OperationsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $row = Operation::where('id', '=', $id)->first();
+
+
+        try {
+            $row->delete();
+        } catch (QueryException $q) {
+
+            return redirect()->back()->with('flash_danger', 'You cannot delete related with another...');
+        }
+
+        return redirect()->route($this->routeName . 'index')->with('flash_success', 'Data Has Been Deleted Successfully !');
     }
+    
 }
