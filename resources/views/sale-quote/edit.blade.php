@@ -57,7 +57,7 @@
           <div class="col-md-4 mb-3">
 							<div class="form-group">
 								<label class="exampleInputPassword1" for="exampleCheck1">Quote Code</label>
-								<input type="text" class="form-control" name="quote_code" placeholder="Quote code">
+								<input type="text" class="form-control" name="quote_code" readonly value="{{$row->quote_code}}" placeholder="Quote code">
 							</div>
 						</div>
           <div class="col-md-4 mb-3">
