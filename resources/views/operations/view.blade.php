@@ -243,7 +243,7 @@
 												<td>{{$filter->ocean->notes}}</td>
 												@endif
 												<td>
-													<?php echo $trackings[$index]->car_price; ?>
+												{{$filter->price}}
 												</td>
 												<td scope="col">
 													@if($typeTesting==0)

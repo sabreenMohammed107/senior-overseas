@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Supplier;
 use App\Models\Country;
 use App\Models\Supplier_type;
+use App\Models\Currency;
+use App\Models\Open_balance;
 use File;
 use DB;
 use Log;
@@ -118,7 +120,9 @@ class SupplierController extends Controller
         $row = Supplier::where('id', '=', $id)->first();
         $countries = Country::all();
         $types=Supplier_type::all();
-        return view($this->viewName . 'edit', compact('row','countries','types' ));
+        $carrencies=Currency::all();
+        $balances=Open_balance::where('supplier_id','=',$id)->get();
+        return view($this->viewName . 'edit', compact('row','countries','types' ,'carrencies','balances'));
     }
 
     /**
@@ -203,5 +207,29 @@ class SupplierController extends Controller
 		$file->move($uploadPath, $imageName);
        
 		return $imageName;
+    }
+     /***
+     * addOpenBalance
+     */
+    public function addOpenBalance(Request $request){
+        $data = [
+            'supplier_id' => $request->input('supplier_id'),
+            'open_balance' => $request->input('open_balance'),
+            'current_balance' => $request->input('open_balance'),
+            'note' => $request->input('note'),
+            'balance_start_date' => Carbon::parse($request->input('balance_start_date')),
+
+        ];
+
+        if ($request->input('currency_id')) {
+
+            $data['currency_id'] = $request->input('currency_id');
+        }
+       
+        Open_balance::create($data);
+
+
+        return redirect()->back()->with('flash_success', $this->message);
+
     }
 }

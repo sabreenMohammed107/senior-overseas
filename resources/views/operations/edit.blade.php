@@ -246,7 +246,7 @@
 												<td>{{$filter->ocean->notes}}</td>
 												@endif
 												<td>
-													<?php echo $trackings[$index]->car_price; ?>
+												{{$filter->price}}
 												</td>
 												<td scope="col">
 													@if($typeTesting==0)
@@ -504,11 +504,11 @@
 																	{{$expense->currency->currency_name}}
 																	@endif</td>
 																<td>
-																	<a href="#" class="btn btn-info d-inline-block" data-toggle="modal" data-target="#addSubCat{{$expense->id}}">edit</a> 
+																	<a href="#" class="btn btn-info d-inline-block" data-toggle="modal" data-target="#addSubCat{{$expense->id}}">edit</a>
 																	<a href="#" onclick="destroy('expense','{{$expense->id}}')" class="btn d-inline-block btn-danger">delete</a>
 																	<form id="delete_{{$expense->id}}" action="{{ route('deleteOperationExpenses', $expense->id) }}" method="POST" style="display: none;">
 																		@csrf
-																	
+
 																		<button type="submit" value=""></button>
 																	</form>
 																</td>
@@ -623,7 +623,7 @@
 				</div>
 			</div>
 		</div>
-		</form>
+	
 	</div>
 </div>
 </div>
@@ -700,7 +700,7 @@
 										<select name="currency_id" class=" form-control" data-live-search="true">
 											<option value="">Select ...</option>
 											@foreach ($expenseCurrency as $data)
-											<option value='{{$data->id}}' >
+											<option value='{{$data->id}}'>
 												{{$data->currency_name}}</option>
 											@endforeach
 										</select>

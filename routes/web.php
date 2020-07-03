@@ -33,13 +33,17 @@ Route::post('editUserPassword', 'UserListController@editUserPassword')->name('ed
 
 // ----------------------------client------------------
 Route::resource('/client', 'ClientController');
+Route::post('/add-openBalanceClient', 'ClientController@addOpenBalance')->name('addopenBalanceClient');
 
 // ----------------------------supplier------------------
 Route::resource('/supplier', 'SupplierController');
+Route::post('/add-openBalanceSupplier', 'SupplierController@addOpenBalance')->name('addopenBalanceSupplier');
+
 // ----------------------------port------------------
 Route::resource('/port', 'PortController');
 // ----------------------------carrier------------------
 Route::resource('/carrier', 'CarrierController');
+Route::post('/add-openBalance', 'CarrierController@addOpenBalance')->name('addopenBalance');
 // ----------------------------agent------------------
 Route::resource('/agent', 'AgentController');
 // ----------------------------expenses------------------

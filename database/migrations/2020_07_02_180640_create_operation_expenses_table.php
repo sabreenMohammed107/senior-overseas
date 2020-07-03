@@ -19,6 +19,7 @@ class CreateOperationExpensesTable extends Migration
             $table->integer('expenses_type_id')->unsigned()->nullable();
             $table->double('buy',8, 2)->nullable();
             $table->double('sell',8, 2)->nullable();
+            $table->integer('automatic')->nullable();
             $table->integer('provider_type_id')->unsigned()->nullable();
             $table->integer('currency_id')->unsigned()->nullable();
             $table->text('note')->nullable();

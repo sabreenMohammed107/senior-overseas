@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Carrier;
 
 use App\Models\Carrier_type;
+use App\Models\Currency;
+use App\Models\Open_balance;
 use File;
 use DB;
 use Log;
@@ -105,7 +107,9 @@ class CarrierController extends Controller
         $row = Carrier::where('id', '=', $id)->first();
       
         $types=Carrier_type::all();
-        return view($this->viewName . 'edit', compact('row','types' ));
+        $carrencies=Currency::all();
+        $balances=Open_balance::where('carrier_id','=',$id)->get();
+        return view($this->viewName . 'edit', compact('row','types' ,'carrencies','balances'));
     }
 
     /**
@@ -155,5 +159,30 @@ class CarrierController extends Controller
         }
 
         return redirect()->route($this->routeName . 'index')->with('flash_success', 'Data Has Been Deleted Successfully !');
+    }
+
+    /***
+     * addOpenBalance
+     */
+    public function addOpenBalance(Request $request){
+        $data = [
+            'carrier_id' => $request->input('carrier_id'),
+            'open_balance' => $request->input('open_balance'),
+            'current_balance' => $request->input('open_balance'),
+            'note' => $request->input('note'),
+            'balance_start_date' => Carbon::parse($request->input('balance_start_date')),
+
+        ];
+
+        if ($request->input('currency_id')) {
+
+            $data['currency_id'] = $request->input('currency_id');
+        }
+       
+        Open_balance::create($data);
+
+
+        return redirect()->back()->with('flash_success', $this->message);
+
     }
 }
