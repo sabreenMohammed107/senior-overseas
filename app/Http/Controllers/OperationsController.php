@@ -208,6 +208,7 @@ class OperationsController extends Controller
             if ($request->input('oceanSelected')) {
                 $objBuy = new Collection();
                 $objBuy->operation_id = $operationObj->id;
+                $objBuy->automatic=1;
                 $objBuy->provider_type_id = 1;
                 $ocean = Sale_quote_ocean::where('id', '=', $operationObj->sales_quote_ocean_id)->first();
                 $objBuy->buy = $ocean->ocean->price;
@@ -217,6 +218,7 @@ class OperationsController extends Controller
                 //another row
                 $objSell = new Collection();
                 $objSell->operation_id = $operationObj->id;
+                $objSell->automatic=1;
                 $objSell->provider_type_id = 1;
                 $ocean = Sale_quote_ocean::where('id', '=', $operationObj->sales_quote_ocean_id)->first();
                 $objSell->buy = null;
@@ -225,11 +227,10 @@ class OperationsController extends Controller
                 array_push($savingExpense, $objSell);
             }
 
-
-
             if ($request->input('airSelected')) {
                 $obj2Buy = new Collection();
                 $obj2Buy->operation_id = $operationObj->id;
+                $obj2Buy->automatic=1;
                 $obj2Buy->provider_type_id = 2;
                 $air = Sale_quote_air::where('id', '=', $operationObj->sales_quote_air_id)->first();
                 $obj2Buy->buy = $air->air->price;
@@ -241,6 +242,7 @@ class OperationsController extends Controller
                 //another row
                 $obj2Sell = new Collection();
                 $obj2Sell->operation_id = $operationObj->id;
+                $obj2Sell->automatic=1;
                 $obj2Sell->provider_type_id = 2;
                 $air = Sale_quote_air::where('id', '=', $operationObj->sales_quote_air_id)->first();
                 $obj2Sell->buy = null;
@@ -251,6 +253,7 @@ class OperationsController extends Controller
             if ($request->input('TrackingSelected')) {
                 $obj3 = new Collection();
                 $obj3->operation_id = $operationObj->id;
+                $obj3->automatic=1;
                 $obj3->provider_type_id = 3;
                 $truck = Sale_quote_trucking::where('id', '=', $operationObj->sales_quote_tracking_id)->first();
                 $obj3->buy = $truck->truck->car_price;
@@ -260,6 +263,7 @@ class OperationsController extends Controller
                 //another row
                 $obj3Sell = new Collection();
                 $obj3Sell->operation_id = $operationObj->id;
+                $obj3Sell->automatic=1;
                 $obj3Sell->provider_type_id = 3;
                 $truck = Sale_quote_trucking::where('id', '=', $operationObj->sales_quote_tracking_id)->first();
                 $obj3Sell->buy = null;
@@ -268,10 +272,14 @@ class OperationsController extends Controller
                 array_push($savingExpense, $obj3Sell);
             }
 
+
+            $sale_quot = Sale_quote::where('id', '=', $operationObj->sales_quote_id)->first();
+
+            if ($sale_quot->clearance_price) {
             $obj4 = new Collection();
             $obj4->operation_id = $operationObj->id;
+            $obj4->automatic=1;
             $obj4->provider_type_id = 4;
-            $sale_quot = Sale_quote::where('id', '=', $operationObj->sales_quote_id)->first();
             $obj4->buy = $sale_quot->clearance_price;
             $obj4->sell = null;
             $obj4->currency_id = $sale_quot->clearance_currency_id;
@@ -279,17 +287,21 @@ class OperationsController extends Controller
             //another row
             $obj4Sell = new Collection();
             $obj4Sell->operation_id = $operationObj->id;
+            $obj4Sell->automatic=1;
             $obj4Sell->provider_type_id = 4;
-            $sale_quot = Sale_quote::where('id', '=', $operationObj->sales_quote_id)->first();
             $obj4Sell->buy = null;
             $obj4Sell->sell = $sale_quot->clearance_price;
             $obj4Sell->currency_id = $sale_quot->clearance_currency_id;
             array_push($savingExpense, $obj4Sell);
+            }
             /*-------------------------------*/
+            $sale_quotdoor = Sale_quote::where('id', '=', $operationObj->sales_quote_id)->first();
+            if ($sale_quotdoor->door_door_price) {
             $obj5 = new Collection();
             $obj5->operation_id = $operationObj->id;
+            $obj5->automatic=1;
             $obj5->provider_type_id = 5;
-            $sale_quotdoor = Sale_quote::where('id', '=', $operationObj->sales_quote_id)->first();
+         
             $obj5->buy = $sale_quotdoor->door_door_price;
             $obj5->sell = null;
             $obj5->currency_id = $sale_quotdoor->door_door_currency_id;
@@ -297,12 +309,13 @@ class OperationsController extends Controller
             //another row
             $obj5Sell = new Collection();
             $obj5Sell->operation_id = $operationObj->id;
+            $obj5Sell->automatic=1;
             $obj5Sell->provider_type_id = 5;
-            $sale_quotdoor = Sale_quote::where('id', '=', $operationObj->sales_quote_id)->first();
             $obj5Sell->buy = null;
             $obj5Sell->sell = $sale_quotdoor->door_door_price;
             $obj5Sell->currency_id = $sale_quotdoor->door_door_currency_id;
             array_push($savingExpense, $obj5Sell);
+            }
             /*--------------------------*/
 
             // dd ($savingExpense);

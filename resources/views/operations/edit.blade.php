@@ -504,6 +504,7 @@
 																	{{$expense->currency->currency_name}}
 																	@endif</td>
 																<td>
+																@if($expense->automatic!=1)
 																	<a href="#" class="btn btn-info d-inline-block" data-toggle="modal" data-target="#addSubCat{{$expense->id}}">edit</a>
 																	<a href="#" onclick="destroy('expense','{{$expense->id}}')" class="btn d-inline-block btn-danger">delete</a>
 																	<form id="delete_{{$expense->id}}" action="{{ route('deleteOperationExpenses', $expense->id) }}" method="POST" style="display: none;">
@@ -511,6 +512,7 @@
 
 																		<button type="submit" value=""></button>
 																	</form>
+																	@endif
 																</td>
 															</tr>
 															<!-- Add new Modal -->
