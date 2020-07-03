@@ -114,7 +114,12 @@
 
 
 
-																						<div class="col-md-6 mb-3"></div>
+																					<div class="col-md-6 mb-3">
+																<div class="form-group">
+																	<label class="exampleInputPassword1" for="exampleCheck1">*Clearance supplier</label>
+																	<input type="text" value="{{ $row->sale->supplier->supplier_name  ??'' }}" class="form-control" placeholder="Clearance supplier" disabled>
+																</div>
+															</div>
 
 
 																						<div class="col-md-6 mb-3">
@@ -145,6 +150,12 @@
 
 																					<div style="border-bottom:solid #0094ff 2px;margin-bottom:15px"></div>
 																					<div class="ms-auth-container row">
+																						<div class="col-md-6 mb-3">
+																							<div class="form-group">
+																								<label class="exampleInputPassword1" for="exampleCheck1">*Door Agent</label>
+																								<input type="text" value="{{ $row->sale->agent->agent_name  ??'' }}" class="form-control" placeholder="Door Agent" disabled>
+																							</div>
+																						</div>
 																						<div class="col-md-6 mb-3">
 																							<div class="form-group">
 																								<label class="exampleInputPassword1" for="exampleCheck1">*Door to Door Price</label>
@@ -246,7 +257,7 @@
 												<td>{{$filter->ocean->notes}}</td>
 												@endif
 												<td>
-												{{$filter->price}}
+													{{$filter->price}}
 												</td>
 												<td scope="col">
 													@if($typeTesting==0)
@@ -273,7 +284,7 @@
 														<tr>
 															<th>#</th>
 
-<th>Supplier</th>
+															<th>Supplier</th>
 															<th> Pol</th>
 															<th> Pod</th>
 															<th> Car</th>
@@ -289,8 +300,8 @@
 														<tr>
 															<td>{{$index+1}}</td>
 															<td>@if($track->truck->supplier)
-                                                        {{$track->truck->supplier->supplier_name}}
-                                                        @endif</td>
+																{{$track->truck->supplier->supplier_name}}
+																@endif</td>
 															<td>@if($track->truck->pol)
 																{{$track->truck->pol->port_name}} - {{$track->truck->pol->country->country_name}}
 																@endif</td>
@@ -506,7 +517,7 @@
 																	{{$expense->currency->currency_name}}
 																	@endif</td>
 																<td>
-																@if($expense->automatic!=1)
+																	@if($expense->automatic!=1)
 																	<a href="#" class="btn btn-info d-inline-block" data-toggle="modal" data-target="#addSubCat{{$expense->id}}">edit</a>
 																	<a href="#" onclick="destroy('expense','{{$expense->id}}')" class="btn d-inline-block btn-danger">delete</a>
 																	<form id="delete_{{$expense->id}}" action="{{ route('deleteOperationExpenses', $expense->id) }}" method="POST" style="display: none;">
@@ -627,7 +638,7 @@
 				</div>
 			</div>
 		</div>
-	
+
 	</div>
 </div>
 </div>

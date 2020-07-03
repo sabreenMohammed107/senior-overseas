@@ -46,6 +46,8 @@ Route::resource('/carrier', 'CarrierController');
 Route::post('/add-openBalance', 'CarrierController@addOpenBalance')->name('addopenBalance');
 // ----------------------------agent------------------
 Route::resource('/agent', 'AgentController');
+Route::post('/add-openBalanceAgent', 'AgentController@addOpenBalance')->name('addopenBalanceAgent');
+
 // ----------------------------expenses------------------
 Route::resource('/expenses', 'ExpensesController');
 // ----------------------------container------------------

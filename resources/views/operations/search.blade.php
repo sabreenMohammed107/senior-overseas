@@ -64,7 +64,12 @@
 
 
 
-															<div class="col-md-6 mb-3"></div>
+														<div class="col-md-6 mb-3">
+																<div class="form-group">
+																	<label class="exampleInputPassword1" for="exampleCheck1">*Clearance supplier</label>
+																	<input type="text" value="{{ $sale_qoute->supplier->supplier_name  ??'' }}" class="form-control" placeholder="Clearance supplier" disabled>
+																</div>
+															</div>
 
 
 															<div class="col-md-6 mb-3">
@@ -95,6 +100,12 @@
 
 														<div style="border-bottom:solid #0094ff 2px;margin-bottom:15px"></div>
 														<div class="ms-auth-container row">
+														<div class="col-md-6 mb-3">
+																<div class="form-group">
+																	<label class="exampleInputPassword1" for="exampleCheck1">*Door Agent</label>
+																	<input type="text" value="{{ $sale_qoute->agent->agent_name  ??'' }}" class="form-control" placeholder="Door Agent" disabled>
+																</div>
+															</div>
 															<div class="col-md-6 mb-3">
 																<div class="form-group">
 																	<label class="exampleInputPassword1" for="exampleCheck1">*Door to Door Price</label>
@@ -223,7 +234,7 @@
 							<tr>
 								<th>#</th>
 
-<th>Supplier</th>
+								<th>Supplier</th>
 								<th> Pol</th>
 								<th> Pod</th>
 								<th> Car</th>
@@ -279,6 +290,7 @@
 	<h2>Operations Data</h2>
 </div><br />
 <div class="ms-auth-container row">
+
 	<div class="col-md-6 mb-3">
 		<div class="ui-widget form-group">
 			<label>Consignee</label>

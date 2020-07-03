@@ -249,6 +249,18 @@
                             <div>
                                 <div style="border-bottom:solid 2px #0094ff;margin-bottom:20px"></div>
                                 <div class="ms-auth-container row">
+                                <div class="col-md-6 mb-3">
+										<div class="ui-widget form-group">
+											<label>Door Agent</label>
+											<select name="agent_id" disabled class="form-control" data-live-search="true">
+												<option value="">Select ...</option>
+												@foreach ($agents as $type)
+												<option value='{{$type->id}}' {{ $type->id == $row->agent_id ? 'selected' : '' }}>
+													{{ $type->agent_name}}</option>
+												@endforeach
+											</select>
+										</div>
+									</div>
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
                                             <label class="exampleInputPassword1" for="exampleCheck1">*Door to Door Price</label>

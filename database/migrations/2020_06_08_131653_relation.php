@@ -106,6 +106,7 @@ Schema::table('air_rates', function (Blueprint $table) {
             $table->foreign('clearance_currency_id')->references('id')->on('currencies');
             $table->foreign('door_door_currency_id')->references('id')->on('currencies');
             $table->foreign('sale_person_id')->references('id')->on('employees');
+            $table->foreign('agent_id')->references('id')->on('agents');
         });
 
     }

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Agent;
 use App\Models\Country;
+use App\Models\Currency;
+use App\Models\Open_balance;
 use File;
 use DB;
 use Log;
@@ -104,8 +106,9 @@ class AgentController extends Controller
     {
         $row = Agent::where('id', '=', $id)->first();
         $countries = Country::all();
-        
-        return view($this->viewName . 'edit', compact('row','countries' ));
+        $carrencies=Currency::all();
+        $balances=Open_balance::where('agent_id','=',$id)->get();
+        return view($this->viewName . 'edit', compact('row','countries' ,'carrencies','balances'));
     }
 
     /**
@@ -158,5 +161,30 @@ class AgentController extends Controller
         }
 
         return redirect()->route($this->routeName . 'index')->with('flash_success', 'Data Has Been Deleted Successfully !');
+    }
+
+          /***
+     * addOpenBalance
+     */
+    public function addOpenBalance(Request $request){
+        $data = [
+            'agent_id' => $request->input('agent_id'),
+            'open_balance' => $request->input('open_balance'),
+            'current_balance' => $request->input('open_balance'),
+            'note' => $request->input('note'),
+            'balance_start_date' => Carbon::parse($request->input('balance_start_date')),
+
+        ];
+
+        if ($request->input('currency_id')) {
+
+            $data['currency_id'] = $request->input('currency_id');
+        }
+       
+        Open_balance::create($data);
+
+
+        return redirect()->back()->with('flash_success', $this->message);
+
     }
 }

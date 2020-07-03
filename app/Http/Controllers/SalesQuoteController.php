@@ -18,6 +18,7 @@ use App\Models\Sale_quote_air;
 use App\Models\Sale_quote_ocean;
 use App\Models\Sale_quote_trucking;
 use App\Models\Employee;
+use App\Models\Agent;
 use File;
 use DB;
 use Log;
@@ -175,9 +176,9 @@ class SalesQuoteController extends Controller
         $clearances = Currency::all();
         $doors = Currency::all();
         $clearancesSuppliers = Supplier::where('supplier_type_id', '=', 2)->get();
-        $employees=Employee::all();
-
-        return view($this->viewName . 'create', compact('typeTesting', 'type', 'employees','filtters', 'trackings', 'clients', 'clearancesSuppliers', 'clearances', 'doors'));
+        $employees = Employee::all();
+        $agents = Agent::all();
+        return view($this->viewName . 'create', compact('typeTesting', 'type', 'employees', 'agents', 'filtters', 'trackings', 'clients', 'clearancesSuppliers', 'clearances', 'doors'));
     }
     /**
      * Store a newly created resource in storage.
@@ -198,7 +199,7 @@ class SalesQuoteController extends Controller
         }
 
 
-       //first get data 
+        //first get data 
         $data = [
             'quote_date' => $request->input('quote_date'),
             'quote_code' => $max,
@@ -207,7 +208,7 @@ class SalesQuoteController extends Controller
             'clearance_notes' => $request->input('clearance_notes'),
             'door_door_price' => $request->input('door_door_price'),
             'door_door_notes' => $request->input('door_door_notes'),
-            'sale_quotes_type_id'=>$request->input('sale_quotes_type_id'),
+            'sale_quotes_type_id' => $request->input('sale_quotes_type_id'),
 
 
         ];
@@ -222,6 +223,10 @@ class SalesQuoteController extends Controller
         if ($request->input('supplier_id')) {
 
             $data['supplier_id'] = $request->input('supplier_id');
+        }
+        if ($request->input('agent_id')) {
+
+            $data['agent_id'] = $request->input('agent_id');
         }
         if ($request->input('clearance_currency_id')) {
 
@@ -347,9 +352,9 @@ class SalesQuoteController extends Controller
         $clients = Client::all();
         $clearances = Currency::all();
         $doors = Currency::all();
-        $employees=Employee::all();
+        $employees = Employee::all();
         $clearancesSuppliers = Supplier::where('supplier_type_id', '=', 2)->get();
-        return view($this->viewName . 'edit', compact('row', 'typeTesting','employees',  'filtters', 'trackings', 'clients', 'clearancesSuppliers', 'clearances', 'doors'));
+        return view($this->viewName . 'edit', compact('row', 'typeTesting', 'employees',  'filtters', 'trackings', 'clients', 'clearancesSuppliers', 'clearances', 'doors'));
     }
 
     /**

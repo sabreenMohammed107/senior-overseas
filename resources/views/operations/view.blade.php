@@ -25,7 +25,7 @@
 					<div class="col-12 p-3">
 						<form action="" method="POST">
 
-							
+
 							<div class="ms-auth-container row">
 								<div class="col-md-6 mb-3">
 									<div class="form-group">
@@ -75,7 +75,7 @@
 								<div class="col-md-6 mb-3">
 									<div class="form-group">
 										<label class="exampleInputPassword1" for="exampleCheck1">Import Export</label>
-										<select class="form-control" name="import_export_flag" data-live-search="true" disabled> 
+										<select class="form-control" name="import_export_flag" data-live-search="true" disabled>
 
 											<option>Select ...</option>
 											<option value='1' {{ 1 ==$row->import_export_flag ? 'selected' : '' }}>Import</option>
@@ -111,7 +111,12 @@
 
 
 
-																						<div class="col-md-6 mb-3"></div>
+																					<div class="col-md-6 mb-3">
+																<div class="form-group">
+																	<label class="exampleInputPassword1" for="exampleCheck1">*Clearance supplier</label>
+																	<input type="text" value="{{ $row->sale->supplier->supplier_name  ??'' }}" class="form-control" placeholder="Clearance supplier" disabled>
+																</div>
+															</div>
 
 
 																						<div class="col-md-6 mb-3">
@@ -142,6 +147,12 @@
 
 																					<div style="border-bottom:solid #0094ff 2px;margin-bottom:15px"></div>
 																					<div class="ms-auth-container row">
+																						<div class="col-md-6 mb-3">
+																							<div class="form-group">
+																								<label class="exampleInputPassword1" for="exampleCheck1">*Door Agent</label>
+																								<input type="text" value="{{ $row->sale->agent->agent_name  ??'' }}" class="form-control" placeholder="Door Agent" disabled>
+																							</div>
+																						</div>
 																						<div class="col-md-6 mb-3">
 																							<div class="form-group">
 																								<label class="exampleInputPassword1" for="exampleCheck1">*Door to Door Price</label>
@@ -243,7 +254,7 @@
 												<td>{{$filter->ocean->notes}}</td>
 												@endif
 												<td>
-												{{$filter->price}}
+													{{$filter->price}}
 												</td>
 												<td scope="col">
 													@if($typeTesting==0)
@@ -270,7 +281,7 @@
 														<tr>
 															<th>#</th>
 
-<th>Supplier</th>
+															<th>Supplier</th>
 															<th> Pol</th>
 															<th> Pod</th>
 															<th> Car</th>
@@ -286,8 +297,8 @@
 														<tr>
 															<td>{{$index+1}}</td>
 															<td>@if($track->truck->supplier)
-                                                        {{$track->truck->supplier->supplier_name}}
-                                                        @endif</td>
+																{{$track->truck->supplier->supplier_name}}
+																@endif</td>
 															<td>@if($track->truck->pol)
 																{{$track->truck->pol->port_name}} - {{$track->truck->pol->country->country_name}}
 																@endif</td>
@@ -487,7 +498,7 @@
 														</thead>
 														<tbody>
 
-														@foreach($expenses as $index => $expense)
+															@foreach($expenses as $index => $expense)
 															<tr>
 																<td>{{$index+1}}</td>
 																<td>@if($expense->type)
@@ -503,7 +514,7 @@
 																	{{$expense->currency->currency_name}}
 																	@endif</td>
 																<td>
-																	
+
 																</td>
 															</tr>
 															@endforeach

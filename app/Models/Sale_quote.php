@@ -10,7 +10,7 @@ class Sale_quote extends Model
         'quote_date', 'quote_code', 'client_id','ocean_air_type','supplier_id','sale_quotes_type_id',
        
         'clearance_price', 'clearance_currency_id','clearance_notes','sale_person_id',
-         'door_door_price','door_door_currency_id','door_door_notes'
+         'door_door_price','door_door_currency_id','door_door_notes','agent_id'
      
     ];
     public function client()
@@ -26,6 +26,11 @@ class Sale_quote extends Model
     public function supplier()
     {
         return $this->belongsTo('App\Models\Supplier','supplier_id');
+
+    }
+    public function agent()
+    {
+        return $this->belongsTo('App\Models\Agent','agent_id');
 
     }
     public function clearance()

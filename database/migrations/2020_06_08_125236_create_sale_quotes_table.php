@@ -23,6 +23,7 @@ class CreateSaleQuotesTable extends Migration
             $table->integer('ocean_air_type')->nullable();
             $table->double('clearance_price')->nullable();
             $table->integer('supplier_id')->unsigned()->nullable();
+            $table->integer('agent_id')->unsigned()->nullable();
             $table->integer('clearance_currency_id')->unsigned()->nullable();
             $table->text('clearance_notes')->nullable();
             $table->double('door_door_price')->nullable();
