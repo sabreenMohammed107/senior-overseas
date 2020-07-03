@@ -3,13 +3,13 @@
 	<div class="col-md-6 mb-3">
 		<div class="form-group">
 			<label class="exampleInputPassword1" for="exampleCheck1">Client ( Shipper )</label>
-			<input type="text"  class="form-control" value="{{$sale_qoute->client->client_name ?? 'Client ( Shipper )' }}" placeholder="Client ( Shipper )" readonly>
+			<input type="text" class="form-control" value="{{$sale_qoute->client->client_name ?? 'Client ( Shipper )' }}" placeholder="Client ( Shipper )" readonly>
 		</div>
 	</div>
 	<div class="col-md-6 mb-3">
 		<div class="form-group">
 			<label class="exampleInputPassword1" for="exampleCheck1">Sale Person</label>
-			<input type="text"  class="form-control" value="{{$sale_qoute->employee->employee_name ?? 'Sale person' }}" placeholder="Sale Person" readonly>
+			<input type="text" class="form-control" value="{{$sale_qoute->employee->employee_name ?? 'Sale person' }}" placeholder="Sale Person" readonly>
 		</div>
 	</div>
 	<div class="col-md-6 mb-3">
@@ -19,16 +19,16 @@
 		</div>
 	</div>
 	<div class="col-md-6 mb-3">
-				  				<div class="form-group">
-				  					<label class="exampleInputPassword1" for="exampleCheck1">Import Export</label>
-				  					<select class="form-control" required name="import_export_flag" data-live-search="true">
-				  						<option>Select ...</option>
-				  						<option value="1">Import</option>
-				  						<option value="2">Export</option>
-				  						
-				  					</select>
-				  				</div>
-							  </div>
+		<div class="form-group">
+			<label class="exampleInputPassword1" for="exampleCheck1">Import Export</label>
+			<select class="form-control" required name="import_export_flag" data-live-search="true">
+				<option>Select ...</option>
+				<option value="1">Import</option>
+				<option value="2">Export</option>
+
+			</select>
+		</div>
+	</div>
 	<div class="col-md-12 mb-3">
 		<div class="ms-panel ms-panel-fh">
 			<div class="ms-panel-body">
@@ -223,7 +223,7 @@
 							<tr>
 								<th>#</th>
 
-
+<th>Supplier</th>
 								<th> Pol</th>
 								<th> Pod</th>
 								<th> Car</th>
@@ -238,7 +238,9 @@
 							@foreach($trackings as $index => $track)
 							<tr>
 								<td>{{$index+1}}</td>
-
+								<td>@if($track->truck->supplier)
+									{{$track->truck->supplier->supplier_name}}
+									@endif</td>
 								<td>@if($track->truck->pol)
 									{{$track->truck->pol->port_name}} - {{$track->truck->pol->country->country_name}}
 									@endif</td>
@@ -373,7 +375,7 @@
 <div class="col-md-6 mb-3">
 	<div class="form-group">
 		<label class="exampleInputPassword1" for="exampleCheck1">Notes</label>
-		<textarea id="newClint" name="notes" class="form-control" placeholder="Notes" rows="3" ></textarea>
+		<textarea id="newClint" name="notes" class="form-control" placeholder="Notes" rows="3"></textarea>
 	</div>
 </div>
 <div class="input-group d-flex justify-content-end text-center">

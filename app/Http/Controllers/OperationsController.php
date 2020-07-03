@@ -278,7 +278,7 @@ class OperationsController extends Controller
             if ($sale_quot->clearance_price) {
             $obj4 = new Collection();
             $obj4->operation_id = $operationObj->id;
-            $obj4->automatic=1;
+           
             $obj4->provider_type_id = 4;
             $obj4->buy = $sale_quot->clearance_price;
             $obj4->sell = null;
@@ -287,7 +287,7 @@ class OperationsController extends Controller
             //another row
             $obj4Sell = new Collection();
             $obj4Sell->operation_id = $operationObj->id;
-            $obj4Sell->automatic=1;
+            
             $obj4Sell->provider_type_id = 4;
             $obj4Sell->buy = null;
             $obj4Sell->sell = $sale_quot->clearance_price;
