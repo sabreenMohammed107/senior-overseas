@@ -21,7 +21,7 @@
 	<div class="col-md-6 mb-3">
 				  				<div class="form-group">
 				  					<label class="exampleInputPassword1" for="exampleCheck1">Import Export</label>
-				  					<select class="form-control" name="import_export_flag" data-live-search="true">
+				  					<select class="form-control" required name="import_export_flag" data-live-search="true">
 				  						<option>Select ...</option>
 				  						<option value="1">Import</option>
 				  						<option value="2">Export</option>

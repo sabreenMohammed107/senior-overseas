@@ -17,4 +17,5 @@ class Sale_quote_ocean extends Model
         return $this->belongsTo('App\Models\Ocean_freight_rate','ocean_rate_id');
 
     }
+   
 }
