@@ -79,6 +79,20 @@
 </ul>
 
 </li>
+<!-- Accounting  --> 
+<li class="menu-item">
+<a href="#" class="has-chevron" data-toggle="collapse" data-target="#accountdropdown" aria-expanded="false"
+   aria-controls="contactsdropdown">
+  <span><i class="material-icons fs-16">assignment</i>Accounting</span>
+</a>
+<ul id="accountdropdown" class="collapse" aria-labelledby="basic-elements" data-parent="#side-nav-accordion">
+
+<li> <a href="{{ route('cash-box.index') }}">Cash Box</a> </li>
+<li> <a href="{{ route('bank.index') }}">Bank</a> </li>
+
+</ul>
+
+</li>
 </ul>
 
 

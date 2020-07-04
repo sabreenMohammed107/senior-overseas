@@ -123,7 +123,7 @@
 														<td>
 															{{$balance->open_balance}}
 														</td>
-														<td><?php $date = date_create($row->balance_start_date) ?>
+														<td><?php $date = date_create($balance->balance_start_date) ?>
 															{{ date_format($date,'Y-m-d') }}
 															</td> 
 															<td>{{$balance->open_balance}}
@@ -216,7 +216,7 @@
 								</div>
 							</div>
 							<div class="input-group d-flex justify-content-end text-center">
-								<input type="button" value="Cancel" class="btn btn-dark mx-2" data-dismiss="modal" aria-label="Close">
+							<a href="{{ route('carrier.index') }}" class="btn btn-dark mx-2"> Cancel</a>
 								<input type="submit" value="Add" class="btn btn-success ">
 							</div>
 						</form>
