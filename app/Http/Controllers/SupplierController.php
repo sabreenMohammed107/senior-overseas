@@ -8,6 +8,8 @@ use App\Models\Country;
 use App\Models\Supplier_type;
 use App\Models\Currency;
 use App\Models\Open_balance;
+use App\Models\Financial_entry;
+use App\Models\Finan_trans_type;
 use File;
 use DB;
 use Log;
@@ -226,7 +228,27 @@ class SupplierController extends Controller
             $data['currency_id'] = $request->input('currency_id');
         }
        
-        Open_balance::create($data);
+        DB::transaction(function () use ($data,  $request) {
+            
+            $open=Open_balance::create($data);
+         
+            //save in finance entry
+            $fin_data=[
+                'trans_type_id'=>Finan_trans_type::where('id','=',1)->first()->id,
+                'entry_date'=>Carbon::parse($request->input('balance_start_date')),
+                'depit'=> $request->input('open_balance'),
+                'currency_id'=> $request->input('currency_id'),
+                'notes'=> $request->input('note'),
+               
+            ];
+            if (Supplier::where('id','=',$request->input('supplier_id'))->first()->supplier_type_id==1) {
+
+                $fin_data['trucking_id'] = Supplier::where('id','=',$request->input('supplier_id'))->first()->id;
+            }else{
+                $fin_data['clearance_id'] =Supplier::where('id','=',$request->input('supplier_id'))->first()->id;
+            }
+            Financial_entry::create($fin_data);
+        });
 
 
         return redirect()->back()->with('flash_success', $this->message);

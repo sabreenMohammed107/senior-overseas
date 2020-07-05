@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Currency;
 use App\Models\Cash_box;
+use App\Models\Financial_entry;
+use App\Models\Finan_trans_type;
 use File;
 use DB;
 use Log;
@@ -74,9 +76,24 @@ class CashBoxController extends Controller
             $data['currency_id'] = $request->input('currency_id');
         }
        
-        $this->object::create($data);
+        
 
-
+        DB::transaction(function () use ($data,  $request) {
+            
+            $cash=$this->object::create($data);
+         
+            //save in finance entry
+            $fin_data=[
+                'trans_type_id'=>Finan_trans_type::where('id','=',1)->first()->id,
+                'entry_date'=>Carbon::parse($request->input('balance_start_date')),
+                'depit'=> $request->input('open_balance'),
+                'currency_id'=> $request->input('currency_id'),
+                'cash_box_id'=>$cash->id,
+                'notes'=> $request->input('note'),
+               
+            ];
+            Financial_entry::create($fin_data);
+        });
 
         return redirect()->route($this->routeName . 'index')->with('flash_success', $this->message);
     }

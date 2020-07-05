@@ -26,9 +26,10 @@
                             <tr>
                                 <th>#</th>
                                 <th>Cash Box Name</th>
-                                <th>Open Balance</th>
+                              
                                 <th>Balance Start Date</th>
-                                <th>Current Balance</th>
+                                <th>Open Balance</th>
+                                <!-- <th>Current Balance</th> -->
                                 <th>Currency</th>
                                 <th>Action</th>
                             </tr>
@@ -45,11 +46,12 @@
                                 </td>
                                 <td>{{$row->open_balance}}
                                 </td>
+                                <!-- <td>{{$row->current_balance}} -->
+
                                 <td>@if($row->currency)
                                     {{$row->currency->currency_name}}
                                     @endif
                                 </td>
-                                <td>{{$row->current_balance}}
                                 </td>
                                 <td>
                                     <a href="{{ route('cash-box.edit',$row->id) }}" class="btn btn-info d-inline-block">edit</a>
@@ -87,8 +89,8 @@
             <div class="modal-body">
                 <div class="ms-auth-container row no-gutters">
                     <div class="col-12 p-3">
-                    <form action="{{route('cash-box.store')}}" method="POST">
-							@csrf
+                        <form action="{{route('cash-box.store')}}" method="POST">
+                            @csrf
                             <div class="ms-auth-container row">
 
                                 <div class="col-md-6 mb-3">
@@ -102,35 +104,35 @@
                                 <div class="col-md-6 mb-3">
                                     <div class="form-group">
                                         <label class="exampleInputPassword1" for="exampleCheck1">Balance Start Date</label>
-										<input name="balance_start_date" type="date" class="form-control" placeholder="date">
+                                        <input name="balance_start_date" type="date" class="form-control" placeholder="date">
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <div class="form-group">
                                         <label class="exampleInputPassword1" for="exampleCheck1">Open Balance</label>
-										<input name="open_balance" type="text" class="form-control" placeholder="open balance">
+                                        <input name="open_balance" type="text" class="form-control" placeholder="open balance">
                                     </div>
                                 </div>
-                             
+
                                 <div class="col-md-6 mb-3">
-									<div class="ui-widget form-group">
-										<label>Currency</label>
-										<select name="currency_id" class=" form-control" data-live-search="true">
-											<option value="">Select ...</option>
-											@foreach ($carrencies as $data)
-											<option value='{{$data->id}}'>
-												{{$data->currency_name}}</option>
-											@endforeach
+                                    <div class="ui-widget form-group">
+                                        <label>Currency</label>
+                                        <select name="currency_id" class=" form-control" data-live-search="true">
+                                            <option value="">Select ...</option>
+                                            @foreach ($carrencies as $data)
+                                            <option value='{{$data->id}}'>
+                                                {{$data->currency_name}}</option>
+                                            @endforeach
 
-										</select>
+                                        </select>
 
 
-									</div>
-								</div>
+                                    </div>
+                                </div>
                                 <div class="col-md-12 mb-3">
                                     <div class="form-group">
                                         <label class="exampleInputPassword1" for="exampleCheck1">Notes</label>
-										<textarea name="note" id="newClint" class="form-control" placeholder="Notes" rows="3"></textarea>
+                                        <textarea name="note" id="newClint" class="form-control" placeholder="Notes" rows="3"></textarea>
                                     </div>
                                 </div>
                             </div>

@@ -16,4 +16,7 @@ class Open_balance extends Model
         return $this->belongsTo('App\Models\Currency','currency_id');
 
     }
+
+
+   
 }

@@ -99,5 +99,13 @@ Route::post('/delete-operationExpenses/{id}', 'OperationsController@deleteExpens
 /*---------------------------------------------Accounting ----------------------------------*/
 // ----------------------------Cash_box------------------
 Route::resource('/cash-box', 'CashBoxController');
-// ----------------------------Bank------------------
+// ----------------------------Bank------------------CashFinanceController
 Route::resource('/bank', 'BankController');
+/*------------------------------------------------------*/
+Route::resource('/cash-finance', 'CashFinanceController');
+Route::get('/add-cash-finance/{id}', 'CashFinanceController@addCashFinance')->name('add-cash-finance');
+Route::get('clientSelect/fetch', 'CashFinanceController@clientSelect')->name('clientSelect.fetch');
+Route::get('selector_type/fetch', 'CashFinanceController@selector_type')->name('selector_type.fetch');
+Route::get('selectionSelect/fetch', 'CashFinanceController@selectionSelect')->name('selectionSelect.fetch');
+
+
