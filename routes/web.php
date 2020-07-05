@@ -93,6 +93,7 @@ Route::get('dynamicdependentexist/fetch', 'OperationsController@fetExist')->name
 Route::post('/add-operationExpenses', 'OperationsController@addExpenses')->name('addOperationExpenses');
 Route::post('/edit-operationExpenses', 'OperationsController@updateExpenses')->name('updateOperationExpenses');
 Route::post('/delete-operationExpenses/{id}', 'OperationsController@deleteExpenses')->name('deleteOperationExpenses');
+Route::post('/aaa/{id}', 'OperationsController@sendToAccount')->name('aaa');
 
 
 

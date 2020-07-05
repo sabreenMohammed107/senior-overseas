@@ -21,6 +21,8 @@ use App\Models\Sale_quote_trucking;
 use App\Models\Operation_expense;
 use App\Models\Expenses_provider_type;
 use App\Models\Expense;
+use App\Models\Finan_trans_type;
+use App\Models\Financial_entry;
 use Illuminate\Database\Eloquent\Collection;
 use File;
 use DB;
@@ -208,7 +210,7 @@ class OperationsController extends Controller
             if ($request->input('oceanSelected')) {
                 $objBuy = new Collection();
                 $objBuy->operation_id = $operationObj->id;
-                $objBuy->automatic=1;
+                $objBuy->automatic = 1;
                 $objBuy->provider_type_id = 1;
                 $ocean = Sale_quote_ocean::where('id', '=', $operationObj->sales_quote_ocean_id)->first();
                 $objBuy->buy = $ocean->ocean->price;
@@ -218,7 +220,7 @@ class OperationsController extends Controller
                 //another row
                 $objSell = new Collection();
                 $objSell->operation_id = $operationObj->id;
-                $objSell->automatic=1;
+                $objSell->automatic = 1;
                 $objSell->provider_type_id = 1;
                 $ocean = Sale_quote_ocean::where('id', '=', $operationObj->sales_quote_ocean_id)->first();
                 $objSell->buy = null;
@@ -230,7 +232,7 @@ class OperationsController extends Controller
             if ($request->input('airSelected')) {
                 $obj2Buy = new Collection();
                 $obj2Buy->operation_id = $operationObj->id;
-                $obj2Buy->automatic=1;
+                $obj2Buy->automatic = 1;
                 $obj2Buy->provider_type_id = 2;
                 $air = Sale_quote_air::where('id', '=', $operationObj->sales_quote_air_id)->first();
                 $obj2Buy->buy = $air->air->price;
@@ -242,7 +244,7 @@ class OperationsController extends Controller
                 //another row
                 $obj2Sell = new Collection();
                 $obj2Sell->operation_id = $operationObj->id;
-                $obj2Sell->automatic=1;
+                $obj2Sell->automatic = 1;
                 $obj2Sell->provider_type_id = 2;
                 $air = Sale_quote_air::where('id', '=', $operationObj->sales_quote_air_id)->first();
                 $obj2Sell->buy = null;
@@ -253,7 +255,7 @@ class OperationsController extends Controller
             if ($request->input('TrackingSelected')) {
                 $obj3 = new Collection();
                 $obj3->operation_id = $operationObj->id;
-                $obj3->automatic=1;
+                $obj3->automatic = 1;
                 $obj3->provider_type_id = 3;
                 $truck = Sale_quote_trucking::where('id', '=', $operationObj->sales_quote_tracking_id)->first();
                 $obj3->buy = $truck->truck->car_price;
@@ -263,7 +265,7 @@ class OperationsController extends Controller
                 //another row
                 $obj3Sell = new Collection();
                 $obj3Sell->operation_id = $operationObj->id;
-                $obj3Sell->automatic=1;
+                $obj3Sell->automatic = 1;
                 $obj3Sell->provider_type_id = 3;
                 $truck = Sale_quote_trucking::where('id', '=', $operationObj->sales_quote_tracking_id)->first();
                 $obj3Sell->buy = null;
@@ -276,45 +278,45 @@ class OperationsController extends Controller
             $sale_quot = Sale_quote::where('id', '=', $operationObj->sales_quote_id)->first();
 
             if ($sale_quot->clearance_price) {
-            $obj4 = new Collection();
-            $obj4->operation_id = $operationObj->id;
-           
-            $obj4->provider_type_id = 4;
-            $obj4->buy = $sale_quot->clearance_price;
-            $obj4->sell = null;
-            $obj4->currency_id = $sale_quot->clearance_currency_id;
-            array_push($savingExpense, $obj4);
-            //another row
-            $obj4Sell = new Collection();
-            $obj4Sell->operation_id = $operationObj->id;
-            
-            $obj4Sell->provider_type_id = 4;
-            $obj4Sell->buy = null;
-            $obj4Sell->sell = $sale_quot->clearance_price;
-            $obj4Sell->currency_id = $sale_quot->clearance_currency_id;
-            array_push($savingExpense, $obj4Sell);
+                $obj4 = new Collection();
+                $obj4->operation_id = $operationObj->id;
+
+                $obj4->provider_type_id = 4;
+                $obj4->buy = $sale_quot->clearance_price;
+                $obj4->sell = null;
+                $obj4->currency_id = $sale_quot->clearance_currency_id;
+                array_push($savingExpense, $obj4);
+                //another row
+                $obj4Sell = new Collection();
+                $obj4Sell->operation_id = $operationObj->id;
+
+                $obj4Sell->provider_type_id = 4;
+                $obj4Sell->buy = null;
+                $obj4Sell->sell = $sale_quot->clearance_price;
+                $obj4Sell->currency_id = $sale_quot->clearance_currency_id;
+                array_push($savingExpense, $obj4Sell);
             }
             /*-------------------------------*/
             $sale_quotdoor = Sale_quote::where('id', '=', $operationObj->sales_quote_id)->first();
             if ($sale_quotdoor->door_door_price) {
-            $obj5 = new Collection();
-            $obj5->operation_id = $operationObj->id;
-            $obj5->automatic=1;
-            $obj5->provider_type_id = 5;
-         
-            $obj5->buy = $sale_quotdoor->door_door_price;
-            $obj5->sell = null;
-            $obj5->currency_id = $sale_quotdoor->door_door_currency_id;
-            array_push($savingExpense, $obj5);
-            //another row
-            $obj5Sell = new Collection();
-            $obj5Sell->operation_id = $operationObj->id;
-            $obj5Sell->automatic=1;
-            $obj5Sell->provider_type_id = 5;
-            $obj5Sell->buy = null;
-            $obj5Sell->sell = $sale_quotdoor->door_door_price;
-            $obj5Sell->currency_id = $sale_quotdoor->door_door_currency_id;
-            array_push($savingExpense, $obj5Sell);
+                $obj5 = new Collection();
+                $obj5->operation_id = $operationObj->id;
+                $obj5->automatic = 1;
+                $obj5->provider_type_id = 5;
+
+                $obj5->buy = $sale_quotdoor->door_door_price;
+                $obj5->sell = null;
+                $obj5->currency_id = $sale_quotdoor->door_door_currency_id;
+                array_push($savingExpense, $obj5);
+                //another row
+                $obj5Sell = new Collection();
+                $obj5Sell->operation_id = $operationObj->id;
+                $obj5Sell->automatic = 1;
+                $obj5Sell->provider_type_id = 5;
+                $obj5Sell->buy = null;
+                $obj5Sell->sell = $sale_quotdoor->door_door_price;
+                $obj5Sell->currency_id = $sale_quotdoor->door_door_currency_id;
+                array_push($savingExpense, $obj5Sell);
             }
             /*--------------------------*/
 
@@ -460,11 +462,9 @@ class OperationsController extends Controller
 
     public function addExpenses(Request $request)
     {
-
         $data = [
             'operation_id' => $request->input('operation_id'),
-            'buy' => $request->input('buy'),
-            'sell' => $request->input('sell'),
+
             'note' => $request->input('note'),
 
         ];
@@ -481,7 +481,23 @@ class OperationsController extends Controller
 
             $data['currency_id'] = $request->input('currency_id');
         }
-        Operation_expense::create($data);
+
+
+        if ($request->input('buy')) {
+            $data['buy'] = $request->input('buy');
+            $data['sell'] = null;
+            Operation_expense::create($data);
+        }
+
+        if ($request->input('sell')) {
+            $data['buy'] = null;
+            $data['sell'] = $request->input('sell');
+
+            Operation_expense::create($data);
+        }
+
+
+
 
 
         return redirect()->back()->with('flash_success', $this->message);
@@ -529,5 +545,125 @@ class OperationsController extends Controller
         }
 
         return redirect()->back()->with('flash_success', 'Data Has Been Deleted Successfully !');
+    }
+
+    /***
+     * sendToAccount
+     */
+    public function sendToAccount($id)
+    {
+        $row = Operation::where('id', '=', $id)->first();
+
+
+        $sellRows = Operation_expense::where('operation_id', '=', $id)->where('sell', '!=', null)->where('automatic', '=', 1)->get();
+        $sellRowsOther = Operation_expense::where('operation_id', '=', $id)->where('sell', '!=', null)->whereNull('automatic')->get();
+
+
+        $buyRows = Operation_expense::where('operation_id', '=', $id)->where('buy', '!=', null)->where('automatic', '=', 1)->get();
+        $buyRowsOther = Operation_expense::where('operation_id', '=', $id)->where('buy', '!=', null)->whereNull('automatic')->get();
+
+       
+        DB::transaction(function () use($row, $sellRows,$sellRowsOther,$buyRows,$buyRowsOther,$id) {
+
+        foreach ($sellRows as $sellRow) {
+            //save in finance entry
+            $obj = new Financial_entry();
+            $obj->operation_id = $id;
+            if ($sellRow->provider_type_id == 1) {
+                $obj->trans_type_id = Finan_trans_type::where('id', '=', 13)->first()->id;
+            }
+            if ($sellRow->provider_type_id == 2) {
+                $obj->trans_type_id = Finan_trans_type::where('id', '=', 14)->first()->id;
+            }
+            if ($sellRow->provider_type_id == 3) {
+                $obj->trans_type_id = Finan_trans_type::where('id', '=', 15)->first()->id;
+            }
+            if ($sellRow->provider_type_id == 4) {
+                $obj->trans_type_id = Finan_trans_type::where('id', '=', 16)->first()->id;
+            }
+            if ($sellRow->provider_type_id == 5) {
+
+                $obj->trans_type_id = Finan_trans_type::where('id', '=', 17)->first()->id;
+            }
+
+
+            $obj->entry_date = $row->operation_date;
+            $obj->credit = $sellRow->sell;
+            $obj->client_id = $row->shipper_id;
+            $obj->notes = $row->notes;
+            $obj->currency_id = $sellRow->currency_id;
+            $obj->save();
+        }
+
+        foreach ($buyRows as $buyRow) {
+            //save in finance entry
+            $obj = new Financial_entry();
+            $obj->operation_id = $id;
+
+            if ($sellRow->provider_type_id == 1) {
+                $obj->trans_type_id = Finan_trans_type::where('id', '=', 8)->first()->id;
+                $obj->ocean_carrier_id = $row->ocean->ocean->carrier_id;
+            }
+            if ($sellRow->provider_type_id == 2) {
+                $obj->trans_type_id = Finan_trans_type::where('id', '=', 9)->first()->id;
+                $obj->air_carrier_id = $row->air->air->carrier_id;
+            }
+            if ($sellRow->provider_type_id == 3) {
+                $obj->trans_type_id = Finan_trans_type::where('id', '=', 10)->first()->id;
+                $obj->trucking_id = $row->tracking->truck->supplier_id;
+            }
+            if ($sellRow->provider_type_id == 4) {
+                $obj->trans_type_id = Finan_trans_type::where('id', '=', 11)->first()->id;
+                $obj->clearance_id = $row->sale->supplier_id;
+            }
+            if ($sellRow->provider_type_id == 5) {
+
+                $obj->trans_type_id = Finan_trans_type::where('id', '=', 12)->first()->id;
+                $obj->agent_id = $row->sale->agent_id;
+            }
+
+            $obj->entry_date = $row->operation_date;
+            $obj->depit = $buyRow->buy;
+
+          
+
+            $obj->notes = $row->notes;
+            $obj->currency_id = $buyRow->currency_id;
+            $obj->save();
+        }
+        //others
+        foreach ($sellRowsOther as $rowOther) {
+            //save in finance entry
+            $obj = new Financial_entry();
+            $obj->operation_id = $id;
+
+            $obj->trans_type_id = Finan_trans_type::where('id', '=', 19)->first()->id;
+
+            $obj->entry_date = $row->operation_date;
+            $obj->credit = $rowOther->sell;
+            $obj->client_id = $row->shipper_id;
+            $obj->notes = $row->notes;
+            $obj->currency_id = $rowOther->currency_id;
+            $obj->save();
+        }
+
+        foreach ($buyRowsOther as $buyOther) {
+            //save in finance entry
+            $obj = new Financial_entry();
+            $obj->operation_id = $id;
+
+            $obj->trans_type_id = Finan_trans_type::where('id', '=', 18)->first()->id;
+
+            $obj->entry_date = $row->operation_date;
+            $obj->depit = $buyOther->buy;
+            // $obj->client_id = $row->shipper_id;
+            $obj->notes = $row->notes;
+            $obj->currency_id = $buyOther->currency_id;
+            $obj->save();
+        }
+        //end others
+    });
+
+        return redirect()->back()->with('flash_success', 'Data Has Been Send Successfully !');
     }
 }

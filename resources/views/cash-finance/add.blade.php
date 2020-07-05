@@ -76,8 +76,8 @@
                                                 <option>Select ...</option>
                                                 <option value="3">ocean </option>
                                                 <option value="4">air </option>
-                                                <option value="5">clearance </option>
-                                                <option value="6">trucking </option>
+                                                <option value="5">trucking </option>
+                                                <option value="6">clearance </option>
                                                 <option value="7">agent </option>
 
                                             </select>
@@ -222,9 +222,9 @@
         document.getElementById('div2').style.display = 'none';
         document.getElementById('div1').style.display = 'block';
     }
-  /*--radio button--*/
+    /*--radio button--*/
     $(document).ready(function() {
-         /*--clientSelect--*/
+        /*--clientSelect--*/
         $('.clientSelect').change(function() {
 
             if ($(this).val() != '') {
@@ -254,8 +254,8 @@
                 })
             }
         });
-    /*--End clientSelect--*/
-   /*--selector_type--*/  
+        /*--End clientSelect--*/
+        /*--selector_type--*/
         $('.selector_type').change(function() {
 
             if ($(this).val() != '') {
@@ -276,46 +276,45 @@
                         $('#xxselector').html(result);
 
                     },
+                    error: function() {}
+
+                })
+            }
+        });
+        /*--selector_type--*/
+        /*--xxselector--*/
+        $('.xxselector').change(function() {
+
+            if ($(this).val() != '') {
+                var select = $(this).attr("id");
+                var value = $(this).val();
+
+
+
+                $.ajax({
+                    url: "{{route('selectionSelect.fetch')}}",
+                    method: "get",
+                    data: {
+                        select: select,
+                        value: value,
+                        cash: $('#cash').val(),
+                        fristSelect: $('#selector_type').val(),
+                    },
+                    success: function(result) {
+
+                        $('#selection_current_amount').val(result[0]);
+                        $('#selection_currancy').val(result[1]);
+
+                    },
                     error: function() {
+
+                        $('#selection_current_amount').val(0);
                     }
 
                 })
             }
         });
-          /*--selector_type--*/  
-                  /*--xxselector--*/
-        $('.xxselector').change(function() {
-          
-if ($(this).val() != '') {
-    var select = $(this).attr("id");
-    var value = $(this).val();
-
-
-
-    $.ajax({
-        url: "{{route('selectionSelect.fetch')}}",
-        method: "get",
-        data: {
-            select: select,
-            value: value,
-            cash: $('#cash').val(),
-            fristSelect:$('#selector_type').val(),
-        },
-        success: function(result) {
-           
-            $('#selection_current_amount').val(result[0]);
-            $('#selection_currancy').val(result[1]);
-
-        },
-        error: function() {
-           
-            $('#selection_current_amount').val(0);
-        }
-
-    })
-}
-});
-/*--End clientSelect--*/
+        /*--End clientSelect--*/
     });
 </script>
 

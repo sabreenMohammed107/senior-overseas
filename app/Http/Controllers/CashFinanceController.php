@@ -252,6 +252,7 @@ class CashFinanceController extends Controller
         $value = $request->get('value');
         $cash = $request->get('cash');
         $clients = Open_balance::where('client_id', '=', $value)->get();
+        $clients=Financial_entry::where('client_id', $value)->get();
         foreach ($clients as $client) {
 
             if ($cash == $client->currency_id) {

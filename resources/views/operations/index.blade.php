@@ -20,7 +20,7 @@
                 <h6>Operation</h6>
                 <div>
                     <a href="{{ route('operations.create') }}" class="btn btn-dark"> add new </a>
-                    <a href="#" class="btn btn-dark" data-toggle="modal" data-target="#addSubCat"> Send to Accounting </a>
+                    <!-- <a href="#" class="btn btn-dark" data-toggle="modal" data-target="#addSubCat"> Send to Accounting </a> -->
                 </div>
             </div>
             <div class="ms-panel-body">
@@ -54,6 +54,13 @@
                                     <form id="delete_{{$row->id}}" action="{{ route('operations.destroy', $row->id) }}" method="POST" style="display: none;">
                                         @csrf
                                         @method('DELETE')
+                                        <button type="submit" value=""></button>
+                                    </form>
+
+                                    <a href="#" onclick="sendAccount('operations','{{$row->id}}')" class="btn d-inline-block btn-dark">Send To Account</a>
+                                    <form id="send_{{$row->id}}" action="{{ route('aaa', $row->id) }}" method="POST" style="display: none;">
+                                        @csrf
+                                     
                                         <button type="submit" value=""></button>
                                     </form>
                                 </td>
@@ -151,8 +158,22 @@
 @section('scripts')
 
 <script>
-    $(document).ready(function() {
-
-    });
+     // delete alert
+     function sendAccount(thing, id) {
+  Swal.fire({
+  title: 'Are you sure send this to account ?',
+  text: "You won't be able to  this  "+thing+" again!",
+  type: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Yes, send it!'
+}).then((result) => {
+  if (result.value) {
+  	$('#send_'+id).submit();
+  }
+})
+}
+  
 </script>
 @endsection

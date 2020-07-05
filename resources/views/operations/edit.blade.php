@@ -563,22 +563,24 @@
 
 																								</div>
 																							</div>
+
+
 																							<div class="col-md-6 mb-3">
 																								<div class="form-group">
 																									<label class="exampleInputPassword1" for="exampleCheck1">*Buy</label>
-																									<input name="buy" type="text" value="{{$expense->buy}}" class="form-control" placeholder="buy">
+																									<input name="buy" type="text" value="{{$expense->buy}}" <?php if (!$expense->buy){ ?> disabled <?php   } ?> class="form-control" placeholder="buy">
 																								</div>
 																							</div>
 																							<div class="col-md-6 mb-3">
 																								<div class="form-group">
 																									<label class="exampleInputPassword1" for="exampleCheck1">*Sale</label>
-																									<input name="sell" type="text" value="{{$expense->sell}}" class="form-control" placeholder="sell">
+																									<input name="sell" type="text" value="{{$expense->sell}}" <?php if (!$expense->sell){ ?> disabled <?php   } ?> class="form-control" placeholder="sell">
 																								</div>
 																							</div>
 																							<div class="col-md-6 mb-3">
 																								<div class="ui-widget form-group">
 																									<label>Expense Provider</label>
-																									<select name="provider_type_id" class=" form-control" data-live-search="true">
+																									<select name="provider_type_id" required class=" form-control" data-live-search="true">
 																										<option value="">Select ...</option>
 																										@foreach ($providers as $data)
 																										<option value='{{$data->id}}' {{ $data->id == $expense->provider_type_id ? 'selected' : '' }}>
@@ -592,7 +594,7 @@
 																							<div class="col-md-6 mb-3">
 																								<div class="ui-widget form-group">
 																									<label>Currency</label>
-																									<select name="currency_id" class=" form-control" data-live-search="true">
+																									<select name="currency_id" required class=" form-control" data-live-search="true">
 																										<option value="">Select ...</option>
 																										@foreach ($expenseCurrency as $data)
 																										<option value='{{$data->id}}' {{ $data->id == $expense->currency_id ? 'selected' : '' }}>
@@ -698,7 +700,7 @@
 								<div class="col-md-6 mb-3">
 									<div class="ui-widget form-group">
 										<label>Expense Provider</label>
-										<select name="provider_type_id" class=" form-control" data-live-search="true">
+										<select name="provider_type_id" required class=" form-control" data-live-search="true">
 											<option value="">Select ...</option>
 											@foreach ($providers as $data)
 											<option value='{{$data->id}}'>
@@ -712,7 +714,7 @@
 								<div class="col-md-6 mb-3">
 									<div class="ui-widget form-group">
 										<label>Currency</label>
-										<select name="currency_id" class=" form-control" data-live-search="true">
+										<select name="currency_id" required class=" form-control" data-live-search="true">
 											<option value="">Select ...</option>
 											@foreach ($expenseCurrency as $data)
 											<option value='{{$data->id}}'>

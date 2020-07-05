@@ -35,6 +35,21 @@ class Operation extends Model
         return $this->belongsTo('App\Models\Sale_quote','sales_quote_id');
 
     }
+    public function ocean()
+    {
+        return $this->belongsTo('App\Models\Sale_quote_ocean','sales_quote_ocean_id');
+
+    }
+    public function air()
+    {
+        return $this->belongsTo('App\Models\Sale_quote_air','sales_quote_air_id');
+
+    }
+    public function tracking()
+    {
+        return $this->belongsTo('App\Models\Sale_quote_trucking','sales_quote_tracking_id');
+
+    }
     
     
 }
