@@ -29,6 +29,7 @@
 
                                 <th>open Balance</th>
                                 <th>Currency</th>
+                                <th>Current Balance</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -44,7 +45,12 @@
                                     {{$row->currency->currency_name}}
                                     @endif
                                 </td>
+                                <?php
 
+                                $currentBalance = App\Models\Financial_entry::where('cash_box_id', $row->id)->sum('depit') - App\Models\Financial_entry::where('cash_box_id', $row->id)->sum('credit');
+
+                                ?>
+                                <td>{{$currentBalance}}</td>
                                 <td>
                                     <a href="{{ route('cash-finance.show',$row->id) }}" class="btn btn-info d-inline-block">Select</a>
 

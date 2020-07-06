@@ -56,7 +56,12 @@
                                 <div class="col-md-6 mb-3">
                                     <div class="form-group">
                                         <label class="exampleInputPassword1" for="exampleCheck1">Current Balance</label>
-                                        <input name="current_balance" readonly value="{{$row->current_balance}}" type="text" class="form-control" placeholder="open balance">
+                                        <?php
+
+                                                $currentBalance = App\Models\Financial_entry::where('cash_box_id', $row->id)->sum('depit') - App\Models\Financial_entry::where('cash_box_id', $row->id)->sum('credit');
+
+                                        ?>
+                                        <input name="current_balance" readonly value="{{$currentBalance}}" type="text" class="form-control" placeholder="open balance">
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-3">

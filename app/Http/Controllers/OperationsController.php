@@ -562,107 +562,109 @@ class OperationsController extends Controller
         $buyRows = Operation_expense::where('operation_id', '=', $id)->where('buy', '!=', null)->where('automatic', '=', 1)->get();
         $buyRowsOther = Operation_expense::where('operation_id', '=', $id)->where('buy', '!=', null)->whereNull('automatic')->get();
 
-       
-        DB::transaction(function () use($row, $sellRows,$sellRowsOther,$buyRows,$buyRowsOther,$id) {
 
-        foreach ($sellRows as $sellRow) {
-            //save in finance entry
-            $obj = new Financial_entry();
-            $obj->operation_id = $id;
-            if ($sellRow->provider_type_id == 1) {
-                $obj->trans_type_id = Finan_trans_type::where('id', '=', 13)->first()->id;
-            }
-            if ($sellRow->provider_type_id == 2) {
-                $obj->trans_type_id = Finan_trans_type::where('id', '=', 14)->first()->id;
-            }
-            if ($sellRow->provider_type_id == 3) {
-                $obj->trans_type_id = Finan_trans_type::where('id', '=', 15)->first()->id;
-            }
-            if ($sellRow->provider_type_id == 4) {
-                $obj->trans_type_id = Finan_trans_type::where('id', '=', 16)->first()->id;
-            }
-            if ($sellRow->provider_type_id == 5) {
+        DB::transaction(function () use ($row, $sellRows, $sellRowsOther, $buyRows, $buyRowsOther, $id) {
 
-                $obj->trans_type_id = Finan_trans_type::where('id', '=', 17)->first()->id;
-            }
+            foreach ($sellRows as $sellRow) {
+                //save in finance entry
+                $obj = new Financial_entry();
+                $obj->operation_id = $id;
+                if ($sellRow->provider_type_id == 1) {
+                    $obj->trans_type_id = Finan_trans_type::where('id', '=', 13)->first()->id;
+                }
+                if ($sellRow->provider_type_id == 2) {
+                    $obj->trans_type_id = Finan_trans_type::where('id', '=', 14)->first()->id;
+                }
+                if ($sellRow->provider_type_id == 3) {
+                    $obj->trans_type_id = Finan_trans_type::where('id', '=', 15)->first()->id;
+                }
+                if ($sellRow->provider_type_id == 4) {
+                    $obj->trans_type_id = Finan_trans_type::where('id', '=', 16)->first()->id;
+                }
+                if ($sellRow->provider_type_id == 5) {
+
+                    $obj->trans_type_id = Finan_trans_type::where('id', '=', 17)->first()->id;
+                }
 
 
-            $obj->entry_date = $row->operation_date;
-            $obj->credit = $sellRow->sell;
-            $obj->client_id = $row->shipper_id;
-            $obj->notes = $row->notes;
-            $obj->currency_id = $sellRow->currency_id;
-            $obj->save();
-        }
-
-        foreach ($buyRows as $buyRow) {
-            //save in finance entry
-            $obj = new Financial_entry();
-            $obj->operation_id = $id;
-
-            if ($sellRow->provider_type_id == 1) {
-                $obj->trans_type_id = Finan_trans_type::where('id', '=', 8)->first()->id;
-                $obj->ocean_carrier_id = $row->ocean->ocean->carrier_id;
-            }
-            if ($sellRow->provider_type_id == 2) {
-                $obj->trans_type_id = Finan_trans_type::where('id', '=', 9)->first()->id;
-                $obj->air_carrier_id = $row->air->air->carrier_id;
-            }
-            if ($sellRow->provider_type_id == 3) {
-                $obj->trans_type_id = Finan_trans_type::where('id', '=', 10)->first()->id;
-                $obj->trucking_id = $row->tracking->truck->supplier_id;
-            }
-            if ($sellRow->provider_type_id == 4) {
-                $obj->trans_type_id = Finan_trans_type::where('id', '=', 11)->first()->id;
-                $obj->clearance_id = $row->sale->supplier_id;
-            }
-            if ($sellRow->provider_type_id == 5) {
-
-                $obj->trans_type_id = Finan_trans_type::where('id', '=', 12)->first()->id;
-                $obj->agent_id = $row->sale->agent_id;
+                $obj->entry_date = $row->operation_date;
+                $obj->credit = $sellRow->sell;
+                $obj->client_id = $row->shipper_id;
+                $obj->notes = $row->notes;
+                $obj->currency_id = $sellRow->currency_id;
+                $obj->save();
             }
 
-            $obj->entry_date = $row->operation_date;
-            $obj->depit = $buyRow->buy;
+            foreach ($buyRows as $buyRow) {
+                //save in finance entry
+                $obj = new Financial_entry();
+                $obj->operation_id = $id;
 
-          
+                if ($sellRow->provider_type_id == 1) {
+                    $obj->trans_type_id = Finan_trans_type::where('id', '=', 8)->first()->id;
+                    $obj->ocean_carrier_id = $row->ocean->ocean->carrier_id;
+                }
+                if ($sellRow->provider_type_id == 2) {
+                    $obj->trans_type_id = Finan_trans_type::where('id', '=', 9)->first()->id;
+                    $obj->air_carrier_id = $row->air->air->carrier_id;
+                }
+                if ($sellRow->provider_type_id == 3) {
+                    $obj->trans_type_id = Finan_trans_type::where('id', '=', 10)->first()->id;
+                    $obj->trucking_id = $row->tracking->truck->supplier_id;
+                }
+                if ($sellRow->provider_type_id == 4) {
+                    $obj->trans_type_id = Finan_trans_type::where('id', '=', 11)->first()->id;
+                    $obj->clearance_id = $row->sale->supplier_id;
+                }
+                if ($sellRow->provider_type_id == 5) {
 
-            $obj->notes = $row->notes;
-            $obj->currency_id = $buyRow->currency_id;
-            $obj->save();
-        }
-        //others
-        foreach ($sellRowsOther as $rowOther) {
-            //save in finance entry
-            $obj = new Financial_entry();
-            $obj->operation_id = $id;
+                    $obj->trans_type_id = Finan_trans_type::where('id', '=', 12)->first()->id;
+                    $obj->agent_id = $row->sale->agent_id;
+                }
 
-            $obj->trans_type_id = Finan_trans_type::where('id', '=', 19)->first()->id;
+                $obj->entry_date = $row->operation_date;
+                $obj->depit = $buyRow->buy;
 
-            $obj->entry_date = $row->operation_date;
-            $obj->credit = $rowOther->sell;
-            $obj->client_id = $row->shipper_id;
-            $obj->notes = $row->notes;
-            $obj->currency_id = $rowOther->currency_id;
-            $obj->save();
-        }
 
-        foreach ($buyRowsOther as $buyOther) {
-            //save in finance entry
-            $obj = new Financial_entry();
-            $obj->operation_id = $id;
 
-            $obj->trans_type_id = Finan_trans_type::where('id', '=', 18)->first()->id;
+                $obj->notes = $row->notes;
+                $obj->currency_id = $buyRow->currency_id;
+                $obj->save();
+            }
+            //others
+            foreach ($sellRowsOther as $rowOther) {
+                //save in finance entry
+                $obj = new Financial_entry();
+                $obj->operation_id = $id;
 
-            $obj->entry_date = $row->operation_date;
-            $obj->depit = $buyOther->buy;
-            // $obj->client_id = $row->shipper_id;
-            $obj->notes = $row->notes;
-            $obj->currency_id = $buyOther->currency_id;
-            $obj->save();
-        }
-        //end others
-    });
+                $obj->trans_type_id = Finan_trans_type::where('id', '=', 19)->first()->id;
+
+                $obj->entry_date = $row->operation_date;
+                $obj->credit = $rowOther->sell;
+                $obj->client_id = $row->shipper_id;
+                $obj->notes = $row->notes;
+                $obj->currency_id = $rowOther->currency_id;
+                $obj->save();
+            }
+
+            foreach ($buyRowsOther as $buyOther) {
+                //save in finance entry
+                $obj = new Financial_entry();
+                $obj->operation_id = $id;
+
+                $obj->trans_type_id = Finan_trans_type::where('id', '=', 18)->first()->id;
+
+                $obj->entry_date = $row->operation_date;
+                $obj->depit = $buyOther->buy;
+                // $obj->client_id = $row->shipper_id;
+                $obj->notes = $row->notes;
+                $obj->currency_id = $buyOther->currency_id;
+                $obj->save();
+            }
+            //end others
+            $row->account_confirm = 1;
+            $row->update();
+        });
 
         return redirect()->back()->with('flash_success', 'Data Has Been Send Successfully !');
     }

@@ -160,10 +160,14 @@
 														<td>
 															{{$balance->open_balance}}
 														</td>
-														<td><?php $date = date_create($row->balance_start_date) ?>
+														<td><?php $date = date_create($balance->balance_start_date) ?>
 															{{ date_format($date,'Y-m-d') }}
 															</td> 
-															<td>{{$balance->open_balance}}
+															<td>
+																<?php
+															$currentBalance = App\Models\Financial_entry::where('client_id', $row->id)->where('currency_id', $balance->currency_id) ->sum('credit') - App\Models\Financial_entry::where('client_id', $row->id)->where('currency_id', $balance->currency_id) ->sum('depit');
+?>
+																{{$currentBalance}}
 														</td>
 														<td>@if($balance->currency)
 															{{$balance->currency->currency_name}}

@@ -29,7 +29,7 @@
                               
                                 <th>Balance Start Date</th>
                                 <th>Open Balance</th>
-                                <!-- <th>Current Balance</th> -->
+                                <th>Current Balance</th>
                                 <th>Currency</th>
                                 <th>Action</th>
                             </tr>
@@ -46,8 +46,14 @@
                                 </td>
                                 <td>{{$row->open_balance}}
                                 </td>
-                                <!-- <td>{{$row->current_balance}} -->
+                                <td>
+                                <?php
 
+                                 $currentBalance = App\Models\Financial_entry::where('cash_box_id', $row->id)->sum('depit') - App\Models\Financial_entry::where('cash_box_id', $row->id)->sum('credit');
+
+                                        ?>
+                                    {{$currentBalance}}
+                                </td>
                                 <td>@if($row->currency)
                                     {{$row->currency->currency_name}}
                                     @endif

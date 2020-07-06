@@ -12,6 +12,7 @@ use App\Models\Currency;
 use App\Models\Finan_trans_type;
 use App\Models\Supplier;
 use App\Models\Agent;
+use App\Models\Cashbox_expenses_type;
 use File;
 use DB;
 use Log;
@@ -68,8 +69,9 @@ class CashFinanceController extends Controller
         $currentBalance = Financial_entry::where('cash_box_id', $Selectrow->id)->sum('depit') - Financial_entry::where('cash_box_id', $Selectrow->id)->sum('credit');
 
         $clients = Client::all();
-
-        return view($this->viewName . 'add', compact('Selectrow', 'clients', 'currentBalance'));
+        $cashExpenseIn = Cashbox_expenses_type::where('expense_type', '=', 1)->get();
+        $cashExpenseOut = Cashbox_expenses_type::where('expense_type', '=', 2)->get();
+        return view($this->viewName . 'add', compact('Selectrow', 'clients', 'currentBalance','cashExpenseOut','cashExpenseIn'));
     }
     /**
      * Store a newly created resource in storage.
@@ -82,13 +84,13 @@ class CashFinanceController extends Controller
         //save in finance entry
         if ($request->input('tab') === "igottwo") {
             $obj = new Financial_entry();
-
-            $obj->trans_type_id = Finan_trans_type::where('id', '=', 2)->first()->id;
+            
+            $obj->trans_type_id = Finan_trans_type::where('id', '=', $request->input('cash_in'))->first()->id;
             $obj->entry_date = Carbon::parse($request->input('entry_date'));
             $obj->depit = $request->input('depit');
             $obj->currency_id = $request->input('currency_id');
             $obj->cash_box_id = $request->input('cash_box_id');
-            $obj->notes = $request->input('notes');
+            $obj->notes = $request->input('notesIn');
 
             if ($request->input('client_id')) {
                 $obj->client_id = $request->input('client_id');
@@ -102,7 +104,7 @@ class CashFinanceController extends Controller
             $obj->credit = $request->input('credit');
             $obj->currency_id = $request->input('currency_id');
             $obj->cash_box_id = $request->input('cash_box_id');
-            $obj->notes = $request->input('notes');
+            $obj->notes = $request->input('notesOut');
 
             if ($fristSelect == 3) {
                 $obj->ocean_carrier_id = $request->input('xxselector');
@@ -187,7 +189,12 @@ class CashFinanceController extends Controller
         if ($editrow->agent_id) {
             $dataOther = Financial_entry::where('agent_id', $editrow->agent_id)->where('currency_id', '=', $editrow->currency_id)->sum('depit') - Financial_entry::where('agent_id', $editrow->agent_id)->where('currency_id', '=', $editrow->currency_id)->sum('credit');
         }
-        return view($this->viewName . 'edit', compact('editrow', 'Selectrow', 'clients', 'dataOther','currentBalance', 'dataClient'));
+
+        $cashExpenseIn = Cashbox_expenses_type::where('id', '=', $editrow->trans_type_id)->where('expense_type', '=', 1)->first();
+       
+        $cashExpenseOut = Cashbox_expenses_type::where('id', '=', $editrow->trans_type_id)->where('expense_type', '=', 2)->first();
+
+        return view($this->viewName . 'edit', compact('editrow', 'Selectrow', 'clients', 'dataOther', 'currentBalance', 'dataClient','cashExpenseIn','cashExpenseOut'));
     }
 
     /**
@@ -252,7 +259,7 @@ class CashFinanceController extends Controller
         $value = $request->get('value');
         $cash = $request->get('cash');
         $clients = Open_balance::where('client_id', '=', $value)->get();
-        $clients=Financial_entry::where('client_id', $value)->get();
+        $clients = Financial_entry::where('client_id', $value)->get();
         foreach ($clients as $client) {
 
             if ($cash == $client->currency_id) {

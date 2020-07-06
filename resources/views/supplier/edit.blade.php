@@ -178,7 +178,16 @@
 														<td><?php $date = date_create($row->balance_start_date) ?>
 															{{ date_format($date,'Y-m-d') }}
 															</td> 
-															<td>{{$balance->open_balance}}
+															<td>
+															<?php
+															if ($row->supplier_type_id == 1) {
+																$currentBalance = App\Models\Financial_entry::where('trucking_id', $row->id)->where('currency_id', $balance->currency_id) ->sum('depit') - App\Models\Financial_entry::where('trucking_id', $row->id->where('currency_id', $balance->currency_id) )->sum('credit');
+															} else {
+																$currentBalance = App\Models\Financial_entry::where('clearance_id', $row->id)->where('currency_id', $balance->currency_id) ->sum('depit') - App\Models\Financial_entry::where('clearance_id', $row->id)->where('currency_id', $balance->currency_id) ->sum('credit');
+															}
+
+															?>
+																{{$currentBalance}}
 														</td>
 														<td>@if($balance->currency)
 															{{$balance->currency->currency_name}}

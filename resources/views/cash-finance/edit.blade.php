@@ -90,13 +90,11 @@
                                         <div class="ui-widget form-group">
                                             <label>Selection</label>
                                             <select name="selector_type" disabled data-dependent="xxselector" class=" form-control selector_type" data-show-subtext="true" data-live-search="true" id="selector_type">
-                                                <option>Select ...</option>
-                                                <option value="3" {{  $editrow->ocean_carrier_id !=null ? 'selected' : '' }}>ocean </option>
-                                                <option value="4" {{$editrow->air_carrier_id !=null ? 'selected' : '' }}>air </option>
-                                                <option value="5" {{$editrow->clearance_id !=null? 'selected' : '' }}>clearance </option>
-                                                <option value="6" {{ $editrow->trucking_id !=null? 'selected' : '' }}>trucking </option>
-                                                <option value="7" {{ $editrow->agent_id !=null? 'selected' : '' }}>agent </option>
+                                          
+                                            <option value="{{$Selectrow->trans_type_id}}"  >@if($cashExpenseOut){{$cashExpenseOut->expenses_name}}@endif </option>
 
+                                              
+                                             
                                             </select>
                                         </div>
                                     </div>
@@ -106,7 +104,8 @@
                                         <div class="ui-widget form-group">
                                             <label>Selection</label>
                                             <select id="xxselector" name="xxselector" disabled class=" form-control xxselector" data-show-subtext="true" data-live-search="true">
-                                                <option value="{{  $editrow->ocean_carrier_id}}" {{  $editrow->ocean_carrier_id !=null ? 'selected' : '' }}> {{$editrow->carrierocean->carrier_name ?? '' }}</option>
+                                               
+                                            <option value="{{  $editrow->ocean_carrier_id}}" {{  $editrow->ocean_carrier_id !=null ? 'selected' : '' }}> {{$editrow->carrierocean->carrier_name ?? '' }}</option>
                                                 <option value="{{$editrow->air_carrier_id}}" {{$editrow->air_carrier_id !=null ? 'selected' : '' }}>{{$editrow->carrierair->carrier_name ?? '' }} </option>
                                                 <option value="{{$editrow->clearance_id}}" {{$editrow->clearance_id !=null? 'selected' : '' }}>{{$editrow->supplierclearance->supplier_name ?? '' }} </option>
                                                 <option value="{{ $editrow->trucking_id}}" {{ $editrow->trucking_id !=null? 'selected' : '' }}>{{$editrow->suppliertracking->supplier_name ?? '' }} </option>
@@ -156,10 +155,9 @@
                                         <div class="ui-widget form-group">
                                             <label>Client</label>
                                             <select class=" form-control" disabled data-live-search="true">
-                                                <option>Client</option>
-                                                <option>Client 1</option>
-                                                <option>Client 2</option>
-                                                <option>Client 3</option>
+
+                                            <option value="{{$Selectrow->trans_type_id}}"  >@if($cashExpenseIn){{$cashExpenseIn->expenses_name}}@endif </option>
+
                                             </select>
                                         </div>
                                     </div>

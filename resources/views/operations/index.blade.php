@@ -39,16 +39,22 @@
                             @foreach($rows as $index => $row)
                             <tr>
                                 <td>{{$index+1}}</td>
-                              
+
                                 <td>{{$row->operation_code}}</td>
                                 <td><?php $date = date_create($row->operation_date) ?>
-									{{ date_format($date,'Y-m-d') }}</td>
+                                    {{ date_format($date,'Y-m-d') }}</td>
                                 <td>@if($row->shipper)
-									{{$row->shipper->client_name}}
-									@endif</td>
+                                    {{$row->shipper->client_name}}
+                                    @endif</td>
                                 <td>
-                                   
-                                    <a href="{{ route('operations.show',$row->id) }}" class="btn btn-info d-inline-block">view</a>
+                                    @if($row->account_confirm==1)
+                                    <button class="btn btn-info d-inline-block" disabled>view</button>
+                                    <button class="btn btn-info d-inline-block" disabled>edit</button>
+                                    <button class="btn d-inline-block btn-danger" disabled>delete</button>
+                                    <button class="btn d-inline-block btn-dark" disabled>send To Account</button>
+
+                                    @else
+                                    <a href="{{ route('operations.show',$row->id) }}" class="btn btn-info d-inline-block" role="button" data-role="button" disabled='disabled'>view</a>
                                     <a href="{{ route('operations.edit',$row->id) }}" class="btn btn-info d-inline-block">edit</a>
                                     <a href="#" onclick="destroy('operations','{{$row->id}}')" class="btn d-inline-block btn-danger">delete</a>
                                     <form id="delete_{{$row->id}}" action="{{ route('operations.destroy', $row->id) }}" method="POST" style="display: none;">
@@ -60,9 +66,10 @@
                                     <a href="#" onclick="sendAccount('operations','{{$row->id}}')" class="btn d-inline-block btn-dark">Send To Account</a>
                                     <form id="send_{{$row->id}}" action="{{ route('aaa', $row->id) }}" method="POST" style="display: none;">
                                         @csrf
-                                     
+
                                         <button type="submit" value=""></button>
                                     </form>
+                                    @endif
                                 </td>
                             </tr>
                             @endforeach
@@ -158,22 +165,21 @@
 @section('scripts')
 
 <script>
-     // delete alert
-     function sendAccount(thing, id) {
-  Swal.fire({
-  title: 'Are you sure send this to account ?',
-  text: "You won't be able to  this  "+thing+" again!",
-  type: 'warning',
-  showCancelButton: true,
-  confirmButtonColor: '#3085d6',
-  cancelButtonColor: '#d33',
-  confirmButtonText: 'Yes, send it!'
-}).then((result) => {
-  if (result.value) {
-  	$('#send_'+id).submit();
-  }
-})
-}
-  
+    // delete alert
+    function sendAccount(thing, id) {
+        Swal.fire({
+            title: 'Are you sure send this to account ?',
+            text: "You won't be able to  this  " + thing + " again!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, send it!'
+        }).then((result) => {
+            if (result.value) {
+                $('#send_' + id).submit();
+            }
+        })
+    }
 </script>
 @endsection

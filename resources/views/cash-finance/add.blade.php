@@ -74,11 +74,10 @@
                                             <label>Selection</label>
                                             <select name="selector_type" data-dependent="xxselector" class=" form-control selector_type" data-show-subtext="true" data-live-search="true" id="selector_type">
                                                 <option>Select ...</option>
-                                                <option value="3">ocean </option>
-                                                <option value="4">air </option>
-                                                <option value="5">clearance </option>
-                                                <option value="6">trucking </option>
-                                                <option value="7">agent </option>
+                                                @foreach ($cashExpenseOut as $data)
+                                            <option value='{{$data->id}}' >
+                                                {{$data->expenses_name}}</option>
+                                            @endforeach
 
                                             </select>
                                         </div>
@@ -123,7 +122,7 @@
                                     <div class="col-md-12 mb-3">
                                         <div class="form-group">
                                             <label class="exampleInputPassword1" for="exampleCheck1">Notes</label>
-                                            <textarea name="notes" id="newClint" class="form-control" placeholder="Notes" rows="3"></textarea>
+                                            <textarea name="notesOut" id="newClint" class="form-control" placeholder="Notes" rows="3"></textarea>
                                         </div>
                                     </div>
 
@@ -134,11 +133,12 @@
                                     <div class="col-md-6 mb-3">
                                         <div class="ui-widget form-group">
                                             <label>Client</label>
-                                            <select class=" form-control" disabled data-live-search="true">
-                                                <option>Client</option>
-                                                <option>Client 1</option>
-                                                <option>Client 2</option>
-                                                <option>Client 3</option>
+                                            <select name="cash_in" class=" form-control"  data-live-search="true">
+                                            <option value='' >Select</option>
+                                            @foreach ($cashExpenseIn as $data)
+                                            <option value='{{$data->id}}' >
+                                                {{$data->expenses_name}}</option>
+                                            @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -186,7 +186,7 @@
                                     <div class="col-md-12 mb-3">
                                         <div class="form-group">
                                             <label class="exampleInputPassword1" for="exampleCheck1">Notes</label>
-                                            <textarea name="notes" id="newClint" class="form-control" placeholder="Notes" rows="3"></textarea>
+                                            <textarea name="notesIn" id="newClint" class="form-control" placeholder="Notes" rows="3"></textarea>
                                         </div>
                                     </div>
 

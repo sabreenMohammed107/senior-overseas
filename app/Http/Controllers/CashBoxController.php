@@ -7,6 +7,7 @@ use App\Models\Currency;
 use App\Models\Cash_box;
 use App\Models\Financial_entry;
 use App\Models\Finan_trans_type;
+
 use File;
 use DB;
 use Log;
@@ -120,6 +121,7 @@ class CashBoxController extends Controller
         $row = Cash_box::where('id', '=', $id)->first();
       
         $carrencies=Currency::all();
+        // $currentBalance = Financial_entry::where('cash_box_id', $id)->sum('depit') - Financial_entry::where('cash_box_id', $id)->sum('credit');
       
         return view($this->viewName . 'edit', compact('row','carrencies', ));
     }

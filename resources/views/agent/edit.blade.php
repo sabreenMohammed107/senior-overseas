@@ -1,101 +1,101 @@
 @extends('layout.main')
 
 @section('crumb')
-    
+
 <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href=""><i class="material-icons"></i> {{ __(' Home') }} </a></li>
-    </ol>
-  </nav>
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href=""><i class="material-icons"></i> {{ __(' Home') }} </a></li>
+	</ol>
+</nav>
 
 @endsection
 
 @section('content')
 
 <div class="row">
-     
-<div class="col-md-12">
+
+	<div class="col-md-12">
 
 
 
-<div class="ms-panel">
-  <div class="ms-panel-header d-flex justify-content-between">
-    <h6>Agent</h6>
-    <!-- <a href="add_cource.html" class="btn btn-dark" > add Course </a> -->
-  </div>
-  <div class="ms-panel-body">
-    <div class="ms-auth-container row no-gutters">
-      <div class="col-12 p-3">
-      <form action="{{route('agent.update',$row->id)}}" method="POST" enctype="multipart/form-data">
+		<div class="ms-panel">
+			<div class="ms-panel-header d-flex justify-content-between">
+				<h6>Agent</h6>
+				<!-- <a href="add_cource.html" class="btn btn-dark" > add Course </a> -->
+			</div>
+			<div class="ms-panel-body">
+				<div class="ms-auth-container row no-gutters">
+					<div class="col-12 p-3">
+						<form action="{{route('agent.update',$row->id)}}" method="POST" enctype="multipart/form-data">
 
-{{ csrf_field() }}
+							{{ csrf_field() }}
 
-@method('PUT')
-        <div class="ms-auth-container row">
-				  		<div class="col-md-6 mb-3">
-				  			<div class="form-group">
-				  				<label class="exampleInputPassword1" for="exampleCheck1">*Agent Name</label>
-				  				<input type="text" class="form-control" value="{{$row->agent_name}}" name="agent_name" placeholder="Agent Name">
-				  			</div>
-				  		</div>
-				  		<div class="col-md-6 mb-3">
-				  			<div class="form-group">
-				  				<label class="exampleInputPassword1" for="exampleCheck1">*Contact Person</label>
-				  				<input type="text" class="form-control" value="{{$row->contact_person}}" name="contact_person" placeholder="Contact Person">
-				  			</div>
-				  		</div>
-				  		<div class="col-md-6 mb-3">
-				  			<div class="form-group">
-				  				<label class="exampleInputPassword1" for="exampleCheck1">Email</label>
-				  				<input type="email" class="form-control" value="{{$row->email}}" name="email" placeholder="Email">
-				  			</div>
-				  		</div>
-				  	
-				  		<div class="col-md-6 mb-3">
-				  			<div class="form-group">
-				  				<label class="exampleInputPassword1" for="exampleCheck1">*Mobile</label>
-				  				<input type="tel" class="form-control" name="mobile" value="{{$row->mobile}}" placeholder="Mobile">
-				  			</div>
-				  		</div>
-				  		<div class="col-md-6 mb-3">
-				  			<div class="ui-widget form-group">
-				  				<label>Country</label>
-				  				<select name="country_id" class="form-control" data-live-search="true">
-				  					<option value="">
-                                         @if($row->country)
-                                         {{ $row->country->country_name}}
-                                         @endif
-                                        </option>
-                                      @foreach ($countries as $country)
-                                            <option value='{{$country->id}}'>
-                                                {{ $country->country_name}}</option>
-                                            @endforeach
-				  				</select>
-				  			</div>
-				  		</div>
-				  	
-				  		<div class="col-md-6 mb-3">
-				  			<div class="form-group">
-				  				<label class="exampleInputPassword1" for="exampleCheck1">Phone</label>
-				  				<input type="tel" class="form-control" name="phone" value="{{$row->phone}}" placeholder="Phone">
-				  			</div>
-				  		</div>
-				
-          
-				  	</div>
-                    <div class="input-group d-flex justify-content-end text-center">
-                    <a href="{{ route('agent.index') }}" class="btn btn-dark mx-2"> Cancel</a>
-                   
-                      <input type="submit" value="Add" class="btn btn-success ">
-                    </div>
-   </form>
-      </div>
-    </div>
-  </div>
+							@method('PUT')
+							<div class="ms-auth-container row">
+								<div class="col-md-6 mb-3">
+									<div class="form-group">
+										<label class="exampleInputPassword1" for="exampleCheck1">*Agent Name</label>
+										<input type="text" class="form-control" value="{{$row->agent_name}}" name="agent_name" placeholder="Agent Name">
+									</div>
+								</div>
+								<div class="col-md-6 mb-3">
+									<div class="form-group">
+										<label class="exampleInputPassword1" for="exampleCheck1">*Contact Person</label>
+										<input type="text" class="form-control" value="{{$row->contact_person}}" name="contact_person" placeholder="Contact Person">
+									</div>
+								</div>
+								<div class="col-md-6 mb-3">
+									<div class="form-group">
+										<label class="exampleInputPassword1" for="exampleCheck1">Email</label>
+										<input type="email" class="form-control" value="{{$row->email}}" name="email" placeholder="Email">
+									</div>
+								</div>
+
+								<div class="col-md-6 mb-3">
+									<div class="form-group">
+										<label class="exampleInputPassword1" for="exampleCheck1">*Mobile</label>
+										<input type="tel" class="form-control" name="mobile" value="{{$row->mobile}}" placeholder="Mobile">
+									</div>
+								</div>
+								<div class="col-md-6 mb-3">
+									<div class="ui-widget form-group">
+										<label>Country</label>
+										<select name="country_id" class="form-control" data-live-search="true">
+											<option value="">
+												@if($row->country)
+												{{ $row->country->country_name}}
+												@endif
+											</option>
+											@foreach ($countries as $country)
+											<option value='{{$country->id}}'>
+												{{ $country->country_name}}</option>
+											@endforeach
+										</select>
+									</div>
+								</div>
+
+								<div class="col-md-6 mb-3">
+									<div class="form-group">
+										<label class="exampleInputPassword1" for="exampleCheck1">Phone</label>
+										<input type="tel" class="form-control" name="phone" value="{{$row->phone}}" placeholder="Phone">
+									</div>
+								</div>
+
+
+							</div>
+							<div class="input-group d-flex justify-content-end text-center">
+								<a href="{{ route('agent.index') }}" class="btn btn-dark mx-2"> Cancel</a>
+
+								<input type="submit" value="Add" class="btn btn-success ">
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
-</div>
-        </div>
-        <!-- /.row -->
+<!-- /.row -->
 
 
 <!-- New Data -->
@@ -120,7 +120,7 @@
 								<div class="ms-panel">
 									<div class="ms-panel-header d-flex justify-content-between">
 										<!-- <h6>Expenses Data</h6> -->
-										<button class="btn btn-dark" data-toggle="modal" data-target="#addSubCat"  > add new </a>
+										<button class="btn btn-dark" data-toggle="modal" data-target="#addSubCat"> add new </a>
 									</div>
 									<div class="ms-panel-body">
 
@@ -145,10 +145,15 @@
 														<td>
 															{{$balance->open_balance}}
 														</td>
-														<td><?php $date = date_create($row->balance_start_date) ?>
+														<td><?php $date = date_create($balance->balance_start_date) ?>
 															{{ date_format($date,'Y-m-d') }}
-															</td> 
-															<td>{{$balance->open_balance}}
+														</td>
+														<td>
+															<?php
+															$currentBalance = App\Models\Financial_entry::where('agent_id', $row->id)->where('currency_id', $balance->currency_id)->sum('credit') - App\Models\Financial_entry::where('agent_id', $row->id)->where('currency_id', $balance->currency_id)->sum('depit');
+
+															?>
+															{{$currentBalance}}
 														</td>
 														<td>@if($balance->currency)
 															{{$balance->currency->currency_name}}

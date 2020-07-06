@@ -98,7 +98,7 @@
 								<div class="ms-panel">
 									<div class="ms-panel-header d-flex justify-content-between">
 										<!-- <h6>Expenses Data</h6> -->
-										<button class="btn btn-dark" data-toggle="modal" data-target="#addSubCat"  > add new </a>
+										<button class="btn btn-dark" data-toggle="modal" data-target="#addSubCat"> add new </a>
 									</div>
 									<div class="ms-panel-body">
 
@@ -125,8 +125,17 @@
 														</td>
 														<td><?php $date = date_create($balance->balance_start_date) ?>
 															{{ date_format($date,'Y-m-d') }}
-															</td> 
-															<td>{{$balance->open_balance}}
+														</td>
+														<td>
+															<?php
+															if ($row->carrier_type_id == 1) {
+																$currentBalance = App\Models\Financial_entry::where('ocean_carrier_id', $row->id)->where('currency_id', $balance->currency_id) ->sum('depit')- App\Models\Financial_entry::where('ocean_carrier_id', $row->id)->where('currency_id', $balance->currency_id) ->sum('credit');
+															} else {
+																$currentBalance = App\Models\Financial_entry::where('air_carrier_id', $row->id)->where('currency_id', $balance->currency_id) ->sum('depit') - App\Models\Financial_entry::where('air_carrier_id', $row->id)->where('currency_id', $balance->currency_id) ->sum('credit');
+															}
+
+															?>
+															{{$currentBalance}}
 														</td>
 														<td>@if($balance->currency)
 															{{$balance->currency->currency_name}}
@@ -216,7 +225,7 @@
 								</div>
 							</div>
 							<div class="input-group d-flex justify-content-end text-center">
-							<a href="{{ route('carrier.index') }}" class="btn btn-dark mx-2"> Cancel</a>
+								<a href="{{ route('carrier.index') }}" class="btn btn-dark mx-2"> Cancel</a>
 								<input type="submit" value="Add" class="btn btn-success ">
 							</div>
 						</form>
