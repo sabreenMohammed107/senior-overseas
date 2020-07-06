@@ -85,7 +85,7 @@ class CashFinanceController extends Controller
         if ($request->input('tab') === "igottwo") {
             $obj = new Financial_entry();
             
-            $obj->trans_type_id = Finan_trans_type::where('id', '=', $request->input('cash_in'))->first()->id;
+            $obj->trans_type_id = Finan_trans_type::where('id', '=',2)->first()->id;
             $obj->entry_date = Carbon::parse($request->input('entry_date'));
             $obj->depit = $request->input('depit');
             $obj->currency_id = $request->input('currency_id');

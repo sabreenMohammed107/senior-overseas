@@ -133,8 +133,8 @@
                                     <div class="col-md-6 mb-3">
                                         <div class="ui-widget form-group">
                                             <label>Client</label>
-                                            <select name="cash_in" class=" form-control"  data-live-search="true">
-                                            <option value='' >Select</option>
+                                            <select name="cash_in" disabled class=" form-control"  data-live-search="true">
+                                            <option value='' >Client</option>
                                             @foreach ($cashExpenseIn as $data)
                                             <option value='{{$data->id}}' >
                                                 {{$data->expenses_name}}</option>
