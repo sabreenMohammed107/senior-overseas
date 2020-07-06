@@ -293,11 +293,11 @@ class CashFinanceController extends Controller
 
                 break;
             case 5:
-                $data = Supplier::where('supplier_type_id', '=', 1)->get();
+                $data = Supplier::where('supplier_type_id', '=', 2)->get();
 
                 break;
             case 6:
-                $data = Supplier::where('supplier_type_id', '=', 2)->get();
+                $data = Supplier::where('supplier_type_id', '=', 1)->get();
 
                 break;
             case 7:
@@ -356,10 +356,10 @@ class CashFinanceController extends Controller
                 }
 
                 if ($fristSelect == 5) {
-                    $data = Financial_entry::where('trucking_id', $value)->where('currency_id', '=', $cash)->sum('depit') - Financial_entry::where('trucking_id', $value)->where('currency_id', '=', $cash)->sum('credit');
+                    $data = Financial_entry::where('clearance_id', $value)->where('currency_id', '=', $cash)->sum('depit') - Financial_entry::where('clearance_id', $value)->where('currency_id', '=', $cash)->sum('credit');
                 }
                 if ($fristSelect == 6) {
-                    $data = Financial_entry::where('clearance_id', $value)->where('currency_id', '=', $cash)->sum('depit') - Financial_entry::where('clearance_id', $value)->where('currency_id', '=', $cash)->sum('credit');
+                    $data = Financial_entry::where('trucking_id', $value)->where('currency_id', '=', $cash)->sum('depit') - Financial_entry::where('trucking_id', $value)->where('currency_id', '=', $cash)->sum('credit');
                 }
                 if ($fristSelect == 7) {
                     $data = Financial_entry::where('agent_id', $value)->where('currency_id', '=', $cash)->sum('depit') - Financial_entry::where('agent_id', $value)->where('currency_id', '=', $cash)->sum('credit');
