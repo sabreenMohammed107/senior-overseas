@@ -90,6 +90,8 @@
 <li> <a href="{{ route('cash-box.index') }}">Cash Box</a> </li>
 <li> <a href="{{ route('bank.index') }}">Bank</a> </li>
 <li> <a href="{{ route('cash-finance.index') }}">Cash Box Finance</a> </li>
+<li> <a href="{{ route('bank-finance.index') }}">Bank Finance</a> </li>
+
 
 
 </ul>

@@ -86,7 +86,7 @@ class BankController extends Controller
                 'entry_date'=>Carbon::parse($request->input('balance_start_date')),
                 'depit'=> $request->input('open_balance'),
                 'currency_id'=> $request->input('currency_id'),
-                'bank_id'=>$cash->id,
+                'bank_account_id'=>$cash->id,
                 'notes'=> $request->input('note'),
                
             ];

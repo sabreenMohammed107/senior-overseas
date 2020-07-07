@@ -102,7 +102,7 @@ Route::post('/aaa/{id}', 'OperationsController@sendToAccount')->name('aaa');
 Route::resource('/cash-box', 'CashBoxController');
 // ----------------------------Bank------------------CashFinanceController
 Route::resource('/bank', 'BankController');
-/*------------------------------------------------------*/
+/*-----------------------------CashFinanceController-------------------------*/
 Route::resource('/cash-finance', 'CashFinanceController');
 Route::get('/add-cash-finance/{id}', 'CashFinanceController@addCashFinance')->name('add-cash-finance');
 Route::get('clientSelect/fetch', 'CashFinanceController@clientSelect')->name('clientSelect.fetch');
@@ -110,3 +110,9 @@ Route::get('selector_type/fetch', 'CashFinanceController@selector_type')->name('
 Route::get('selectionSelect/fetch', 'CashFinanceController@selectionSelect')->name('selectionSelect.fetch');
 
 
+/*-----------------------------BankFinanceController-------------------------*/
+Route::resource('/bank-finance', 'BankFinanceController');
+Route::get('/add-bank-finance/{id}', 'BankFinanceController@addBankFinance')->name('add-bank-finance');
+Route::get('bankClientSelect/fetch', 'BankFinanceController@clientSelect')->name('bankClientSelect.fetch');
+Route::get('bank_selector_type/fetch', 'BankFinanceController@selector_type')->name('bank_selector_type.fetch');
+Route::get('bank_selectionSelect/fetch', 'BankFinanceController@selectionSelect')->name('bank_selectionSelect.fetch');
