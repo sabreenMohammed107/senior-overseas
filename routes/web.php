@@ -116,3 +116,5 @@ Route::get('/add-bank-finance/{id}', 'BankFinanceController@addBankFinance')->na
 Route::get('bankClientSelect/fetch', 'BankFinanceController@clientSelect')->name('bankClientSelect.fetch');
 Route::get('bank_selector_type/fetch', 'BankFinanceController@selector_type')->name('bank_selector_type.fetch');
 Route::get('bank_selectionSelect/fetch', 'BankFinanceController@selectionSelect')->name('bank_selectionSelect.fetch');
+// ----------------------------invoice------------------
+Route::resource('/invoice', 'InvoiceController');
