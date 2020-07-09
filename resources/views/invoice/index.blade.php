@@ -16,7 +16,7 @@
 <div class="col-md-12">
   <div class="ms-panel">
     <div class="ms-panel-header d-flex justify-content-between">
-      <h6>Operation</h6>
+      <h6>Invoice</h6>
       <div>
           <a href="{{ route('invoice.create') }}" class="btn btn-dark" > add new </a>
       </div>
@@ -48,8 +48,8 @@
                              <th>Pol</th>
                              <th>Pod</th>
                           <td>
-                        <a href="view_operation.html" class="btn btn-info d-inline-block">view</a>
-                              <a href="edit_invoice.html" class="btn btn-info d-inline-block">edit</a>
+                        <a href="{{ route('invoice.show',1) }}" class="btn btn-info d-inline-block">view</a>
+                              <a href="{{ route('invoice.edit',1) }}" class="btn btn-info d-inline-block">edit</a>
                               <a href="#" onclick="delette('ٌRound')" class="btn d-inline-block btn-danger">delete</a>
                               <a href="#" class="btn btn-info d-inline-block">Report</a>  
                         </td>

@@ -72,7 +72,7 @@ class InvoiceController extends Controller
      */
     public function show($id)
     {
-        //
+        return view($this->viewName . 'view');
     }
 
     /**
@@ -83,7 +83,8 @@ class InvoiceController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view($this->viewName . 'edit');
+
     }
 
     /**
