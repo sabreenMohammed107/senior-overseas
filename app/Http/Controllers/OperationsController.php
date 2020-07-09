@@ -27,6 +27,8 @@ use Illuminate\Database\Eloquent\Collection;
 use File;
 use DB;
 use Log;
+// This is important to add here. 
+use PDF;
 use Carbon\Carbon;
 use Illuminate\Database\QueryException;
 
@@ -667,5 +669,27 @@ class OperationsController extends Controller
         });
 
         return redirect()->back()->with('flash_success', 'Data Has Been Send Successfully !');
+    }
+
+    public function printPDF()
+    {
+        $rows = Operation::orderBy("id", "Desc")->get();
+        // This  $data array will be passed to our PDF blade
+           $data = [
+              'title' => 'First PDF for Medium',
+              'heading' => 'Hello from 99Points.info',
+              'rows' => $rows,
+              'content' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.' 
+                ];
+
+       
+        $title = "My Report";
+        $pdf = PDF::loadView($this->viewName . 'pdf_view2',$data);
+        return $pdf->stream('medium.pdf'); // to open in blank page
+
+
+       // return $pdf->dawnload('medium.pdf');  to open in blank page
+
+       
     }
 }

@@ -94,6 +94,8 @@ Route::post('/add-operationExpenses', 'OperationsController@addExpenses')->name(
 Route::post('/edit-operationExpenses', 'OperationsController@updateExpenses')->name('updateOperationExpenses');
 Route::post('/delete-operationExpenses/{id}', 'OperationsController@deleteExpenses')->name('deleteOperationExpenses');
 Route::post('/aaa/{id}', 'OperationsController@sendToAccount')->name('aaa');
+Route::get('/customer/print-pdf', 'OperationsController@printPDF')->name('customer.printpdf');
+
 
 
 
