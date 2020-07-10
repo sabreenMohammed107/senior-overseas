@@ -218,6 +218,7 @@ class OperationsController extends Controller
                 $objBuy->buy = $ocean->ocean->price;
                 $objBuy->sell = null;
                 $objBuy->currency_id = $ocean->currency_id;
+                $objBuy->invoice_statement_flag=1;
                 array_push($savingExpense, $objBuy);
                 //another row
                 $objSell = new Collection();
@@ -228,6 +229,7 @@ class OperationsController extends Controller
                 $objSell->buy = null;
                 $objSell->sell = $ocean->price;
                 $objSell->currency_id = $ocean->currency_id;
+                $objSell->invoice_statement_flag=1;
                 array_push($savingExpense, $objSell);
             }
 
@@ -240,6 +242,7 @@ class OperationsController extends Controller
                 $obj2Buy->buy = $air->air->price;
                 $obj2Buy->sell = null;
                 $obj2Buy->currency_id = $air->currency_id;
+                $obj2Buy->invoice_statement_flag=1;
                 array_push($savingExpense, $obj2Buy);
 
 
@@ -252,6 +255,7 @@ class OperationsController extends Controller
                 $obj2Sell->buy = null;
                 $obj2Sell->sell = $air->price;
                 $obj2Sell->currency_id = $air->currency_id;
+                $obj2Sell->invoice_statement_flag=1;
                 array_push($savingExpense, $obj2Sell);
             }
             if ($request->input('TrackingSelected')) {
@@ -263,6 +267,7 @@ class OperationsController extends Controller
                 $obj3->buy = $truck->truck->car_price;
                 $obj3->sell = null;
                 $obj3->currency_id = $truck->currency_id;
+                $obj3->invoice_statement_flag=1;
                 array_push($savingExpense, $obj3);
                 //another row
                 $obj3Sell = new Collection();
@@ -273,6 +278,7 @@ class OperationsController extends Controller
                 $obj3Sell->buy = null;
                 $obj3Sell->sell = $truck->car_price;
                 $obj3Sell->currency_id = $truck->currency_id;
+                $obj3Sell->invoice_statement_flag=1;
                 array_push($savingExpense, $obj3Sell);
             }
 
@@ -287,6 +293,7 @@ class OperationsController extends Controller
                 $obj4->buy = $sale_quot->clearance_price;
                 $obj4->sell = null;
                 $obj4->currency_id = $sale_quot->clearance_currency_id;
+                $obj4->invoice_statement_flag=1;
                 array_push($savingExpense, $obj4);
                 //another row
                 $obj4Sell = new Collection();
@@ -296,6 +303,7 @@ class OperationsController extends Controller
                 $obj4Sell->buy = null;
                 $obj4Sell->sell = $sale_quot->clearance_price;
                 $obj4Sell->currency_id = $sale_quot->clearance_currency_id;
+                $obj4Sell->invoice_statement_flag=1;
                 array_push($savingExpense, $obj4Sell);
             }
             /*-------------------------------*/
@@ -309,6 +317,7 @@ class OperationsController extends Controller
                 $obj5->buy = $sale_quotdoor->door_door_price;
                 $obj5->sell = null;
                 $obj5->currency_id = $sale_quotdoor->door_door_currency_id;
+                $obj5->invoice_statement_flag=1;
                 array_push($savingExpense, $obj5);
                 //another row
                 $obj5Sell = new Collection();
@@ -318,6 +327,7 @@ class OperationsController extends Controller
                 $obj5Sell->buy = null;
                 $obj5Sell->sell = $sale_quotdoor->door_door_price;
                 $obj5Sell->currency_id = $sale_quotdoor->door_door_currency_id;
+                $obj5Sell->invoice_statement_flag=1;
                 array_push($savingExpense, $obj5Sell);
             }
             /*--------------------------*/
@@ -468,6 +478,7 @@ class OperationsController extends Controller
             'operation_id' => $request->input('operation_id'),
 
             'note' => $request->input('note'),
+            'invoice_statement_flag'=>1,
 
         ];
 
@@ -684,7 +695,7 @@ class OperationsController extends Controller
 
        
         $title = "My Report";
-        $pdf = PDF::loadView($this->viewName . 'pdf_view2',$data);
+        $pdf = PDF::loadView($this->viewName . 'test',$data);
         return $pdf->stream('medium.pdf'); // to open in blank page
 
 

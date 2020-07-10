@@ -1,53 +1,8 @@
-@extends('layout.main')
-
-@section('crumb')
-
-<nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href=""><i class="material-icons"></i> {{ __(' Home') }} </a></li>
-    </ol>
-</nav>
-
-@endsection
-
-@section('content')
-
-<div class="row">
-    <div class="col-md-12">
-        <div class="ms-panel">
-            <div class="ms-panel-header d-flex justify-content-between">
-                <h6>Invoice</h6>
-                <a href="{{route('invoice.index') }}" class="btn btn-danger" > Cancel</a>
-            </div>
-            <div class="ms-panel-body">
-                <div class="ms-auth-container row no-gutters">
-                    <div class="col-12 p-3">
-                     
-                            <div class="ms-auth-container row">
-                                <div class="col-md-6 mb-3">
-                                    <div class="ui-widget form-group">
-										<label>Operation Code</label>
-									
-                                        <select id="operation_id" disabled name="operation_id" class="form-control dynamic" data-dependent="allData" data-show-subtext="true" data-live-search="true" id="exist">
-											<option value="">Select ...</option>
-											@foreach ($operations as $type)
-											<option value='{{$type->id}}' {{ $type->id == $rowSelected->operation_id ? 'selected' : '' }}>
-												{{$type->operation_code}}</option>
-											@endforeach
-										</select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="main">
-
-							<div class="ms-auth-container row">
+<div class="ms-auth-container row">
     <div class="col-md-6 mb-3">
         <div class="form-group">
-			<label class="exampleInputPassword1" for="exampleCheck1">Invoice Date</label>
-			
-			<?php $dateinvoice = date_create($rowSelected->invoice_date) ?>
-
-            <input type="date" name="invoice_date" readonly value="{{ date_format($dateinvoice,'Y-m-d') }}" class="form-control" placeholder="Invoice Date">
+            <label class="exampleInputPassword1" for="exampleCheck1">Invoice Date</label>
+            <input type="date" name="invoice_date" class="form-control" placeholder="Invoice Date">
         </div>
     </div>
     <div class="col-md-6 mb-3">
@@ -188,164 +143,66 @@
     <div class="col-md-6 mb-3">
         <div class="form-group">
             <label class="exampleInputPassword1" for="exampleCheck1">Invoice Note</label>
-           <textarea name="invoice_note" readonly class="form-control" rows="3">{{$rowSelected->notes}}</textarea>
+           <textarea name="invoice_note" class="form-control" rows="3"></textarea>
         </div>
     </div>
 </div>
-
-
-
-</div>
-							
-							<!--
+<!--
                               table of expenses
-						  -->
-						  <div class="ms-auth-container row">
-			<div class="col-md-12 mb-3">
-				<div class="tabbable-panel">
-					<div class="tabbable-line">
-						<ul class="nav nav-tabs " role="tablist">
-							
-							<li class="btn btn-light test">
-								<a href="#tab_default_2" class="active" data-toggle="tab" role="tab">
-								Invoice Points
-								</a>
+                          -->
+<div class="ms-panel">
+    <div class="ms-panel-header d-flex justify-content-between">
+        <h6>Expenses Data</h6>
+        <!-- <a href="#" class="btn btn-dark" data-toggle="modal" data-target="#addSubCat"> add new </a> -->
+    </div>
+    <div class="ms-panel-body">
 
-							</li>
-							<li class="btn btn-light test">
-								<a href="#tab_default_1"  data-toggle="tab" role="tab">
-								Statment Points
-								</a>
-
-							</li>
-						</ul>
-						<div class="tab-content test ">
-							<div class="tab-pane " id="tab_default_1">
-								<!-- Add Expenses -->
-								<div class="row">
-									<div class="col-md-12">
-
-										<div class="ms-panel">
-											<div class="ms-panel-header d-flex justify-content-between">
-												<!-- <h6>Expenses Data</h6> -->
-											</div>
-											<div class="ms-panel-body">
-
-												<div class="table-responsive">
-													<table id="courseEval" class="dattable table table-striped thead-dark  w-100">
-														<thead>
-															<tr>
-																<th>#</th>
-																<th>Expense Type</th>
-																<th>Buy</th>
-																<th>Sale</th>
-																<th>Expense provider</th>
-																<th>Currency</th>
-															</tr>
-														</thead>
-														<tbody>
-
-															@foreach($expensesStatment as $index => $expense)
-															<tr>
-																<td>{{$index+1}}</td>
-																<td>@if($expense->type)
-																	{{$expense->type->expense_name}}
-																	@endif
-																</td>
-																<td>{{$expense->buy}}</td>
-																<td>{{$expense->sell}}</td>
-																<td>@if($expense->provider)
-																	{{$expense->provider->provider_type}}
-																	@endif</td>
-																<td>@if($expense->currency)
-																	{{$expense->currency->currency_name}}
-																	@endif</td>
-															
-															</tr>
-														
-															@endforeach
-														</tbody>
-													</table>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<!--End Expenses-->
-							</div>
-							<div class="tab-pane active" id="tab_default_2">
-								<!-- Add Expenses -->
-								<div class="row">
-									<div class="col-md-12">
-
-										<div class="ms-panel">
-											<div class="ms-panel-header d-flex justify-content-between">
-												<!-- <h6>Expenses Data</h6> -->
-											</div>
-											<div class="ms-panel-body">
-
-												<div class="table-responsive">
-													<table id="courseEval" class="dattable table table-striped thead-dark  w-100">
-														<thead>
-															<tr>
-																<th>#</th>
-																<th>Expense Type</th>
-																<th>Buy</th>
-																<th>Sale</th>
-																<th>Expense provider</th>
-																<th>Currency</th>
-															</tr>
-														</thead>
-														<tbody>
-
-															@foreach($expensesInvoice as $index => $expense)
-															<tr>
-																<td>{{$index+1}}</td>
-																<td>@if($expense->type)
-																	{{$expense->type->expense_name}}
-																	@endif
-																</td>
-																<td>{{$expense->buy}}</td>
-																<td>{{$expense->sell}}</td>
-																<td>@if($expense->provider)
-																	{{$expense->provider->provider_type}}
-																	@endif</td>
-																<td>@if($expense->currency)
-																	{{$expense->currency->currency_name}}
-																	@endif</td>
-																
-															</tr>
-														
-															@endforeach
-														</tbody>
-													</table>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<!--End Expenses-->
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+        <div class="table-responsive">
+            <table id="courseEval" class="dattable table table-striped thead-dark  w-100">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Expense Type</th>
+                        <th>Buy</th>
+                        <th>Sale</th>
+                        <th>Expense provider</th>
+                        <th>Currency</th>
+                      
+                    </tr>
+                </thead>
+                <tbody>
 
 
-                    </div>
-                </div>
-            </div>
+                    @foreach($expenses as $index => $expense)
+                    <tr>
+                        <td>{{$index+1}}</td>
+
+                        
+                        <td>@if($expense->type)
+                            {{$expense->type->expense_name}}
+                            @endif
+                        </td>
+                        <td>{{$expense->buy}}</td>
+                        <td>{{$expense->sell}}</td>
+                        <td>@if($expense->provider)
+                            {{$expense->provider->provider_type}}
+                            @endif</td>
+                        <td>@if($expense->currency)
+                            {{$expense->currency->currency_name}}
+                            @endif</td>
+                        
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
 
-@endsection
-@section('scripts')
-
-
-
-<script type="text/javascript">
-   
-</script>
-@endsection
+<div class="input-group d-flex justify-content-end text-center">
+    <a href="{{ route('invoice.index') }}" class="btn btn-dark mx-2"> Cancel</a>
+    <!-- <input type="button" value="Cancel" class="btn btn-dark mx-2" data-dismiss="modal" aria-label="Close"> -->
+    <input type="submit" value="Add" class="btn btn-success ">
+</div>
+</form>
+</div>

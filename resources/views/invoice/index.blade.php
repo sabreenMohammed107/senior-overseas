@@ -31,29 +31,42 @@
                           <th>Invoice Date</th>
                               <th>Client</th>
                              <th>Operation Code</th>
-                             <th>Pol</th>
-                             <th>Pod</th>
+                         
                           
                           <th>Action</th>
                       </tr>
                   </thead>
                   <tbody>
 
-                      <tr>
-                          <td>#</td>
-                          <th>100</th>
-                          <th>20-7-2020</th>
-                              <th>Client</th>
-                             <th>102</th>
-                             <th>Pol</th>
-                             <th>Pod</th>
+                  @foreach($rows as $index => $row)
+                            <tr>
+                                <td>{{$index+1}}</td>
+                         
+                                <td>{{$row->invoice_no}}</td>
+                          <td>  <?php
+                            $date = date_create($row->invoice_date) ?>
+                                    {{ date_format($date,'Y-m-d') }}</td>
+                         
+                              <td>@if($row->operation)
+                                    {{$row->operation->shipper->client_name}}
+                                    @endif</td>
+                             <td>@if($row->operation)
+                                    {{$row->operation->operation_code}}
+                                    @endif</td>
+                            
                           <td>
-                        <a href="{{ route('invoice.show',1) }}" class="btn btn-info d-inline-block">view</a>
-                              <a href="{{ route('invoice.edit',1) }}" class="btn btn-info d-inline-block">edit</a>
-                              <a href="#" onclick="delette('ٌRound')" class="btn d-inline-block btn-danger">delete</a>
+                        <a href="{{ route('invoice.show',$row->id) }}" class="btn btn-info d-inline-block">view</a>
+                              <a href="{{ route('invoice.edit',$row->id) }}" class="btn btn-info d-inline-block">edit</a>
+                              <a href="#" onclick="destroy('invoice','{{$row->id}}')" class="btn d-inline-block btn-danger">delete</a>
+                                    <form id="delete_{{$row->id}}" action="{{ route('invoice.destroy', $row->id) }}" method="POST" style="display: none;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" value=""></button>
+                                    </form>
                               <a href="#" class="btn btn-info d-inline-block">Report</a>  
                         </td>
                       </tr>
+                      @endforeach
                   </tbody>
               </table>
           </div>

@@ -22,6 +22,8 @@ class CreateOperationExpensesTable extends Migration
             $table->integer('automatic')->nullable();
             $table->integer('provider_type_id')->unsigned()->nullable();
             $table->integer('currency_id')->unsigned()->nullable();
+            $table->integer('invoice_statement_flag')->nullable();
+            
             $table->text('note')->nullable();
             $table->timestamps();
         });

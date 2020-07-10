@@ -8,7 +8,7 @@ class Operation_expense extends Model
 {
     protected $fillable = [
         'operation_id', 'expenses_type_id',
-         'buy','sell', 'provider_type_id','currency_id','note','automatic'
+         'buy','sell', 'provider_type_id','currency_id','note','automatic','invoice_statement_flag'
      
     ];
     public function operation()

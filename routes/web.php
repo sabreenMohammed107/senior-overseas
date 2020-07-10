@@ -120,3 +120,6 @@ Route::get('bank_selector_type/fetch', 'BankFinanceController@selector_type')->n
 Route::get('bank_selectionSelect/fetch', 'BankFinanceController@selectionSelect')->name('bank_selectionSelect.fetch');
 // ----------------------------invoice------------------
 Route::resource('/invoice', 'InvoiceController');
+Route::get('dynamicoperation/fetch', 'InvoiceController@fetExist')->name('dynamicoperation.fetch');
+Route::get('/sendStatment/{id}', 'InvoiceController@sendStatment')->name('sendStatment');
+Route::get('/sendInvoice/{id}', 'InvoiceController@sendInvoice')->name('sendInvoice');

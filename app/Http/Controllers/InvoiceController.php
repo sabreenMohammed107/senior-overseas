@@ -3,16 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Ocean_freight_rate;
-use App\Models\Carrier;
-use App\Models\Port;
-use App\Models\Container;
-use App\Models\Currency;
+use App\Models\Invoice;
+use App\Models\Operation;
+use App\Models\Operation_expense;
 use File;
 use DB;
 use Log;
 use Carbon\Carbon;
 use Illuminate\Database\QueryException;
+
 class InvoiceController extends Controller
 {
     protected $object;
@@ -22,7 +21,7 @@ class InvoiceController extends Controller
     protected $message;
     protected $errormessage;
 
-    public function __construct(Ocean_freight_rate $object)
+    public function __construct(Invoice $object)
     {
         $this->middleware('auth');
 
@@ -39,8 +38,8 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        return view($this->viewName . 'index');
-
+        $rows = Invoice::orderBy("id", "Desc")->get();
+        return view($this->viewName . 'index', compact('rows'));
     }
 
     /**
@@ -50,8 +49,21 @@ class InvoiceController extends Controller
      */
     public function create()
     {
-        return view($this->viewName . 'add');
+        $operations = Operation::all();
+        $expenses = [];
+        return view($this->viewName . 'add', compact('operations', 'expenses'));
     }
+    public function fetExist(Request $request)
+    {
+        $operations = Operation::orderBy("created_at", "Desc")->get();
+
+        $id = $request->input('buildings_id');
+        $selected = Operation::where('id', '=', $id)->first();
+        $expenses = Operation_expense::where('operation_id', '=', $id)->orderBy("id", "Desc")->get();
+
+        return view($this->viewName . 'search', compact('operations', 'selected', 'expenses'))->render();
+    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -61,7 +73,32 @@ class InvoiceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $max = Invoice::orderBy('id', 'desc')->value('invoice_no');
+
+        if ($max >= 100) {
+
+            $max = $max + 1;
+        } else {
+
+            $max = 100;
+        }
+
+
+        $data = [
+            'invoice_no' => $max,
+            'operation_id' => $request->input('operation_id'),
+            'invoice_date' => Carbon::parse($request->input('invoice_date')),
+            'notes' => $request->input('invoice_note'),
+
+
+        ];
+
+
+        $this->object::create($data);
+
+
+
+        return redirect()->route($this->routeName . 'index')->with('flash_success', $this->message);
     }
 
     /**
@@ -72,7 +109,15 @@ class InvoiceController extends Controller
      */
     public function show($id)
     {
-        return view($this->viewName . 'view');
+        $rowSelected = Invoice::where('id', '=', $id)->first();
+
+        $operations = Operation::orderBy("created_at", "Desc")->get();
+
+
+        $selected = Operation::where('id', '=', $rowSelected->operation_id)->first();
+        $expensesInvoice = Operation_expense::where('operation_id', '=', $rowSelected->operation_id)->where('invoice_statement_flag', '=', 1)->orderBy("id", "Desc")->get();
+        $expensesStatment = Operation_expense::where('operation_id', '=', $rowSelected->operation_id)->where('invoice_statement_flag', '=', 2)->orderBy("id", "Desc")->get();
+        return view($this->viewName . 'view', compact('rowSelected', 'operations', 'selected', 'expensesStatment', 'expensesInvoice'));
     }
 
     /**
@@ -83,8 +128,42 @@ class InvoiceController extends Controller
      */
     public function edit($id)
     {
-        return view($this->viewName . 'edit');
+        $rowSelected = Invoice::where('id', '=', $id)->first();
 
+        $operations = Operation::orderBy("created_at", "Desc")->get();
+
+
+        $selected = Operation::where('id', '=', $rowSelected->operation_id)->first();
+        $expensesInvoice = Operation_expense::where('operation_id', '=', $rowSelected->operation_id)->where('invoice_statement_flag', '=', 1)->orderBy("id", "Desc")->get();
+        $expensesStatment = Operation_expense::where('operation_id', '=', $rowSelected->operation_id)->where('invoice_statement_flag', '=', 2)->orderBy("id", "Desc")->get();
+        return view($this->viewName . 'edit', compact('rowSelected', 'operations', 'selected', 'expensesStatment', 'expensesInvoice'));
+    }
+
+
+    public function sendStatment($id)
+    {
+        $data = [
+            'invoice_statement_flag' => 2,
+ 
+        ];
+       
+       
+        Operation_expense::findOrFail($id)->update($data);
+
+        return redirect()->back()->with('flash_success', $this->message);
+    }
+
+    public function sendInvoice($id)
+    {
+        $data = [
+            'invoice_statement_flag' => 1,
+ 
+        ];
+       
+       
+        Operation_expense::findOrFail($id)->update($data);
+
+        return redirect()->back()->with('flash_success', $this->message);
     }
 
     /**
@@ -107,6 +186,16 @@ class InvoiceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $row = Invoice::where('id', '=', $id)->first();
+
+        try {
+
+            $row->delete();
+        } catch (QueryException $q) {
+
+            return redirect()->back()->with('flash_danger', 'You cannot delete related with another...');
+        }
+
+        return redirect()->back()->with('flash_success', 'Data Has Been Deleted Successfully !');
     }
 }
