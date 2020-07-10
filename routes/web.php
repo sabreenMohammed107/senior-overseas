@@ -121,5 +121,5 @@ Route::get('bank_selectionSelect/fetch', 'BankFinanceController@selectionSelect'
 // ----------------------------invoice------------------
 Route::resource('/invoice', 'InvoiceController');
 Route::get('dynamicoperation/fetch', 'InvoiceController@fetExist')->name('dynamicoperation.fetch');
-Route::get('/sendStatment/{id}', 'InvoiceController@sendStatment')->name('sendStatment');
-Route::get('/sendInvoice/{id}', 'InvoiceController@sendInvoice')->name('sendInvoice');
+Route::get('/sendStatment', 'InvoiceController@sendStatment')->name('sendStatment');
+Route::get('/sendInvoice', 'InvoiceController@sendInvoice')->name('sendInvoice');

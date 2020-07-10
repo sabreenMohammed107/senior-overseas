@@ -208,137 +208,20 @@
 						<ul class="nav nav-tabs " role="tablist">
 							
 							<li class="btn btn-light test">
-								<a href="#tab_default_2" class="active" data-toggle="tab" role="tab">
+								<a href="#tab_default_2" id="testInvoice" class="active" data-toggle="tab" role="tab">
 								Invoice Points
 								</a>
 
 							</li>
 							<li class="btn btn-light test">
-								<a href="#tab_default_1"  data-toggle="tab" role="tab">
+								<a href="#tab_default_1" id="testStatment"  data-toggle="tab" role="tab">
 								Statment Points
 								</a>
 
 							</li>
 						</ul>
-						<div class="tab-content test ">
-							<div class="tab-pane " id="tab_default_1">
-								<!-- Add Expenses -->
-								<div class="row">
-									<div class="col-md-12">
-
-										<div class="ms-panel">
-											<div class="ms-panel-header d-flex justify-content-between">
-												<!-- <h6>Expenses Data</h6> -->
-											</div>
-											<div class="ms-panel-body">
-
-												<div class="table-responsive">
-													<table id="courseEval" class="dattable table table-striped thead-dark  w-100">
-														<thead>
-															<tr>
-																<th>#</th>
-																<th>Expense Type</th>
-																<th>Buy</th>
-																<th>Sale</th>
-																<th>Expense provider</th>
-																<th>Currency</th>
-																<th>Action</th>
-															</tr>
-														</thead>
-														<tbody>
-
-															@foreach($expensesStatment as $index => $expense)
-															<tr>
-																<td>{{$index+1}}</td>
-																<td>@if($expense->type)
-																	{{$expense->type->expense_name}}
-																	@endif
-																</td>
-																<td>{{$expense->buy}}</td>
-																<td>{{$expense->sell}}</td>
-																<td>@if($expense->provider)
-																	{{$expense->provider->provider_type}}
-																	@endif</td>
-																<td>@if($expense->currency)
-																	{{$expense->currency->currency_name}}
-																	@endif</td>
-																<td>
-																
-																	<a href="{{ route('sendInvoice',$expense->id) }}" class="btn btn-info d-inline-block" >Send To Invoice</a>
-																	
-																
-																</td>
-															</tr>
-														
-															@endforeach
-														</tbody>
-													</table>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<!--End Expenses-->
-							</div>
-							<div class="tab-pane active" id="tab_default_2">
-								<!-- Add Expenses -->
-								<div class="row">
-									<div class="col-md-12">
-
-										<div class="ms-panel">
-											<div class="ms-panel-header d-flex justify-content-between">
-												<!-- <h6>Expenses Data</h6> -->
-											</div>
-											<div class="ms-panel-body">
-
-												<div class="table-responsive">
-													<table id="courseEval" class="dattable table table-striped thead-dark  w-100">
-														<thead>
-															<tr>
-																<th>#</th>
-																<th>Expense Type</th>
-																<th>Buy</th>
-																<th>Sale</th>
-																<th>Expense provider</th>
-																<th>Currency</th>
-																<th>Action</th>
-															</tr>
-														</thead>
-														<tbody>
-
-															@foreach($expensesInvoice as $index => $expense)
-															<tr>
-																<td>{{$index+1}}</td>
-																<td>@if($expense->type)
-																	{{$expense->type->expense_name}}
-																	@endif
-																</td>
-																<td>{{$expense->buy}}</td>
-																<td>{{$expense->sell}}</td>
-																<td>@if($expense->provider)
-																	{{$expense->provider->provider_type}}
-																	@endif</td>
-																<td>@if($expense->currency)
-																	{{$expense->currency->currency_name}}
-																	@endif</td>
-																<td>
-																	
-																	<a href="{{ route('sendStatment',$expense->id) }}" class="btn btn-info d-inline-block" >Send To Statment</a>
-																	
-																
-																</td>
-															</tr>
-														
-															@endforeach
-														</tbody>
-													</table>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<!--End Expenses-->
-							</div>
+						<div class="tab-content test " id="commentarea">
+						@include('invoice.statment_table')
 						</div>
 					</div>
 				</div>
@@ -359,6 +242,51 @@
 
 
 <script type="text/javascript">
-   
+   function sendStatment(){
+	var xx = document.getElementById('statmentid').value; 
+
+if (xx) {
+
+	$.ajax({
+		url: "{{route('sendStatment')}}",
+		method: "get",
+		data: {
+			id: xx,
+
+		},
+		success: function(data) {
+			$('#commentarea').html(data);
+		}
+	});
+} else {
+
+}
+   }
+
+   function sendInvoice(){
+	var xx = document.getElementById('invoiceid').value; 
+
+if (xx) {
+
+	$.ajax({
+		url: "{{route('sendInvoice')}}",
+		method: "get",
+		data: {
+			id: xx,
+
+		},
+		success: function(data) {
+			$('#commentarea').html(data);
+			$("#testInvoice").removeClass("active");
+			$("#testStatment").addClass("active");
+
+			$("#tab_default_2").removeClass("active");
+			$("#tab_default_1").addClass("active");
+		}
+	});
+} else {
+
+}
+   }
 </script>
 @endsection

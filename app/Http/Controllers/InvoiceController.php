@@ -140,30 +140,42 @@ class InvoiceController extends Controller
     }
 
 
-    public function sendStatment($id)
+    public function sendStatment(Request $request)
     {
+        $id = $request->input('id');
+        $obj=Operation_expense::where('id','=',$id)->first();
+        $operation=
         $data = [
             'invoice_statement_flag' => 2,
- 
-        ];
-       
-       
-        Operation_expense::findOrFail($id)->update($data);
 
-        return redirect()->back()->with('flash_success', $this->message);
+        ];
+
+
+        Operation_expense::findOrFail($id)->update($data);
+        $expensesStatment = Operation_expense::where('operation_id', '=', $obj->operation_id)->where('invoice_statement_flag', '=', 2)->orderBy("id", "Desc")->get();
+        $expensesInvoice = Operation_expense::where('operation_id', '=',  $obj->operation_id)->where('invoice_statement_flag', '=', 1)->orderBy("id", "Desc")->get();
+
+       
+        return view($this->viewName .'statment_table', compact('expensesInvoice','expensesStatment'))->render();
     }
 
-    public function sendInvoice($id)
+    public function sendInvoice(Request $request)
     {
+        $id = $request->input('id');
+        $obj=Operation_expense::where('id','=',$id)->first();
+        $operation=
         $data = [
             'invoice_statement_flag' => 1,
- 
-        ];
-       
-       
-        Operation_expense::findOrFail($id)->update($data);
 
-        return redirect()->back()->with('flash_success', $this->message);
+        ];
+
+
+        Operation_expense::findOrFail($id)->update($data);
+        $expensesStatment = Operation_expense::where('operation_id', '=', $obj->operation_id)->where('invoice_statement_flag', '=', 2)->orderBy("id", "Desc")->get();
+        $expensesInvoice = Operation_expense::where('operation_id', '=',  $obj->operation_id)->where('invoice_statement_flag', '=', 1)->orderBy("id", "Desc")->get();
+
+       
+        return view($this->viewName .'statment_table', compact('expensesInvoice','expensesStatment'))->render();
     }
 
     /**
