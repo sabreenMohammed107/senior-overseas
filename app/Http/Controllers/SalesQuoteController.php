@@ -354,7 +354,8 @@ class SalesQuoteController extends Controller
         $doors = Currency::all();
         $employees = Employee::all();
         $clearancesSuppliers = Supplier::where('supplier_type_id', '=', 2)->get();
-        return view($this->viewName . 'edit', compact('row', 'typeTesting', 'employees',  'filtters', 'trackings', 'clients', 'clearancesSuppliers', 'clearances', 'doors'));
+        $agents = Agent::all();
+        return view($this->viewName . 'edit', compact('row', 'typeTesting', 'employees','agents',  'filtters', 'trackings', 'clients', 'clearancesSuppliers', 'clearances', 'doors'));
     }
 
     /**
