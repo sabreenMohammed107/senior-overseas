@@ -15,8 +15,8 @@
 															<tr>
 																<th>#</th>
 																<th>Expense Type</th>
-																<th>Buy</th>
-																<th>Sale</th>
+																
+																<th>Sell</th>
 																<th>Expense provider</th>
 																<th>Currency</th>
 																<th>Action</th>
@@ -24,25 +24,24 @@
 														</thead>
 														<tbody>
 
-															@foreach($expensesStatment as $index => $expense)
+															@foreach($expensesStatment as $index => $stat)
 															<tr>
 																<td>{{$index+1}}</td>
-																<td>@if($expense->type)
-																	{{$expense->type->expense_name}}
+																<td>@if($stat->type)
+																	{{$stat->type->expense_name}}
 																	@endif
 																</td>
-																<td>{{$expense->buy}}</td>
-																<td>{{$expense->sell}}</td>
-																<td>@if($expense->provider)
-																	{{$expense->provider->provider_type}}
+															
+																<td>{{$stat->sell}}</td>
+																<td>@if($stat->provider)
+																	{{$stat->provider->provider_type}}
 																	@endif</td>
-																<td>@if($expense->currency)
-																	{{$expense->currency->currency_name}}
+																<td>@if($stat->currency)
+																	{{$stat->currency->currency_name}}
 																	@endif</td>
 																<td>
-                                                                <input type="hidden" name="invoiceid" id="invoiceid" value="{{$expense->id}}" >
 
-                                                                    <button onclick="sendInvoice()" class="btn btn-info d-inline-block" >Send To Invoice</button>
+                                                                    <button onclick="sendInvoice('{{$stat->id}}')" class="btn btn-info d-inline-block" >Send To Invoice</button>
 	
 																
 																</td>
@@ -75,8 +74,8 @@
 															<tr>
 																<th>#</th>
 																<th>Expense Type</th>
-																<th>Buy</th>
-																<th>Sale</th>
+																
+																<th>Sell</th>
 																<th>Expense provider</th>
 																<th>Currency</th>
 																<th>Action</th>
@@ -91,7 +90,7 @@
 																	{{$expense->type->expense_name}}
 																	@endif
 																</td>
-																<td>{{$expense->buy}}</td>
+																
 																<td>{{$expense->sell}}</td>
 																<td>@if($expense->provider)
 																	{{$expense->provider->provider_type}}
@@ -100,8 +99,8 @@
 																	{{$expense->currency->currency_name}}
 																	@endif</td>
 																<td>
-																	<input type="hidden" name="statmentid" id="statmentid" value="{{$expense->id}}" >
-																	<button onclick="sendStatment()" class="btn btn-info d-inline-block" >Send To Statment</button>
+																	<!-- <input type="hidden" name="statmentid" id="statmentid" value="{{$expense->id}}" > -->
+																	<button onclick="sendStatment('{{$expense->id}}')" class="btn btn-info d-inline-block" >Send To Statment</button>
 																	
 																
 																</td>

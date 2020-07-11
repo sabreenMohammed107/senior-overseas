@@ -54,7 +54,6 @@
                                     <button class="btn d-inline-block btn-dark" disabled>send To Account</button>
 
                                     @else
-                                    <a href="{{route('customer.printpdf')}}" target="_blank">Print PDF</a>
                                     <a href="{{ route('operations.show',$row->id) }}" class="btn btn-info d-inline-block" role="button" data-role="button" disabled='disabled'>view</a>
                                     <a href="{{ route('operations.edit',$row->id) }}" class="btn btn-info d-inline-block">edit</a>
                                     <a href="#" onclick="destroy('operations','{{$row->id}}')" class="btn d-inline-block btn-danger">delete</a>

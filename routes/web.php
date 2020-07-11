@@ -123,3 +123,11 @@ Route::resource('/invoice', 'InvoiceController');
 Route::get('dynamicoperation/fetch', 'InvoiceController@fetExist')->name('dynamicoperation.fetch');
 Route::get('/sendStatment', 'InvoiceController@sendStatment')->name('sendStatment');
 Route::get('/sendInvoice', 'InvoiceController@sendInvoice')->name('sendInvoice');
+
+/*-------------------------Statment----------------------------------*/
+Route::resource('/account-statment', 'AccountStatmentController');
+Route::get('selector_statment/fetch', 'AccountStatmentController@selector_type')->name('selector_statment.fetch');
+/*-------------------------BankCashStatmentController----------------------------------*/
+Route::resource('/bank-cash-statment', 'BankCashStatmentController');
+
+

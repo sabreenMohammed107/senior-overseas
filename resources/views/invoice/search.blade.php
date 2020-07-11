@@ -163,8 +163,8 @@
                     <tr>
                         <th>#</th>
                         <th>Expense Type</th>
-                        <th>Buy</th>
-                        <th>Sale</th>
+                        
+                        <th>Sell</th>
                         <th>Expense provider</th>
                         <th>Currency</th>
                       
@@ -182,7 +182,7 @@
                             {{$expense->type->expense_name}}
                             @endif
                         </td>
-                        <td>{{$expense->buy}}</td>
+                       
                         <td>{{$expense->sell}}</td>
                         <td>@if($expense->provider)
                             {{$expense->provider->provider_type}}

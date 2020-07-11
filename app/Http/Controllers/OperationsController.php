@@ -695,7 +695,7 @@ class OperationsController extends Controller
 
        
         $title = "My Report";
-        $pdf = PDF::loadView($this->viewName . 'test',$data);
+        $pdf = PDF::loadView($this->viewName . 'pdf_view2',$data);
         return $pdf->stream('medium.pdf'); // to open in blank page
 
 

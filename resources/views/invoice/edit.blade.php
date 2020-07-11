@@ -242,16 +242,15 @@
 
 
 <script type="text/javascript">
-   function sendStatment(){
-	var xx = document.getElementById('statmentid').value; 
-
-if (xx) {
+   function sendStatment(expens){
+	
+if (expens) {
 
 	$.ajax({
 		url: "{{route('sendStatment')}}",
 		method: "get",
 		data: {
-			id: xx,
+			id: expens,
 
 		},
 		success: function(data) {
@@ -263,16 +262,15 @@ if (xx) {
 }
    }
 
-   function sendInvoice(){
-	var xx = document.getElementById('invoiceid').value; 
+   function sendInvoice(id){
 
-if (xx) {
+if (id) {
 
 	$.ajax({
 		url: "{{route('sendInvoice')}}",
 		method: "get",
 		data: {
-			id: xx,
+			id: id,
 
 		},
 		success: function(data) {
@@ -284,7 +282,8 @@ if (xx) {
 			$("#tab_default_1").addClass("active");
 		}
 	});
-} else {
+} 
+else {
 
 }
    }

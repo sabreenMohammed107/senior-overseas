@@ -48,5 +48,16 @@ class Financial_entry extends Model
         return $this->belongsTo('App\Models\Agent','agent_id');
 
     }
+    public function operation()
+    {
+        return $this->belongsTo('App\Models\Operation','operation_id');
+
+    }
+
+    public function type()
+    {
+        return $this->belongsTo('App\Models\Finan_trans_type','trans_type_id');
+
+    }
 
 }

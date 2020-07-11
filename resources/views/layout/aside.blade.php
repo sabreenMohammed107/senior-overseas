@@ -98,6 +98,20 @@
 </ul>
 
 </li>
+<!-- Operations  --> 
+<li class="menu-item">
+<a href="#" class="has-chevron" data-toggle="collapse" data-target="#statmentdropdown" aria-expanded="false"
+   aria-controls="contactsdropdown">
+  <span><i class="material-icons fs-16">assignment</i>Account Statment</span>
+</a>
+<ul id="statmentdropdown" class="collapse" aria-labelledby="basic-elements" data-parent="#side-nav-accordion">
+
+<li> <a href="{{ route('bank-cash-statment.index') }}">Bank/CashBox Statment</a> </li>
+<li> <a href="{{ route('account-statment.index') }}">Operations Statment</a> </li>
+
+</ul>
+
+</li>
 </ul>
 
 

@@ -17,46 +17,38 @@
     <!-- <h1>{{ $heading}}</h1> -->
     <h1>Customer List</h1>
 
-    <table width="100%" style="width:100%" border="1">
+    <table width="100%" style="width:100%" border="0">
         <thead>
             <tr>
-                <th>#</th>
-                <th>Operation Code</th>
-                <th>Operation Date</th>
-                <th>Shipper</th>
+              
+                <th>Expense Type</th>
+                <th>Buy</th>
+                <th>Sale</th>
+                <th>Expense provider</th>
+                <th>Currency</th>
             </tr>
         </thead>
         <tbody>
 
             @foreach($rows as $index => $row)
-            <tr>
-                <td>{{$index+1}}</td>
+            <tr style="height:20px;background:#CCC">
+              
 
                 <td>{{$row->operation_code}}</td>
-                <td><?php $date = date_create($row->operation_date) ?>
-                    {{ date_format($date,'Y-m-d') }}</td>
-                <td>@if($row->shipper)
-                    {{$row->shipper->client_name}}
-                    @endif</td>
+               
 
             </tr>
             <?php
             $expenses = App\Models\Operation_expense::where('operation_id', '=', $row->id)->orderBy("id", "Desc")->get();
             ?>
-            <th>#</th>
-            <th>Expense Type</th>
-            <th>Buy</th>
-            <th>Sale</th>
-            <th>Expense provider</th>
-            <th>Currency</th>
-            <th>Action</th>
+
             </tr>
-            </thead>
-        <tbody>
+        
+        <tbody border="1">
 
             @foreach($expenses as $index => $expense)
             <tr>
-                <td>{{$index+1}}</td>
+              
                 <td>@if($expense->type)
                     {{$expense->type->expense_name}}
                     @endif
@@ -69,12 +61,12 @@
                 <td>@if($expense->currency)
                     {{$expense->currency->currency_name}}
                     @endif</td>
-             
-                    @endforeach
-                    </tbody>
-                    @endforeach
 
-                    </tbody>
+                @endforeach
+        </tbody>
+        @endforeach
+
+        </tbody>
     </table>
 
 </body>
