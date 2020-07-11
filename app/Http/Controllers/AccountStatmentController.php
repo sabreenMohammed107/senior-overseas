@@ -44,7 +44,7 @@ class AccountStatmentController extends Controller
      */
     public function index()
     {
-        $Finantypes = cashbox_expenses_type::all();
+        $Finantypes =Cashbox_expenses_type::all();
         $currencies = Currency::all();
         $filtters = [];
         $current_balance=0;
