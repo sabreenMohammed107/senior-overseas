@@ -534,6 +534,13 @@ class OperationsController extends Controller
         if ($request->input('sell')) {
             $data['buy'] = null;
             $data['sell'] = $request->input('sell');
+            $data['cashbox_expenses_types_id'] =null;
+            $data['ocean_carrier_id'] =null;
+            $data['air_carrier_id'] =null;
+            $data['trucking_id'] = null;
+            $data['clearance_id'] = null;
+            $data['agent_id'] =null;
+
             
             Operation_expense::create($data);
         }
@@ -680,7 +687,7 @@ class OperationsController extends Controller
 
                 $obj->entry_date = $row->operation_date;
                 $obj->credit = $rowOther->sell;
-                $obj->client_id = $row->shipper_id;
+                $obj->client_id =$row->shipper_id;
                 $obj->notes = $row->notes;
                 $obj->currency_id = $rowOther->currency_id;
                 $obj->save();
