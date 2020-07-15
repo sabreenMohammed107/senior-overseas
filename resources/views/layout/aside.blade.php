@@ -17,16 +17,18 @@
   </li>
   <!-- /Home -->
   <!-- Setup  -->
+  @if (Auth::user()->role_id==1 ||Auth::user()->role_id==4 || Auth::user()->role_id==2)
   <li class="menu-item">
     <a href="#" class="has-chevron" data-toggle="collapse" data-target="#create" aria-expanded="false"
      aria-controls="tables">
       <span><i class="material-icons fs-16">build</i>Setup</span>
     </a>
     <ul id="create" class="collapse" aria-labelledby="tables" data-parent="#side-nav-accordion">
-    <!-- @if (Auth::user()->role==null) -->
-    <!-- <li> <a href="{{ route('role.index') }}">Roles</a> </li> -->
-    <!-- @endif -->
-      <li> <a href="{{ route('client.index') }}">Clients</a> </li>
+   
+    @if (Auth::user()->role_id==1 ||Auth::user()->role_id==4 || Auth::user()->role_id==2  )
+    <li> <a href="{{ route('client.index') }}">Clients</a> </li>
+    @endif
+    @if (Auth::user()->role_id==1 ||Auth::user()->role_id==4  )
       <li> <a href="{{ route('supplier.index') }}">Suppliers</a> </li>
       <li> <a href="{{ route('port.index') }}">Ports</a> </li>
       <li> <a href="{{ route('carrier.index') }}">Carriers</a> </li>
@@ -38,10 +40,14 @@
       <li> <a href="{{ route('currency.index') }}">Currencies</a> </li>
       <li> <a href="{{ route('commodity.index') }}">Commodity</a> </li>
       <li> <a href="{{ route('country.index') }}">Countries</a> </li>
+  
+      @endif
     </ul>
   </li>
+  @endif
   <!--  Setup  -->
   <!-- Price Lists  -->
+  @if (Auth::user()->role_id==1 ||Auth::user()->role_id==4 || Auth::user()->role_id==3)
   <li class="menu-item">
     <a href="#" class="has-chevron" data-toggle="collapse" data-target="#basic-elements" aria-expanded="false"
      aria-controls="basic-elements">
@@ -53,8 +59,10 @@
       <li> <a href="{{ route('air-rate.index') }}">Air Rates</a> </li>
     </ul>
   </li>
+  @endif
   <!--  Price Lists  -->
 <!-- Sales  -->
+@if (Auth::user()->role_id==1 ||Auth::user()->role_id==4 || Auth::user()->role_id==2)
 <li class="menu-item">
   <a href="#" class="has-chevron" data-toggle="collapse" data-target="#contactsdropdown" aria-expanded="false"
    aria-controls="contactsdropdown">
@@ -66,7 +74,9 @@
   </ul>
   
 </li>
+@endif
 <!-- Operations  --> 
+@if (Auth::user()->role_id==1 ||Auth::user()->role_id==4 )
 <li class="menu-item">
 <a href="#" class="has-chevron" data-toggle="collapse" data-target="#operationdropdown" aria-expanded="false"
    aria-controls="contactsdropdown">
@@ -79,7 +89,9 @@
 </ul>
 
 </li>
+@endif
 <!-- Accounting  --> 
+@if (Auth::user()->role_id==1 ||Auth::user()->role_id==5)
 <li class="menu-item">
 <a href="#" class="has-chevron" data-toggle="collapse" data-target="#accountdropdown" aria-expanded="false"
    aria-controls="contactsdropdown">
@@ -112,6 +124,7 @@
 </ul>
 
 </li>
+@endif
 </ul>
 
 

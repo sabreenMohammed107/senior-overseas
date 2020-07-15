@@ -49,14 +49,23 @@ class InvoiceController extends Controller
      */
     public function create()
     {
-        $operations = Operation::all();
+        /*---to get choose one only --*/
+        $ids = Invoice::get('operation_id');
+     
+        $operations = Operation::whereNOTIN('id',$ids)->get();
+     
+     
+
+  
         $expenses = [];
         return view($this->viewName . 'add', compact('operations', 'expenses'));
     }
     public function fetExist(Request $request)
     {
-        $operations = Operation::orderBy("created_at", "Desc")->get();
-
+        $ids = Invoice::get('operation_id');
+     
+        $operations = Operation::whereNOTIN('id',$ids)->get();
+     
         $id = $request->input('buildings_id');
         $selected = Operation::where('id', '=', $id)->first();
         $expenses = Operation_expense::where('operation_id', '=', $id)->whereNotNull('sell')->orderBy("id", "Desc")->get();
@@ -143,8 +152,8 @@ class InvoiceController extends Controller
     public function sendStatment(Request $request)
     {
         $id = $request->input('id');
-        $obj=Operation_expense::where('id','=',$id)->first();
-     
+        $obj = Operation_expense::where('id', '=', $id)->first();
+
         $data = [
             'invoice_statement_flag' => 2,
 
@@ -155,15 +164,15 @@ class InvoiceController extends Controller
         $expensesStatment = Operation_expense::where('operation_id', '=', $obj->operation_id)->whereNotNull('sell')->where('invoice_statement_flag', '=', 2)->orderBy("id", "Desc")->get();
         $expensesInvoice = Operation_expense::where('operation_id', '=',  $obj->operation_id)->whereNotNull('sell')->where('invoice_statement_flag', '=', 1)->orderBy("id", "Desc")->get();
 
-       
-        return view($this->viewName .'statment_table', compact('expensesInvoice','expensesStatment'))->render();
+
+        return view($this->viewName . 'statment_table', compact('expensesInvoice', 'expensesStatment'))->render();
     }
 
     public function sendInvoice(Request $request)
     {
         $id = $request->input('id');
-        $obj=Operation_expense::where('id','=',$id)->first();
-      
+        $obj = Operation_expense::where('id', '=', $id)->first();
+
         $data = [
             'invoice_statement_flag' => 1,
 
@@ -174,8 +183,8 @@ class InvoiceController extends Controller
         $expensesStatment = Operation_expense::where('operation_id', '=', $obj->operation_id)->whereNotNull('sell')->where('invoice_statement_flag', '=', 2)->orderBy("id", "Desc")->get();
         $expensesInvoice = Operation_expense::where('operation_id', '=',  $obj->operation_id)->whereNotNull('sell')->where('invoice_statement_flag', '=', 1)->orderBy("id", "Desc")->get();
 
-       
-        return view($this->viewName .'statment_table', compact('expensesInvoice','expensesStatment'))->render();
+
+        return view($this->viewName . 'statment_table', compact('expensesInvoice', 'expensesStatment'))->render();
     }
 
     /**

@@ -87,11 +87,13 @@ class BankFinanceController extends Controller
         $obj->entry_date = Carbon::parse($request->input('entry_date'));
         $obj->depit = $request->input('depit');
         $obj->currency_id = $request->input('currency_id');
-        $obj->cash_box_id = $request->input('cash_box_id');
+        $obj->bank_account_id = $request->input('bank_account_id');
         $obj->notes = $request->input('notesIn');
 
         if ($request->input('client_id')) {
             $obj->client_id = $request->input('client_id');
+            $Clientdata = Financial_entry::where('client_id',$request->input('client_id'))->where('currency_id', '=', $request->input('currency_id'))->sum('credit') - Financial_entry::where('client_id',$request->input('client_id'))->where('currency_id', '=', $request->input('currency_id'))->sum('depit');
+
         }
     } else {
         $fristSelect = $request->input('selector_type');
@@ -106,29 +108,48 @@ class BankFinanceController extends Controller
 
         if ($fristSelect == 3) {
             $obj->ocean_carrier_id = $request->input('xxselector');
+            $data = Financial_entry::where('ocean_carrier_id',  $request->input('xxselector'))->where('currency_id', '=', $request->input('currency_id'))->sum('depit') - Financial_entry::where('ocean_carrier_id',$request->input('xxselector'))->where('currency_id', '=', $request->input('currency_id'))->sum('credit');
+
         }
         if ($fristSelect == 4) {
             $obj->air_carrier_id = $request->input('xxselector');
+            $data = Financial_entry::where('air_carrier_id',  $request->input('xxselector'))->where('currency_id', '=',$request->input('currency_id'))->sum('depit') - Financial_entry::where('air_carrier_id', $request->input('xxselector'))->where('currency_id', '=', $request->input('currency_id'))->sum('credit');
+
         }
 
         if ($fristSelect == 5) {
             $obj->trucking_id = $request->input('xxselector');
+            $data = Financial_entry::where('trucking_id',  $request->input('xxselector'))->where('currency_id', '=', $request->input('currency_id'))->sum('depit') - Financial_entry::where('trucking_id', $request->input('xxselector'))->where('currency_id', '=', $request->input('currency_id'))->sum('credit');
+
         }
         if ($fristSelect == 6) {
             $obj->clearance_id = $request->input('xxselector');
+            $data = Financial_entry::where('clearance_id', $request->input('xxselector'))->where('currency_id', '=', $request->input('currency_id'))->sum('depit') - Financial_entry::where('clearance_id', $request->input('xxselector'))->where('currency_id', '=', $request->input('currency_id'))->sum('credit');
+
         }
         if ($fristSelect == 7) {
             $obj->agent_id = $request->input('xxselector');
+            $data = Financial_entry::where('agent_id', $request->input('xxselector'))->where('currency_id', '=', $request->input('currency_id'))->sum('depit') - Financial_entry::where('agent_id', $request->input('xxselector'))->where('currency_id', '=', $request->input('currency_id'))->sum('credit');
+
         }
     }
+    $currentBalance = Financial_entry::where('bank_account_id', $request->input('bank_account_id'))->sum('depit') - Financial_entry::where('bank_account_id', $request->input('bank_account_id'))->sum('credit');
+       
+    if ($request->input('credit') > $currentBalance ||  $request->input('credit') > $data || $request->input('depit') > $Clientdata) {
+        
+        return redirect()->back()->withInput($request->input())->with('flash_danger', 'Amount Is Not Valid');
+    }
+     else {
     DB::transaction(function () use ($obj,  $request) {
         $obj->save();
-     
+       
     });
+
 
 
     return redirect()->route($this->routeName . 'show', $request->input('bank_account_id'))->with('flash_success', $this->message);
     }
+}
 
     /**
      * Display the specified resource.
@@ -206,7 +227,23 @@ class BankFinanceController extends Controller
             $obj->depit = $obj->depit + $diffetant;
             $obj->notes = $request->input('notes');
 
-            $obj->update();
+            $Clientdata = Financial_entry::where('client_id',$obj->client_id)->where('currency_id', '=', $obj->currency_id)->sum('credit') - Financial_entry::where('client_id',$obj->client_id)->where('currency_id', '=', $obj->currency_id)->sum('depit');
+           
+            $currentBalance = Financial_entry::where('bank_account_id', $obj->bank_account_id)->sum('depit') - Financial_entry::where('bank_account_id', $obj->bank_account_id)->sum('credit');
+
+            if ( $obj->depit  > $Clientdata || $obj->depit> $currentBalance) {
+            
+                return redirect()->back()->withInput($request->input())->with('flash_danger', 'Amount Is Not Valid');
+            }
+             else {
+                $obj->update();
+               
+           
+    
+    
+            return redirect()->route($this->routeName . 'show', $request->input('bank_account_id'))->with('flash_success', $this->message);
+        }
+
         } else {
 
             $obj = $this->object::findOrFail($id);
@@ -214,13 +251,60 @@ class BankFinanceController extends Controller
             $diffetant = $request->input('credit') - $obj->credit;
             $obj->credit = $obj->credit + $diffetant;
             $obj->notes = $request->input('notes');
-            $obj->update();
+            $currentBalance = Financial_entry::where('bank_account_id', $obj->bank_account_id)->sum('depit') - Financial_entry::where('bank_account_id', $obj->bank_account_id)->sum('credit');
+
+            if ($obj->ocean_carrier_id) {
+             
+                $data = Financial_entry::where('ocean_carrier_id',  $obj->ocean_carrier_id)->where('currency_id', '=', $obj->bank_account_id)->sum('depit') - Financial_entry::where('ocean_carrier_id',$request->input('xxselector'))->where('currency_id', '=',$obj->bank_account_id)->sum('credit');
+
+            }
+            if ($obj->air_carrier_id) {
+               
+                $data = Financial_entry::where('air_carrier_id', $obj->air_carrier_id)->where('currency_id', '=',$obj->bank_account_id)->sum('depit') - Financial_entry::where('air_carrier_id', $request->input('xxselector'))->where('currency_id', '=',$obj->bank_account_id)->sum('credit');
+
+            }
+
+            if ($obj->trucking_id) {
+            
+                $data = Financial_entry::where('trucking_id', $obj->trucking_id)->where('currency_id', '=',$obj->bank_account_id)->sum('depit') - Financial_entry::where('trucking_id', $request->input('xxselector'))->where('currency_id', '=',$obj->bank_account_id)->sum('credit');
+
+            }
+            if ($obj->clearance_id) {
+               
+                $data = Financial_entry::where('clearance_id',$obj->clearance_id)->where('currency_id', '=',$obj->bank_account_id)->sum('depit') - Financial_entry::where('clearance_id', $request->input('xxselector'))->where('currency_id', '=', $obj->bank_account_id)->sum('credit');
+
+            }
+            if ($obj->agent_id) {
+             
+                $data = Financial_entry::where('agent_id',$obj->agent_id)->where('currency_id', '=', $obj->bank_account_id)->sum('depit') - Financial_entry::where('agent_id', $obj->agent_id)->where('currency_id', '=', $obj->bank_account_id)->sum('credit');
+
+            }          
+            
+            
+
+           
+            if ( $obj->credit  > $currentBalance || $obj->depit> $currentBalance) {
+            
+                return redirect()->back()->withInput($request->input())->with('flash_danger', 'Amount Is Not Valid');
+            }
+             else {
+                $obj->update();
+               
+           
+    
+    
+            return redirect()->route($this->routeName . 'show', $request->input('bank_account_id'))->with('flash_success', $this->message);
+        }
+
+
+           
         }
 
 
 
         return redirect()->route($this->routeName . 'show', $request->input('bank_account_id'))->with('flash_success', $this->message);
     }
+
 
     /**
      * Remove the specified resource from storage.

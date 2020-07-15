@@ -22,7 +22,7 @@
               <h6 class="dropdown-header ms-inline m-0"><span class="text-disabled">Welcome, {{ Auth::user()->name }}</span></h6>
             </li>
             <li class="dropdown-divider"></li>
-            @if (Auth::user()->role==null)
+            @if (Auth::user()->role_id==1)
             <li class="ms-dropdown-list">
 
               <a class="media fs-14 p-2" href="{{ url('registerTest') }}"> <span><i class="flaticon-user mr-2"></i>Create New User</span>
@@ -33,7 +33,7 @@
             <li class="dropdown-divider"></li>
             @endif
            
-            @if (Auth::user()!=null)
+           
             <li class="ms-dropdown-list">
 
               <a class="media fs-14 p-2" href="{{ url('resetPassword/'.Auth::user()->id) }}"> <span><i class="flaticon-alert
@@ -41,7 +41,7 @@
               </a>
 
             </li>
-            @endif
+      
 
             <li class="dropdown-menu-footer">
               <a class="media fs-14 p-2" href="{{ route('logout') }}" onclick="event.preventDefault();

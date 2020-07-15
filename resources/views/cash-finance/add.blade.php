@@ -75,7 +75,7 @@
                                             <select name="selector_type" data-dependent="xxselector" class=" form-control selector_type" data-show-subtext="true" data-live-search="true" id="selector_type">
                                                 <option>Select ...</option>
                                                 @foreach ($cashExpenseOut as $data)
-                                            <option value='{{$data->id}}' >
+                                            <option value='{{$data->id}}'  >
                                                 {{$data->expenses_name}}</option>
                                             @endforeach
 
@@ -103,26 +103,26 @@
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
                                             <label class="exampleInputPassword1" for="exampleCheck1">Client Currency</label>
-                                            <input id="selection_currancy" readonly type="text" class="form-control" placeholder="Amount">
+                                            <input id="selection_currancy"  readonly type="text" class="form-control" placeholder="Amount">
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
                                             <label class="exampleInputPassword1" for="exampleCheck1">Amount
                                                 Money</label>
-                                            <input type="number" name="credit" class="form-control" placeholder="Amount">
+                                            <input type="number" name="credit"  class="form-control @error('credit') is-invalid @enderror" placeholder="Amount">
+                                            @error('credit')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                                         </div>
                                     </div>
-                                    <!-- <div class="col-md-6 mb-3">
-                                        <div class="form-group">
-                                            <label class="exampleInputPassword1" for="exampleCheck1">Currency</label>
-                                            <input type="text" class="form-control" placeholder="LE">
-                                        </div>
-                                    </div> -->
+                                   
                                     <div class="col-md-12 mb-3">
                                         <div class="form-group">
                                             <label class="exampleInputPassword1" for="exampleCheck1">Notes</label>
-                                            <textarea name="notesOut" id="newClint" class="form-control" placeholder="Notes" rows="3"></textarea>
+                                            <textarea name="notesOut" id="newClint" class="form-control" placeholder="Notes" rows="3">{{ old('notesOut') }}</textarea>
                                         </div>
                                     </div>
 
@@ -136,7 +136,7 @@
                                             <select name="cash_in" disabled class=" form-control"  data-live-search="true">
                                             <option value='' >Client</option>
                                             @foreach ($cashExpenseIn as $data)
-                                            <option value='{{$data->id}}' >
+                                            <option value='{{$data->id}}'  >
                                                 {{$data->expenses_name}}</option>
                                             @endforeach
                                             </select>
@@ -150,7 +150,7 @@
                                             <select name="client_id" class=" form-control clientSelect" data-show-subtext="true" data-live-search="true" id="clientSelect">
                                                 <option value=" ">Select ...</option>
                                                 @foreach ($clients as $type)
-                                                <option value='{{$type->id}}'>
+                                                <option value='{{$type->id}}' >
                                                     {{ $type->client_name}}</option>
                                                 @endforeach
 
@@ -174,7 +174,7 @@
                                         <div class="form-group">
                                             <label class="exampleInputPassword1" for="exampleCheck1">Amount
                                                 Money</label>
-                                            <input type="number" name="depit" class="form-control" placeholder="Amount">
+                                            <input type="number" name="depit" value="{{ old('depit') }}" class="form-control" placeholder="Amount">
                                         </div>
                                     </div>
                                     <!-- <div class="col-md-6 mb-3">
@@ -186,7 +186,7 @@
                                     <div class="col-md-12 mb-3">
                                         <div class="form-group">
                                             <label class="exampleInputPassword1" for="exampleCheck1">Notes</label>
-                                            <textarea name="notesIn" id="newClint" class="form-control" placeholder="Notes" rows="3"></textarea>
+                                            <textarea name="notesIn" id="newClint" class="form-control" placeholder="Notes" rows="3">{{ old('notesIn') }}</textarea>
                                         </div>
                                     </div>
 
@@ -256,13 +256,14 @@
         });
         /*--End clientSelect--*/
         /*--selector_type--*/
+ 
         $('.selector_type').change(function() {
 
             if ($(this).val() != '') {
                 var select = $(this).attr("id");
-                var value = $(this).val();
+                var value = $("#selector_type option:selected").val();
 
-
+alert("nn"+value);
 
                 $.ajax({
                     url: "{{route('selector_type.fetch')}}",
