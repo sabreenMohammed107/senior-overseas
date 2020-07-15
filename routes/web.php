@@ -97,6 +97,10 @@ Route::post('/aaa/{id}', 'OperationsController@sendToAccount')->name('aaa');
 Route::get('/customer/print-pdf', 'OperationsController@printPDF')->name('customer.printpdf');
 
 
+Route::get('selector_type_operation/fetch', 'CashFinanceController@selector_type')->name('selector_type_operation.fetch');
+
+
+
 
 
 /*---------------------------------------------Accounting ----------------------------------*/

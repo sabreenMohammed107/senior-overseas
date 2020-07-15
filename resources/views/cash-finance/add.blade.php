@@ -263,7 +263,6 @@
                 var select = $(this).attr("id");
                 var value = $("#selector_type option:selected").val();
 
-alert("nn"+value);
 
                 $.ajax({
                     url: "{{route('selector_type.fetch')}}",

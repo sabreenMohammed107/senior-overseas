@@ -26,8 +26,8 @@ class FinanRelation extends Migration
             $table->foreign('air_carrier_id')->references('id')->on('carriers');
             $table->foreign('agent_id')->references('id')->on('agents');
 
-            $table->foreign('trucking_id')->references('id')->on('trucking_rates');
-            $table->foreign('clearance_id')->references('id')->on('currencies');
+            $table->foreign('trucking_id')->references('id')->on('suppliers');
+            $table->foreign('clearance_id')->references('id')->on('suppliers');
             $table->foreign('operation_id')->references('id')->on('operations');
         });
     }

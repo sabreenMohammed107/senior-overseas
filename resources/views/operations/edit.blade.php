@@ -114,12 +114,12 @@
 
 
 
-																					<div class="col-md-6 mb-3">
-																<div class="form-group">
-																	<label class="exampleInputPassword1" for="exampleCheck1">*Clearance supplier</label>
-																	<input type="text" value="{{ $row->sale->supplier->supplier_name  ??'' }}" class="form-control" placeholder="Clearance supplier" disabled>
-																</div>
-															</div>
+																						<div class="col-md-6 mb-3">
+																							<div class="form-group">
+																								<label class="exampleInputPassword1" for="exampleCheck1">*Clearance supplier</label>
+																								<input type="text" value="{{ $row->sale->supplier->supplier_name  ??'' }}" class="form-control" placeholder="Clearance supplier" disabled>
+																							</div>
+																						</div>
 
 
 																						<div class="col-md-6 mb-3">
@@ -511,7 +511,7 @@
 																<td>{{$expense->buy}}</td>
 																<td>{{$expense->sell}}</td>
 																<td>@if($expense->provider)
-																	{{$expense->provider->provider_type}}
+																	{{$expense->provider->expenses_name}}
 																	@endif</td>
 																<td>@if($expense->currency)
 																	{{$expense->currency->currency_name}}
@@ -568,33 +568,40 @@
 																							<div class="col-md-6 mb-3">
 																								<div class="form-group">
 																									<label class="exampleInputPassword1" for="exampleCheck1">*Buy</label>
-																									<input name="buy" type="text" value="{{$expense->buy}}" <?php if (!$expense->buy){ ?> disabled <?php   } ?> class="form-control" placeholder="buy">
+																									<input name="buy" type="text" value="{{$expense->buy}}" <?php if (!$expense->buy) { ?> disabled <?php   } ?> class="form-control" placeholder="buy">
 																								</div>
 																							</div>
 																							<div class="col-md-6 mb-3">
 																								<div class="form-group">
 																									<label class="exampleInputPassword1" for="exampleCheck1">*Sale</label>
-																									<input name="sell" type="text" value="{{$expense->sell}}" <?php if (!$expense->sell){ ?> disabled <?php   } ?> class="form-control" placeholder="sell">
+																									<input name="sell" type="text" value="{{$expense->sell}}" <?php if (!$expense->sell) { ?> disabled <?php   } ?> class="form-control" placeholder="sell">
+																								</div>
+																							</div>
+																							<div class="col-md-6 mb-3">
+																								<div class="form-group">
+																									<label class="exampleInputPassword1" for="exampleCheck1">Provider</label>
+																									<input name="sell" type="text" value="{{$expense->provider->expense_name ??'Provider' }}" disabled class="form-control" placeholder="sell">
 																								</div>
 																							</div>
 																							<div class="col-md-6 mb-3">
 																								<div class="ui-widget form-group">
-																									<label>Expense Provider</label>
-																									<select name="provider_type_id" required class=" form-control" data-live-search="true">
-																										<option value="">Select ...</option>
-																										@foreach ($providers as $data)
-																										<option value='{{$data->id}}' {{ $data->id == $expense->provider_type_id ? 'selected' : '' }}>
-																											{{$data->provider_type}}</option>
-																										@endforeach
+																									<label>Selection</label>
+																									<select name="xxxselector" disabled class=" form-control xxselector" data-show-subtext="true" data-live-search="true">
+
+																										<option value="{{$expense->ocean_carrier_id}}" {{$expense->ocean_carrier_id !=null ? 'selected' : '' }}>{{$expense->carrierocean->carrier_name ?? '' }}</option>
+																										<option value="{{$expense->air_carrier_id}}" {{$expense->air_carrier_id !=null ? 'selected' : '' }}>{{$expense->carrierair->carrier_name ?? '' }} </option>
+																										<option value="{{$expense->clearance_id}}" {{$expense->clearance_id !=null? 'selected' : '' }}>{{$expense->supplierclearance->supplier_name ?? '' }} </option>
+																										<option value="{{ $expense->trucking_id}}" {{ $expense->trucking_id !=null? 'selected' : '' }}>{{$expense->suppliertracking->supplier_name ?? '' }} </option>
+																										<option value="{{ $expense->agent_id}}" {{ $expense->agent_id !=null? 'selected' : '' }}>{{$expense->agent->agent_name ?? '' }} </option>
+
 																									</select>
-
-
 																								</div>
 																							</div>
+
 																							<div class="col-md-6 mb-3">
 																								<div class="ui-widget form-group">
 																									<label>Currency</label>
-																									<select name="currency_id" required class=" form-control" data-live-search="true">
+																									<select name="currency_id" disabled  class=" form-control" data-live-search="true">
 																										<option value="">Select ...</option>
 																										@foreach ($expenseCurrency as $data)
 																										<option value='{{$data->id}}' {{ $data->id == $expense->currency_id ? 'selected' : '' }}>
@@ -700,15 +707,25 @@
 								<div class="col-md-6 mb-3">
 									<div class="ui-widget form-group">
 										<label>Expense Provider</label>
-										<select name="provider_type_id" required class=" form-control" data-live-search="true">
-											<option value="">Select ...</option>
+										<select name="selector_type" data-dependent="xxselector" class=" form-control selector_type" data-show-subtext="true" data-live-search="true" id="selector_type">
+											<option>Select ...</option>
 											@foreach ($providers as $data)
 											<option value='{{$data->id}}'>
-												{{$data->provider_type}}</option>
+												{{$data->expenses_name}}</option>
 											@endforeach
+
 										</select>
 
 
+									</div>
+								</div>
+								<div class="col-md-6 mb-3">
+									<div class="ui-widget form-group">
+										<label>Selection</label>
+										<select id="xxselector" name="xxselector" class=" form-control xxselector" data-show-subtext="true" data-live-search="true">
+
+
+										</select>
 									</div>
 								</div>
 								<div class="col-md-6 mb-3">
@@ -745,4 +762,36 @@
 	</div>
 </div>
 <!-- /Add new Modal -->
+@endsection
+
+@section('scripts')
+
+<script>
+	$(document).ready(function() {
+		$('.selector_type').change(function() {
+
+			if ($(this).val() != '') {
+				var select = $(this).attr("id");
+				var value = $("#selector_type option:selected").val();
+
+				alert('ss' + value);
+				$.ajax({
+					url: "{{route('selector_type_operation.fetch')}}",
+					method: "get",
+					data: {
+						select: select,
+						value: value,
+						cash: $('#cash').val(),
+					},
+					success: function(result) {
+						$('#xxselector').html(result);
+
+					},
+					error: function() {}
+
+				})
+			}
+		});
+	});
+</script>
 @endsection
