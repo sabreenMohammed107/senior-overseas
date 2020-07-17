@@ -139,7 +139,7 @@ class CashFinanceController extends Controller
          elseif ($Clientdata && $request->input('depit') > $Clientdata) {
             return redirect()->back()->withInput($request->input())->with('flash_danger', 'Amount Is Not Valid');
 
-        } elseif (!empty($request->input('selector_type'))  && !empty($request->input('credit')) && $request->input('credit') > $data) {
+        } elseif (!empty($request->input('selector_type'))  && !empty($request->input('credit')) || $request->input('credit') > $data) {
 
             return redirect()->back()->withInput($request->input())->with('flash_danger', 'Amount Is Not Valid');
         } else {
