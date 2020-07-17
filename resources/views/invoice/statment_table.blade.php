@@ -34,7 +34,7 @@
 															
 																<td>{{$stat->sell}}</td>
 																<td>@if($stat->provider)
-																	{{$stat->provider->provider_type}}
+																	{{$stat->provider->expenses_name}}
 																	@endif</td>
 																<td>@if($stat->currency)
 																	{{$stat->currency->currency_name}}
@@ -93,7 +93,7 @@
 																
 																<td>{{$expense->sell}}</td>
 																<td>@if($expense->provider)
-																	{{$expense->provider->provider_type}}
+																	{{$expense->provider->expenses_name}}
 																	@endif</td>
 																<td>@if($expense->currency)
 																	{{$expense->currency->currency_name}}
