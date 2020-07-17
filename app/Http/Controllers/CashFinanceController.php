@@ -91,7 +91,7 @@ class CashFinanceController extends Controller
             $obj->currency_id = $request->input('currency_id');
             $obj->cash_box_id = $request->input('cash_box_id');
             $obj->notes = $request->input('notesIn');
-
+            $Clientdata = 0;
             if ($request->input('client_id')) {
                 $obj->client_id = $request->input('client_id');
                 $Clientdata = Financial_entry::where('client_id', $request->input('client_id'))->where('currency_id', '=', $request->input('currency_id'))->sum('credit') - Financial_entry::where('client_id', $request->input('client_id'))->where('currency_id', '=', $request->input('currency_id'))->sum('depit');
@@ -106,7 +106,7 @@ class CashFinanceController extends Controller
             $obj->currency_id = $request->input('currency_id');
             $obj->cash_box_id = $request->input('cash_box_id');
             $obj->notes = $request->input('notesOut');
-            $data = null;
+            $data = 0;
             if ($fristSelect == 3) {
                 $obj->ocean_carrier_id = $request->input('xxselector');
                 $data = Financial_entry::where('ocean_carrier_id',  $request->input('xxselector'))->where('currency_id', '=', $request->input('currency_id'))->sum('depit') - Financial_entry::where('ocean_carrier_id', $request->input('xxselector'))->where('currency_id', '=', $request->input('currency_id'))->sum('credit');
@@ -131,15 +131,19 @@ class CashFinanceController extends Controller
         }
 
         $currentBalance = Financial_entry::where('cash_box_id', $request->input('cash_box_id'))->sum('depit') - Financial_entry::where('cash_box_id', $request->input('cash_box_id'))->sum('credit');
-
+        if ($request->input('client_id')) {
+            $Clientdata = Financial_entry::where('client_id', $request->input('client_id'))->where('currency_id', '=', $request->input('currency_id'))->sum('credit') - Financial_entry::where('client_id', $request->input('client_id'))->where('currency_id', '=', $request->input('currency_id'))->sum('depit');
+        }
         if ($request->input('credit') > $currentBalance) {
 
             return redirect()->back()->withInput($request->input())->with('flash_danger', 'Amount Is Not Valid');
         } elseif ( !empty($request->input('depit'))) {
+
             if ($request->input('depit') > $Clientdata) {
                 return redirect()->back()->withInput($request->input())->with('flash_danger', 'Amount Is Not Valid');
             }
         } elseif (!empty($request->input('selector_type'))  && !empty($request->input('credit'))) {
+
             if ($request->input('credit') > $data) {
                 return redirect()->back()->withInput($request->input())->with('flash_danger', 'Amount Is Not Valid');
             }
