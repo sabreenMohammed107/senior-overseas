@@ -219,7 +219,7 @@ class OperationsController extends Controller
                 $ocean = Sale_quote_ocean::where('id', '=', $operationObj->sales_quote_ocean_id)->first();
                 $objBuy->buy = $ocean->ocean->price;
                 $objBuy->sell = null;
-                $objBuy->currency_id = $ocean->currency_id;
+                $objBuy->currency_id =$ocean->ocean->currency_id;
                 $objBuy->invoice_statement_flag=1;
                 array_push($savingExpense, $objBuy);
                 //another row
@@ -230,7 +230,7 @@ class OperationsController extends Controller
                 $ocean = Sale_quote_ocean::where('id', '=', $operationObj->sales_quote_ocean_id)->first();
                 $objSell->buy = null;
                 $objSell->sell = $ocean->price;
-                $objSell->currency_id = $ocean->currency_id;
+                $objSell->currency_id = $ocean->ocean->currency_id;
                 $objSell->invoice_statement_flag=1;
                 array_push($savingExpense, $objSell);
             }

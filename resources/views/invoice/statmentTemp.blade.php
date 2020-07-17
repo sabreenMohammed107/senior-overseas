@@ -42,15 +42,15 @@
         <div class="container">
             <div class="card">
 
-                <div class="card-header bg-primary text-white border-0" style="height: 110px;">
+                <!-- <div class="card-header bg-primary text-white border-0" style="height: 110px;">
                     <h5 style="font-size: 30px;margin-left:50px">Over Seas Egypt
                         <img style="background-color: #FFF;float:right;margin:5px 20px" src="{{ asset('adminasset/img/logo.png')}}" alt="logo" width="150" height="100" />
                     </h5>
                     <p style="font-size: 20px;margin-left:50px">Professional frieght forwarder</p>
-                </div>
+                </div> -->
                 <div class="card-body">
 
-                    <div class=" col-md-12 mb-4" style="margin-top:30px">
+                    <div class=" col-md-12 mb-4" style="margin-top:100px">
                         <h2 style="margin-bottom: 40px;">
                             Statment No: <a>{{$invoice->invoice_no}}</a></h2>
                         <div class="form_in">
@@ -71,9 +71,17 @@
                         <div class="form_in">
 
                             <div class="in_style">BL NO: <a>{{$invoice->operation->pl_no}}</a></div>
-                            <div class="in_style">Volume: <a>{{$invoice->operation->container_counts}}</a></div>
-                            <div class="in_style">Pol / Aol: <a>{{$invoice->operation->ocean->ocean->pol->port_name ?? '' }}{{$invoice->operation->air->air->aol->port_name ?? '' }}</a></div>
-                            <div class="in_style">Pod / Aod: <a>{{$invoice->operation->ocean->ocean->pod->port_name ?? '' }}{{$invoice->operation->air->air->aod->port_name ?? '' }}</a></div>
+                            <div class="in_style">Volume: <a>{{$invoice->operation->container_counts }} x {{ $invoice->operation->ocean->ocean->container->container_type ?? ''}}</a></div>
+                            <div class="in_style"> @if($invoice->operation->ocean)
+                                <span>Pol </span>
+                                @else
+                                <span>Aol:</span>
+                                @endif<a>{{$invoice->operation->ocean->ocean->pol->port_name ?? '' }}{{$invoice->operation->air->air->aol->port_name ?? '' }}</a></div>
+                            <div class="in_style">@if($invoice->operation->ocean)
+                                <span>Pod </span>
+                                @else
+                                <span>Aod:</span>
+                                @endif <a>{{$invoice->operation->ocean->ocean->pod->port_name ?? '' }}{{$invoice->operation->air->air->aod->port_name ?? '' }}</a></div>
                             <div class="in_style">Loading Date: <a>
                                     <?php $dateinvoice = date_create($invoice->operation->loading_date)
                                     ?>
@@ -101,10 +109,15 @@
                                 <tr>
                                     <td>{{$index+1}}</td>
                                     <td class="left strong">{{$row->provider->expenses_name ?? ''}}</td>
-                                    <td class="left">1 x 1</td>
+                                    <td class="left">{{ $row->operation->container_counts}} x {{ $row->operation->ocean->ocean->container->container_type ?? ''}}</td>
                                     <td class="right">{{$row->sell}}</td>
                                     <td class="center"><i class="fas fa-rupee-sign"></i>{{$row->currency->currency_name}}</td>
-                                    <td class="right"><i class="fas fa-rupee-sign"></i>{{$row->sell *1}}</td>
+                                    <td class="right"><i class="fas fa-rupee-sign"></i>
+                                     @if($row->automatic==1)
+                                        {{$row->sell *$row->operation->container_counts}}
+                                        @else
+                                        {{$row->sell *1}}
+                                        @endif</td>
                                 </tr>
 
                                 @endforeach
@@ -142,12 +155,12 @@
                 </div>
             </div>
         </div>
-        <footer class="bg-primary" style="width:100%;height:100px; position: absolute;
+        <!-- <footer class="bg-primary" style="width:100%;height:100px; position: absolute;
   bottom: 10px;color:#fff;font-size:20px">
             <div style="margin-top: 30px;text-align:center">
                 <strong>No 2 Fatma El Nabouia St., </strong><span> Mob:01208787456</span><br>
                 <strong>Email:info@os-eg.com</strong></div>
-        </footer>
+        </footer> -->
     </section>
 
 

@@ -241,7 +241,12 @@ class InvoiceController extends Controller
             $total=0;
             foreach ($rows as $row) {
                 if ($row->currency->currency_name === $cur) {
-                    $total = $total + ($row->sell *1);
+                    if($row->automatic==1){
+                        $total = $total + ($row->sell *$row->operation->container_counts);
+                    }else{
+                        $total = $total + ($row->sell *1);
+                    }
+                  
                   
                 }
                
@@ -249,7 +254,7 @@ class InvoiceController extends Controller
             $total=Terbilang::make($total, " - $cur");
             $obj = new Collection();
             $obj->cur = $cur;
-            $obj->total = $total;
+            $obj->total =strtoupper($total);
             
            
             array_push($totals, $obj);
@@ -296,7 +301,12 @@ class InvoiceController extends Controller
             $total=0;
             foreach ($rows as $row) {
                 if ($row->currency->currency_name === $cur) {
-                    $total = $total + ($row->sell *1);
+                    if($row->automatic==1){
+                        $total = $total + ($row->sell *$row->operation->container_counts);
+                    }else{
+                        $total = $total + ($row->sell *1);
+                    }
+                  
                   
                 }
                
@@ -304,10 +314,10 @@ class InvoiceController extends Controller
             $total=Terbilang::make($total, " - $cur");
             $obj = new Collection();
             $obj->cur = $cur;
-            $obj->total = $total;
+            $obj->total = strtoupper($total);
            
             array_push($totals, $obj);
-           
+          
         }
  
         // This  $data array will be passed to our PDF blade
