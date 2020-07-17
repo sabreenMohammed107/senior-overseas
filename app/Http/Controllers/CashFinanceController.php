@@ -138,10 +138,13 @@ class CashFinanceController extends Controller
       
         $currentBalance = Financial_entry::where('cash_box_id', $request->input('cash_box_id'))->sum('depit') - Financial_entry::where('cash_box_id', $request->input('cash_box_id'))->sum('credit');
        
-        if ($request->input('credit') > $currentBalance || ($data &&  $request->input('credit') > $data )) {
+        if ($request->input('credit') > $currentBalance ) {
             
             return redirect()->back()->withInput($request->input())->with('flash_danger', 'Amount Is Not Valid');
         }elseif($Clientdata && $request->input('depit') > $Clientdata){
+            return redirect()->back()->withInput($request->input())->with('flash_danger', 'Amount Is Not Valid');
+
+        }elseif($data && $request->input('credit') > $data){
             return redirect()->back()->withInput($request->input())->with('flash_danger', 'Amount Is Not Valid');
 
         }
