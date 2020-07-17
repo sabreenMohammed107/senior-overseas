@@ -133,7 +133,7 @@ class BankFinanceController extends Controller
         if ($request->input('credit') > $currentBalance) {
 
             return redirect()->back()->withInput($request->input())->with('flash_danger', 'Amount Is Not Valid');
-        } elseif ($Clientdata && !empty($request->input('depit'))) {
+        } elseif (!empty($request->input('depit'))) {
             if ($request->input('depit') > $Clientdata) {
                 return redirect()->back()->withInput($request->input())->with('flash_danger', 'Amount Is Not Valid');
             }
