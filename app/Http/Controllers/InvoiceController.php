@@ -266,7 +266,7 @@ class InvoiceController extends Controller
 
 
         $title = "My Report";
-        $pdf = PDF::loadView($this->viewName . 'invoceTemp.blade.php', $data);
+        $pdf = PDF::loadView($this->viewName . 'invoceTemp', $data);
         return $pdf->stream('medium.pdf'); // to open in blank page
 
 
