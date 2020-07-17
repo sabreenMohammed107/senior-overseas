@@ -127,6 +127,9 @@ Route::resource('/invoice', 'InvoiceController');
 Route::get('dynamicoperation/fetch', 'InvoiceController@fetExist')->name('dynamicoperation.fetch');
 Route::get('/sendStatment', 'InvoiceController@sendStatment')->name('sendStatment');
 Route::get('/sendInvoice', 'InvoiceController@sendInvoice')->name('sendInvoice');
+Route::get('/customer/print-pdf/{id}', 'InvoiceController@printInvoicePDF')->name('customer.printpdf');
+Route::get('/customer/print-statment/{id}', 'InvoiceController@printStatmentPDF')->name('customer.printstatment');
+
 
 /*-------------------------Statment----------------------------------*/
 Route::resource('/account-statment', 'AccountStatmentController');

@@ -9,7 +9,9 @@ use App\Models\Operation_expense;
 use File;
 use DB;
 use Log;
+use PDF;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\QueryException;
 
 class InvoiceController extends Controller
@@ -51,21 +53,21 @@ class InvoiceController extends Controller
     {
         /*---to get choose one only --*/
         $ids = Invoice::get('operation_id');
-     
-        $operations = Operation::whereNOTIN('id',$ids)->get();
-     
-     
 
-  
+        $operations = Operation::whereNOTIN('id', $ids)->get();
+
+
+
+
         $expenses = [];
         return view($this->viewName . 'add', compact('operations', 'expenses'));
     }
     public function fetExist(Request $request)
     {
         $ids = Invoice::get('operation_id');
-     
-        $operations = Operation::whereNOTIN('id',$ids)->get();
-     
+
+        $operations = Operation::whereNOTIN('id', $ids)->get();
+
         $id = $request->input('buildings_id');
         $selected = Operation::where('id', '=', $id)->first();
         $expenses = Operation_expense::where('operation_id', '=', $id)->whereNotNull('sell')->orderBy("id", "Desc")->get();
@@ -218,5 +220,109 @@ class InvoiceController extends Controller
         }
 
         return redirect()->back()->with('flash_success', 'Data Has Been Deleted Successfully !');
+    }
+
+
+
+    public function printInvoicePDF($id)
+    {
+        $invoice = Invoice::where('id', '=', $id)->first();
+        $rows = Operation_expense::where('operation_id', '=', $invoice->operation_id)->whereNotNull('sell')->where('invoice_statement_flag', '=', 1)->orderBy("id", "Desc")->get();
+        $curs = [];
+        foreach ($rows as $row) {
+            $cur = $row->currency->currency_name;
+            array_push($curs, $cur);
+        }
+        $curs = array_unique($curs);
+        $totals = [];
+        $total = 0;
+        foreach ($curs as $cur) {
+            $total=0;
+            foreach ($rows as $row) {
+                if ($row->currency->currency_name === $cur) {
+                    $total = $total + ($row->sell *1);
+                  
+                }
+               
+            }
+            $obj = new Collection();
+            $obj->cur = $cur;
+            $obj->total = $total;
+           
+            array_push($totals, $obj);
+           
+        }
+ 
+        // This  $data array will be passed to our PDF blade
+        $data = [
+            'title' => 'First PDF for Medium',
+            'heading' => 'Hello from 99Points.info',
+            'rows' => $rows,
+            'invoice' => $invoice,
+            'curs' => $curs,
+            'totals'=>$totals,
+            'content' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.'
+        ];
+
+
+        $title = "My Report";
+        $pdf = PDF::loadView($this->viewName . 'invoceTemp.blade.php', $data);
+        return $pdf->stream('medium.pdf'); // to open in blank page
+
+
+        // return $pdf->dawnload('medium.pdf');  to open in blank page
+
+
+    }
+
+    public function printStatmentPDF($id)
+    {
+        $invoice = Invoice::where('id', '=', $id)->first();
+        $rows = Operation_expense::where('operation_id', '=', $invoice->operation_id)->whereNotNull('sell')->where('invoice_statement_flag', '=',2 )->orderBy("id", "Desc")->get();
+        $curs = [];
+        foreach ($rows as $row) {
+            $cur = $row->currency->currency_name;
+            array_push($curs, $cur);
+        }
+        $curs = array_unique($curs);
+        $totals = [];
+        $total = 0;
+        foreach ($curs as $cur) {
+            $total=0;
+            foreach ($rows as $row) {
+                if ($row->currency->currency_name === $cur) {
+                    $total = $total + ($row->sell *1);
+                  
+                }
+               
+            }
+            $obj = new Collection();
+            $obj->cur = $cur;
+            $obj->total = $total;
+           
+            array_push($totals, $obj);
+           
+        }
+ 
+        // This  $data array will be passed to our PDF blade
+        $data = [
+            'title' => 'First PDF for Medium',
+            'heading' => 'Hello from 99Points.info',
+            'rows' => $rows,
+            'invoice' => $invoice,
+            'curs' => $curs,
+            'totals'=>$totals,
+            'content' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.'
+        ];
+
+
+        $title = "My Report";
+        $pdf = PDF::loadView($this->viewName . 'statmentTemp', $data);
+        return $pdf->stream('medium.pdf'); // to open in blank page
+
+
+        // return $pdf->dawnload('medium.pdf');  to open in blank page
+
+
     }
 }

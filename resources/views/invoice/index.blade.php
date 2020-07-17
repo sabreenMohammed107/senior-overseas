@@ -63,7 +63,9 @@
                                         @method('DELETE')
                                         <button type="submit" value=""></button>
                                     </form>
-                              <a href="#" class="btn btn-info d-inline-block">Report</a>  
+                              <a href="{{ route('customer.printpdf',$row->id) }}" target="_blank" class="btn btn-info d-inline-block">InvoiceReport</a> 
+                              <a href="{{ route('customer.printstatment',$row->id) }}" target="_blank" class="btn btn-info d-inline-block">StatmentReport</a>  
+ 
                         </td>
                       </tr>
                       @endforeach
