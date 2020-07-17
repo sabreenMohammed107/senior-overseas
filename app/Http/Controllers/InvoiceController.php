@@ -10,6 +10,7 @@ use File;
 use DB;
 use Log;
 use PDF;
+use Terbilang;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\QueryException;
@@ -245,15 +246,19 @@ class InvoiceController extends Controller
                 }
                
             }
+            $total=Terbilang::make($total, " - $cur");
             $obj = new Collection();
             $obj->cur = $cur;
             $obj->total = $total;
+            
            
             array_push($totals, $obj);
            
         }
- 
+      
+        // six hundred and fifty-four thousand, three hundred and twenty-one dollars
         // This  $data array will be passed to our PDF blade
+
         $data = [
             'title' => 'First PDF for Medium',
             'heading' => 'Hello from 99Points.info',
@@ -296,6 +301,7 @@ class InvoiceController extends Controller
                 }
                
             }
+            $total=Terbilang::make($total, " - $cur");
             $obj = new Collection();
             $obj->cur = $cur;
             $obj->total = $total;
