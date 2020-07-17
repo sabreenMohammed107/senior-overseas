@@ -100,7 +100,7 @@
                                 @foreach($rows as $index => $row)
                                 <tr>
                                     <td>{{$index+1}}</td>
-                                    <td class="left strong">{{$row->provider->expenses_name}}</td>
+                                    <td class="left strong">{{$row->provider->expenses_name ?? ''}}</td>
                                     <td class="left">1 x 1</td>
                                     <td class="right">{{$row->sell}}</td>
                                     <td class="center"><i class="fas fa-rupee-sign"></i>{{$row->currency->currency_name}}</td>
