@@ -181,14 +181,14 @@
 															<td>
 															<?php
 															$currentBalance=0;
-															if ($row->supplier_type_id == 1) {
-																$currentBalance = App\Models\Financial_entry::where('trucking_id', $row->id)->where('currency_id', $balance->currency_id) ->sum('depit') - App\Models\Financial_entry::where('trucking_id', $row->id->where('currency_id', $balance->currency_id) )->sum('credit');
-															} else {
-																$currentBalance = App\Models\Financial_entry::where('clearance_id', $row->id)->where('currency_id', $balance->currency_id) ->sum('depit') - App\Models\Financial_entry::where('clearance_id', $row->id)->where('currency_id', $balance->currency_id) ->sum('credit');
-															}
+															// if ($row->supplier_type_id == 1) {
+															// 	$currentBalance = App\Models\Financial_entry::where('trucking_id', $row->id)->where('currency_id', $balance->currency_id) ->sum('depit') - App\Models\Financial_entry::where('trucking_id', $row->id->where('currency_id', $balance->currency_id) )->sum('credit');
+															// } else {
+															// 	$currentBalance = App\Models\Financial_entry::where('clearance_id', $row->id)->where('currency_id', $balance->currency_id) ->sum('depit') - App\Models\Financial_entry::where('clearance_id', $row->id)->where('currency_id', $balance->currency_id) ->sum('credit');
+															// }
 
 															?>
-																{{$currentBalance}}
+																{{$currentBalance}}{{ $row->id}}{{ $balance->currency_id}}
 														</td>
 														<td>@if($balance->currency)
 															{{$balance->currency->currency_name}}
