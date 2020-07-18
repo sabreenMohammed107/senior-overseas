@@ -183,7 +183,7 @@
 															$currentBalance=0;
 															if ($row->supplier_type_id == 1) {
 
-																$currentBalances = App\Models\Financial_entry::where('trucking_id', $row->id)->where('currency_id', $balance->currency_id) ->sum('depit') - App\Models\Financial_entry::where('trucking_id', $row->id->where('currency_id', $balance->currency_id) )->sum('credit');
+																$currentBalances = App\Models\Financial_entry::where('trucking_id', $row->id)->sum('depit') - App\Models\Financial_entry::where('trucking_id', $row->id)->sum('credit');
 															} else {
 																$currentBalances = App\Models\Financial_entry::where('clearance_id', $row->id)->where('currency_id', $balance->currency_id) ->sum('depit') - App\Models\Financial_entry::where('clearance_id', $row->id)->where('currency_id', $balance->currency_id) ->sum('credit');
 															}
