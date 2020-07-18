@@ -25,7 +25,7 @@
         .form_in {
             display: inline-block;
             width: 50%;
-            height: 200px;
+            height: 250px;
         }
 
         .in_style {
@@ -63,6 +63,8 @@
                                 </a></div>
                             <div class="in_style">Cur: <a>@foreach($curs as $cur){{$cur}} @endforeach</a></div>
                             <div class="in_style">Ref#: <a>{{$invoice->operation->operation_code}}</a></div>
+                            <div class="in_style">Tracking start point: <a>{{$invoice->operation->tracking->truck->pol->port_name ?? '' }}</a></div>
+                            <div class="in_style">Tracking end point: <a>{{$invoice->operation->tracking->truck->pod->port_name ?? '' }}</a></div>
                             <div class="in_style">to: <a>{{$invoice->operation->sale->client->client_name ?? '' }} <br> {{$invoice->operation->sale->client->address ?? '' }}</a></div>
 
 
@@ -71,7 +73,7 @@
                         <div class="form_in">
 
                             <div class="in_style">BL NO: <a>{{$invoice->operation->pl_no}}</a></div>
-                            <div class="in_style">Volume: <a>{{$invoice->operation->container_counts }} x {{ $invoice->operation->ocean->ocean->container->container_type ?? ''}}</a></div>
+                            <div class="in_style">Volume: <a>{{$invoice->operation->container_counts }} x{{$invoice->operation->air->air->slide_range ?? '' }} {{ $invoice->operation->ocean->ocean->container->container_type ?? ''}}</a></div>
                             <div class="in_style"> @if($invoice->operation->ocean)
                                 <span>Pol </span>
                                 @else
@@ -109,7 +111,7 @@
                                 <tr>
                                     <td>{{$index+1}}</td>
                                     <td class="left strong">{{$row->provider->expenses_name ?? ''}}</td>
-                                    <td class="left">{{ $row->operation->container_counts}} x {{ $row->operation->ocean->ocean->container->container_type ?? ''}}</td>
+                                    <td class="left">{{ $row->operation->container_counts}} x{{$row->operation->air->air->slide_range ?? '' }} {{ $row->operation->ocean->ocean->container->container_type ?? ''}}</td>
                                     <td class="right">{{$row->sell}}</td>
                                     <td class="center"><i class="fas fa-rupee-sign"></i>{{$row->currency->currency_name}}</td>
                                     <td class="right"><i class="fas fa-rupee-sign"></i>
@@ -137,7 +139,7 @@
                                         </td>
                                         @foreach($totals as $total)
                                         @if($total->cur===$cur)
-                                        <td class="right"><i class="fas fa-rupee-sign"></i>{{$total->total}}</td>
+                                        <td class="right"><i class="fas fa-rupee-sign"></i> {{" " . number_format($total->num, 2, '.', ',')  }}  <br> {{$total->total}}</td>
                                         @endif
                                         @endforeach
                                     </tr>

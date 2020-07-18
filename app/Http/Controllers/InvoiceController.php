@@ -251,11 +251,12 @@ class InvoiceController extends Controller
                 }
                
             }
+            $totalNum=$total;
             $total=Terbilang::make($total, " - $cur");
             $obj = new Collection();
             $obj->cur = $cur;
             $obj->total =strtoupper($total);
-            
+            $obj->num = $totalNum;
            
             array_push($totals, $obj);
            
@@ -311,10 +312,12 @@ class InvoiceController extends Controller
                 }
                
             }
+            $totalNum=$total;
             $total=Terbilang::make($total, " - $cur");
             $obj = new Collection();
             $obj->cur = $cur;
             $obj->total = strtoupper($total);
+            $obj->num = $totalNum;
            
             array_push($totals, $obj);
           
