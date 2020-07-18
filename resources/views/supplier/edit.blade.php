@@ -185,7 +185,7 @@
 
 																$currentBalances = App\Models\Financial_entry::where('trucking_id', $row->id)->where('currency_id',$balance->currency->id)->sum('depit') - App\Models\Financial_entry::where('trucking_id', $row->id)->where('currency_id',$balance->currency->id)->sum('credit');
 															} else {
-																$currentBalances = App\Models\Financial_entry::where('clearance_id', $row->id)->where('currency_id', $balance->currency_id)->sum('depit') - App\Models\Financial_entry::where('clearance_id', $row->id)->where('currency_id', $balance->currency_id) ->sum('credit');
+																$currentBalances = App\Models\Financial_entry::where('clearance_id', $row->id)->where('currency_id',$balance->currency->id)->sum('depit') - App\Models\Financial_entry::where('clearance_id', $row->id)->where('currency_id',$balance->currency->id)->sum('credit');
 															}
 
 															?>
