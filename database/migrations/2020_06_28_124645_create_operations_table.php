@@ -26,6 +26,7 @@ class CreateOperationsTable extends Migration
             $table->string('container_name', 250)->nullable();
             $table->string('pl_no', 250)->nullable();
             $table->dateTime('loading_date', 6)->nullable();
+            $table->dateTime('arrival_date', 6)->nullable();
             $table->string('vassel_name', 250)->nullable();
             $table->string('booking_no', 250)->nullable();
             $table->integer('commodity_id')->unsigned()->nullable();

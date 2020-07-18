@@ -212,9 +212,9 @@
 					<td scope="col">
 						@if($typeTesting==0)
 
-						<input name="airSelected" id="userSelected_1" type="radio" value="{{$filter->id}}">
+						<input name="airSelected" id="userSelected_1" type="radio" value="{{$filter->id}}" >
 						@else
-						<input name="oceanSelected" id="userSelected_1" type="radio" value="{{$filter->id}}">
+						<input name="oceanSelected" id="userSelected_1" type="radio" value="{{$filter->id}}" >
 
 						@endif
 					</td>
@@ -267,7 +267,7 @@
 									<?php echo $trackings[$index]->car_price; ?>
 								</td>
 								<td scope="col">
-									<input name="TrackingSelected" id="TrackingSelected" type="radio" value="{{$track->id}}">
+									<input name="TrackingSelected" id="TrackingSelected" type="radio" value="{{$track->id}}" >
 								</td>
 
 							</tr>
@@ -337,6 +337,12 @@
 		<div class="form-group">
 			<label class="exampleInputPassword1" for="exampleCheck1">Loading Date</label>
 			<input type="date" name="loading_date" class="form-control" placeholder="Loading Date">
+		</div>
+	</div>
+	<div class="col-md-6 mb-3">
+		<div class="form-group">
+			<label class="exampleInputPassword1" for="exampleCheck1">Arrival Date</label>
+			<input type="date" name="arrival_date" class="form-control" placeholder="arrival Date">
 		</div>
 	</div>
 </div>

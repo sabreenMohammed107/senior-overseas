@@ -61,10 +61,12 @@
                                     {{ date_format($dateinvoice,'Y-m-d') ?? '' }}
 
                                 </a></div>
+
                             <div class="in_style">Cur: <a>@foreach($curs as $cur){{$cur}} @endforeach</a></div>
                             <div class="in_style">Ref#: <a>{{$invoice->operation->operation_code}}</a></div>
                             <div class="in_style">Tracking start point: <a>{{$invoice->operation->tracking->truck->pol->port_name ?? '' }}</a></div>
                             <div class="in_style">Tracking end point: <a>{{$invoice->operation->tracking->truck->pod->port_name ?? '' }}</a></div>
+                            <div class="in_style">truck container type: <a>{{$invoice->operation->tracking->truck->car->car_type ?? '' }}</a></div>
                             <div class="in_style">to: <a>{{$invoice->operation->sale->client->client_name ?? '' }} <br> {{$invoice->operation->sale->client->address ?? '' }}</a></div>
 
 
@@ -73,7 +75,7 @@
                         <div class="form_in">
 
                             <div class="in_style">BL NO: <a>{{$invoice->operation->pl_no}}</a></div>
-                            <div class="in_style">Volume: <a>{{$invoice->operation->container_counts }} x{{$invoice->operation->air->air->slide_range ?? '' }} {{ $invoice->operation->ocean->ocean->container->container_type ?? ''}}</a></div>
+                            <div class="in_style">Volume: <a>{{$invoice->operation->container_counts }} @if($invoice->operation->ocean) <span>X</span>  @endif {{$invoice->operation->ocean->ocean->container->container_size ?? ''}} {{ $invoice->operation->ocean->ocean->container->container_type ?? ''}}</a></div>
                             <div class="in_style"> @if($invoice->operation->ocean)
                                 <span>Pol </span>
                                 @else
@@ -88,6 +90,12 @@
                                     <?php $dateinvoice = date_create($invoice->operation->loading_date)
                                     ?>
                                     {{ date_format($dateinvoice,'Y-m-d') ?? '' }}
+                                </a></div>
+
+                                <div class="in_style">Arrival Date: <a>
+                                    <?php $dateinvoice2 = date_create($invoice->operation->arrival_date)
+                                    ?>
+                                    {{ date_format($dateinvoice2,'Y-m-d') ?? '' }}
                                 </a></div>
 
 
@@ -111,7 +119,7 @@
                                 <tr>
                                     <td>{{$index+1}}</td>
                                     <td class="left strong">{{$row->provider->expenses_name ?? ''}}</td>
-                                    <td class="left">{{ $row->operation->container_counts}} x{{$row->operation->air->air->slide_range ?? '' }} {{ $row->operation->ocean->ocean->container->container_type ?? ''}}</td>
+                                    <td class="left">{{ $row->operation->container_counts}} @if($row->operation->ocean) <span>X</span>  @endif {{$row->operation->ocean->ocean->container->container_size ?? ''}} {{ $row->operation->ocean->ocean->container->container_type ?? ''}}</td>
                                     <td class="right">{{$row->sell}}</td>
                                     <td class="center"><i class="fas fa-rupee-sign"></i>{{$row->currency->currency_name}}</td>
                                     <td class="right"><i class="fas fa-rupee-sign"></i>

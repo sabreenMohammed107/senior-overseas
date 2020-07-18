@@ -391,6 +391,17 @@
 										<input type="date" name="loading_date" value="{{ date_format($date1,'Y-m-d') }}" class="form-control" placeholder="Loading Date">
 									</div>
 								</div>
+
+								<div class="col-md-6 mb-3">
+									<div class="form-group">
+										<label class="exampleInputPassword1" for="exampleCheck1">Arrival Date</label>
+										<?php
+										$datee = date_create($row->loading_date)
+										?>
+										<input type="date" name="arrival_date" value="{{ date_format($datee,'Y-m-d') }}" class="form-control" placeholder="Loading Date">
+									</div>
+								</div>
+								
 							</div>
 
 							<div style="border-bottom:solid #0094ff 2px;">

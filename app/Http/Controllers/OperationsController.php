@@ -154,6 +154,7 @@ class OperationsController extends Controller
             'container_name' => $request->input('container_name'),
             'pl_no' => $request->input('pl_no'),
             'loading_date' => Carbon::parse($request->input('loading_date')),
+            'arrival_date' => Carbon::parse($request->input('arrival_date')),
             'vassel_name' => $request->input('vassel_name'),
             'cut_off_date' => Carbon::parse($request->input('cut_off_date')),
             'booking_no' => $request->input('booking_no'),
@@ -424,6 +425,7 @@ class OperationsController extends Controller
             'container_name' => $request->input('container_name'),
             'pl_no' => $request->input('pl_no'),
             'loading_date' => Carbon::parse($request->input('loading_date')),
+            'arrival_date' => Carbon::parse($request->input('arrival_date')),
             'vassel_name' => $request->input('vassel_name'),
             'cut_off_date' => Carbon::parse($request->input('cut_off_date')),
             'booking_no' => $request->input('booking_no'),
@@ -634,7 +636,7 @@ class OperationsController extends Controller
 
 
                 $obj->entry_date = $row->operation_date;
-                $obj->credit = $sellRow->sell;
+                $obj->credit = $sellRow->sell* $row->container_counts;
                 $obj->client_id = $row->shipper_id;
                 $obj->notes = $row->notes;
                 $obj->currency_id = $sellRow->currency_id;
@@ -669,7 +671,7 @@ class OperationsController extends Controller
                 }
 
                 $obj->entry_date = $row->operation_date;
-                $obj->depit = $buyRow->buy;
+                $obj->depit = $buyRow->buy*$row->container_counts;
 
 
 

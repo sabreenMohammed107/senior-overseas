@@ -11,7 +11,38 @@
       </div>
       <ul class="ms-nav-list ms-inline mb-0" id="ms-nav-options">
         </li>
+        <li class="ms-nav-item ms-nav-user dropdown">
+          <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+            Notification ({{ count(Auth::user()->Notifications) }})<span class="caret"></span>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    @if(count(Auth::user()->notifications) > 0)
+                                    @foreach (Auth::user()->notifications as $row)
 
+                                    @if ($row->read_at == NULL)
+                                    <a class="dropdown-item" href="{{$row->data['url']}}" style="background-color:#ddd">
+                                        <span><img src="{{ asset('uploads/'.$row->data['img']) }}" width="30" height="30"></span>
+                                        {{$row->data['title']}}
+                                        <p style="font-size: 10px;">{{ $row->data['desc'] }}</p>
+                                    </a>
+                                    @else
+                                    <a class="dropdown-item" href="{{$row->data['url']}}">
+                                        <span><img src="{{ asset('uploads/'.$row->data['img']) }}" width="30" height="30"></span>
+                                        {{$row->data['title']}}
+                                        <p style="font-size: 10px;">{{ $row->data['desc'] }}</p>
+                                    </a>
+                                    @endif
+
+                                    
+                                    @endforeach
+                                    
+                                    @else
+                                    <span>No Found Notifications</span>
+                                    @endif
+
+                                </div>
+
+        </li>
         <li class="ms-nav-item ms-nav-user dropdown">
           <a href="#" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <img class="ms-user-img ms-img-round float-left" src="https://via.placeholder.com/270x270" alt="people">
@@ -32,8 +63,8 @@
             </li>
             <li class="dropdown-divider"></li>
             @endif
-           
-           
+
+
             <li class="ms-dropdown-list">
 
               <a class="media fs-14 p-2" href="{{ url('resetPassword/'.Auth::user()->id) }}"> <span><i class="flaticon-alert
@@ -41,7 +72,7 @@
               </a>
 
             </li>
-      
+
 
             <li class="dropdown-menu-footer">
               <a class="media fs-14 p-2" href="{{ route('logout') }}" onclick="event.preventDefault();
@@ -56,6 +87,10 @@
             </li>
           </ul>
         </li>
+
+
+
+
       </ul>
       <div class="ms-toggler ms-d-block-sm pr-0 ms-nav-toggler" data-toggle="slideDown" data-target="#ms-nav-options">
         <span class="ms-toggler-bar bg-primary"></span>
