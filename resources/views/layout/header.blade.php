@@ -20,16 +20,20 @@
                                     @foreach (Auth::user()->notifications as $row)
 
                                     @if ($row->read_at == NULL)
-                                    <a class="dropdown-item" href="{{$row->data['url']}}" style="background-color:#ddd">
-                                        <span><img src="{{ asset('uploads/'.$row->data['img']) }}" width="30" height="30"></span>
+                                    <a class="dropdown-item" href="{{$row->data['title']}}" style="background-color:#ddd">
+                                        <span>
+                                          
+                                          <!-- <img src="{{ asset('uploads/'.$row->data['name']) }}" width="30" height="30"></span> -->
                                         {{$row->data['title']}}
-                                        <p style="font-size: 10px;">{{ $row->data['desc'] }}</p>
+                                        <p style="font-size: 10px;">{{ $row->data['address'] }}</p>
                                     </a>
                                     @else
-                                    <a class="dropdown-item" href="{{$row->data['url']}}">
-                                        <span><img src="{{ asset('uploads/'.$row->data['img']) }}" width="30" height="30"></span>
+                                    <a class="dropdown-item" href="{{$row->data['title']}}">
+                                        <span>
+                                          <!-- <img src="{{ asset('uploads/'.$row->data['name']) }}" width="30" height="30"> -->
+                                      </span>
                                         {{$row->data['title']}}
-                                        <p style="font-size: 10px;">{{ $row->data['desc'] }}</p>
+                                        <p style="font-size: 10px;">{{ $row->data['address'] }}</p>
                                     </a>
                                     @endif
 

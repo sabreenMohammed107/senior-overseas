@@ -4,6 +4,11 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use App\Models\Operation;
+use App\User;
+use Carbon\Carbon;
+use Notification;
+use App\Notifications\OperationNotification;
 
 class Kernel extends ConsoleKernel
 {
@@ -13,7 +18,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        // \App\Console\Commands\DemoCron::class,
     ];
 
     /**
@@ -24,8 +29,21 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        // $schedule->command('DemoCron')
+        // ->everyMinute();
+
+      
+        $schedule->call(function () {
+            $operations = Operation::all();
+            $user = User::where('role_id', '=', 1)->first();
+            // foreach ($operations as $operation) {
+            //     if (Carbon::yesterday() == $operation->loadind_date) {
+                  
+            //         $user->notify(new OperationNotification());
+            //     }
+            // }
+             $user->notify(new OperationNotification());
+        })->everyMinute();
     }
 
     /**
@@ -35,7 +53,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }

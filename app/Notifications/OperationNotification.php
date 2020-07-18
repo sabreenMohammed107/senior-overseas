@@ -7,18 +7,18 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class MyFirstNotification extends Notification
+class OperationNotification extends Notification
 {
     use Queueable;
-    public $object;
+
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($data)
+    public function __construct()
     {
-        $this->object = $data;
+        //
     }
 
     /**
@@ -29,8 +29,7 @@ class MyFirstNotification extends Notification
      */
     public function via($notifiable)
     {
-        // return ['mail'];
-        return ['database']; //'database'
+        return ['database'];
     }
 
     /**
@@ -56,10 +55,10 @@ class MyFirstNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            'title' => 'New Supplier Added',
-            'name' => 'The User has been added new image ('.$this->object->supplier_name.')',
+            'title' => 'Reminder Loading Date',
+            'name' => 'The User has been added new image ',
             
-            'address' => $this->object->address,
+            'address' => '',
         ];
     }
 }
