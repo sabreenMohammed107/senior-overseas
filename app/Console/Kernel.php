@@ -56,15 +56,15 @@ class Kernel extends ConsoleKernel
             }
             else{
                 foreach ($operations as $operation) {
-                if (date_format(date_create($operation->loading_date),'Y-m-d') == $datetime->format('Y-m-d') || date_format(date_create($operation->cut_off_date),'Y-m-d') == $datetime->format('Y-m-d') ||date_format(date_create($operation->arrival_date),'Y-m-d') == $datetime->format('Y-m-d')) {
+                if (date_format(date_create($operation->loading_date),'Y-m-d') == $datetime->format('Y-m-d') ) {
                     $user->notify(new OperationNotification($operation));
 
                  }
-                 if ( date_format(date_create($operation->cut_off_date),'Y-m-d') == $datetime->format('Y-m-d') ) {
+                if ( date_format(date_create($operation->cut_off_date),'Y-m-d') == $datetime->format('Y-m-d') ) {
                     $user->notify(new OperationNotification($operation));
 
                  }
-                 if (date_format(date_create($operation->arrival_date),'Y-m-d') == $datetime->format('Y-m-d')) {
+                if (date_format(date_create($operation->arrival_date),'Y-m-d') == $datetime->format('Y-m-d')) {
                     $user->notify(new OperationNotification($operation));
 
                  }
