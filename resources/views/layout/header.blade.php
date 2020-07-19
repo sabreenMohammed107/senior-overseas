@@ -24,8 +24,8 @@
                                         <span>
                                           
                                         {{$row->data['title']}}
-                                        <p style="font-size: 10px;">{{ $row->data['code'] }}</p>
-                                        <p style="font-size: 10px;">{{ $row->data['loading_date'] }}</p>
+                                        <p style="font-size: 10px;">Code :{{ $row->data['code'] }}</p>
+                                        <p style="font-size: 10px;">Loading Date :{{ $row->data['loading_date'] }}</p>
                                     </a>
                                     @else
                                     <a class="dropdown-item" href="{{$row->data['title']}}">
@@ -33,8 +33,8 @@
                                       </span>
                                         {{$row->data['title']}}
                                        
-                                        <p style="font-size: 10px;">{{ $row->data['code'] }}</p>
-                                        <p style="font-size: 10px;">{{ $row->data['loading_date'] }}</p>
+                                        <p style="font-size: 10px;">Code :{{ $row->data['code'] }}</p>
+                                        <p style="font-size: 10px;">Loading Date :{{ $row->data['loading_date'] }}</p>
                                     </a>
                                     @endif
 
