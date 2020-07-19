@@ -37,11 +37,11 @@ class Kernel extends ConsoleKernel
             foreach ($operations as $operation) {
                 if (Carbon::yesterday() == $operation->loadind_date) {
                   
-                    $user->notify(new OperationNotification());
+                    $user->notify(new OperationNotification($operation));
                 }
             }
             //  $user->notify(new OperationNotification());
-        })->everyMinute();
+        })->daily();
     }
 
     /**

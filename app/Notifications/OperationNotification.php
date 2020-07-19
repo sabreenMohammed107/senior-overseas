@@ -10,15 +10,15 @@ use Illuminate\Notifications\Messages\MailMessage;
 class OperationNotification extends Notification
 {
     use Queueable;
-
+    public $object;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($data)
     {
-        //
+        $this->object = $data;
     }
 
     /**
@@ -41,9 +41,9 @@ class OperationNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+            ->line('The introduction to the notification.')
+            ->action('Notification Action', url('/'))
+            ->line('Thank you for using our application!');
     }
 
     /**
@@ -56,9 +56,8 @@ class OperationNotification extends Notification
     {
         return [
             'title' => 'Reminder Loading Date',
-            'name' => 'The User has been added new image ',
-            
-            'address' => '',
+            'code' => 'Operation code'.$this->object->operation_code,
+            'loading_date' => $this->object->loading_date,
         ];
     }
 }
