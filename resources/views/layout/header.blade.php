@@ -11,43 +11,54 @@
       </div>
       <ul class="ms-nav-list ms-inline mb-0" id="ms-nav-options">
         </li>
-        <li class="ms-nav-item ms-nav-user dropdown">
-          <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-            Notification ({{auth()->user()->unreadNotifications()->count()}})<span class="caret"></span>
-          </a>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    @if(count(Auth::user()->notifications) > 0)
-                                    @foreach (Auth::user()->notifications as $row)
-
-                                    @if ($row->read_at == NULL)
-                                    <a class="dropdown-item" href="{{url('notifications/'.$row->id)}}" style="background-color:#ddd">
+        <li class="ms-nav-item dropdown">
+          <a href="#" class="text-disabled ms-has-notification" data-type="Admin" data-id="{{session('Id')}}" id="notificationDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span>{{auth()->user()->unreadNotifications()->count()}}</span>
+            <i class="flaticon-bell"></i></a>
+          <ul class="dropdown-menu dropdown-menu-right" style="height:300px;overflow-y:auto;" aria-labelledby="notificationDropdown">
+            <li class="dropdown-menu-header">
+              <h6 class="dropdown-header ms-inline m-0"><span class="text-disabled">Notifications</span></h6><span class="badge badge-pill badge-info">{{auth()->user()->unreadNotifications()->count()}} New</span>
+            </li>
+            <li class="dropdown-divider"></li>
+            <li class="ms-scrollable ms-dropdown-list">
+@foreach (Auth::user()->notifications->where('type','App\Notifications\OperationNotification') as $Notification)
+                  <a class="media p-2">
+                <div class="media-body">
+                @if ($Notification->read_at == NULL)
+                                    <a class="dropdown-item" href="{{url('notifications/'.$Notification->id)}}" style="background-color:#ddd">
                                         <span>
                                           
-                                        {{$row->data['title']}}
-                                        <p style="font-size: 10px;">Code :{{ $row->data['code'] }}</p>
-                                        <p style="font-size: 10px;">Loading Date :{{ $row->data['loading_date'] }}</p>
+                                        {{$Notification->data['title']}}
+                                        <p style="font-size: 10px;">Code :{{ $Notification->data['operation_code'] }}</p>
+                                        <p style="font-size: 10px;"><span><strong> Loading Date :</strong>{{ $Notification->data['loading_date'] }}</span>
+                                        <span><strong> Arrival Date :</strong>{{ $Notification->data['arrival_date'] }}</span><span>
+                                        <strong> Cut Off Date :</strong>{{ $Notification->data['cut_off_date'] }}
+                                        </span></p>
                                     </a>
                                     @else
                                     <a class="dropdown-item" href="">
                                         <span>
                                       </span>
-                                        {{$row->data['title']}}
+                                        {{$Notification->data['title']}}
                                        
-                                        <p style="font-size: 10px;">Code :{{ $row->data['code'] }}</p>
-                                        <p style="font-size: 10px;">Loading Date :{{ $row->data['loading_date'] }}</p>
+                                        <p style="font-size: 10px;">Code :{{ $Notification->data['operation_code'] }}</p>
+                                        <p style="font-size: 10px;"><span><strong> Loading Date :</strong>{{ $Notification->data['loading_date'] }}</span>
+                                        <span><strong> Arrival Date :</strong>{{ $Notification->data['arrival_date'] }}</span><span>
+                                        <strong> Cut Off Date :</strong>{{ $Notification->data['cut_off_date'] }}
+                                        </span></p>
                                     </a>
                                     @endif
+                  <p class="fs-10 my-1 text-disabled"><i class="material-icons"></i> {{ Carbon\Carbon::parse($Notification->NotificationDate)->diffForHumans()}}</p>
+                </div>
+              </a>
+@endforeach
 
-                                    
-                                    @endforeach
-                                    
-                                    @else
-                                    <span>No Found Notifications</span>
-                                    @endif
 
-                                </div>
-
+            </li>
+          
+          </ul>
         </li>
+       
         <li class="ms-nav-item ms-nav-user dropdown">
           <a href="#" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <img class="ms-user-img ms-img-round float-left" src="https://via.placeholder.com/270x270" alt="people">
