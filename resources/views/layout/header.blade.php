@@ -20,7 +20,7 @@
                                     @foreach (Auth::user()->notifications as $row)
 
                                     @if ($row->read_at == NULL)
-                                    <a class="dropdown-item" href="{{$row->data['title']}}" style="background-color:#ddd">
+                                    <a class="dropdown-item" href="" style="background-color:#ddd">
                                         <span>
                                           
                                         {{$row->data['title']}}
@@ -28,7 +28,7 @@
                                         <p style="font-size: 10px;">Loading Date :{{ $row->data['loading_date'] }}</p>
                                     </a>
                                     @else
-                                    <a class="dropdown-item" href="{{$row->data['title']}}">
+                                    <a class="dropdown-item" href="">
                                         <span>
                                       </span>
                                         {{$row->data['title']}}
