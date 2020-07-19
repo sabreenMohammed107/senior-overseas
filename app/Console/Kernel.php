@@ -60,6 +60,14 @@ class Kernel extends ConsoleKernel
                     $user->notify(new OperationNotification($operation));
 
                  }
+                 if ( date_format(date_create($operation->cut_off_date),'Y-m-d') == $datetime->format('Y-m-d') ) {
+                    $user->notify(new OperationNotification($operation));
+
+                 }
+                 if (date_format(date_create($operation->arrival_date),'Y-m-d') == $datetime->format('Y-m-d')) {
+                    $user->notify(new OperationNotification($operation));
+
+                 }
                 }
                 return true;
             }
