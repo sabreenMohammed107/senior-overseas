@@ -35,13 +35,13 @@ class Kernel extends ConsoleKernel
             $operations = Operation::all();
             $user = User::where('role_id', '=', 1)->first();
             foreach ($operations as $operation) {
-                if (Carbon::yesterday() == $operation->loadind_date) {
+                // if (Carbon::yesterday() == $operation->loadind_date) {
                   
                     $user->notify(new OperationNotification($operation));
-                }
+                // }
             }
             //  $user->notify(new OperationNotification());
-        })->daily();
+        })->everyMinute();
     }
 
     /**

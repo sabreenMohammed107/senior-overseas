@@ -56,7 +56,7 @@ class OperationNotification extends Notification
     {
         return [
             'title' => 'Reminder Loading Date',
-            'code' => 'Operation code'.$this->object->operation_code,
+            'code' => $this->object->operation_code,
             'loading_date' => $this->object->loading_date,
         ];
     }
