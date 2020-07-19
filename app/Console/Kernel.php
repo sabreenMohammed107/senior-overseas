@@ -29,20 +29,18 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('DemoCron')
-        // ->everyMinute();
-
+     
       
         $schedule->call(function () {
             $operations = Operation::all();
             $user = User::where('role_id', '=', 1)->first();
-            // foreach ($operations as $operation) {
-            //     if (Carbon::yesterday() == $operation->loadind_date) {
+            foreach ($operations as $operation) {
+                if (Carbon::yesterday() == $operation->loadind_date) {
                   
-            //         $user->notify(new OperationNotification());
-            //     }
-            // }
-             $user->notify(new OperationNotification());
+                    $user->notify(new OperationNotification());
+                }
+            }
+            //  $user->notify(new OperationNotification());
         })->everyMinute();
     }
 

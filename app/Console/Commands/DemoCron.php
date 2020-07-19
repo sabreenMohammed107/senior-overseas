@@ -3,7 +3,11 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-
+use App\Models\Operation;
+use App\User;
+use Carbon\Carbon;
+use Notification;
+use App\Notifications\OperationNotification;
 class DemoCron extends Command
 {
     /**
@@ -38,12 +42,7 @@ class DemoCron extends Command
     public function handle()
     {
         \Log::info("Cron is working fine!");
-     
-        /*
-           Write your database logic we bellow:
-           Item::create(['name'=>'hello new']);
-        */
-      
+       
         $this->info('Demo:Cron Cummand Run successfully!');
     }
 }
