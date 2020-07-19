@@ -23,7 +23,6 @@
                                     <a class="dropdown-item" href="{{$row->data['title']}}" style="background-color:#ddd">
                                         <span>
                                           
-                                          <!-- <img src="{{ asset('uploads/'.$row->data['name']) }}" width="30" height="30"></span> -->
                                         {{$row->data['title']}}
                                         <p style="font-size: 10px;">{{ $row->data['code'] }}</p>
                                         <p style="font-size: 10px;">{{ $row->data['loading_date'] }}</p>
@@ -31,7 +30,6 @@
                                     @else
                                     <a class="dropdown-item" href="{{$row->data['title']}}">
                                         <span>
-                                          <!-- <img src="{{ asset('uploads/'.$row->data['name']) }}" width="30" height="30"> -->
                                       </span>
                                         {{$row->data['title']}}
                                        
