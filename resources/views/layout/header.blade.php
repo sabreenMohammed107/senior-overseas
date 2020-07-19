@@ -13,14 +13,14 @@
         </li>
         <li class="ms-nav-item ms-nav-user dropdown">
           <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-            Notification ({{ count(Auth::user()->Notifications) }})<span class="caret"></span>
+            Notification ({{auth()->user()->unreadNotifications()->groupBy('notifiable_type')->count()}})<span class="caret"></span>
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     @if(count(Auth::user()->notifications) > 0)
                                     @foreach (Auth::user()->notifications as $row)
 
                                     @if ($row->read_at == NULL)
-                                    <a class="dropdown-item" href="" style="background-color:#ddd">
+                                    <a class="dropdown-item" href="{{url('notifications/'.$row->id)}}" style="background-color:#ddd">
                                         <span>
                                           
                                         {{$row->data['title']}}

@@ -137,4 +137,7 @@ Route::get('selector_statment/fetch', 'AccountStatmentController@selector_type')
 /*-------------------------BankCashStatmentController----------------------------------*/
 Route::resource('/bank-cash-statment', 'BankCashStatmentController');
 
+/*-------------------------Statment----------------------------------*/
+Route::get('/notifications/{id}', 'UserNotificationsController@show')->name('notifications');
+
 
