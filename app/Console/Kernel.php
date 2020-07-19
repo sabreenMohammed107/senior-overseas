@@ -41,7 +41,7 @@ class Kernel extends ConsoleKernel
                 }
             }
             //  $user->notify(new OperationNotification());
-        })->everyMinute();
+        })->daily();
     }
 
     /**
