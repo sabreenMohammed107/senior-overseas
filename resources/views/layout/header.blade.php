@@ -13,7 +13,7 @@
         </li>
         <li class="ms-nav-item ms-nav-user dropdown">
           <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-            Notification ({{auth()->user()->unreadNotifications()->groupBy('notifiable_type')->count()}})<span class="caret"></span>
+            Notification ({{auth()->user()->unreadNotifications()->count()}})<span class="caret"></span>
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     @if(count(Auth::user()->notifications) > 0)
