@@ -48,7 +48,7 @@
                                         </span></p>
                                     </a>
                                     @endif
-                  <p class="fs-10 my-1 text-disabled"><i class="material-icons"></i> {{ Carbon\Carbon::parse($Notification->NotificationDate)->diffForHumans()}}</p>
+                  <p class="fs-10 my-1 text-disabled"><i class="material-icons"></i> {{ Carbon\Carbon::parse($Notification->created_at)->diffForHumans()}}</p>
                 </div>
               </a>
 @endforeach
