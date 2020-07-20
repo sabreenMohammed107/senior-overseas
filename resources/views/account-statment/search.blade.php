@@ -13,7 +13,7 @@
               <tr>
                   <th>#</th>
                   <th>ID</th>
-                  <th>Depit</th>
+                  <th>Debit</th>
                   <th>Credit</th>
                   <th>Transaction Data</th>
                   <th>Operation Code</th>

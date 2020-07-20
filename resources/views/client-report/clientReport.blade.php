@@ -61,7 +61,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Depit</th>
+                                    <th>Debit</th>
                                     <th>Credit</th>
                                     <th>Transaction Date</th>
                                     <th>Currency</th>
