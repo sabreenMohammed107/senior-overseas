@@ -51,7 +51,7 @@
                 </div> -->
                 <div class="card-body" style="margin-top: 80px;">
                     <h2 style="margin-bottom: 40px;border-bottom:1px solid #000;padding:20px 0px">
-                        Supplier Report</h2>
+                    Suppliers/Expenses Report</h2>
                         <div class="formData">
                     <div class="form_in">
                         <div class="in_style">Selection: <a>{{$selection}}</a></div>  
@@ -71,7 +71,7 @@
                                     <th>#</th>
                                     <th>Depit</th>
                                     <th>Credit</th>
-                                    <th>Transaction Data</th>
+                                    <th>Transaction Date</th>
                                     <th>Currency</th>
                                     <th>Transaction Type</th>
                             <th>Operation code</th>

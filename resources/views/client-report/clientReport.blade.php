@@ -63,7 +63,7 @@
                                     <th>#</th>
                                     <th>Depit</th>
                                     <th>Credit</th>
-                                    <th>Transaction Data</th>
+                                    <th>Transaction Date</th>
                                     <th>Currency</th>
                                     <th>Transaction Type</th>
                             <th>Operation code</th>
