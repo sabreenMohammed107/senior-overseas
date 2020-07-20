@@ -182,7 +182,7 @@ class ClientReport extends Controller
          $total = Financial_entry::where('client_id', $client_id)->where('currency_id', '=', $cur)->sum('credit') - Financial_entry::where('client_id', $client_id)->where('currency_id', '=', $cur)->sum('depit');
             $name=Currency::where('id','=',$cur)->first();
             $totalNum = $total;
-            $total = Terbilang::make($total, " - $cur");
+            $total = Terbilang::make($total, " -  $name->currency_name");
             $obj = new Collection();
             $obj->cur = $name->currency_name;
             $obj->total = strtoupper($total);

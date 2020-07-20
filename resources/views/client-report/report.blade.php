@@ -7,6 +7,7 @@
                             <th>Depit</th>
                             <th>Credit</th>
                             <th>Transaction Data</th>
+                            <th>Currency</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -18,7 +19,8 @@
                             <td> <?php $date = date_create($Report->entry_date) ?>
                                 {{ date_format($date,'Y-m-d') }}</td>
 
-                          
+                                <td>@if($Report->currency){{$Report->currency->currency_name}}@endif</td>
+ 
                         </tr>
                         @endforeach
                         </tr>
