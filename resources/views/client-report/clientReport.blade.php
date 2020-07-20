@@ -73,7 +73,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($filtters as $index => $Report)
+                        @foreach($filtters->sortBy('currency_id') as $index => $Report)
                         <tr>
                             <td>{{$index+1}}</td>
                             <td>{{$Report->depit}}</td>
