@@ -73,7 +73,7 @@
 
                             <input type="submit" id="search_button" value="Search" class="btn btn-success ">
 
-                            <button type="submit" formtarget="_blank" class="btn btn-info d-inline-block">Client Report</button>
+                            <button type="submit" formtarget="_blank" class="btn btn-info d-inline-block">Show Report</button>
 
                         </div>
                     </form>

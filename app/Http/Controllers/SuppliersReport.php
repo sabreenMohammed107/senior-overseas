@@ -79,7 +79,7 @@ class SuppliersReport extends Controller
         $from_date = Carbon::parse($request->input('from_date'));
         $to_date = Carbon::parse($request->input('to_date'));
 
-        $filtters = Financial_entry::orderBy('currency_id')->orderBy('entry_date');
+        $filtters = Financial_entry::orderBy('currency_id')->orderBy('entry_date',"ASC");
 
         if (!empty($request->get("from_date"))) {
             $filtters->where('entry_date', '>=', Carbon::parse($request->get("from_date")));
@@ -144,22 +144,22 @@ class SuppliersReport extends Controller
             $total = 0;
             foreach ($filtters as $filtter) {
                 if ($filtter->ocean_carrier_id) {
-                    $total = Financial_entry::where('ocean_carrier_id', $xxselector)->where('currency_id', '=', $cur)->sum('credit') - Financial_entry::where('ocean_carrier_id', $xxselector)->where('currency_id', '=', $cur)->sum('depit');
+                    $total = Financial_entry::where('ocean_carrier_id', $xxselector)->where('currency_id', '=', $cur)->sum('depit') - Financial_entry::where('ocean_carrier_id', $xxselector)->where('currency_id', '=', $cur)->sum('credit');
                 break;
                 } elseif ($filtter->air_carrier_id) {
-                    $total = Financial_entry::where('air_carrier_id', $xxselector)->where('currency_id', '=', $cur)->sum('credit') - Financial_entry::where('air_carrier_id', $xxselector)->where('currency_id', '=', $cur)->sum('depit');
+                    $total = Financial_entry::where('air_carrier_id', $xxselector)->where('currency_id', '=', $cur)->sum('depit') - Financial_entry::where('air_carrier_id', $xxselector)->where('currency_id', '=', $cur)->sum('credit');
                 break;
                 } elseif ($filtter->trucking_id) {
-                    $total = Financial_entry::where('trucking_id', $xxselector)->where('currency_id', '=', $cur)->sum('credit') - Financial_entry::where('trucking_id', $xxselector)->where('currency_id', '=', $cur)->sum('depit');
+                    $total = Financial_entry::where('trucking_id', $xxselector)->where('currency_id', '=', $cur)->sum('depit') - Financial_entry::where('trucking_id', $xxselector)->where('currency_id', '=', $cur)->sum('credit');
                 break;
                 } elseif ($filtter->clearance_id) {
-                    $total = Financial_entry::where('clearance_id', $xxselector)->where('currency_id', '=', $cur)->sum('credit') - Financial_entry::where('clearance_id', $xxselector)->where('currency_id', '=', $cur)->sum('depit');
+                    $total = Financial_entry::where('clearance_id', $xxselector)->where('currency_id', '=', $cur)->sum('depit') - Financial_entry::where('clearance_id', $xxselector)->where('currency_id', '=', $cur)->sum('credit');
                 break;
                 } elseif ($filtter->agent_id) {
-                    $total = Financial_entry::where('agent_id', $xxselector)->where('currency_id', '=', $cur)->sum('credit') - Financial_entry::where('agent_id', $xxselector)->where('currency_id', '=', $cur)->sum('depit');
+                    $total = Financial_entry::where('agent_id', $xxselector)->where('currency_id', '=', $cur)->sum('depit') - Financial_entry::where('agent_id', $xxselector)->where('currency_id', '=', $cur)->sum('credit');
                 break;
                 } else {
-                    $total = Financial_entry::where('trans_type_id', $fristSelect)->where('currency_id', '=', $cur)->sum('credit') - Financial_entry::where('trans_type_id', $xxselector)->where('currency_id', '=', $cur)->sum('depit');
+                    $total = Financial_entry::where('trans_type_id', $fristSelect)->where('currency_id', '=', $cur)->sum('depit') - Financial_entry::where('trans_type_id', $xxselector)->where('currency_id', '=', $cur)->sum('credit');
                 break;
                 }
             }
@@ -229,10 +229,10 @@ class SuppliersReport extends Controller
         $fristSelect = $request->input('selector_type');
         $xxselector = $request->input('xxselector');
 
-        $from_date = Carbon::parse($request->input('from_date'));
-        $to_date = Carbon::parse($request->input('to_date'));
+        $from_date =$request->input('from_date');
+        $to_date =$request->input('to_date');
 
-        $filtters = Financial_entry::orderBy('currency_id')->orderBy('entry_date');
+        $filtters = Financial_entry::orderBy('currency_id')->orderBy('entry_date','"Asc"');
 
         if (!empty($request->get("from_date"))) {
             $filtters->where('entry_date', '>=', Carbon::parse($request->get("from_date")));
@@ -298,34 +298,34 @@ class SuppliersReport extends Controller
             $objname='';
             foreach ($filtters as $filtter) {
                 if ($filtter->ocean_carrier_id) {
-                    $total = Financial_entry::where('ocean_carrier_id', $xxselector)->where('currency_id', '=', $cur)->sum('credit') - Financial_entry::where('ocean_carrier_id', $xxselector)->where('currency_id', '=', $cur)->sum('depit');
+                    $total = Financial_entry::where('ocean_carrier_id', $xxselector)->where('currency_id', '=', $cur)->sum('depit') - Financial_entry::where('ocean_carrier_id', $xxselector)->where('currency_id', '=', $cur)->sum('credit');
                     $obj=Carrier::where('id', '=', $request->input('xxselector'))->first();
                     $objname=$obj->carrier_name;
 
                 break;
                 } elseif ($filtter->air_carrier_id) {
-                    $total = Financial_entry::where('air_carrier_id', $xxselector)->where('currency_id', '=', $cur)->sum('credit') - Financial_entry::where('air_carrier_id', $xxselector)->where('currency_id', '=', $cur)->sum('depit');
+                    $total = Financial_entry::where('air_carrier_id', $xxselector)->where('currency_id', '=', $cur)->sum('depit') - Financial_entry::where('air_carrier_id', $xxselector)->where('currency_id', '=', $cur)->sum('credit');
                     $obj=Carrier::where('id', '=', $request->input('xxselector'))->first();
                     $objname=$obj->carrier_name;
 
                 break;
                 } elseif ($filtter->trucking_id) {
-                    $total = Financial_entry::where('trucking_id', $xxselector)->where('currency_id', '=', $cur)->sum('credit') - Financial_entry::where('trucking_id', $xxselector)->where('currency_id', '=', $cur)->sum('depit');
+                    $total = Financial_entry::where('trucking_id', $xxselector)->where('currency_id', '=', $cur)->sum('depit') - Financial_entry::where('trucking_id', $xxselector)->where('currency_id', '=', $cur)->sum('credit');
                     $obj=Supplier::where('id', '=', $request->input('xxselector'))->first();
                     $objname=$obj->supplier_name;
                 break;
                 } elseif ($filtter->clearance_id) {
-                    $total = Financial_entry::where('clearance_id', $xxselector)->where('currency_id', '=', $cur)->sum('credit') - Financial_entry::where('clearance_id', $xxselector)->where('currency_id', '=', $cur)->sum('depit');
+                    $total = Financial_entry::where('clearance_id', $xxselector)->where('currency_id', '=', $cur)->sum('depit') - Financial_entry::where('clearance_id', $xxselector)->where('currency_id', '=', $cur)->sum('credit');
                     $obj=Supplier::where('id', '=', $request->input('xxselector'))->first();
                     $objname=$obj->supplier_name;
                 break;
                 } elseif ($filtter->agent_id) {
-                    $total = Financial_entry::where('agent_id', $xxselector)->where('currency_id', '=', $cur)->sum('credit') - Financial_entry::where('agent_id', $xxselector)->where('currency_id', '=', $cur)->sum('depit');
+                    $total = Financial_entry::where('agent_id', $xxselector)->where('currency_id', '=', $cur)->sum('depit') - Financial_entry::where('agent_id', $xxselector)->where('currency_id', '=', $cur)->sum('credit');
                     $obj=Agent::where('id', '=', $request->input('xxselector'))->first();
                     $objname=$obj->agent_name;
                 break;
                 } else {
-                    $total = Financial_entry::where('trans_type_id', $fristSelect)->where('currency_id', '=', $cur)->sum('credit') - Financial_entry::where('trans_type_id', $xxselector)->where('currency_id', '=', $cur)->sum('depit');
+                    $total = Financial_entry::where('trans_type_id', $fristSelect)->where('currency_id', '=', $cur)->sum('depit') - Financial_entry::where('trans_type_id', $xxselector)->where('currency_id', '=', $cur)->sum('credit');
                     $obj=Finan_trans_type::where('id', '=', $request->input('xxselector'))->first();
                     $objname=$obj->trans_type;
 
