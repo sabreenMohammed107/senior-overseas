@@ -159,7 +159,7 @@ class SuppliersReport extends Controller
                     $total = Financial_entry::where('agent_id', $xxselector)->where('currency_id', '=', $cur)->sum('depit') - Financial_entry::where('agent_id', $xxselector)->where('currency_id', '=', $cur)->sum('credit');
                 break;
                 } else {
-                    $total = Financial_entry::where('trans_type_id', $fristSelect)->where('currency_id', '=', $cur)->sum('depit') - Financial_entry::where('trans_type_id', $xxselector)->where('currency_id', '=', $cur)->sum('credit');
+                    $total = Financial_entry::where('trans_type_id', $request->get("selector_type"))->where('currency_id', '=', $cur)->sum('depit') - Financial_entry::where('trans_type_id', $request->get("selector_type"))->where('currency_id', '=', $cur)->sum('credit');
                 break;
                 }
             }
@@ -325,8 +325,8 @@ class SuppliersReport extends Controller
                     $objname=$obj->agent_name;
                 break;
                 } else {
-                    $total = Financial_entry::where('trans_type_id', $fristSelect)->where('currency_id', '=', $cur)->sum('depit') - Financial_entry::where('trans_type_id', $xxselector)->where('currency_id', '=', $cur)->sum('credit');
-                    $obj=Finan_trans_type::where('id', '=', $request->input('xxselector'))->first();
+                    $total = Financial_entry::where('trans_type_id',$request->get("selector_type"))->where('currency_id', '=', $cur)->sum('depit') - Financial_entry::where('trans_type_id',$request->get("selector_type"))->where('currency_id', '=', $cur)->sum('credit');
+                    $obj=Finan_trans_type::where('id', '=', $request->get("selector_type"))->first();
                     $objname=$obj->trans_type;
 
                 break;
