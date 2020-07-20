@@ -156,7 +156,9 @@ class ClientReport extends Controller
 
             $filtters->where('client_id', '=', $request->get("client_id"));
         }
-        $filtters = $filtters->get();
+        $filtters = $filtters->orderBy('currency_id', 'DESC')
+        ->orderBy('entry_date', 'ASC')
+        ->get();
         // ----------------- //
         $curs = [];
         foreach ($filtters as $row) {
