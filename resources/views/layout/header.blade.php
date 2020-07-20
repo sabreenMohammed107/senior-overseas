@@ -21,7 +21,7 @@
             </li>
             <li class="dropdown-divider"></li>
             <li class="ms-scrollable ms-dropdown-list">
-@foreach (Auth::user()->notifications->where('type','App\Notifications\OperationNotification') as $Notification)
+@foreach (Auth::user()->unreadNotifications->where('type','App\Notifications\OperationNotification') as $Notification)
                   <a class="media p-2">
                 <div class="media-body">
                 @if ($Notification->read_at == NULL)

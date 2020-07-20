@@ -11,7 +11,7 @@
                                         </td>
                                         @foreach($totals as $total)
                                         @if($total->cur===$cur)
-                                        <td class="right"><i class="fas fa-rupee-sign"></i> {{" " . number_format($total->num, 2, '.', ',')  }} <br> {{$total->total}}</td>
+                                        <td class="right"> {{" " . number_format($total->num, 2, '.', ',')  }} <br> {{$total->total}} - {{$cur}}</td>
                                         @endif
                                         @endforeach
                                     </tr>

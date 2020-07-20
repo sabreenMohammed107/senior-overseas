@@ -20,7 +20,7 @@
                       </div>
                       <div class="ms-panel-body">
                           <ul class="ms-activity-log">
-                              @foreach (Auth::user()->notifications as $Notification)
+                              @foreach (Auth::user()->unreadNotifications as $Notification)
                                   <li>
                                   <div class="ms-btn-icon btn-pill icon btn-success">
                                       <a href="{{url('notifications/'.$Notification->id)}}"><i class="flaticon-tick-inside-circle"></i></a>
