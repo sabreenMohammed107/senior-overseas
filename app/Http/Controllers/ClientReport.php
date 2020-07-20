@@ -144,7 +144,7 @@ class ClientReport extends Controller
         $from_date = Carbon::parse($request->input('from_date'));
         $to_date = Carbon::parse($request->input('to_date'));
         $client = Client::where('id', '=', $client_id)->first();
-        $filtters = Financial_entry::orderBy('entry_date')->orderBy('currency_id');
+        $filtters = Financial_entry::orderBy('currency_id')->orderBy('entry_date');
 
         if (!empty($request->get("from_date"))) {
             $filtters->where('entry_date', '>=', Carbon::parse($request->get("from_date")));
