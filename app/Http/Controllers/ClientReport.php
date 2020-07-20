@@ -46,7 +46,9 @@ class ClientReport extends Controller
     {
         $rows = Client::orderBy("created_at", "Desc")->get();
         $filtters = [];
-        return view($this->viewName . 'index', compact('rows', 'filtters'));
+        $totals=[];
+        $curs=[];
+        return view($this->viewName . 'index', compact('rows', 'filtters','curs','totals'));
     }
 
     /**
@@ -71,7 +73,7 @@ class ClientReport extends Controller
         $from_date = Carbon::parse($request->input('from_date'));
         $to_date = Carbon::parse($request->input('to_date'));
 
-        $filtters = Financial_entry::orderBy("created_at", "Desc");
+        $filtters = Financial_entry::orderBy('currency_id')->orderBy('entry_date');
 
         if (!empty($request->get("from_date"))) {
             $filtters->where('entry_date', '>=', Carbon::parse($request->get("from_date")));
@@ -88,8 +90,39 @@ class ClientReport extends Controller
 
         $rows = Client::orderBy("created_at", "Desc")->get();
 
+        $curs = [];
+        foreach ($filtters as $row) {
+            $cur = $row->currency->currency_name;
+            array_push($curs, $cur);
+        }
+        $curs = array_unique($curs);
+        $totals = [];
+        $total = 0;
+        $cursIds = [];
+        foreach ($filtters as $row) {
+            $cursId = $row->currency_id;
+            array_push($cursIds, $cursId);
+        }
+        $cursIds = array_unique($cursIds);
 
-        return view($this->viewName . 'report', compact('rows', 'filtters'))->render();
+
+
+
+        foreach ($cursIds as $cur) {
+            $total = 0;
+           
+         $total = Financial_entry::where('client_id', $client_id)->where('currency_id', '=', $cur)->sum('credit') - Financial_entry::where('client_id', $client_id)->where('currency_id', '=', $cur)->sum('depit');
+            $name=Currency::where('id','=',$cur)->first();
+            $totalNum = $total;
+            $total = Terbilang::make($total, " -  $name->currency_name");
+            $obj = new Collection();
+            $obj->cur = $name->currency_name;
+            $obj->total = strtoupper($total);
+            $obj->num = $totalNum;
+
+            array_push($totals, $obj);
+        }
+        return view($this->viewName . 'report', compact('rows', 'filtters','curs','totals'))->render();
     }
 
     /**
@@ -141,8 +174,8 @@ class ClientReport extends Controller
     public function fetchReport(Request $request)
     {
         $client_id = $request->input('client_id');
-        $from_date = Carbon::parse($request->input('from_date'));
-        $to_date = Carbon::parse($request->input('to_date'));
+        $from_date =$request->input('from_date');
+        $to_date = $request->input('to_date');
         $client = Client::where('id', '=', $client_id)->first();
         $filtters = Financial_entry::orderBy('currency_id')->orderBy('entry_date');
 

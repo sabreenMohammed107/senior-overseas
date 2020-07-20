@@ -1,5 +1,32 @@
 
-            <div class="table-responsive">
+            <div class="row">
+                        <div class="col-lg-12 col-sm-12 ml-auto">
+                            <table class="table table-clear">
+                                <tbody>
+                                    @foreach($curs as $cur)
+
+                                    <tr>
+                                        <td class="left">
+                                            <strong>total - {{$cur}}</strong>
+                                        </td>
+                                        @foreach($totals as $total)
+                                        @if($total->cur===$cur)
+                                        <td class="right"><i class="fas fa-rupee-sign"></i> {{" " . number_format($total->num, 2, '.', ',')  }} <br> {{$total->total}}</td>
+                                        @endif
+                                        @endforeach
+                                    </tr>
+
+
+                                    @endforeach
+
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                    </div>
+           
+           <div class="table-responsive">
                 <table id="courseEval" class="dattable table table-striped thead-dark  w-100">
                     <thead>
                         <tr>

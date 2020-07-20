@@ -24,8 +24,8 @@
 
         .form_in {
             display: inline-block;
-            width: 80%;
-            height: 180px;
+            width: 30%;
+            height: 120px;
         }
 
         .in_style {
@@ -49,47 +49,42 @@
                     <p style="font-size: 20px;margin-left:50px">Professional frieght forwarder</p>
                 </div> -->
                 <div class="card-body" style="margin-top: 80px;">
-                <h2 style="margin-bottom: 40px;border-bottom:1px solid #000;padding:20px 0px">
-                          Client Report</h2>
-                        <div class="form_in">
+                    <h2 style="margin-bottom: 40px;border-bottom:1px solid #000;padding:20px 0px">
+                        Client Report</h2>
+                    <div class="form_in">
+                        <div class="in_style">Client Name: <a>{{$client_name}}</a></div>  </div>
+                        <div class="form_in"><div class="in_style">From Date: <a>{{$from_date }}</a></div></div>
+                        <div class="form_in"> <div class="in_style">To Date: <a>{{$to_date}}</a></div></div>
+                    </div>
+                    <div class="table-responsive-sm">
+                        <table id="courseEval" class="dattable table table-striped thead-dark  w-100">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Depit</th>
+                                    <th>Credit</th>
+                                    <th>Transaction Data</th>
+                                    <th>Currency</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($filtters as $index => $Report)
+                                <tr>
+                                    <td>{{$index+1}}</td>
+                                    <td>{{$Report->depit}}</td>
+                                    <td>{{$Report->credit}}</td>
+                                    <td> <?php $date = date_create($Report->entry_date) ?>
+                                        {{ date_format($date,'Y-m-d') }}</td>
 
-                            
+                                    <td>@if($Report->currency){{$Report->currency->currency_name}}@endif</td>
 
-                            <div class="in_style">Client Name: <a>{{$client_name}}</a></div>
-                            <div class="in_style">From Date: <a>{{$from_date }}</a></div>
-                            <div class="in_style">To Date: <a>{{$to_date}}</a></div>
-                           
-
-                        </div>
-                        <div class="table-responsive-sm">
-                <table id="courseEval" class="dattable table table-striped thead-dark  w-100">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Depit</th>
-                            <th>Credit</th>
-                            <th>Transaction Data</th>
-                            <th>Currency</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($filtters as $index => $Report)
-                        <tr>
-                            <td>{{$index+1}}</td>
-                            <td>{{$Report->depit}}</td>
-                            <td>{{$Report->credit}}</td>
-                            <td> <?php $date = date_create($Report->entry_date) ?>
-                                {{ date_format($date,'Y-m-d') }}</td>
-
-                                <td>@if($Report->currency){{$Report->currency->currency_name}}@endif</td>
-
-                        </tr>
-                        @endforeach
-                        </tr>
-                    </tbody>
-                </table> 
-                        </div>
-                        <div class="row">
+                                </tr>
+                                @endforeach
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
                         <div class="col-lg-6 col-sm-6 ml-auto">
                             <table class="table table-clear">
                                 <tbody>
@@ -101,14 +96,14 @@
                                         </td>
                                         @foreach($totals as $total)
                                         @if($total->cur===$cur)
-                                        <td class="right"><i class="fas fa-rupee-sign"></i> {{" " . number_format($total->num, 2, '.', ',')  }}  <br> {{$total->total}}</td>
+                                        <td class="right"><i class="fas fa-rupee-sign"></i> {{" " . number_format($total->num, 2, '.', ',')  }} <br> {{$total->total}}</td>
                                         @endif
                                         @endforeach
                                     </tr>
 
 
                                     @endforeach
-                                
+
                                 </tbody>
                             </table>
 
@@ -118,7 +113,7 @@
                 </div>
             </div>
         </div>
- 
+
     </section>
 
 
