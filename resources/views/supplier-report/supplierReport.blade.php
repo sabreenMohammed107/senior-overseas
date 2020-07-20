@@ -73,6 +73,8 @@
                                     <th>Credit</th>
                                     <th>Transaction Data</th>
                                     <th>Currency</th>
+                                    <th>Transaction Type</th>
+                            <th>Operation code</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -85,7 +87,8 @@
                                         {{ date_format($date,'Y-m-d') }}</td>
 
                                     <td>@if($Report->currency){{$Report->currency->currency_name}}@endif</td>
-
+                                    <td>@if($Report->type){{$Report->type->trans_type}}@endif</td>
+                                <td>@if($Report->operation){{$Report->operation->operation_code}}@endif</td>
                                 </tr>
                                 @endforeach
                                 </tr>
