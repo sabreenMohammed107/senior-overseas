@@ -148,8 +148,9 @@ Route::get('fetch-client-report/fetch', 'ClientReport@fetchReport')->name('fetch
 
 
 /*-------------------------Supplier Reports----------------------------------*/
-Route::resource('/supplier-report', 'SupplierReport');
-Route::get('fetch-client-report/fetch', 'ClientReport@fetchReport')->name('fetch-client-report.fetch');
+Route::resource('/supplier-report', 'SuppliersReport');
+Route::get('fetch-supplier-report/fetch', 'SuppliersReport@fetchReport')->name('fetch-supplier-report.fetch');
+Route::get('supplier_selector_report/fetch', 'SuppliersReport@selector_type')->name('supplier_selector_report.fetch');
 
 
 

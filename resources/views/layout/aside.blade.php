@@ -135,6 +135,8 @@
 <ul id="Reports" class="collapse" aria-labelledby="basic-elements" data-parent="#side-nav-accordion">
 
 <li> <a href="{{ route('client-report.index') }}">Client Report</a> </li>
+<li> <a href="{{ route('supplier-report.index') }}">Supplier Report</a> </li>
+
 
 </ul>
 
