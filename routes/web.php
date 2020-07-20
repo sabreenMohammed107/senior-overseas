@@ -141,3 +141,10 @@ Route::resource('/bank-cash-statment', 'BankCashStatmentController');
 Route::get('/notifications/{id}', 'UserNotificationsController@show')->name('notifications');
 
 
+
+/*-------------------------Reports----------------------------------*/
+Route::resource('/client-report', 'ClientReport');
+Route::get('fetch-client-report/fetch', 'ClientReport@fetchReport')->name('fetch-client-report.fetch');
+
+
+

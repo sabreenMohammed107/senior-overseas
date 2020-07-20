@@ -125,6 +125,20 @@
 
 </li>
 @endif
+
+<!-- Reports  --> 
+<li class="menu-item">
+<a href="#" class="has-chevron" data-toggle="collapse" data-target="#Reports" aria-expanded="false"
+   aria-controls="contactsdropdown">
+  <span><i class="material-icons fs-16">assignment</i>Reports</span>
+</a>
+<ul id="Reports" class="collapse" aria-labelledby="basic-elements" data-parent="#side-nav-accordion">
+
+<li> <a href="{{ route('client-report.index') }}">Client Report</a> </li>
+
+</ul>
+
+</li>
 </ul>
 
 
