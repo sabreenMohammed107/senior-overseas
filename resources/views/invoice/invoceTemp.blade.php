@@ -79,15 +79,19 @@
                             <div class="in_style">
                                 @if($invoice->operation->ocean)
                                 <span>Pol </span>
-                                @else
+                                @elseif($invoice->operation->air)
                                 <span>Aol:</span>
+                                @else
+                                <span></span>
                                 @endif
                                 <a>{{$invoice->operation->ocean->ocean->pol->port_name ?? '' }}{{$invoice->operation->air->air->aol->port_name ?? '' }}</a></div>
                             <div class="in_style">
                                 @if($invoice->operation->ocean)
                                 <span>Pod </span>
-                                @else
+                                @elseif($invoice->operation->air)
                                 <span>Aod:</span>
+                                @else
+                                <span></span>
                                 @endif
                                 <a>{{$invoice->operation->ocean->ocean->pod->port_name ?? '' }}{{$invoice->operation->air->air->aod->port_name ?? '' }}</a></div>
                                  <div class="in_style">Loading Date: <a>
