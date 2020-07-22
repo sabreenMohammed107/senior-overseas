@@ -37,7 +37,7 @@
       <li> <a href="{{ route('container.index') }}">Containers </a> </li>
       <li> <a href="{{ route('employee.index') }}">Employees </a> </li>
       <li> <a href="{{ route('bank-account.index') }}">Bank Accounts</a> </li>
-      <li> <a href="{{ route('currency.index') }}">Currencies</a> </li>
+      <!-- <li> <a href="{{ route('currency.index') }}">Currencies</a> </li> -->
       <li> <a href="{{ route('commodity.index') }}">Commodity</a> </li>
       <li> <a href="{{ route('country.index') }}">Countries</a> </li>
   

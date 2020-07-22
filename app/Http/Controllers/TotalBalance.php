@@ -84,8 +84,8 @@ class TotalBalance extends Controller
         $clientsReport = [];
         $cashsReport = [];
         foreach ($banks as $bank) {
-            $bankEgp = Financial_entry::where('bank_account_id', $bank->id)->where('currency_id', 1)->sum('depit') - Financial_entry::where('bank_account_id', $bank->id)->where('currency_id', 1)->sum('credit');
-            $bankUsa = Financial_entry::where('bank_account_id', $bank->id)->where('currency_id', 2)->sum('depit') - Financial_entry::where('bank_account_id', $bank->id)->where('currency_id', 2)->sum('credit');
+            $bankEgp = Financial_entry::where('bank_account_id', $bank->id)->where('currency_id', 2)->sum('depit') - Financial_entry::where('bank_account_id', $bank->id)->where('currency_id', 2)->sum('credit');
+            $bankUsa = Financial_entry::where('bank_account_id', $bank->id)->where('currency_id', 1)->sum('depit') - Financial_entry::where('bank_account_id', $bank->id)->where('currency_id', 1)->sum('credit');
             $bankUre = Financial_entry::where('bank_account_id', $bank->id)->where('currency_id', 3)->sum('depit') - Financial_entry::where('bank_account_id', $bank->id)->where('currency_id', 3)->sum('credit');
 
             $obj = new Collection();
@@ -98,8 +98,8 @@ class TotalBalance extends Controller
         }
 
         foreach ($clients as $client) {
-            $clientEgp = Financial_entry::where('client_id', $client->id)->where('currency_id', 1)->sum('credit') - Financial_entry::where('client_id', $client->id)->where('currency_id', 1)->sum('depit');
-            $clientUsa = Financial_entry::where('client_id', $client->id)->where('currency_id', 2)->sum('credit') - Financial_entry::where('client_id', $client->id)->where('currency_id', 2)->sum('depit');
+            $clientEgp = Financial_entry::where('client_id', $client->id)->where('currency_id', 2)->sum('credit') - Financial_entry::where('client_id', $client->id)->where('currency_id', 2)->sum('depit');
+            $clientUsa = Financial_entry::where('client_id', $client->id)->where('currency_id', 1)->sum('credit') - Financial_entry::where('client_id', $client->id)->where('currency_id', 1)->sum('depit');
             $clientUre = Financial_entry::where('client_id', $client->id)->where('currency_id', 3)->sum('credit') - Financial_entry::where('client_id', $client->id)->where('currency_id', 3)->sum('depit');
 
             $obj = new Collection();
@@ -112,8 +112,8 @@ class TotalBalance extends Controller
         }
 
         foreach ($cashs as $cash) {
-            $cashEgp = Financial_entry::where('cash_box_id', $cash->id)->where('currency_id', 1)->sum('depit') - Financial_entry::where('cash_box_id', $cash->id)->where('currency_id', 1)->sum('credit');
-            $cashUsa = Financial_entry::where('cash_box_id', $cash->id)->where('currency_id', 2)->sum('depit') - Financial_entry::where('cash_box_id', $cash->id)->where('currency_id', 2)->sum('credit');
+            $cashEgp = Financial_entry::where('cash_box_id', $cash->id)->where('currency_id', 2)->sum('depit') - Financial_entry::where('cash_box_id', $cash->id)->where('currency_id', 2)->sum('credit');
+            $cashUsa = Financial_entry::where('cash_box_id', $cash->id)->where('currency_id', 1)->sum('depit') - Financial_entry::where('cash_box_id', $cash->id)->where('currency_id', 1)->sum('credit');
             $cashUre = Financial_entry::where('cash_box_id', $cash->id)->where('currency_id', 3)->sum('depit') - Financial_entry::where('cash_box_id', $cash->id)->where('currency_id', 3)->sum('credit');
 
             $obj = new Collection();
@@ -143,13 +143,13 @@ class TotalBalance extends Controller
         foreach ($suppliers as $supplier) {
            
             if($supplier->supplier_type_id==1){
-                $supplierEgp = $supplierEgp+(Financial_entry::where('trucking_id', $supplier->id)->where('currency_id', 1)->sum('depit') - Financial_entry::where('trucking_id', $supplier->id)->where('currency_id', 1)->sum('credit'));
-                $supplierUsa =$supplierUsa+( Financial_entry::where('trucking_id', $supplier->id)->where('currency_id', 2)->sum('depit') - Financial_entry::where('trucking_id', $supplier->id)->where('currency_id', 2)->sum('credit'));
+                $supplierEgp = $supplierEgp+(Financial_entry::where('trucking_id', $supplier->id)->where('currency_id', 2)->sum('depit') - Financial_entry::where('trucking_id', $supplier->id)->where('currency_id', 2)->sum('credit'));
+                $supplierUsa =$supplierUsa+( Financial_entry::where('trucking_id', $supplier->id)->where('currency_id', 1)->sum('depit') - Financial_entry::where('trucking_id', $supplier->id)->where('currency_id', 1)->sum('credit'));
                 $supplierUre = $supplierUre+(Financial_entry::where('trucking_id', $supplier->id)->where('currency_id', 3)->sum('depit') - Financial_entry::where('trucking_id', $supplier->id)->where('currency_id', 3)->sum('credit'));
 
             }else{
-                $supplierEgp =  $supplierEgp+(Financial_entry::where('clearance_id', $supplier->id)->where('currency_id', 1)->sum('depit') - Financial_entry::where('clearance_id', $supplier->id)->where('currency_id', 1)->sum('credit'));
-                $supplierUsa = $supplierUsa+(Financial_entry::where('clearance_id', $supplier->id)->where('currency_id', 3)->sum('depit') - Financial_entry::where('clearance_id', $supplier->id)->where('currency_id', 3)->sum('credit'));
+                $supplierEgp =  $supplierEgp+(Financial_entry::where('clearance_id', $supplier->id)->where('currency_id', 2)->sum('depit') - Financial_entry::where('clearance_id', $supplier->id)->where('currency_id', 2)->sum('credit'));
+                $supplierUsa = $supplierUsa+(Financial_entry::where('clearance_id', $supplier->id)->where('currency_id', 1)->sum('depit') - Financial_entry::where('clearance_id', $supplier->id)->where('currency_id', 1)->sum('credit'));
                 $supplierUre = $supplierUre+(Financial_entry::where('clearance_id', $supplier->id)->where('currency_id', 3)->sum('depit') - Financial_entry::where('clearance_id', $supplier->id)->where('currency_id', 3)->sum('credit'));
 
             }
@@ -158,13 +158,13 @@ class TotalBalance extends Controller
         foreach ($carriers as $carrier) {
            
             if($carrier->carrier_type_id==1){
-                $carrierEgp = $carrierEgp+(Financial_entry::where('ocean_carrier_id', $carrier->id)->where('currency_id', 1)->sum('depit') - Financial_entry::where('ocean_carrier_id', $carrier->id)->where('currency_id', 1)->sum('credit'));
-                $carrierUsa =$carrierUsa+( Financial_entry::where('ocean_carrier_id', $carrier->id)->where('currency_id', 2)->sum('depit') - Financial_entry::where('ocean_carrier_id', $carrier->id)->where('currency_id', 2)->sum('credit'));
+                $carrierEgp = $carrierEgp+(Financial_entry::where('ocean_carrier_id', $carrier->id)->where('currency_id', 2)->sum('depit') - Financial_entry::where('ocean_carrier_id', $carrier->id)->where('currency_id', 2)->sum('credit'));
+                $carrierUsa =$carrierUsa+( Financial_entry::where('ocean_carrier_id', $carrier->id)->where('currency_id', 1)->sum('depit') - Financial_entry::where('ocean_carrier_id', $carrier->id)->where('currency_id', 1)->sum('credit'));
                 $carrierUre = $carrierUre+(Financial_entry::where('ocean_carrier_id', $carrier->id)->where('currency_id', 3)->sum('depit') - Financial_entry::where('ocean_carrier_id', $carrier->id)->where('currency_id', 3)->sum('credit'));
 
             }else{
-                $carrierEgp =  $carrierEgp+(Financial_entry::where('air_carrier_id', $carrier->id)->where('currency_id', 1)->sum('depit') - Financial_entry::where('air_carrier_id', $carrier->id)->where('currency_id', 1)->sum('credit'));
-                $carrierUsa = $carrierUsa+(Financial_entry::where('air_carrier_id', $carrier->id)->where('currency_id', 3)->sum('depit') - Financial_entry::where('air_carrier_id', $carrier->id)->where('currency_id', 3)->sum('credit'));
+                $carrierEgp =  $carrierEgp+(Financial_entry::where('air_carrier_id', $carrier->id)->where('currency_id', 2)->sum('depit') - Financial_entry::where('air_carrier_id', $carrier->id)->where('currency_id', 2)->sum('credit'));
+                $carrierUsa = $carrierUsa+(Financial_entry::where('air_carrier_id', $carrier->id)->where('currency_id', 1)->sum('depit') - Financial_entry::where('air_carrier_id', $carrier->id)->where('currency_id', 1)->sum('credit'));
                 $carrierUre = $carrierUre+(Financial_entry::where('air_carrier_id', $carrier->id)->where('currency_id', 3)->sum('depit') - Financial_entry::where('air_carrier_id', $carrier->id)->where('currency_id', 3)->sum('credit'));
 
             }
@@ -174,8 +174,8 @@ class TotalBalance extends Controller
         foreach ($agents as $aget) {
            
           
-                $agentEgp = $agentEgp+(Financial_entry::where('agent_id', $aget->id)->where('currency_id', 1)->sum('depit') - Financial_entry::where('agent_id', $aget->id)->where('currency_id', 1)->sum('credit'));
-                $agentUsa =$agentUsa+( Financial_entry::where('agent_id', $aget->id)->where('currency_id', 2)->sum('depit') - Financial_entry::where('agent_id', $aget->id)->where('currency_id', 2)->sum('credit'));
+                $agentEgp = $agentEgp+(Financial_entry::where('agent_id', $aget->id)->where('currency_id', 2)->sum('depit') - Financial_entry::where('agent_id', $aget->id)->where('currency_id', 2)->sum('credit'));
+                $agentUsa =$agentUsa+( Financial_entry::where('agent_id', $aget->id)->where('currency_id', 1)->sum('depit') - Financial_entry::where('agent_id', $aget->id)->where('currency_id', 1)->sum('credit'));
                 $agentUre = $agentUre+(Financial_entry::where('agent_id', $aget->id)->where('currency_id', 3)->sum('depit') - Financial_entry::where('agent_id', $aget->id)->where('currency_id', 3)->sum('credit'));
 
            
