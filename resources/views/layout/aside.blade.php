@@ -136,6 +136,8 @@
 
 <li> <a href="{{ route('client-report.index') }}">Client Report</a> </li>
 <li> <a href="{{ route('supplier-report.index') }}">Supplier Report</a> </li>
+<li> <a href="{{ route('total-balance.index') }}">Balances Statment</a> </li>
+
 
 
 </ul>
