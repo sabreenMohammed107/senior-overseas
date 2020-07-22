@@ -19,7 +19,8 @@
         body {
             background-color: #fff;
             font-family: 'segoe ui', 'arial', 'helvetica', 'sans-serif';
-            /*overflow-x:hidden;*/
+            font-size: 14px;
+            /* overflow-x:hidden; */
         }
 
 
@@ -36,8 +37,14 @@
     </style>
     <div class="container">
         <div class="card-body" style="margin-top: 80px;">
-            <h2 style="margin-bottom: 40px;border-bottom:1px solid #000;padding:20px 0px">
-                Total Balance Report</h2>
+        <div style="margin-bottom: 40px;border-bottom:1px solid #000;padding:10px 0px">
+            <h2 >
+                Total Balance Report
+                <p><?php 
+                $date = date_create(now());
+                echo date_format($date,'Y-m-d')?></p>
+                </h2>
+                </div>
 
         </div>
         <!--bank-->
@@ -70,7 +77,7 @@
                 </tr>
                 @endforeach
             </tbody>
-            <tfoot>
+            <tfoot class="btn-outline-info">
                 <tr>
                     <th>Total</th>
                     <th><?php echo $sumEgp ?></th>
@@ -110,7 +117,7 @@
                 </tr>
                 @endforeach
             </tbody>
-            <tfoot>
+            <tfoot class="btn-outline-info">
                 <tr>
                     <th>Total</th>
                     <th><?php echo $clientEgp ?></th>
@@ -124,7 +131,7 @@
         <table  class="dattable table table-striped thead-dark  w-100">
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col">Cash Boxs</th>
+                    <th scope="col">Cash Boxes</th>
                     <th scope="col">EGP</th>
                     <th scope="col">USD</th>
                     <th scope="col">URE</th>
@@ -149,7 +156,7 @@
             </tr>
             @endforeach
             </tbody>
-            <tfoot>
+            <tfoot class="btn-outline-info">
                 <tr>
                     <th>Total</th>
                     <th><?php echo $cashEgp ?></th>
@@ -178,7 +185,7 @@
 
             </tbody>
 
-            <tfoot>
+            <tfoot class="btn-outline-info">
                 <tr>
                     <th>Total</th>
                     <th><?php echo $supplierEgp ?></th>
@@ -188,8 +195,10 @@
                 </tr>
             </tfoot>
         </table>
-
-        <table  class="dattable table table-striped thead-dark  w-100">
+<hr>
+        
+    </div>
+    <table  class="dattable table table-striped thead-dark  w-100">
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">Totals</th>
@@ -207,9 +216,9 @@
 
             </tbody>
 
-            <tfoot>
+            <tfoot class="btn-outline-info">
                 <tr>
-                    <th></th>
+                    <th>Totals</th>
                     <th><?php echo $summingEgp ?></th>
                     <th><?php echo $summingUse ?></th>
                     <th><?php echo $summingUre ?></th>
@@ -217,7 +226,6 @@
                 </tr>
             </tfoot>
         </table>
-    </div>
 <footer style="height: 100px;">
 
 </footer>
