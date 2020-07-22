@@ -81,7 +81,7 @@
             </tfoot>
         </table>
         <!--client-->
-        <table class="table" class="dattable table table-striped thead-dark  w-100">
+        <table  class="dattable table table-striped thead-dark  w-100">
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">Clients</th>
@@ -121,7 +121,7 @@
             </tfoot>
         </table>
         <!--cashbox-->
-        <table class="table" class="dattable table table-striped thead-dark  w-100">
+        <table  class="dattable table table-striped thead-dark  w-100">
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">Cash Boxs</th>
@@ -160,7 +160,7 @@
             </tfoot>
         </table>
         <!--supplier-->
-        <table class="table" class="dattable table table-striped thead-dark  w-100">
+        <table  class="dattable table table-striped thead-dark  w-100">
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">Suppliers</th>
@@ -189,7 +189,7 @@
             </tfoot>
         </table>
 
-        <table class="table" class="dattable table table-striped thead-dark  w-100">
+        <table  class="dattable table table-striped thead-dark  w-100">
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">Totals</th>
