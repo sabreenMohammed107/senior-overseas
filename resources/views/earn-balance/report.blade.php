@@ -61,7 +61,7 @@
         <table id="bankTable" class="dattable table table-striped thead-dark  w-100">
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col">Sells</th>
+                    <th scope="col">Sales</th>
                     <th scope="col">EGP</th>
                     <th scope="col">USD</th>
                     <th scope="col">URE</th>
@@ -82,7 +82,7 @@
             </tbody>
             <tfoot class="btn-outline-info">
                 <tr>
-                    <th>Total Safy</th>
+                    <th>Net sales </th>
                     <th><?php echo $sellEgp ?></th>
                     <th><?php echo $sellUse ?></th>
                     <th><?php echo $sellUre ?></th>
@@ -94,7 +94,7 @@
         <table class="dattable table table-striped thead-dark  w-100">
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col">Buy</th>
+                    <th scope="col">Purchasing</th>
                     <th scope="col">EGP</th>
                     <th scope="col">USD</th>
                     <th scope="col">URE</th>
@@ -115,7 +115,7 @@
             </tbody>
             <tfoot class="btn-outline-danger">
                 <tr>
-                    <th>Total Safy</th>
+                    <th>Net Purchasing</th>
                     <th><?php echo $buyEgp ?></th>
                     <th><?php echo $buyUse ?></th>
                     <th><?php echo $buyUre ?></th>
@@ -127,7 +127,7 @@
         <table class="dattable table table-striped thead-dark  w-100">
             <thead class="thead-dark" style="display: none;">
                 <tr>
-                    <th scope="col">Buy Sell Totals</th>
+                    <th scope="col">Net Profit</th>
                     <th scope="col">EGP</th>
                     <th scope="col">USD</th>
                     <th scope="col">URE</th>
@@ -145,7 +145,7 @@
 
             <tfoot class="btn-info">
                 <tr>
-                    <th style="width: 25%;">Buy Sell Totals</th>
+                    <th style="width: 25%;">Net Profit</th>
                     <th><?php echo $summingEgp ?></th>
                     <th><?php echo $summingUse ?></th>
                     <th><?php echo $summingUre ?></th>
@@ -206,7 +206,7 @@
     <table class="dattable table table-striped thead-dark  w-100">
         <thead class="thead-dark" style="display: none;">
             <tr>
-                <th scope="col">Earning Totals</th>
+                <th scope="col">Net Income</th>
                 <th scope="col">EGP</th>
                 <th scope="col">USD</th>
                 <th scope="col">URE</th>
@@ -225,7 +225,7 @@
 
         <tfoot class="btn-info">
             <tr>
-                <th>Totals</th>
+                <th>Net Income</th>
                 <th><?php echo $summingEgpF ?></th>
                 <th><?php echo $summingUseF ?></th>
                 <th><?php echo $summingUreF ?></th>
