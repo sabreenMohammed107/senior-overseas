@@ -39,7 +39,7 @@
         <div class="card-body" style="margin-top: 80px;">
             <div style="margin-bottom: 40px;border-bottom:1px solid #000;padding:10px 0px">
                 <h2>
-                    Total Earn Report
+                    Income List Report
 
             </div>
 
