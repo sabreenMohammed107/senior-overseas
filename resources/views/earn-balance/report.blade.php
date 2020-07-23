@@ -69,9 +69,9 @@
             </thead>
             <tbody>
                 <?php
-                $sellEgp = 300;
-                $sellUse = 500;
-                $sellUre = 7000;
+                $sellEgp = $sellExpensesEgp;
+                $sellUse = $sellExpensesUse;
+                $sellUre = $sellExpensesUre;
                 ?>
                 <tr>
                     <th scope="row">Total </th>
