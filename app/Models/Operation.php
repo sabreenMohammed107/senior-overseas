@@ -12,10 +12,11 @@ class Operation extends Model
         'container_name', 'loading_date','arrival_date', 'vassel_name', 'booking_no', 'commodity_id', 'cut_off_date', 'sales_quote_ocean_id',
         'sales_quote_air_id', 'sales_quote_tracking_id','account_confirm', 'notes',
     ];
+  
     
     public function expense()
     {
-        return $this->belongsTo('App\Models\Operation_expense','operation_id','id');
+        return $this->hasMeny('App\Models\Operation_expense','operation_id','id');
 
     }
     public function shipper()

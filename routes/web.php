@@ -154,5 +154,7 @@ Route::get('supplier_selector_report/fetch', 'SuppliersReport@selector_type')->n
 
 /*-------------------------Reports----------------------------------*/
 Route::resource('/total-balance', 'TotalBalance');
-// Route::get('fetch-client-report/fetch', 'ClientReport@fetchReport')->name('fetch-client-report.fetch');
+
+/*-------------------------earn-balance----------------------------------*/
+Route::resource('/earn-balance', 'EarnReportController');
 

@@ -17,7 +17,7 @@
     <div class="col-md-12">
         <div class="ms-panel">
             <div class="ms-panel-header d-flex justify-content-between">
-                <h6>TClient Report</h6>
+                <h6>Client Report</h6>
 
             </div>
 
