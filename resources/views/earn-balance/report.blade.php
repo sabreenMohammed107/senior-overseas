@@ -64,7 +64,7 @@
                     <th scope="col">Sales</th>
                     <th scope="col">EGP</th>
                     <th scope="col">USD</th>
-                    <th scope="col">URE</th>
+                    <th scope="col">EURO</th>
                 </tr>
             </thead>
             <tbody>
@@ -97,7 +97,7 @@
                     <th scope="col">Purchasing</th>
                     <th scope="col">EGP</th>
                     <th scope="col">USD</th>
-                    <th scope="col">URE</th>
+                    <th scope="col">EURO</th>
                 </tr>
             </thead>
             <tbody>
@@ -130,7 +130,7 @@
                     <th scope="col">Net Profit</th>
                     <th scope="col">EGP</th>
                     <th scope="col">USD</th>
-                    <th scope="col">URE</th>
+                    <th scope="col">EURO</th>
                 </tr>
             </thead>
             <?php
@@ -161,7 +161,7 @@
                     <th scope="col">Expenses</th>
                     <th scope="col">EGP</th>
                     <th scope="col">USD</th>
-                    <th scope="col">URE</th>
+                    <th scope="col">EURO</th>
                 </tr>
             </thead>
             <?php
@@ -191,7 +191,7 @@
             @endforeach
             <tfoot class="btn-outline-danger">
                 <tr>
-                    <th>Total</th>
+                    <th>Total Expenses</th>
                     <th><?php echo $cashEgp ?></th>
                     <th><?php echo $cashUse ?></th>
                     <th><?php echo $cashUre ?></th>
@@ -209,7 +209,7 @@
                 <th scope="col">Net Income</th>
                 <th scope="col">EGP</th>
                 <th scope="col">USD</th>
-                <th scope="col">URE</th>
+                <th scope="col">EURO</th>
             </tr>
         </thead>
         <?php

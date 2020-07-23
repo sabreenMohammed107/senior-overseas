@@ -54,7 +54,7 @@
                     <th scope="col">Banks</th>
                     <th scope="col">EGP</th>
                     <th scope="col">USD</th>
-                    <th scope="col">URE</th>
+                    <th scope="col">EURO</th>
                 </tr>
             </thead>
             <tbody>
@@ -94,7 +94,7 @@
                     <th scope="col">Clients</th>
                     <th scope="col">EGP</th>
                     <th scope="col">USD</th>
-                    <th scope="col">URE</th>
+                    <th scope="col">EURO</th>
                 </tr>
             </thead>
             <tbody>
@@ -134,7 +134,7 @@
                     <th scope="col">Cash Boxes</th>
                     <th scope="col">EGP</th>
                     <th scope="col">USD</th>
-                    <th scope="col">URE</th>
+                    <th scope="col">EURO</th>
                 </tr>
             </thead>
             <?php
@@ -173,7 +173,7 @@
                     <th scope="col">Suppliers</th>
                     <th scope="col">EGP</th>
                     <th scope="col">USD</th>
-                    <th scope="col">URE</th>
+                    <th scope="col">EURO</th>
                 </tr>
             </thead>
             <?php
@@ -204,7 +204,7 @@
                     <th scope="col">Totals</th>
                     <th scope="col">EGP</th>
                     <th scope="col">USD</th>
-                    <th scope="col">URE</th>
+                    <th scope="col">EURO</th>
                 </tr>
             </thead>
             <?php
