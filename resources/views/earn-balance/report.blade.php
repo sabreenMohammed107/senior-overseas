@@ -172,9 +172,9 @@
             @foreach($extraExpense as $extra)
             <?php
 
-            $gyp = App\Models\Financial_entry::where('trans_type_id', $extra->id)->where('currency_id', 2)->sum('depit');
-            $use = App\Models\Financial_entry::where('trans_type_id', $extra->id)->where('currency_id', 1)->sum('depit');
-            $ure = App\Models\Financial_entry::where('trans_type_id', $extra->id)->where('currency_id', 3)->sum('depit');
+            $gyp = App\Models\Financial_entry::where('trans_type_id', $extra->id)->where('currency_id', 2)->sum('credit');
+            $use = App\Models\Financial_entry::where('trans_type_id', $extra->id)->where('currency_id', 1)->sum('credit');
+            $ure = App\Models\Financial_entry::where('trans_type_id', $extra->id)->where('currency_id', 3)->sum('credit');
             $cashEgp = $cashEgp + $gyp;
             $cashUse = $cashUse + $use;
             $cashUre = $cashUre + $ure;
