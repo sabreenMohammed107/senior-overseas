@@ -7,7 +7,7 @@ use App\Models\Bank_account;
 use App\Models\Currency;
 use App\Models\Financial_entry;
 use App\Models\Finan_trans_type;
-use App\Models\cashbox_expenses_type;
+use App\Models\Cashbox_expenses_type;
 use App\Models\Carrier;
 use App\Models\Supplier;
 use App\Models\Agent;
