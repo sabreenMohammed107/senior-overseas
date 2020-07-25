@@ -39,6 +39,14 @@
 
         width: 100%;
     }
+    .clearance{
+        display: inline-block;
+        padding: 10px 0; 
+        width: 50%; 
+    }
+    .clearance input{
+        width: 40%;
+    }
 </style>
 
 <body>
@@ -57,7 +65,6 @@
 
         <div class="test">
 
-            <input type="hidden" name="savingType" value="{{$typeTesting}}">
             <div class="test-4 mb-3">
 
                 <label>Client</label>
@@ -95,190 +102,194 @@
 
         </div>
 
-        <div class="ms-auth-container row no-gutters">
-            <div class="col-12 p-3">
-                <!--datatable select data -->
-                <table id="courseEval" class="dattable table table-striped thead-dark  w-100">
-                    <thead class="thead-dark" style="font-size: 14px;">
-                        <tr>
-                            <th>#</th>
-                            @if($typeTesting==0)
-                            <th> Carrier</th>
+        <!--datatable select data -->
+        <table id="courseEval" class="dattable table table-striped thead-dark  w-100">
+            <thead class="thead-dark" style="font-size: 14px;">
+                <tr>
+                    <th>#</th>
+                    @if($typeTesting==0)
+                    <th> Carrier</th>
 
-                            <th> Rang</th>
-                            <th> Aol</th>
-                            <th> Aod</th>
-                            <th> Notes</th>
+                    <th> Rang</th>
+                    <th> Aol</th>
+                    <th> Aod</th>
+                    <th> Notes</th>
 
-                            @else
-                            <th> Carrier</th>
+                    @else
+                    <th> Carrier</th>
 
-                            <th> Pol</th>
-                            <th> Pod</th>
-                            <th>T.T.(Days</th>
-                            <th> Notes</th>
-                            @endif
-                            <th>Price</th>
+                    <th> Pol</th>
+                    <th> Pod</th>
+                    <th>T.T.(Days</th>
+                    <th> Notes</th>
+                    @endif
+                    <th>Price</th>
 
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($filtters as $index => $filter)
-                        <tr>
-                            <td>{{$index+1}}</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($filtters as $index => $filter)
+                <tr>
+                    <td>{{$index+1}}</td>
 
 
-                            @if($typeTesting==0)
-                            <td>@if($filter->air->carrier)
-                                {{$filter->air->carrier->carrier_name}}
-                                @endif</td>
-                            <td>{{$filter->air->slide_range}}</td>
+                    @if($typeTesting==0)
+                    <td>@if($filter->air->carrier)
+                        {{$filter->air->carrier->carrier_name}}
+                        @endif</td>
+                    <td>{{$filter->air->slide_range}}</td>
 
-                            <td>@if($filter->air->aol)
-                                {{$filter->air->aol->port_name}} - {{$filter->air->aol->country->country_name}}
-                                @endif</td>
-                            <td>@if($filter->air->aod)
-                                {{$filter->air->aod->port_name}} - {{$filter->air->aod->country->country_name}}
-                                @endif</td>
-                            <td>{{$filter->air->notes}}</td>
-                            @else
-                            <td>@if($filter->ocean->carrier)
-                                {{$filter->ocean->carrier->carrier_name}}
-                                @endif</td>
-                            <td>@if($filter->ocean->pol)
-                                {{$filter->ocean->pol->port_name}} - {{$filter->ocean->pol->country->country_name}}
-                                @endif</td>
-                            <td>@if($filter->ocean->pod)
-                                {{$filter->ocean->pod->port_name}} - {{$filter->ocean->pod->country->country_name}}
-                                @endif</td>
-                            <td> {{$filter->ocean->transit_time}}</td>
-                            <td>{{$filter->ocean->notes}}</td>
+                    <td>@if($filter->air->aol)
+                        {{$filter->air->aol->port_name}} - {{$filter->air->aol->country->country_name}}
+                        @endif</td>
+                    <td>@if($filter->air->aod)
+                        {{$filter->air->aod->port_name}} - {{$filter->air->aod->country->country_name}}
+                        @endif</td>
+                    <td>{{$filter->air->notes}}</td>
+                    @else
+                    <td>@if($filter->ocean->carrier)
+                        {{$filter->ocean->carrier->carrier_name}}
+                        @endif</td>
+                    <td>@if($filter->ocean->pol)
+                        {{$filter->ocean->pol->port_name}} - {{$filter->ocean->pol->country->country_name}}
+                        @endif</td>
+                    <td>@if($filter->ocean->pod)
+                        {{$filter->ocean->pod->port_name}} - {{$filter->ocean->pod->country->country_name}}
+                        @endif</td>
+                    <td> {{$filter->ocean->transit_time}}</td>
+                    <td>{{$filter->ocean->notes}}</td>
 
-                            @endif
+                    @endif
 
-                            <td>
-                                {{$filter->price}}
-                            </td>
-
-
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-                <div>
-                    <div style="border-bottom:solid 2px #0094ff;margin-bottom:20px"></div>
-                    <div class="ms-auth-container row">
-                        <!-- Tracking table -->
-                        <div class="col-12 p-3">
-                            <table id="courseEval" class="dattable table table-striped thead-dark  w-100">
-                                <thead class="thead-dark" style="font-size: 14px;">
-                                    <tr>
-                                        <th>#</th>
-                                        <th> supplier</th>
-
-                                        <th> Pol</th>
-                                        <th> Pod</th>
-                                        <th> Car</th>
-                                        <th>T.T(Days</th>
-                                        <th>Notes</th>
-                                        <th>Price</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    @foreach($trackings as $index => $track)
-                                    <tr>
-                                        <td>{{$index+1}}</td>
-                                        <td>@if($track->truck->supplier)
-                                            {{$track->truck->supplier->supplier_name}}
-                                            @endif</td>
-                                        <td>@if($track->truck->pol)
-                                            {{$track->truck->pol->port_name}} - {{$track->truck->pol->country->country_name}}
-                                            @endif</td>
-                                        <td>@if($track->truck->pod)
-                                            {{$track->truck->pod->port_name}} - {{$track->truck->pod->country->country_name}}
-                                            @endif</td>
-                                        <td>@if($track->truck->car)
-                                            {{$track->truck->car->car_type}}
-                                            @endif</td>
-                                        <td>{{$track->truck->transit_time}}</td>
-                                        <td>{{$track->truck->notes}}</td>
-                                        <td>
-                                            <?php echo $trackings[$index]->car_price; ?>
-                                        </td>
-
-                                    </tr>
-                                    @endforeach
-
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- End Table -->
+                    <td>
+                        {{$filter->price}}
+                    </td>
 
 
-                    </div>
-                </div>
-              
-                    <div style="border-bottom:solid 2px #0094ff;margin-bottom:20px"></div>
-                    <div class="test" style="height: 50px;">
-                      
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
 
-                            <label>Clearance Suppliers</label>
-                            <input type="text" name="supplier_id" value="@if($row->supplier){{$row->supplier->supplier_name_name}}@endif" placeholder="Quote code">
+        <div style="border-bottom:solid 2px #0094ff;margin-bottom:20px"></div>
 
+        <table id="courseEval" class="dattable table table-striped thead-dark  w-100">
+            <thead class="thead-dark" style="font-size: 14px;">
+                <tr>
+                    <th>#</th>
+                    <th> supplier</th>
 
-                         <hr style="margin-bottom: 10px;">
-                        
-                      
-                        <label >Clearance Currency</label>
-                            <input type="text" name="supplier_id" value="@if($row->clearance){{$row->clearance->currency_name}}@endif" placeholder="Quote code">
+                    <th> Pol</th>
+                    <th> Pod</th>
+                    <th> Car</th>
+                    <th>T.T(Days</th>
+                    <th>Notes</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
 
+                @foreach($trackings as $index => $track)
+                <tr>
+                    <td>{{$index+1}}</td>
+                    <td>@if($track->truck->supplier)
+                        {{$track->truck->supplier->supplier_name}}
+                        @endif</td>
+                    <td>@if($track->truck->pol)
+                        {{$track->truck->pol->port_name}} - {{$track->truck->pol->country->country_name}}
+                        @endif</td>
+                    <td>@if($track->truck->pod)
+                        {{$track->truck->pod->port_name}} - {{$track->truck->pod->country->country_name}}
+                        @endif</td>
+                    <td>@if($track->truck->car)
+                        {{$track->truck->car->car_type}}
+                        @endif</td>
+                    <td>{{$track->truck->transit_time}}</td>
+                    <td>{{$track->truck->notes}}</td>
+                    <td>
+                        <?php echo $trackings[$index]->car_price; ?>
+                    </td>
 
-                    
-                            <hr style="margin-bottom: 10px;">
-                
+                </tr>
+                @endforeach
 
-                            <label>Clearance Price</label>
-                            <input type="text" disabled name="clearance_price" value="{{$row->clearance_price}}" placeholder="Clearance Price">
+            </tbody>
+        </table>
+        <div style="border-bottom:solid 2px #0094ff;margin-bottom:20px"></div>
+        <div class="test">
 
-                            <hr style="margin-bottom: 10px;">
+            <div class="clearance">
 
-                       
-                    </div>
-
-
-                    <div class="test">
-                      
-                            <label>Door Agent</label>
-                            <input type="text" name="agent_id" value="@if($row->agent){{$row->agent->agent_name}}@endif" placeholder="Quote code">
-
-                            <hr style="margin-bottom: 10px;">
-                            <label >Door Currency</label>
-                            <input type="text" name="door_door_currency_id" value="@if($row->door){{$row->door->currency_name}}@endif" placeholder="Quote code">
-
-                            <hr style="margin-bottom: 10px;">
-
-
-                                <label >Door Price</label>
-                                <input type="text" disabled name="door_door_price" value="{{$row->door_door_price}}" placeholder="Door to Door Price">
-                           
-                                <hr style="margin-bottom: 10px;">
-                        </div>
-
-
-
-               
-                <!-- /.row -->
-
+            <label>Clearance Suppliers</label>
+                            <input type="text" name="supplier_id" value="@if($row->supplier){{$row->supplier->supplier_name_name}}@endif" >
 
             </div>
-            <footer style="height: 100px;">
 
-            </footer>
-            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-            <script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+            <div class="clearance">
+
+                <label >Clearance Currency</label>
+               <input type="text" name="supplier_id" value="@if($row->clearance){{$row->clearance->currency_name}}@endif" >
+            </div>
+        </div>
+
+        <div class="test">
+
+            <div class="clearance">
+
+            <label>Clearance Price</label>
+                            <input type="text" disabled name="clearance_price" value="{{$row->clearance_price}}" placeholder="Clearance Price">
+            </div>
+
+            <div class="clearance">
+
+               
+            </div>
+        </div>
+
+        <div style="border-bottom:solid 2px #0094ff;margin-bottom:20px"></div>
+        <div class="test">
+
+            <div class="clearance">
+
+            <label>Door Agent</label>
+                            <input type="text" name="agent_id" value="@if($row->agent){{$row->agent->agent_name}}@endif" placeholder="Quote code">
+            </div>
+
+            <div class="clearance">
+
+            <label >Door Currency</label>
+                            <input type="text" name="door_door_currency_id" value="@if($row->door){{$row->door->currency_name}}@endif" placeholder="Quote code">
+
+            </div>
+        </div>
+
+        <div class="test">
+
+            <div class="clearance">
+
+            <label >Door Price</label>
+                                <input type="text" disabled name="door_door_price" value="{{$row->door_door_price}}" placeholder="Door to Door Price">
+            </div>
+
+            <div class="clearance">
+
+               
+            </div>
+        </div>
+
+
+
+        <!-- /.row -->
+
+
+
+        <footer style="height: 100px;">
+
+        </footer>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 </body>
 
 </html>
