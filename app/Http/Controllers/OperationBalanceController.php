@@ -102,7 +102,7 @@ class OperationBalanceController extends Controller
 
         $title = "My Report";
         // return view($this->viewName . 'report' ,$data);
-        $pdf = PDF::loadView($this->viewName . 'report', $data);
+        $pdf = PDF::loadView($this->viewName . 'report2', $data);
         return $pdf->stream('medium.pdf'); // to open in blank page
     }
 

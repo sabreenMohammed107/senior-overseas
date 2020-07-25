@@ -59,7 +59,7 @@
 										@method('DELETE')
 										<button type="submit" value=""></button>
 									</form>
-									<a href="{{ route('sale-quote.show',$row->id) }}" target="_blank" class="btn btn-info d-inline-block">InvoiceReport</a> 
+									<a href="{{ route('sale-quote.show',$row->id) }}" target="_blank" class="btn btn-info d-inline-block">Report</a> 
 
 								</td>
 							</tr>
