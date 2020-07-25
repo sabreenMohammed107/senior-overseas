@@ -101,10 +101,10 @@
             </div>
 
         </div>
-
+        @if($filtters !=null)  
         <!--datatable select data -->
         <table id="courseEval" class="dattable table table-striped thead-dark  w-100">
-       @if($filtters)  
+     
         <thead class="thead-dark" style="font-size: 14px;">
                 <tr>
                     <th>#</th>
@@ -128,7 +128,7 @@
 
                 </tr>
             </thead>
-            @endif
+          
             <tbody>
                 @foreach($filtters as $index => $filter)
                 <tr>
@@ -172,7 +172,7 @@
                 @endforeach
             </tbody>
         </table>
-
+        @endif
         <div style="border-bottom:solid 2px #0094ff;margin-bottom:20px"></div>
 
         <table id="courseEval" class="dattable table table-striped thead-dark  w-100">
