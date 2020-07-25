@@ -106,8 +106,11 @@
         <table id="courseEval" class="dattable table table-striped thead-dark  w-100">
      
         @if($filtters->isEmpty())
+          <thead class="thead-dark" style="font-size: 14px; display:none">
+          @else
           <thead class="thead-dark" style="font-size: 14px;">
-                <tr>
+ 
+          @endif      <tr>
                     <th>#</th>
                     @if($typeTesting==0)
                     <th> Carrier</th>
@@ -129,7 +132,7 @@
 
                 </tr>
             </thead>
-            @endif
+           
             <tbody>
                 @foreach($filtters as $index => $filter)
                 <tr>
