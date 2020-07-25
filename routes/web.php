@@ -157,4 +157,6 @@ Route::resource('/total-balance', 'TotalBalance');
 
 /*-------------------------earn-balance----------------------------------*/
 Route::resource('/earn-balance', 'EarnReportController');
+/*-------------------------operation-balance----------------------------------*/
+Route::resource('/operation-balance', 'OperationBalanceController');
 

@@ -22,6 +22,7 @@ use App\Models\Agent;
 use File;
 use DB;
 use Log;
+use PDF;
 use Carbon\Carbon;
 use Illuminate\Database\QueryException;
 
@@ -327,7 +328,44 @@ class SalesQuoteController extends Controller
      */
     public function show($id)
     {
-        //
+        $row = Sale_quote::where('id', '=', $id)->first();
+        $filtters = [];
+        if ($row->ocean_air_type == 0) {
+            $filtters = Sale_quote_air::where('sale_quote_id', '=', $id)->orderBy("created_at", "Desc")->get();
+            $typeTesting = 0;
+        } else {
+            $filtters = Sale_quote_ocean::where('sale_quote_id', '=', $id)->orderBy("created_at", "Desc")->get();
+            $typeTesting = 1;
+        }
+        $trackings = Sale_quote_trucking::where('sale_quote_id', '=', $id)->orderBy("created_at", "Desc")->get();
+        //all Data
+        $clients = Client::all();
+        $clearances = Currency::all();
+        $doors = Currency::all();
+        $employees = Employee::all();
+        $clearancesSuppliers = Supplier::where('supplier_type_id', '=', 2)->get();
+        $agents = Agent::all();
+         // This  $data array will be passed to our PDF blade
+         $data = [
+            'title' => 'First PDF for Medium',
+            'heading' => 'Hello from 99Points.info',
+            'row' => $row,
+            'typeTesting' => $typeTesting,
+            'employees' => $employees,
+            'agents'=>$agents,
+            'filtters' => $filtters,
+            'trackings' => $trackings,
+            'clients' => $clients,
+            'clearancesSuppliers'=>$clearancesSuppliers,
+            'clearances' => $clearances,
+            'doors'=>$doors,
+            'content' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.'
+        ];
+
+
+        $title = "My Report";
+        $pdf = PDF::loadView($this->viewName . 'report', $data);
+        return $pdf->stream('medium.pdf'); // to open in blank page
     }
 
     /**

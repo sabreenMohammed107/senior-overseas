@@ -138,6 +138,8 @@
 <li> <a href="{{ route('supplier-report.index') }}">Supplier Report</a> </li>
 <li> <a href="{{ route('total-balance.index') }}">Balances Statment</a> </li>
 <li> <a href="{{ route('earn-balance.index') }}">Earning Statment</a> </li>
+<li> <a href="{{ route('operation-balance.index') }}">Operation Statment</a> </li>
+
 
 
 
