@@ -25,7 +25,7 @@
     .test-4 {
         display: inline-block;
         width: 40%;
-        padding: 30px 0 0 0;
+        padding: 10px 0 0 0;
     }
 
     .test-3 {
@@ -41,7 +41,7 @@
     }
     .clearance{
         display: inline-block;
-        padding: 10px 0; 
+        padding: 10px 0 0 0; 
         width: 50%; 
     }
     .clearance input{
@@ -53,7 +53,7 @@
 
     <div class="container">
         <div class="card-body" style="margin-top: 80px;">
-            <div style="margin-bottom: 40px;border-bottom:1px solid #000;padding:10px 0px">
+            <div style="margin-bottom: 20px;border-bottom:1px solid #000;padding:10px 0px">
                 <h2>
                     Sale Quote
 
@@ -104,7 +104,8 @@
 
         <!--datatable select data -->
         <table id="courseEval" class="dattable table table-striped thead-dark  w-100">
-            <thead class="thead-dark" style="font-size: 14px;">
+       @if($filtters)  
+        <thead class="thead-dark" style="font-size: 14px;">
                 <tr>
                     <th>#</th>
                     @if($typeTesting==0)
@@ -127,6 +128,7 @@
 
                 </tr>
             </thead>
+            @endif
             <tbody>
                 @foreach($filtters as $index => $filter)
                 <tr>
