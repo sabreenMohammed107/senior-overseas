@@ -17,12 +17,14 @@
     }
 
     .test {
-        margin-top: 10px;
+        margin-top: 20px;
         width: 100%;
 
 
     }
-
+    th {
+  height: 5px;
+}
     .test-4 {
         display: inline-block;
         width: 40%;
@@ -40,12 +42,14 @@
 
         width: 100%;
     }
-    .clearance{
+
+    .clearance {
         display: inline-block;
-        padding: 10px 0 0 0; 
-        width: 50%; 
+        padding: 10px 0 0 0;
+        width: 50%;
     }
-    .clearance input{
+
+    .clearance input {
         width: 40%;
     }
 </style>
@@ -64,7 +68,7 @@
         </div>
 
 
-        <div class="test">
+        <!-- <div class="test">
 
             <div class="test-4 mb-3">
 
@@ -82,8 +86,8 @@
 
                 <input type="text" name="quote_date" value="{{ date_format($date,'Y-m-d') }}">
             </div>
-        </div>
-        <div class="test ">
+        </div> -->
+        <!-- <div class="test ">
 
             <div class="test-4 mb-3">
 
@@ -101,39 +105,39 @@
 
             </div>
 
-        </div>
-       
+        </div> -->
+
         <!--datatable select data -->
-        <table id="courseEval" class="dattable table table-striped thead-dark  w-100">
-     
-        @if($filtters->isEmpty())
-          <thead class="thead-dark" style="font-size: 14px; display:none">
-          @else
-          <thead class="thead-dark" style="font-size: 14px;">
- 
-          @endif      <tr>
-                    <th>#</th>
-                    @if($typeTesting==0)
-                    <th> Carrier</th>
+        <table id="courseEval" class="dattable table table-striped thead-dark  w-100" style="font-size: 12px;">
 
-                    <th> Rang</th>
-                    <th> Aol</th>
-                    <th> Aod</th>
-                    <th> Notes</th>
+            @if($filtters->isEmpty())
+            <thead class="thead-dark" style="font-size: 12px; display:none">
+                @else
+                <thead class="thead-dark" style="font-size: 12px;">
 
-                    @else
-                    <th> Carrier</th>
+                    @endif <tr>
+                        <th>#</th>
+                        @if($typeTesting==0)
+                        <th> Carrier</th>
 
-                    <th> Pol</th>
-                    <th> Pod</th>
-                    <th>T.T.(Days</th>
-                    <th> Notes</th>
-                    @endif
-                    <th>Price</th>
+                        <th> Rang</th>
+                        <th> Aol</th>
+                        <th> Aod</th>
+                        <th> Date</th>
 
-                </tr>
-            </thead>
-           
+                        @else
+                        <th> Carrier</th>
+
+                        <th> Pol</th>
+                        <th> Pod</th>
+                        <th>T.T.(Days</th>
+                        <th> Date</th>
+                        @endif
+                        <th>Price</th>
+
+                    </tr>
+                </thead>
+
             <tbody>
                 @foreach($filtters as $index => $filter)
                 <tr>
@@ -152,7 +156,17 @@
                     <td>@if($filter->air->aod)
                         {{$filter->air->aod->port_name}} - {{$filter->air->aod->country->country_name}}
                         @endif</td>
-                    <td>{{$filter->air->notes}}</td>
+                  
+
+                    <td>
+                        @if($filter->air)
+                        <?php $date1 = date_create($filter->air_validity_date) ?>
+                        {{ date_format($date1,'Y-m-d') }}
+                        @endif
+                    </td>
+
+
+
                     @else
                     <td>@if($filter->ocean->carrier)
                         {{$filter->ocean->carrier->carrier_name}}
@@ -164,8 +178,12 @@
                         {{$filter->ocean->pod->port_name}} - {{$filter->ocean->pod->country->country_name}}
                         @endif</td>
                     <td> {{$filter->ocean->transit_time}}</td>
-                    <td>{{$filter->ocean->notes}}</td>
-
+                    <td>
+                        @if($filter->ocean)
+                        <?php $date2 = date_create($filter->ocean_validity_date) ?>
+                        {{ date_format($date2,'Y-m-d') }}
+                        @endif
+                    </td>
                     @endif
 
                     <td>
@@ -177,11 +195,11 @@
                 @endforeach
             </tbody>
         </table>
-     
+
         <div style="border-bottom:solid 2px #0094ff;margin-bottom:20px"></div>
 
-        <table id="courseEval" class="dattable table table-striped thead-dark  w-100">
-            <thead class="thead-dark" style="font-size: 14px;">
+        <table id="courseEval" class="dattable table table-striped thead-dark  w-100" style="font-size: 12px;">
+            <thead class="thead-dark" style="font-size: 12px;">
                 <tr>
                     <th>#</th>
                     <th> supplier</th>
@@ -212,7 +230,12 @@
                         {{$track->truck->car->car_type}}
                         @endif</td>
                     <td>{{$track->truck->transit_time}}</td>
-                    <td>{{$track->truck->notes}}</td>
+                    <td>
+                    @if($track->truck)
+                        <?php $date3 = date_create($track->validity_date) ?>
+                        {{ date_format($date3,'Y-m-d') }}
+                        @endif
+                        </td>
                     <td>
                         <?php echo $trackings[$index]->car_price; ?>
                     </td>
@@ -222,66 +245,56 @@
 
             </tbody>
         </table>
+        <table  class="dattable table table-striped thead-dark  w-100" style="font-size: 14px;">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Clearance</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                  
+                </tr>
+            </thead>
+           
+            <tbody>
+<tr>
+    <td style="width: 90%;">Currency : @if($row->clearance){{$row->clearance->currency_name}}@endif</td>
+    <td> </td>
+    <td></td>
+</tr>
+<tr>
+    <td style="width: 90%;">Price : {{$row->clearance_price}}</td>
+    <td> </td>
+    <td></td>
+</tr>
+<tr>
+    <td style="width: 90%;">Notes :{{$row->clearance_notes}}</td>
+    <td> </td>
+    <td></td>
+</tr>
+            </tbody>
+
+            <tfoot class="btn-outline-info">
+                
+            </tfoot>
+        </table>
         <div style="border-bottom:solid 2px #0094ff;margin-bottom:20px"></div>
-        <div class="test">
+        <div class="test" style="border: 1px solid #000;">
 
-            <div class="clearance">
-
-            <label>Clearance Suppliers</label>
-                            <input type="text" name="supplier_id" value="@if($row->supplier){{$row->supplier->supplier_name_name}}@endif" >
-
-            </div>
-
-            <div class="clearance">
-
-                <label >Clearance Currency</label>
-               <input type="text" name="supplier_id" value="@if($row->clearance){{$row->clearance->currency_name}}@endif" >
-            </div>
+            <h5>Tearms & Condations</h5>
+            <ul style="font-size: 12px;">
+                <li>Rates are excluding any official receipts.</li>
+                <li>Bosla first container EGP 50 thereafter EGP 15/Container same declaration.</li>
+                <li>Rates are subject to modification upon any sovereign changes.</li>
+                <li>Invoices will be sent to your premises within 5 working days.</li>
+            </ul>
+            <span>Please find truck detention charges below:</span>
+            <ul style="font-size: 12px;">
+                <li>First 8 hours for free.</li>
+                <li>From hour 8 to hour 12 from truck arrival :EGP 700.</li>
+                <li>From hour 12 to hour 24 from truck arrival :1/2freight.</li>
+                <li>After 24 hours from truck arrival :Full freight will be added per day.</li>
+            </ul>
         </div>
-
-        <div class="test">
-
-            <div class="clearance">
-
-            <label>Clearance Price</label>
-                            <input type="text" disabled name="clearance_price" value="{{$row->clearance_price}}" placeholder="Clearance Price">
-            </div>
-
-            <div class="clearance">
-
-               
-            </div>
-        </div>
-
-        <div style="border-bottom:solid 2px #0094ff;margin-bottom:20px"></div>
-        <div class="test">
-
-            <div class="clearance">
-
-            <label>Door Agent</label>
-                            <input type="text" name="agent_id" value="@if($row->agent){{$row->agent->agent_name}}@endif" placeholder="Quote code">
-            </div>
-
-            <div class="clearance">
-
-            <label >Door Currency</label>
-                            <input type="text" name="door_door_currency_id" value="@if($row->door){{$row->door->currency_name}}@endif" placeholder="Quote code">
-
-            </div>
-        </div>
-
-        <div class="test">
-
-            <div class="clearance">
-
-            <label >Door Price</label>
-                                <input type="text" disabled name="door_door_price" value="{{$row->door_door_price}}" placeholder="Door to Door Price">
-            </div>
-
-            <div class="clearance">
-
-               
-            </div>
         </div>
 
 
