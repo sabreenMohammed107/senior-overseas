@@ -31,12 +31,7 @@
         padding: 5px 0 0 0;
     }
 
-    .test-3 {
-        display: inline-block;
-        width: 33%;
-        font-size: 14px;
-        padding: 30px 0 0 0;
-    }
+
 
     .col-md-12 {
 
@@ -127,7 +122,7 @@
 
                         @else
                         <th> Carrier</th>
-
+                        <th> Container</th>
                         <th> Pol</th>
                         <th> Pod</th>
                         <th>T.T.(Days</th>
@@ -171,6 +166,9 @@
                     <td>@if($filter->ocean->carrier)
                         {{$filter->ocean->carrier->carrier_name}}
                         @endif</td>
+                        <td>@if($$filter->ocean->container)
+                                {{$filter->ocean->container->container_size}}-{{$filter->ocean->container->container_type}} 
+                                    @endif</td>
                     <td>@if($filter->ocean->pol)
                         {{$filter->ocean->pol->port_name}} - {{$filter->ocean->pol->country->country_name}}
                         @endif</td>
@@ -206,6 +204,7 @@
                     <th> Pol</th>
                     <th> Pod</th>
                     <th> Car</th>
+                   
                     <th>T.T(Days</th>
                     <th>Notes</th>
                     <th>Price</th>
