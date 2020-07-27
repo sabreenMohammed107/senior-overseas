@@ -277,7 +277,7 @@
         <div style="border-bottom:solid 2px #0094ff;margin-bottom:20px"></div>
         <div class="test" style="border: 1px solid #000;">
 
-            <h5>Tearms & Condations</h5>
+            <h5>Terms & Conditions</h5>
             <ul style="font-size: 12px;">
                 <li>Rates are excluding any official receipts.</li>
                 <li>Bosla first container EGP 50 thereafter EGP 15/Container same declaration.</li>
