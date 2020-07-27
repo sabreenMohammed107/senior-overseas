@@ -166,7 +166,7 @@
                     <td>@if($filter->ocean->carrier)
                         {{$filter->ocean->carrier->carrier_name}}
                         @endif</td>
-                        <td>@if($$filter->ocean->container)
+                        <td>@if($filter->ocean->container)
                                 {{$filter->ocean->container->container_size}}-{{$filter->ocean->container->container_type}} 
                                     @endif</td>
                     <td>@if($filter->ocean->pol)
