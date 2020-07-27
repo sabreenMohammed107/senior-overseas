@@ -210,7 +210,7 @@
                   
                     <th> Pol</th>
                     <th> Pod</th>
-                    <th> Car</th>
+                    <th>Container</th>
                    
                     <th>T.T(Days</th>
                     <th>Notes</th>
