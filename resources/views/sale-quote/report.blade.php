@@ -17,7 +17,7 @@
     }
 
     .test {
-        margin-top: 20px;
+        margin-top: 5px;
         width: 100%;
 
 
@@ -82,7 +82,7 @@
                 <input type="text" name="quote_date" value="{{ date_format($date,'Y-m-d') }}">
             </div>
         </div> 
-        <!-- <div class="test ">
+         <div class="test ">
 
             <div class="test-4 mb-3">
 
@@ -100,7 +100,7 @@
 
             </div>
 
-        </div>  -->
+        </div> 
 
         <!--datatable select data -->
         <table id="courseEval" class="dattable table table-striped thead-dark  w-100" style="font-size: 12px;">
