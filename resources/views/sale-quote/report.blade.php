@@ -28,7 +28,7 @@
     .test-4 {
         display: inline-block;
         width: 40%;
-        padding: 10px 0 0 0;
+        padding: 5px 0 0 0;
     }
 
     .test-3 {
@@ -280,7 +280,7 @@
             <h5>Terms & Conditions</h5>
             <ul style="font-size: 12px;">
                 <li>Rates are excluding any official receipts.</li>
-                <li>Bosla first container EGP 50 thereafter EGP 15/Container same declaration.</li>
+                <li>Bosla first container EGP 50 there after EGP 15/Container same declaration.</li>
                 <li>Rates are subject to modification upon any sovereign changes.</li>
                 <li>Invoices will be sent to your premises within 5 working days.</li>
             </ul>
