@@ -82,7 +82,7 @@
                 <input type="text" name="quote_date" value="{{ date_format($date,'Y-m-d') }}">
             </div>
         </div> 
-        <div class="test ">
+        <!-- <div class="test ">
 
             <div class="test-4 mb-3">
 
@@ -100,7 +100,7 @@
 
             </div>
 
-        </div> 
+        </div>  -->
 
         <!--datatable select data -->
         <table id="courseEval" class="dattable table table-striped thead-dark  w-100" style="font-size: 12px;">
@@ -119,7 +119,7 @@
                         <th> Aol</th>
                         <th> Aod</th>
                         <th> Date</th>
-
+                        <th>Price</th>
                         @else
                         <th> Carrier</th>
                         <th> Container</th>
@@ -127,9 +127,9 @@
                         <th> Pod</th>
                         <th>T.T.(Days</th>
                         <th> Date</th>
-                        @endif
+                       
                         <th>Price</th>
-
+                        @endif
                     </tr>
                 </thead>
 
@@ -159,7 +159,11 @@
                         {{ date_format($date1,'Y-m-d') }}
                         @endif
                     </td>
-
+                    <td>
+                        {{$filter->price}}-@if($filter->air->currency)
+                        {{$filter->air->currency->currency_name}}
+                        @endif
+                    </td>
 
 
                     @else
@@ -182,11 +186,14 @@
                         {{ date_format($date2,'Y-m-d') }}
                         @endif
                     </td>
+                    <td>
+                    {{$filter->price}}-@if($filter->ocean->currency)
+                        {{$filter->ocean->currency->currency_name}}
+                        @endif
+                    </td>
                     @endif
 
-                    <td>
-                        {{$filter->price}}
-                    </td>
+                   
 
 
                 </tr>
@@ -233,7 +240,9 @@
                         @endif
                         </td>
                     <td>
-                        <?php echo $trackings[$index]->car_price; ?>
+                        <?php echo $trackings[$index]->car_price; ?> -@if($track->truck->currency)
+                        {{$track->truck->currency->currency_name}}
+                        @endif
                     </td>
 
                 </tr>
