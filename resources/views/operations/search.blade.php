@@ -318,7 +318,7 @@
 	<div class="col-md-6 mb-3">
 		<div class="form-group">
 			<label class="exampleInputPassword1" for="exampleCheck1">Containers Counts</label>
-			<input type="text" class="form-control" name="container_counts" placeholder="Containers Counts">
+			<input type="number" value="1" class="form-control" name="container_counts" placeholder="Containers Counts">
 		</div>
 	</div>
 	<div class="col-md-6 mb-3">

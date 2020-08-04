@@ -636,7 +636,10 @@ class OperationsController extends Controller
 
 
                 $obj->entry_date = $row->operation_date;
-                $obj->credit = $sellRow->sell* $row->container_counts;
+                    $obj->credit = $sellRow->sell* $row->container_counts;
+
+                
+
                 $obj->client_id = $row->shipper_id;
                 $obj->notes = $row->notes;
                 $obj->currency_id = $sellRow->currency_id;
@@ -671,8 +674,9 @@ class OperationsController extends Controller
                 }
 
                 $obj->entry_date = $row->operation_date;
-                $obj->depit = $buyRow->buy*$row->container_counts;
+                    $obj->depit = $buyRow->buy * $row->container_counts;
 
+               
 
 
                 $obj->notes = $row->notes;
@@ -702,7 +706,7 @@ class OperationsController extends Controller
 
                 $obj->trans_type_id = Finan_trans_type::where('id', '=', 18)->first()->id;
 
-                $obj->entry_date = $buyOther->operation_date;
+                $obj->entry_date = $row->operation_date;
                 $obj->depit = $buyOther->buy;
                 // $obj->client_id = $row->shipper_id;
                 if($buyOther->ocean_carrier_id!=null){

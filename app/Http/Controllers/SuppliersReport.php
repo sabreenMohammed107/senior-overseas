@@ -124,7 +124,10 @@ class SuppliersReport extends Controller
 
         $curs = [];
         foreach ($filtters as $row) {
-            $cur = $row->currency->currency_name;
+            if($row->currency){
+                $cur = $row->currency->currency_name;
+
+            }
             array_push($curs, $cur);
         }
         $curs = array_unique($curs);
@@ -277,7 +280,10 @@ class SuppliersReport extends Controller
 
         $curs = [];
         foreach ($filtters as $row) {
-            $cur = $row->currency->currency_name;
+            if($row->currency){
+                $cur = $row->currency->currency_name;
+
+            }
             array_push($curs, $cur);
         }
         $curs = array_unique($curs);
