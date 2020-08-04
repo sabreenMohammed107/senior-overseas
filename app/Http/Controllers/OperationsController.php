@@ -706,19 +706,19 @@ class OperationsController extends Controller
                 $obj->depit = $buyOther->buy;
                 // $obj->client_id = $row->shipper_id;
                 if($buyOther->ocean_carrier_id!=null){
-                    $obj->ocean_carrier_id = $buyOther->ocean_carrier_id;
+                    $obj->ocean_carrier_id =$row->ocean->ocean->carrier_id;
                 }
                 if($buyOther->air_carrier_id!=null){
-                    $obj->air_carrier_id = $buyOther->air_carrier_id;   
+                    $obj->air_carrier_id = $row->air->air->carrier_id;
                 }
                 if($buyOther->clearance_id!=null){
-                    $obj->clearance_id = $buyOther->clearance_id;  
+                    $obj->clearance_id =  $row->sale->supplier_id;
                 }
                 if($buyOther->trucking_id!=null){
-                    $obj->trucking_id = $buyOther->trucking_id;  
+                    $obj->trucking_id = $row->tracking->truck->supplier_id;
                 }
                 if($buyOther->agent_id!=null){
-                    $obj->agent_id = $buyOther->agent_id;  
+                    $obj->agent_id =$row->sale->agent_id;
                 }
                 $obj->notes = $buyOther->notes;
                 $obj->currency_id = $buyOther->currency_id;
