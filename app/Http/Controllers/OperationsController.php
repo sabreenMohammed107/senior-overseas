@@ -648,23 +648,23 @@ class OperationsController extends Controller
                 $obj = new Financial_entry();
                 $obj->operation_id = $id;
 
-                if ($sellRow->cashbox_expenses_types_id == 3) {
+                if ($buyRow->cashbox_expenses_types_id == 3) {
                     $obj->trans_type_id = Finan_trans_type::where('id', '=', 8)->first()->id;
                     $obj->ocean_carrier_id = $row->ocean->ocean->carrier_id;
                 }
-                if ($sellRow->cashbox_expenses_types_id == 4) {
+                if ($buyRow->cashbox_expenses_types_id == 4) {
                     $obj->trans_type_id = Finan_trans_type::where('id', '=', 9)->first()->id;
                     $obj->air_carrier_id = $row->air->air->carrier_id;
                 }
-                if ($sellRow->cashbox_expenses_types_id == 6) {
+                if ($buyRow->cashbox_expenses_types_id == 6) {
                     $obj->trans_type_id = Finan_trans_type::where('id', '=', 10)->first()->id;
                     $obj->trucking_id = $row->tracking->truck->supplier_id;
                 }
-                if ($sellRow->cashbox_expenses_types_id == 5) {
+                if ($buyRow->cashbox_expenses_types_id == 5) {
                     $obj->trans_type_id = Finan_trans_type::where('id', '=', 11)->first()->id;
                     $obj->clearance_id = $row->sale->supplier_id;
                 }
-                if ($sellRow->cashbox_expenses_types_id == 7) {
+                if ($buyRow->cashbox_expenses_types_id == 7) {
 
                     $obj->trans_type_id = Finan_trans_type::where('id', '=', 12)->first()->id;
                     $obj->agent_id = $row->sale->agent_id;
@@ -706,19 +706,19 @@ class OperationsController extends Controller
                 $obj->depit = $buyOther->buy;
                 // $obj->client_id = $row->shipper_id;
                 if($buyOther->ocean_carrier_id!=null){
-                    $obj->ocean_carrier_id =$row->ocean->ocean->carrier_id;
+                    $obj->ocean_carrier_id = $buyOther->ocean_carrier_id;
                 }
                 if($buyOther->air_carrier_id!=null){
-                    $obj->air_carrier_id = $row->air->air->carrier_id;
+                    $obj->air_carrier_id = $buyOther->air_carrier_id;   
                 }
                 if($buyOther->clearance_id!=null){
-                    $obj->clearance_id =  $row->sale->supplier_id;
+                    $obj->clearance_id = $buyOther->clearance_id;  
                 }
                 if($buyOther->trucking_id!=null){
-                    $obj->trucking_id = $row->tracking->truck->supplier_id;
+                    $obj->trucking_id = $buyOther->trucking_id;  
                 }
                 if($buyOther->agent_id!=null){
-                    $obj->agent_id =$row->sale->agent_id;
+                    $obj->agent_id = $buyOther->agent_id;  
                 }
                 $obj->notes = $buyOther->notes;
                 $obj->currency_id = $buyOther->currency_id;
