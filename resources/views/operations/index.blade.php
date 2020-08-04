@@ -47,14 +47,14 @@
                                     {{$row->shipper->client_name}}
                                     @endif</td>
                                 <td>
+                                <a href="{{ route('operations.show',$row->id) }}" class="btn btn-info d-inline-block" role="button" data-role="button" disabled='disabled'>view</a>
+
                                     @if($row->account_confirm==1)
-                                    <button class="btn btn-info d-inline-block" disabled>view</button>
                                     <button class="btn btn-info d-inline-block" disabled>edit</button>
                                     <button class="btn d-inline-block btn-danger" disabled>delete</button>
                                     <button class="btn d-inline-block btn-dark" disabled>send To Account</button>
 
                                     @else
-                                    <a href="{{ route('operations.show',$row->id) }}" class="btn btn-info d-inline-block" role="button" data-role="button" disabled='disabled'>view</a>
                                     <a href="{{ route('operations.edit',$row->id) }}" class="btn btn-info d-inline-block">edit</a>
                                     <a href="#" onclick="destroy('operations','{{$row->id}}')" class="btn d-inline-block btn-danger">delete</a>
                                     <form id="delete_{{$row->id}}" action="{{ route('operations.destroy', $row->id) }}" method="POST" style="display: none;">

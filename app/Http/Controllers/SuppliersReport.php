@@ -79,7 +79,7 @@ class SuppliersReport extends Controller
         $from_date = Carbon::parse($request->input('from_date'));
         $to_date = Carbon::parse($request->input('to_date'));
 
-        $filtters = Financial_entry::orderBy('currency_id','asc')->orderBy('entry_date','asc');
+        $filtters =Financial_entry::orderBy('currency_id')->orderBy('entry_date');
 
         if (!empty($request->get("from_date"))) {
             $filtters->where('entry_date', '>=', Carbon::parse($request->get("from_date")));
@@ -232,7 +232,7 @@ class SuppliersReport extends Controller
         $from_date =$request->input('from_date');
         $to_date =$request->input('to_date');
 
-        $filtters = Financial_entry::orderBy('currency_id','asc')->orderBy('entry_date','asc');
+        $filtters =Financial_entry::orderBy('currency_id')->orderBy('entry_date');
 
         if (!empty($request->get("from_date"))) {
             $filtters->where('entry_date', '>=', Carbon::parse($request->get("from_date")));
@@ -240,29 +240,29 @@ class SuppliersReport extends Controller
         if (!empty($request->get("to_date"))) {
             $filtters->where('entry_date', '<=', Carbon::parse($request->get("to_date")));
         }
-        if (!empty($request->get("selector_type")) && $fristSelect == 3) {
+        if ( $fristSelect == 3) {
             if (!empty($request->get("xxselector"))) {
                 $filtters->where('ocean_carrier_id', '=', $request->get("xxselector"));
             }
         }
-        if (!empty($request->get("selector_type")) && $fristSelect == 4) {
+        if ( $fristSelect == 4) {
             if (!empty($request->get("xxselector"))) {
                 $filtters->where('air_carrier_id', '=', $request->get("xxselector"));
             }
         }
 
-        if (!empty($request->get("selector_type")) && $fristSelect == 6) {
+        if ( $fristSelect == 6) {
             if (!empty($request->get("xxselector"))) {
                 $filtters->where('trucking_id', '=', $request->get("xxselector"));
             }
         }
-        if (!empty($request->get("selector_type")) && $fristSelect == 5) {
+        if ( $fristSelect == 5) {
 
             if (!empty($request->get("xxselector"))) {
                 $filtters->where('clearance_id', '=', $request->get("xxselector"));
             }
         }
-        if (!empty($request->get("selector_type")) && $fristSelect == 7) {
+        if ( $fristSelect == 7) {
             if (!empty($request->get("xxselector"))) {
                 $filtters->where('agent_id', '=', $request->get("xxselector"));
             }
