@@ -111,7 +111,7 @@ class ClientReport extends Controller
         foreach ($cursIds as $cur) {
             $total = 0;
            
-         $total = Financial_entry::where('client_id', $client_id)->where('currency_id', '=', $cur)->sum('credit') - Financial_entry::where('client_id', $client_id)->where('currency_id', '=', $cur)->sum('depit');
+         $total =  $filtters->where('client_id', $client_id)->where('currency_id', '=', $cur)->sum('credit') -  $filtters->where('client_id', $client_id)->where('currency_id', '=', $cur)->sum('depit');
             $name=Currency::where('id','=',$cur)->first();
             $totalNum = $total;
             $total = Terbilang::make($total, " -  $name->currency_name");
@@ -214,7 +214,7 @@ class ClientReport extends Controller
         foreach ($cursIds as $cur) {
             $total = 0;
            
-         $total = Financial_entry::where('client_id', $client_id)->where('currency_id', '=', $cur)->sum('credit') - Financial_entry::where('client_id', $client_id)->where('currency_id', '=', $cur)->sum('depit');
+         $total =  $filtters->where('client_id', $client_id)->where('currency_id', '=', $cur)->sum('credit') -  $filtters->where('client_id', $client_id)->where('currency_id', '=', $cur)->sum('depit');
             $name=Currency::where('id','=',$cur)->first();
             $totalNum = $total;
             $total = Terbilang::make($total, " -  $name->currency_name");

@@ -147,22 +147,22 @@ class SuppliersReport extends Controller
             $total = 0;
             foreach ($filtters as $filtter) {
                 if ($filtter->ocean_carrier_id) {
-                    $total = Financial_entry::where('ocean_carrier_id', $xxselector)->where('currency_id', '=', $cur)->sum('depit') - Financial_entry::where('ocean_carrier_id', $xxselector)->where('currency_id', '=', $cur)->sum('credit');
+                    $total = $filtters->where('ocean_carrier_id', $xxselector)->where('currency_id', '=', $cur)->sum('depit') - $filtters->where('ocean_carrier_id', $xxselector)->where('currency_id', '=', $cur)->sum('credit');
                 break;
                 } elseif ($filtter->air_carrier_id) {
-                    $total = Financial_entry::where('air_carrier_id', $xxselector)->where('currency_id', '=', $cur)->sum('depit') - Financial_entry::where('air_carrier_id', $xxselector)->where('currency_id', '=', $cur)->sum('credit');
+                    $total = $filtters->where('air_carrier_id', $xxselector)->where('currency_id', '=', $cur)->sum('depit') - $filtters->where('air_carrier_id', $xxselector)->where('currency_id', '=', $cur)->sum('credit');
                 break;
                 } elseif ($filtter->trucking_id) {
-                    $total = Financial_entry::where('trucking_id', $xxselector)->where('currency_id', '=', $cur)->sum('depit') - Financial_entry::where('trucking_id', $xxselector)->where('currency_id', '=', $cur)->sum('credit');
+                    $total =$filtters->where('trucking_id', $xxselector)->where('currency_id', '=', $cur)->sum('depit') - $filtters->where('trucking_id', $xxselector)->where('currency_id', '=', $cur)->sum('credit');
                 break;
                 } elseif ($filtter->clearance_id) {
-                    $total = Financial_entry::where('clearance_id', $xxselector)->where('currency_id', '=', $cur)->sum('depit') - Financial_entry::where('clearance_id', $xxselector)->where('currency_id', '=', $cur)->sum('credit');
+                    $total = $filtters->where('clearance_id', $xxselector)->where('currency_id', '=', $cur)->sum('depit') - $filtters->where('clearance_id', $xxselector)->where('currency_id', '=', $cur)->sum('credit');
                 break;
                 } elseif ($filtter->agent_id) {
-                    $total = Financial_entry::where('agent_id', $xxselector)->where('currency_id', '=', $cur)->sum('depit') - Financial_entry::where('agent_id', $xxselector)->where('currency_id', '=', $cur)->sum('credit');
+                    $total = $filtters->where('agent_id', $xxselector)->where('currency_id', '=', $cur)->sum('depit') - $filtters->where('agent_id', $xxselector)->where('currency_id', '=', $cur)->sum('credit');
                 break;
                 } else {
-                    $total = Financial_entry::where('trans_type_id', $request->get("selector_type"))->where('currency_id', '=', $cur)->sum('depit') - Financial_entry::where('trans_type_id', $request->get("selector_type"))->where('currency_id', '=', $cur)->sum('credit');
+                    $total = $filtters->where('trans_type_id', $request->get("selector_type"))->where('currency_id', '=', $cur)->sum('depit') - $filtters->where('trans_type_id', $request->get("selector_type"))->where('currency_id', '=', $cur)->sum('credit');
                 break;
                 }
             }
@@ -304,34 +304,34 @@ class SuppliersReport extends Controller
             $objname='';
             foreach ($filtters as $filtter) {
                 if ($filtter->ocean_carrier_id) {
-                    $total = Financial_entry::where('ocean_carrier_id', $xxselector)->where('currency_id', '=', $cur)->sum('depit') - Financial_entry::where('ocean_carrier_id', $xxselector)->where('currency_id', '=', $cur)->sum('credit');
+                    $total =  $filtters->where('ocean_carrier_id', $xxselector)->where('currency_id', '=', $cur)->sum('depit') -  $filtters->where('ocean_carrier_id', $xxselector)->where('currency_id', '=', $cur)->sum('credit');
                     $obj=Carrier::where('id', '=', $request->input('xxselector'))->first();
                     $objname=$obj->carrier_name;
 
                 break;
                 } elseif ($filtter->air_carrier_id) {
-                    $total = Financial_entry::where('air_carrier_id', $xxselector)->where('currency_id', '=', $cur)->sum('depit') - Financial_entry::where('air_carrier_id', $xxselector)->where('currency_id', '=', $cur)->sum('credit');
+                    $total =  $filtters->where('air_carrier_id', $xxselector)->where('currency_id', '=', $cur)->sum('depit') -  $filtters->where('air_carrier_id', $xxselector)->where('currency_id', '=', $cur)->sum('credit');
                     $obj=Carrier::where('id', '=', $request->input('xxselector'))->first();
                     $objname=$obj->carrier_name;
 
                 break;
                 } elseif ($filtter->trucking_id) {
-                    $total = Financial_entry::where('trucking_id', $xxselector)->where('currency_id', '=', $cur)->sum('depit') - Financial_entry::where('trucking_id', $xxselector)->where('currency_id', '=', $cur)->sum('credit');
+                    $total =  $filtters->where('trucking_id', $xxselector)->where('currency_id', '=', $cur)->sum('depit') -  $filtters->where('trucking_id', $xxselector)->where('currency_id', '=', $cur)->sum('credit');
                     $obj=Supplier::where('id', '=', $request->input('xxselector'))->first();
                     $objname=$obj->supplier_name;
                 break;
                 } elseif ($filtter->clearance_id) {
-                    $total = Financial_entry::where('clearance_id', $xxselector)->where('currency_id', '=', $cur)->sum('depit') - Financial_entry::where('clearance_id', $xxselector)->where('currency_id', '=', $cur)->sum('credit');
+                    $total =  $filtters->where('clearance_id', $xxselector)->where('currency_id', '=', $cur)->sum('depit') -  $filtters->where('clearance_id', $xxselector)->where('currency_id', '=', $cur)->sum('credit');
                     $obj=Supplier::where('id', '=', $request->input('xxselector'))->first();
                     $objname=$obj->supplier_name;
                 break;
                 } elseif ($filtter->agent_id) {
-                    $total = Financial_entry::where('agent_id', $xxselector)->where('currency_id', '=', $cur)->sum('depit') - Financial_entry::where('agent_id', $xxselector)->where('currency_id', '=', $cur)->sum('credit');
+                    $total =  $filtters->where('agent_id', $xxselector)->where('currency_id', '=', $cur)->sum('depit') -  $filtters->where('agent_id', $xxselector)->where('currency_id', '=', $cur)->sum('credit');
                     $obj=Agent::where('id', '=', $request->input('xxselector'))->first();
                     $objname=$obj->agent_name;
                 break;
                 } else {
-                    $total = Financial_entry::where('trans_type_id',$request->get("selector_type"))->where('currency_id', '=', $cur)->sum('depit') - Financial_entry::where('trans_type_id',$request->get("selector_type"))->where('currency_id', '=', $cur)->sum('credit');
+                    $total =  $filtters->where('trans_type_id',$request->get("selector_type"))->where('currency_id', '=', $cur)->sum('depit') -  $filtters->where('trans_type_id',$request->get("selector_type"))->where('currency_id', '=', $cur)->sum('credit');
                     $obj=Finan_trans_type::where('id', '=', $request->get("selector_type"))->first();
                     $objname=$obj->trans_type;
 
