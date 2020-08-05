@@ -301,7 +301,6 @@
                         fristSelect: $('#selector_type').val(),
                     },
                     success: function(result) {
- alert('true'+result[2]);
                         $('#selection_current_amount').val(result[0]);
                         $('#selection_currancy').val(result[1]);
 

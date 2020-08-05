@@ -149,13 +149,11 @@ class CashFinanceController extends Controller
         }
 
         $currentBalance = Financial_entry::where('cash_box_id', $request->input('cash_box_id'))->sum('depit') - Financial_entry::where('cash_box_id', $request->input('cash_box_id'))->sum('credit');
-       
+
         if ($request->input('credit') > $currentBalance) {
 
             return redirect()->back()->withInput($request->input())->with('flash_danger', 'Amount Is Not Valid');
-      
-        } 
-        else {
+        } else {
             DB::transaction(function () use ($obj,  $request) {
                 $obj->save();
             });
@@ -430,39 +428,38 @@ class CashFinanceController extends Controller
         if ($fristSelect == 7) {
             $rows = Open_balance::where('agent_id', '=', $value)->get();
         }
-    //  foreach ($rows as $row) {
+        //  foreach ($rows as $row) {
 
-    //         if ($cash==$row->currency_id) {
+        //         if ($cash==$row->currency_id) {
+        $data = 0;
+        if ($fristSelect == 3) {
+            $data = Financial_entry::where('ocean_carrier_id', $value)->where('currency_id', '=', $cash)->sum('depit') - Financial_entry::where('ocean_carrier_id', $value)->where('currency_id', '=', $cash)->sum('credit');
+        }
+        if ($fristSelect == 4) {
+            $data = Financial_entry::where('air_carrier_id', $value)->where('currency_id', '=', $cash)->sum('depit') - Financial_entry::where('air_carrier_id', $value)->where('currency_id', '=', $cash)->sum('credit');
+        }
 
-                if ($fristSelect ==3) {
-                    $data = Financial_entry::where('ocean_carrier_id', $value)->where('currency_id', '=', $cash)->sum('depit') - Financial_entry::where('ocean_carrier_id', $value)->where('currency_id', '=', $cash)->sum('credit');
-                }
-                if ($fristSelect ==4) {
-                    $data = Financial_entry::where('air_carrier_id', $value)->where('currency_id', '=', $cash)->sum('depit') - Financial_entry::where('air_carrier_id', $value)->where('currency_id', '=', $cash)->sum('credit');
-                }
-
-                if ($fristSelect ==5) {
-                    $data = Financial_entry::where('clearance_id', $value)->where('currency_id', '=', $cash)->sum('depit') - Financial_entry::where('clearance_id', $value)->where('currency_id', '=', $cash)->sum('credit');
-                }
-                if ($fristSelect ==6) {
-                    $data = Financial_entry::where('trucking_id', $value)->where('currency_id', '=', $cash)->sum('depit') - Financial_entry::where('trucking_id', $value)->where('currency_id', '=', $cash)->sum('credit');
-                }
-                if ($fristSelect ==7) {
-                    $data = Financial_entry::where('agent_id', $value)->where('currency_id', '=', $cash)->sum('depit') - Financial_entry::where('agent_id', $value)->where('currency_id', '=', $cash)->sum('credit');
-                }
-            //     $xx=10;
-            //     break;
-            // } else {
-            //     $data = 0;
-            // }
+        if ($fristSelect == 5) {
+            $data = Financial_entry::where('clearance_id', $value)->where('currency_id', '=', $cash)->sum('depit') - Financial_entry::where('clearance_id', $value)->where('currency_id', '=', $cash)->sum('credit');
+        }
+        if ($fristSelect == 6) {
+            $data = Financial_entry::where('trucking_id', $value)->where('currency_id', '=', $cash)->sum('depit') - Financial_entry::where('trucking_id', $value)->where('currency_id', '=', $cash)->sum('credit');
+        }
+        if ($fristSelect == 7) {
+            $data = Financial_entry::where('agent_id', $value)->where('currency_id', '=', $cash)->sum('depit') - Financial_entry::where('agent_id', $value)->where('currency_id', '=', $cash)->sum('credit');
+        }
+        //     $xx=10;
+        //     break;
+        // } else {
+        //     $data = 0;
+        // }
         // }
 
         $currency = Currency::where('id', '=', $cash)->first()->currency_name;
 
         array_push($dataAjax, $data);
         array_push($dataAjax, $currency);
-        array_push($dataAjax, $xx);
-
+      
         return ($dataAjax);
     }
 }
