@@ -115,7 +115,7 @@
 								<div class="col-md-6 mb-3">
 									<div class="ui-widget form-group">
 										<label>Currency</label>
-										<select name="currency_id" class="form-control" data-live-search="true">
+										<select name="currency_id" required class="form-control" data-live-search="true">
                                         <option value="">Select ...</option>
                                             @foreach ($currencies as $type)
                                             <option value='{{$type->id}}'>

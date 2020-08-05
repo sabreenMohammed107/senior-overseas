@@ -110,7 +110,7 @@
                                 <div class="col-md-6 mb-3">
                                     <div class="form-group">
                                         <label class="exampleInputPassword1" for="exampleCheck1">Balance Start Date</label>
-                                        <input name="balance_start_date" type="date" class="form-control" placeholder="date">
+                                        <input name="balance_start_date" required type="date" class="form-control" placeholder="date">
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
