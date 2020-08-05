@@ -461,7 +461,7 @@ class CashFinanceController extends Controller
 
         array_push($dataAjax, $data);
         array_push($dataAjax, $currency);
-        array_push($dataAjax, $cash);
+        array_push($dataAjax, $fristSelect);
 
         return ($dataAjax);
     }
