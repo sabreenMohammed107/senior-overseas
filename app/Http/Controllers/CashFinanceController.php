@@ -422,18 +422,17 @@ class CashFinanceController extends Controller
         $fristSelect = $request->get('fristSelect');
 
         if ($fristSelect == 3 || $fristSelect == 4) {
-            $rows = Carrier::where('carrier_id', '=', $value)->get();
+            $rows = Open_balance::where('carrier_id', '=', $value)->get();
         }
         if ($fristSelect == 5 || $fristSelect == 6) {
-            $rows = Supplier::where('supplier_id', '=', $value)->get();
+            $rows = Open_balance::where('supplier_id', '=', $value)->get();
         }
         if ($fristSelect == 7) {
-            $rows = Agent::where('agent_id', '=', $value)->get();
+            $rows = Open_balance::where('agent_id', '=', $value)->get();
         }
-$xx=0;
-        foreach ($rows as $row) {
+    //  foreach ($rows as $row) {
 
-            if ($cash==$row->currency_id) {
+    //         if ($cash==$row->currency_id) {
 
                 if ($fristSelect ==3) {
                     $data = Financial_entry::where('ocean_carrier_id', $value)->where('currency_id', '=', $cash)->sum('depit') - Financial_entry::where('ocean_carrier_id', $value)->where('currency_id', '=', $cash)->sum('credit');
@@ -451,13 +450,12 @@ $xx=0;
                 if ($fristSelect ==7) {
                     $data = Financial_entry::where('agent_id', $value)->where('currency_id', '=', $cash)->sum('depit') - Financial_entry::where('agent_id', $value)->where('currency_id', '=', $cash)->sum('credit');
                 }
-                $xx=10;
-                break;
-            } else {
-$xx=7;
-                $data = 0;
-            }
-        }
+            //     $xx=10;
+            //     break;
+            // } else {
+            //     $data = 0;
+            // }
+        // }
 
         $currency = Currency::where('id', '=', $cash)->first()->currency_name;
 

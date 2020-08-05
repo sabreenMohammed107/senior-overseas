@@ -425,9 +425,9 @@ class BankFinanceController extends Controller
             $rows = Open_balance::where('agent_id', '=', $value)->get();
         }
 
-        foreach ($rows as $row) {
+        // foreach ($rows as $row) {
 
-            if ($cash == $row->currency_id) {
+        //     if ($cash == $row->currency_id) {
                 if ($fristSelect == 3) {
                     $data = Financial_entry::where('ocean_carrier_id', $value)->where('currency_id', '=', $cash)->sum('depit') - Financial_entry::where('ocean_carrier_id', $value)->where('currency_id', '=', $cash)->sum('credit');
                 }
@@ -444,12 +444,12 @@ class BankFinanceController extends Controller
                 if ($fristSelect == 7) {
                     $data = Financial_entry::where('agent_id', $value)->where('currency_id', '=', $cash)->sum('depit') - Financial_entry::where('agent_id', $value)->where('currency_id', '=', $cash)->sum('credit');
                 }
-                break;
-            } else {
+            //     break;
+            // } else {
 
-                $data = 0;
-            }
-        }
+            //     $data = 0;
+            // }
+        // }
 
 
         $currency = Currency::where('id', '=', $cash)->first()->currency_name;
