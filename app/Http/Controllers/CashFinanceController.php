@@ -422,19 +422,19 @@ class CashFinanceController extends Controller
         $fristSelect = $request->get('fristSelect');
 
         if ($fristSelect == 3 || $fristSelect == 4) {
-            $rows = Open_balance::where('carrier_id', '=', $value)->get();
+            $rows = Carrier::where('carrier_id', '=', $value)->get();
         }
         if ($fristSelect == 5 || $fristSelect == 6) {
-            $rows = Open_balance::where('supplier_id', '=', $value)->get();
+            $rows = Supplier::where('supplier_id', '=', $value)->get();
         }
         if ($fristSelect == 7) {
-            $rows = Open_balance::where('agent_id', '=', $value)->get();
+            $rows = Agent::where('agent_id', '=', $value)->get();
         }
-
+$xx=0;
         foreach ($rows as $row) {
 
-            if ($cash == $row->currency_id) {
-                
+            if ($cash==$row->currency_id) {
+
                 if ($fristSelect ==3) {
                     $data = Financial_entry::where('ocean_carrier_id', $value)->where('currency_id', '=', $cash)->sum('depit') - Financial_entry::where('ocean_carrier_id', $value)->where('currency_id', '=', $cash)->sum('credit');
                 }
@@ -444,25 +444,26 @@ class CashFinanceController extends Controller
 
                 if ($fristSelect ==5) {
                     $data = Financial_entry::where('clearance_id', $value)->where('currency_id', '=', $cash)->sum('depit') - Financial_entry::where('clearance_id', $value)->where('currency_id', '=', $cash)->sum('credit');
-
                 }
                 if ($fristSelect ==6) {
                     $data = Financial_entry::where('trucking_id', $value)->where('currency_id', '=', $cash)->sum('depit') - Financial_entry::where('trucking_id', $value)->where('currency_id', '=', $cash)->sum('credit');
-
                 }
                 if ($fristSelect ==7) {
                     $data = Financial_entry::where('agent_id', $value)->where('currency_id', '=', $cash)->sum('depit') - Financial_entry::where('agent_id', $value)->where('currency_id', '=', $cash)->sum('credit');
-
                 }
-            break;
-            } 
+                $xx=10;
+                break;
+            } else {
+$xx=7;
+                $data = 0;
+            }
         }
 
         $currency = Currency::where('id', '=', $cash)->first()->currency_name;
 
         array_push($dataAjax, $data);
         array_push($dataAjax, $currency);
-        array_push($dataAjax, $value);
+        array_push($dataAjax, $xx);
 
         return ($dataAjax);
     }
