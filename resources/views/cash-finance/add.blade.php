@@ -301,14 +301,14 @@
                         fristSelect: $('#selector_type').val(),
                     },
                     success: function(result) {
-alert('true'+result[0]);
+ alert('true'+result[2]);
                         $('#selection_current_amount').val(result[0]);
                         $('#selection_currancy').val(result[1]);
 
                     },
                     error: function() {
-                        alert('error'+result[0]);
-                        // $('#selection_current_amount').val(0);
+                        // alert('error'+result[0]);
+                       $('#selection_current_amount').val(0);
                     }
 
                 })

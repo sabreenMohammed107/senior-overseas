@@ -434,20 +434,20 @@ class CashFinanceController extends Controller
         foreach ($rows as $row) {
 
             if ($cash == $row->currency_id) {
-                if ($fristSelect == 3) {
+                if ($fristSelect ==3) {
                     $data = Financial_entry::where('ocean_carrier_id', $value)->where('currency_id', '=', $cash)->sum('depit') - Financial_entry::where('ocean_carrier_id', $value)->where('currency_id', '=', $cash)->sum('credit');
                 }
-                if ($fristSelect == 4) {
+                if ($fristSelect ==4) {
                     $data = Financial_entry::where('air_carrier_id', $value)->where('currency_id', '=', $cash)->sum('depit') - Financial_entry::where('air_carrier_id', $value)->where('currency_id', '=', $cash)->sum('credit');
                 }
 
-                if ($fristSelect == 5) {
+                if ($fristSelect ==5) {
                     $data = Financial_entry::where('clearance_id', $value)->where('currency_id', '=', $cash)->sum('depit') - Financial_entry::where('clearance_id', $value)->where('currency_id', '=', $cash)->sum('credit');
                 }
-                if ($fristSelect == 6) {
+                if ($fristSelect ==6) {
                     $data = Financial_entry::where('trucking_id', $value)->where('currency_id', '=', $cash)->sum('depit') - Financial_entry::where('trucking_id', $value)->where('currency_id', '=', $cash)->sum('credit');
                 }
-                if ($fristSelect == 7) {
+                if ($fristSelect ==7) {
                     $data = Financial_entry::where('agent_id', $value)->where('currency_id', '=', $cash)->sum('depit') - Financial_entry::where('agent_id', $value)->where('currency_id', '=', $cash)->sum('credit');
                 }
                 break;
@@ -457,11 +457,11 @@ class CashFinanceController extends Controller
             }
         }
 
-
         $currency = Currency::where('id', '=', $cash)->first()->currency_name;
 
         array_push($dataAjax, $data);
         array_push($dataAjax, $currency);
+        array_push($dataAjax, $cash);
 
         return ($dataAjax);
     }
