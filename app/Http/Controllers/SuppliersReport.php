@@ -298,10 +298,10 @@ class SuppliersReport extends Controller
 
 
 
+        $objname='';
 
         foreach ($cursIds as $cur) {
             $total = 0;
-            $objname='';
             foreach ($filtters as $filtter) {
                 if ($filtter->ocean_carrier_id) {
                     $total =  $filtters->where('ocean_carrier_id', $xxselector)->where('currency_id', '=', $cur)->sum('depit') -  $filtters->where('ocean_carrier_id', $xxselector)->where('currency_id', '=', $cur)->sum('credit');
