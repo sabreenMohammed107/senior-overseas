@@ -15,8 +15,6 @@ use DB;
 use Log;
 use App\User;
 use Carbon\Carbon;
-use Notification;
-use App\Notifications\MyFirstNotification;
 use Illuminate\Database\QueryException;
 class SupplierController extends Controller
 {
@@ -97,7 +95,6 @@ class SupplierController extends Controller
         $user=User::where('role_id','=',1)->first();
         $dateee=$this->object::create($data);
 
-        Notification::send($user, new MyFirstNotification($dateee));
       
         return redirect()->route($this->routeName . 'index')->with('flash_success', $this->message);
     }
