@@ -110,7 +110,7 @@
                                         <div class="form-group">
                                             <label class="exampleInputPassword1" for="exampleCheck1">Amount
                                                 Money</label>
-                                            <input type="number" name="credit" class="form-control" placeholder="Amount">
+                                            <input type="number" step="0.01" name="credit" class="form-control" placeholder="Amount">
                                         </div>
                                     </div>
                                     <!-- <div class="col-md-6 mb-3">
@@ -174,7 +174,7 @@
                                         <div class="form-group">
                                             <label class="exampleInputPassword1" for="exampleCheck1">Amount
                                                 Money</label>
-                                            <input type="number" name="depit" class="form-control" placeholder="Amount">
+                                            <input type="number" step="0.01" name="depit" class="form-control" placeholder="Amount">
                                         </div>
                                     </div>
                                     <!-- <div class="col-md-6 mb-3">

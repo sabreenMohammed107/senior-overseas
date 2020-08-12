@@ -129,7 +129,7 @@
 										@endif
 
 										<td>
-											<input name='price{{$row->id}}[]' type="number" value="{{$row->price}}">
+											<input name='price{{$row->id}}[]' type="number" step="0.01" value="{{$row->price}}">
 										</td>
 										<td><input name='tableId[]' type="checkbox" id="checkItem" value="{{$row->id}}">
 
@@ -177,7 +177,7 @@
 														<td>{{$row->transit_time}}</td>
                                                     <td>{{$row->notes}}</td>
 													<td>
-														<input name='car_price{{$row->id}}[]' type="number" value="<?php echo $trackings[$index]->car_price; ?>">
+														<input name='car_price{{$row->id}}[]' type="number" step="0.01" value="<?php echo $trackings[$index]->car_price; ?>">
 													</td>
 													<td>
 														<input name='idTracking[]' type="checkbox" id="checkItem" value="<?php echo $trackings[$index]->id; ?>">
@@ -211,7 +211,7 @@
 									<div class="col-md-6 mb-3">
 										<div class="form-group">
 											<label class="exampleInputPassword1" for="exampleCheck1">*Clearance Price</label>
-											<input type="number" name="clearance_price" class="form-control" placeholder="Clearance Price">
+											<input type="number" step="0.01" name="clearance_price" class="form-control" placeholder="Clearance Price">
 										</div>
 									</div>
 									<div class="col-md-6 mb-3">
@@ -253,7 +253,7 @@
 									<div class="col-md-6 mb-3">
 										<div class="form-group">
 											<label class="exampleInputPassword1" for="exampleCheck1">*Door to Door Price</label>
-											<input type="number" name="door_door_price" class="form-control" placeholder="Door to Door Price">
+											<input type="number" step="0.01" name="door_door_price" class="form-control" placeholder="Door to Door Price">
 										</div>
 									</div>
 									<div class="col-md-6 mb-3">

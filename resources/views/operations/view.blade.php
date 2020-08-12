@@ -122,7 +122,7 @@
 																						<div class="col-md-6 mb-3">
 																							<div class="form-group">
 																								<label class="exampleInputPassword1" for="exampleCheck1">*Clearance Price</label>
-																								<input type="number" value="{{ $row->sale->clearance_price ?? 'Clearance Price' }}" class="form-control" placeholder="Clearance Price" disabled>
+																								<input type="number" step="0.01" value="{{ $row->sale->clearance_price ?? 'Clearance Price' }}" class="form-control" placeholder="Clearance Price" disabled>
 																							</div>
 																						</div>
 																						<div class="col-md-6 mb-3">
@@ -156,7 +156,7 @@
 																						<div class="col-md-6 mb-3">
 																							<div class="form-group">
 																								<label class="exampleInputPassword1" for="exampleCheck1">*Door to Door Price</label>
-																								<input type="number" value="{{$row->sale->door_door_price ?? 'Door to Door Price' }}" class="form-control" placeholder="Door to Door Price" disabled>
+																								<input type="number" step="0.01" value="{{$row->sale->door_door_price ?? 'Door to Door Price' }}" class="form-control" placeholder="Door to Door Price" disabled>
 																							</div>
 																						</div>
 																						<div class="col-md-6 mb-3">

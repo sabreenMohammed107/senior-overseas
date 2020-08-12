@@ -137,7 +137,7 @@
                                         @endif
 
                                         <td>
-                                            <input disabled name='price{{$filter->id}}[]' type="number" value="{{$filter->price}}">
+                                            <input disabled name='price{{$filter->id}}[]' step="0.01" type="number" value="{{$filter->price}}">
                                         </td>
                                         <td>
 
@@ -188,7 +188,7 @@
                                                         <td>{{$track->truck->transit_time}}</td>
                                                     <td>{{$track->truck->notes}}</td>
                                                     <td>
-                                                        <input disabled name='car_price{{$track->id}}[]' type="number" value="<?php echo $trackings[$index]->car_price; ?>">
+                                                        <input disabled name='car_price{{$track->id}}[]' step="0.01" step="0.01" type="number" value="<?php echo $trackings[$index]->car_price; ?>">
                                                     </td>
                                                     <td>
                                                         <input disabled name='idTracking[]' checked type="checkbox" id="checkItem" value="<?php echo $trackings[$index]->id; ?>">

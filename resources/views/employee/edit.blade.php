@@ -73,7 +73,7 @@
 <div class="col-md-6 mb-3">
     <div class="form-group">
         <label class="exampleInputPassword1" for="exampleCheck1">*Salary</label>
-        <input type="number" class="form-control" value="{{$row->salary}}" name="salary" placeholder="Salary">
+        <input type="number" step="0.01" class="form-control" value="{{$row->salary}}" name="salary" placeholder="Salary">
     </div>
 </div>
 

@@ -110,7 +110,7 @@
                                         <div class="form-group">
                                             <label class="exampleInputPassword1" for="exampleCheck1">Amount
                                                 Money</label>
-                                            <input type="number" name="credit"  class="form-control @error('credit') is-invalid @enderror" placeholder="Amount">
+                                            <input type="number" step="0.01" name="credit"  class="form-control @error('credit') is-invalid @enderror" placeholder="Amount">
                                             @error('credit')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -174,7 +174,7 @@
                                         <div class="form-group">
                                             <label class="exampleInputPassword1" for="exampleCheck1">Amount
                                                 Money</label>
-                                            <input type="number" name="depit" value="{{ old('depit') }}" class="form-control" placeholder="Amount">
+                                            <input type="number" step="0.01" name="depit" value="{{ old('depit') }}" class="form-control" placeholder="Amount">
                                         </div>
                                     </div>
                                     <!-- <div class="col-md-6 mb-3">
