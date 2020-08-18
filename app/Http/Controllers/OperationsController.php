@@ -657,7 +657,7 @@ class OperationsController extends Controller
                 }
                 if ($buyRow->cashbox_expenses_types_id == 4) {
                     $obj->trans_type_id = Finan_trans_type::where('id', '=', 9)->first()->id;
-                    $obj->air_carrier_id = $row->air->air->carrier_id;
+                    $obj->air_carrier_id = $row->air->air->air_carrier_id;
                 }
                 if ($buyRow->cashbox_expenses_types_id == 6) {
                     $obj->trans_type_id = Finan_trans_type::where('id', '=', 10)->first()->id;

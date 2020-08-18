@@ -76,19 +76,20 @@
 
         <hr>
         <?php
+        $operat = App\Models\Operation::where('id', '=', $Buy)->first();
+
         $gypBuy = App\Models\Operation_expense::where('currency_id', 2)->whereNotNull('buy')->where('operation_id', $Buy)->sum('buy');
         $useBuy = App\Models\Operation_expense::where('currency_id', 1)->whereNotNull('buy')->where('operation_id', $Buy)->sum('buy');
         $ureBuy = App\Models\Operation_expense::where('currency_id', 3)->whereNotNull('buy')->where('operation_id', $Buy)->sum('buy');
         $BuyEgp = $BuyEgp + $gypBuy;
         $BuyUse = $BuyUse + $useBuy;
         $BuyUre = $BuyUre + $ureBuy;
-        $gyp = App\Models\Operation_expense::where('currency_id', 2)->whereNotNull('sell')->where('operation_id', $Buy)->sum('sell');
-        $use = App\Models\Operation_expense::where('currency_id', 1)->whereNotNull('sell')->where('operation_id', $Buy)->sum('sell');
-        $ure = App\Models\Operation_expense::where('currency_id', 3)->whereNotNull('sell')->where('operation_id', $Buy)->sum('sell');
+        $gyp = App\Models\Operation_expense::where('currency_id', 2)->whereNotNull('sell')->where('operation_id', $Buy)->sum('sell')*$operat->container_counts;
+        $use = App\Models\Operation_expense::where('currency_id', 1)->whereNotNull('sell')->where('operation_id', $Buy)->sum('sell')*$operat->container_counts;
+        $ure = App\Models\Operation_expense::where('currency_id', 3)->whereNotNull('sell')->where('operation_id', $Buy)->sum('sell')*$operat->container_counts;
         $cashEgp = $cashEgp + $gyp;
         $cashUse = $cashUse + $use;
         $cashUre = $cashUre + $ure;
-        $operat = App\Models\Operation::where('id', '=', $Buy)->first();
         ?>
         <div style="width: 100%;">
             <div style="display: inline-block; width:30%">

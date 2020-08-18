@@ -83,6 +83,10 @@ class OperationBalanceController extends Controller
 
         $sellExpenses = Operation_expense::whereNotNull('sell')->whereIn('operation_id', $operations)->get();
         $buyExpenses = Operation_expense::whereNotNull('buy')->whereIn('operation_id', $operations)->get();
+      
+      
+      
+      
         $data = [
             'title' => 'First PDF for Medium',
             'heading' => 'Hello from 99Points.info',
