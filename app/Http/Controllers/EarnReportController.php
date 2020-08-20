@@ -102,12 +102,12 @@ class EarnReportController extends Controller
     $buyExpensesUse=0;  
     $buyExpensesUre=0;  
 foreach($opo as $ee){
-    $sellExpensesEgp += Operation_expense::whereNotNull('sell')->where('currency_id', 2)->where('operation_id', $ee->id)->value('sell')*$ee->container_counts;
-    $sellExpensesUse += Operation_expense::whereNotNull('sell')->where('currency_id', 1)->where('operation_id', $ee->id)->value('sell')*$ee->container_counts;
-    $sellExpensesUre += Operation_expense::whereNotNull('sell')->where('currency_id', 3)->where('operation_id', $ee->id)->value('sell')*$ee->container_counts;
-    $buyExpensesEgp += Operation_expense::whereNotNull('buy')->where('currency_id', 2)->where('operation_id', $ee->id)->value('buy')*$ee->container_counts;
-    $buyExpensesUse += Operation_expense::whereNotNull('buy')->where('currency_id', 1)->where('operation_id', $ee->id)->value('buy')*$ee->container_counts;
-    $buyExpensesUre += Operation_expense::whereNotNull('buy')->where('currency_id', 3)->where('operation_id', $ee->id)->value('buy')*$ee->container_counts;
+    $sellExpensesEgp += Operation_expense::whereNotNull('sell')->where('currency_id', 2)->where('operation_id', $ee->id)->sum('sell')*$ee->container_counts;
+    $sellExpensesUse += Operation_expense::whereNotNull('sell')->where('currency_id', 1)->where('operation_id', $ee->id)->sum('sell')*$ee->container_counts;
+    $sellExpensesUre += Operation_expense::whereNotNull('sell')->where('currency_id', 3)->where('operation_id', $ee->id)->sum('sell')*$ee->container_counts;
+    $buyExpensesEgp += Operation_expense::whereNotNull('buy')->where('currency_id', 2)->where('operation_id', $ee->id)->sum('buy')*$ee->container_counts;
+    $buyExpensesUse += Operation_expense::whereNotNull('buy')->where('currency_id', 1)->where('operation_id', $ee->id)->sum('buy')*$ee->container_counts;
+    $buyExpensesUre += Operation_expense::whereNotNull('buy')->where('currency_id', 3)->where('operation_id', $ee->id)->sum('buy')*$ee->container_counts;
 }
         /**
          * Expenses
