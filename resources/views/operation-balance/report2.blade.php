@@ -78,15 +78,15 @@
         <?php
         $operat = App\Models\Operation::where('id', '=', $Buy)->first();
 
-        $gypBuy = (App\Models\Operation_expense::where('currency_id', 2)->whereNotNull('buy')->where('operation_id', $Buy)->where('automatic',1)->sum('buy')*$operat->container_counts)+(App\Models\Operation_expense::where('currency_id', 2)->whereNotNull('buy')->where('operation_id', $Buy)->whereNot('automatic')->sum('buy'));
-        $useBuy = (App\Models\Operation_expense::where('currency_id', 1)->whereNotNull('buy')->where('operation_id', $Buy)->where('automatic',1)->sum('buy')*$operat->container_counts)+(App\Models\Operation_expense::where('currency_id', 1)->whereNotNull('buy')->where('operation_id', $Buy)->whereNot('automatic')->sum('buy'));
-        $ureBuy = (App\Models\Operation_expense::where('currency_id', 3)->whereNotNull('buy')->where('operation_id', $Buy)->where('automatic',1)->sum('buy')*$operat->container_counts)+(App\Models\Operation_expense::where('currency_id', 3)->whereNotNull('buy')->where('operation_id', $Buy)->whereNot('automatic')->sum('buy'));
+        $gypBuy = (App\Models\Operation_expense::where('currency_id', 2)->whereNotNull('buy')->where('operation_id', $Buy)->where('automatic',1)->sum('buy')*$operat->container_counts)+(App\Models\Operation_expense::where('currency_id', 2)->whereNotNull('buy')->where('operation_id', $Buy)->where('automatic','!=',1)->sum('buy'));
+        $useBuy = (App\Models\Operation_expense::where('currency_id', 1)->whereNotNull('buy')->where('operation_id', $Buy)->where('automatic',1)->sum('buy')*$operat->container_counts)+(App\Models\Operation_expense::where('currency_id', 1)->whereNotNull('buy')->where('operation_id', $Buy)->where('automatic','!=',1)->sum('buy'));
+        $ureBuy = (App\Models\Operation_expense::where('currency_id', 3)->whereNotNull('buy')->where('operation_id', $Buy)->where('automatic',1)->sum('buy')*$operat->container_counts)+(App\Models\Operation_expense::where('currency_id', 3)->whereNotNull('buy')->where('operation_id', $Buy)->where('automatic','!=',1)->sum('buy'));
         $BuyEgp = $BuyEgp + $gypBuy;
         $BuyUse = $BuyUse + $useBuy;
         $BuyUre = $BuyUre + $ureBuy;
-        $gyp = (App\Models\Operation_expense::where('currency_id', 2)->whereNotNull('sell')->where('operation_id', $Buy)->where('automatic',1)->sum('sell')*$operat->container_counts)+(App\Models\Operation_expense::where('currency_id', 2)->whereNotNull('sell')->where('operation_id', $Buy)->whereNot('automatic')->sum('sell'));
-        $use = (App\Models\Operation_expense::where('currency_id', 1)->whereNotNull('sell')->where('operation_id', $Buy)->where('automatic',1)->sum('sell')*$operat->container_counts)+(App\Models\Operation_expense::where('currency_id', 1)->whereNotNull('sell')->where('operation_id', $Buy)->whereNot('automatic')->sum('sell'));
-        $ure = (App\Models\Operation_expense::where('currency_id', 3)->whereNotNull('sell')->where('operation_id', $Buy)->where('automatic',1)->sum('sell')*$operat->container_counts)+(App\Models\Operation_expense::where('currency_id', 3)->whereNotNull('sell')->where('operation_id', $Buy)->whereNot('automatic')->sum('sell'));
+        $gyp = (App\Models\Operation_expense::where('currency_id', 2)->whereNotNull('sell')->where('operation_id', $Buy)->where('automatic',1)->sum('sell')*$operat->container_counts)+(App\Models\Operation_expense::where('currency_id', 2)->whereNotNull('sell')->where('operation_id', $Buy)->where('automatic','!=',1)->sum('sell'));
+        $use = (App\Models\Operation_expense::where('currency_id', 1)->whereNotNull('sell')->where('operation_id', $Buy)->where('automatic',1)->sum('sell')*$operat->container_counts)+(App\Models\Operation_expense::where('currency_id', 1)->whereNotNull('sell')->where('operation_id', $Buy)->where('automatic','!=',1)->sum('sell'));
+        $ure = (App\Models\Operation_expense::where('currency_id', 3)->whereNotNull('sell')->where('operation_id', $Buy)->where('automatic',1)->sum('sell')*$operat->container_counts)+(App\Models\Operation_expense::where('currency_id', 3)->whereNotNull('sell')->where('operation_id', $Buy)->where('automatic','!=',1)->sum('sell'));
         $cashEgp = $cashEgp + $gyp;
         $cashUse = $cashUse + $use;
         $cashUre = $cashUre + $ure;
