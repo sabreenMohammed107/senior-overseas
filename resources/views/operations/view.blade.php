@@ -498,6 +498,7 @@
 															</tr>
 														</thead>
 														<tbody>
+															
 
 															@foreach($expenses as $index => $expense)
 															<tr>
