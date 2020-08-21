@@ -492,6 +492,7 @@
 																<th>Buy</th>
 																<th>Sale</th>
 																<th>Expense provider</th>
+																<th>Auto</th>
 																<th>Currency</th>
 																<th>Action</th>
 															</tr>
@@ -509,6 +510,10 @@
 																<td>{{$expense->sell}}</td>
 																<td>@if($expense->provider)
 																	{{$expense->provider->provider_type}}
+																	@endif</td>
+																	<td>@if($expense->automatic==1)
+																	YES
+																	@else NO
 																	@endif</td>
 																<td>@if($expense->currency)
 																	{{$expense->currency->currency_name}}
