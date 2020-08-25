@@ -26,25 +26,25 @@
 
 
 
-      
-        footer { 
-  position: fixed; 
-  width: 100%; 
-  bottom: 0; 
-  left: 0;
-  right: 0;
-}
+
+        footer {
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
     </style>
     <div class="container">
         <div class="card-body" style="margin-top: 80px;">
-        <div style="margin-bottom: 40px;border-bottom:1px solid #000;padding:10px 0px">
-            <h2 >
-                Total Balance Report
-                <p><?php 
-                $date = date_create(now());
-                echo date_format($date,'Y-m-d')?></p>
+            <div style="margin-bottom: 40px;border-bottom:1px solid #000;padding:10px 0px">
+                <h2>
+                    Total Balance Report
+                    <p><?php
+                        $date = date_create(now());
+                        echo date_format($date, 'Y-m-d') ?></p>
                 </h2>
-                </div>
+            </div>
 
         </div>
         <!--bank-->
@@ -88,7 +88,7 @@
             </tfoot>
         </table>
         <!--client-->
-        <table  class="dattable table table-striped thead-dark  w-100">
+        <table class="dattable table table-striped thead-dark  w-100">
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">Clients</th>
@@ -128,7 +128,7 @@
             </tfoot>
         </table>
         <!--cashbox-->
-        <table  class="dattable table table-striped thead-dark  w-100">
+        <table class="dattable table table-striped thead-dark  w-100">
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">Cash Boxes</th>
@@ -166,20 +166,196 @@
                 </tr>
             </tfoot>
         </table>
-        <!--supplier-->
-        <table  class="dattable table table-striped thead-dark  w-100">
+        <!--Agent-->
+        <table class="dattable table table-striped thead-dark  w-100">
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col">Suppliers</th>
+                    <th scope="col">Agents</th>
+                    <th scope="col">EGP</th>
+                    <th scope="col">USD</th>
+                    <th scope="col">EURO</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $agentEgp = 0;
+                $agentUse = 0;
+                $agentUre = 0;
+                ?>
+                @foreach($agents as $agent)
+                <?php
+                $agentEgp = $agentEgp + (App\Models\Financial_entry::where('agent_id', $agent->id)->where('currency_id', 2)->sum('depit') - App\Models\Financial_entry::where('agent_id', $agent->id)->where('currency_id', 2)->sum('credit'));
+                $agentUse = $agentUse +  (App\Models\Financial_entry::where('agent_id', $agent->id)->where('currency_id', 1)->sum('depit') - App\Models\Financial_entry::where('agent_id', $agent->id)->where('currency_id', 1)->sum('credit'));
+                $agentUre = $agentUre + (App\Models\Financial_entry::where('agent_id', $agent->id)->where('currency_id', 3)->sum('depit') - App\Models\Financial_entry::where('agent_id', $agent->id)->where('currency_id', 3)->sum('credit'));
+                ?>
+                <tr>
+                    <th scope="row">{{$agent->agent_name}}</th>
+                    <td>{{App\Models\Financial_entry::where('agent_id', $agent->id)->where('currency_id', 2)->sum('depit') - App\Models\Financial_entry::where('agent_id', $agent->id)->where('currency_id', 2)->sum('credit')}}</td>
+                    <td>{{App\Models\Financial_entry::where('agent_id', $agent->id)->where('currency_id', 1)->sum('depit') - App\Models\Financial_entry::where('agent_id', $agent->id)->where('currency_id', 1)->sum('credit')}}</td>
+                    <td>{{App\Models\Financial_entry::where('agent_id', $agent->id)->where('currency_id', 3)->sum('depit') - App\Models\Financial_entry::where('agent_id', $agent->id)->where('currency_id', 3)->sum('credit')}}</td>
+                </tr>
+                @endforeach
+            </tbody>
+            <tfoot class="btn-outline-info">
+                <tr>
+                    <th>Total</th>
+                    <th><?php echo $agentEgp ?></th>
+                    <th><?php echo $agentUse ?></th>
+                    <th><?php echo $agentUre ?></th>
+
+                </tr>
+            </tfoot>
+        </table>
+        <!--carrier-->
+        <table class="dattable table table-striped thead-dark  w-100">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Carriers</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">EGP</th>
+                    <th scope="col">USD</th>
+                    <th scope="col">EURO</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $carrierEgp = 0;
+                $carrierUsa = 0;
+                $carrierUre = 0;
+                ?>
+                @foreach($carriers as $carrier)
+                <?php
+                if ($carrier->carrier_type_id == 1) {
+                    $carrierEgp = $carrierEgp + (App\Models\Financial_entry::where('ocean_carrier_id', $carrier->id)->where('currency_id', 2)->sum('depit') - App\Models\Financial_entry::where('ocean_carrier_id', $carrier->id)->where('currency_id', 2)->sum('credit'));
+                    $carrierUsa = $carrierUsa + (App\Models\Financial_entry::where('ocean_carrier_id', $carrier->id)->where('currency_id', 1)->sum('depit') - App\Models\Financial_entry::where('ocean_carrier_id', $carrier->id)->where('currency_id', 1)->sum('credit'));
+                    $carrierUre = $carrierUre + (App\Models\Financial_entry::where('ocean_carrier_id', $carrier->id)->where('currency_id', 3)->sum('depit') - App\Models\Financial_entry::where('ocean_carrier_id', $carrier->id)->where('currency_id', 3)->sum('credit'));
+                } else {
+                    $carrierEgp =  $carrierEgp + (App\Models\Financial_entry::where('air_carrier_id', $carrier->id)->where('currency_id', 2)->sum('depit') - App\Models\Financial_entry::where('air_carrier_id', $carrier->id)->where('currency_id', 2)->sum('credit'));
+                    $carrierUsa = $carrierUsa + (App\Models\Financial_entry::where('air_carrier_id', $carrier->id)->where('currency_id', 1)->sum('depit') - App\Models\Financial_entry::where('air_carrier_id', $carrier->id)->where('currency_id', 1)->sum('credit'));
+                    $carrierUre = $carrierUre + (App\Models\Financial_entry::where('air_carrier_id', $carrier->id)->where('currency_id', 3)->sum('depit') - App\Models\Financial_entry::where('air_carrier_id', $carrier->id)->where('currency_id', 3)->sum('credit'));
+                }
+                ?>
+                <tr>
+                    <th scope="row">{{$carrier->carrier_name}}</th>
+                    <th scope="row">{{$carrier->type->carrier_name ?? ''}}</th>
+                    <td>@if($carrier->carrier_type_id==1)
+                      {{(App\Models\Financial_entry::where('ocean_carrier_id', $carrier->id)->where('currency_id', 2)->sum('depit') - App\Models\Financial_entry::where('ocean_carrier_id', $carrier->id)->where('currency_id', 2)->sum('credit'))}}
+
+                        @else
+                       {{(App\Models\Financial_entry::where('air_carrier_id', $carrier->id)->where('currency_id', 2)->sum('depit') - App\Models\Financial_entry::where('air_carrier_id', $carrier->id)->where('currency_id', 2)->sum('credit'))}}
+
+                        @endif</td>
+                    <td>@if($carrier->carrier_type_id==1)
+                    {{App\Models\Financial_entry::where('ocean_carrier_id', $carrier->id)->where('currency_id', 1)->sum('depit') - App\Models\Financial_entry::where('ocean_carrier_id', $carrier->id)->where('currency_id', 1)->sum('credit')}}
+
+                        @else
+                       {{App\Models\Financial_entry::where('air_carrier_id', $carrier->id)->where('currency_id', 1)->sum('depit') - App\Models\Financial_entry::where('air_carrier_id', $carrier->id)->where('currency_id', 1)->sum('credit')}}
+
+                        @endif</td>
+                    <td>@if($carrier->carrier_type_id==1)
+                  {{ App\Models\Financial_entry::where('ocean_carrier_id', $carrier->id)->where('currency_id', 3)->sum('depit') - App\Models\Financial_entry::where('ocean_carrier_id', $carrier->id)->where('currency_id', 3)->sum('credit')}}
+
+                        @else
+                      {{App\Models\Financial_entry::where('air_carrier_id', $carrier->id)->where('currency_id', 3)->sum('depit') - App\Models\Financial_entry::where('air_carrier_id', $carrier->id)->where('currency_id', 3)->sum('credit')}}
+
+                        @endif</td>
+                </tr>
+                @endforeach
+            </tbody>
+            <tfoot class="btn-outline-info">
+                <tr>
+                    <th>Total</th>
+                    <th></th>
+                    <th><?php echo $carrierEgp ?></th>
+                    <th><?php echo $carrierUsa ?></th>
+                    <th><?php echo $carrierUre ?></th>
+
+                </tr>
+            </tfoot>
+        </table>
+         <!--Supplier-->
+         <table class="dattable table table-striped thead-dark  w-100">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Trucking / Clearance</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">EGP</th>
+                    <th scope="col">USD</th>
+                    <th scope="col">EURO</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $supplierEgp = 0;
+                $supplierUsa = 0;
+                $supplierUre = 0;
+                ?>
+                @foreach($suppliers as $supplier)
+                <?php
+                if($supplier->supplier_type_id==1){
+                    $supplierEgp = $supplierEgp+(App\Models\Financial_entry::where('trucking_id', $supplier->id)->where('currency_id', 2)->sum('depit') - App\Models\Financial_entry::where('trucking_id', $supplier->id)->where('currency_id', 2)->sum('credit'));
+                    $supplierUsa =$supplierUsa+( App\Models\Financial_entry::where('trucking_id', $supplier->id)->where('currency_id', 1)->sum('depit') - App\Models\Financial_entry::where('trucking_id', $supplier->id)->where('currency_id', 1)->sum('credit'));
+                    $supplierUre = $supplierUre+(App\Models\Financial_entry::where('trucking_id', $supplier->id)->where('currency_id', 3)->sum('depit') - App\Models\Financial_entry::where('trucking_id', $supplier->id)->where('currency_id', 3)->sum('credit'));
+    
+                }else{
+                    $supplierEgp =  $supplierEgp+(App\Models\Financial_entry::where('clearance_id', $supplier->id)->where('currency_id', 2)->sum('depit') - App\Models\Financial_entry::where('clearance_id', $supplier->id)->where('currency_id', 2)->sum('credit'));
+                    $supplierUsa = $supplierUsa+(App\Models\Financial_entry::where('clearance_id', $supplier->id)->where('currency_id', 1)->sum('depit') - App\Models\Financial_entry::where('clearance_id', $supplier->id)->where('currency_id', 1)->sum('credit'));
+                    $supplierUre = $supplierUre+(App\Models\Financial_entry::where('clearance_id', $supplier->id)->where('currency_id', 3)->sum('depit') - App\Models\Financial_entry::where('clearance_id', $supplier->id)->where('currency_id', 3)->sum('credit'));
+    
+                }
+                ?>
+                <tr>
+                    <th scope="row">{{$supplier->supplier_name}}</th>
+                    <th scope="row">{{$supplier->type->supplier_type ?? ''}}</th>
+                    <td>@if($supplier->supplier_type_id==1)
+                      {{App\Models\Financial_entry::where('trucking_id', $supplier->id)->where('currency_id', 2)->sum('depit') - App\Models\Financial_entry::where('trucking_id', $supplier->id)->where('currency_id', 2)->sum('credit')}}
+
+                        @else
+                       {{App\Models\Financial_entry::where('clearance_id', $supplier->id)->where('currency_id', 2)->sum('depit') - App\Models\Financial_entry::where('clearance_id', $supplier->id)->where('currency_id', 2)->sum('credit')}}
+
+                        @endif</td>
+                    <td>@if($supplier->supplier_type_id==1)
+                    {{App\Models\Financial_entry::where('trucking_id', $supplier->id)->where('currency_id', 1)->sum('depit') - App\Models\Financial_entry::where('trucking_id', $supplier->id)->where('currency_id', 1)->sum('credit')}}
+
+                        @else
+                       {{App\Models\Financial_entry::where('clearance_id', $supplier->id)->where('currency_id', 1)->sum('depit') - App\Models\Financial_entry::where('clearance_id', $supplier->id)->where('currency_id', 1)->sum('credit')}}
+
+                        @endif</td>
+                    <td>@if($supplier->supplier_type_id==1)
+                  {{App\Models\Financial_entry::where('trucking_id', $supplier->id)->where('currency_id', 3)->sum('depit') - App\Models\Financial_entry::where('trucking_id', $supplier->id)->where('currency_id', 3)->sum('credit')}}
+
+                        @else
+                      {{App\Models\Financial_entry::where('clearance_id', $supplier->id)->where('currency_id', 3)->sum('depit') - App\Models\Financial_entry::where('clearance_id', $supplier->id)->where('currency_id', 3)->sum('credit')}}
+
+                        @endif</td>
+                </tr>
+                @endforeach
+            </tbody>
+            <tfoot class="btn-outline-info">
+                <tr>
+                    <th>Total</th>
+                    <th></th>
+                    <th><?php echo $supplierEgp ?></th>
+                    <th><?php echo $supplierUsa ?></th>
+                    <th><?php echo $supplierUre ?></th>
+
+                </tr>
+            </tfoot>
+        </table>
+        <!--supplier-->
+        <table class="dattable table table-striped thead-dark  w-100">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Total Of Suppliers</th>
                     <th scope="col">EGP</th>
                     <th scope="col">USD</th>
                     <th scope="col">EURO</th>
                 </tr>
             </thead>
             <?php
-            $supplierEgp = $sumSuppliersEgp;
-            $supplierUse = $sumSuppliersUse;
-            $supplierUre = $sumSuppliersUre;
+            $suppliersEgp = $sumSuppliersEgp;
+            $suppliersUse = $sumSuppliersUse;
+            $suppliersUre = $sumSuppliersUre;
             ?>
             <tbody>
 
@@ -188,47 +364,47 @@
             <tfoot class="btn-outline-info">
                 <tr>
                     <th>Total</th>
-                    <th><?php echo $supplierEgp ?></th>
-                    <th><?php echo $supplierUse ?></th>
-                    <th><?php echo $supplierUre ?></th>
+                    <th><?php echo $sumSuppliersEgp ?></th>
+                    <th><?php echo $sumSuppliersUse ?></th>
+                    <th><?php echo $sumSuppliersUre ?></th>
 
                 </tr>
             </tfoot>
         </table>
-<hr>
-        
+        <hr>
+
     </div>
-    <table  class="dattable table table-striped thead-dark  w-100">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">Totals</th>
-                    <th scope="col">EGP</th>
-                    <th scope="col">USD</th>
-                    <th scope="col">EURO</th>
-                </tr>
-            </thead>
-            <?php
-            $summingEgp = ($cashEgp + $sumEgp + $clientEgp) - $sumSuppliersEgp;
-            $summingUse = ($cashUse + $sumUse + $clientUse) - $sumSuppliersUse;
-            $summingUre = ($cashUre + $sumUre + $clientUre) - $sumSuppliersUre;
-            ?>
-            <tbody>
+    <table class="dattable table table-striped thead-dark  w-100">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Totals</th>
+                <th scope="col">EGP</th>
+                <th scope="col">USD</th>
+                <th scope="col">EURO</th>
+            </tr>
+        </thead>
+        <?php
+        $summingEgp = ($cashEgp + $sumEgp + $clientEgp) - $sumSuppliersEgp;
+        $summingUse = ($cashUse + $sumUse + $clientUse) - $sumSuppliersUse;
+        $summingUre = ($cashUre + $sumUre + $clientUre) - $sumSuppliersUre;
+        ?>
+        <tbody>
 
-            </tbody>
+        </tbody>
 
-            <tfoot class="btn-outline-info">
-                <tr>
-                    <th>Totals</th>
-                    <th><?php echo $summingEgp ?></th>
-                    <th><?php echo $summingUse ?></th>
-                    <th><?php echo $summingUre ?></th>
+        <tfoot class="btn-outline-info">
+            <tr>
+                <th>Totals</th>
+                <th><?php echo $summingEgp ?></th>
+                <th><?php echo $summingUse ?></th>
+                <th><?php echo $summingUre ?></th>
 
-                </tr>
-            </tfoot>
-        </table>
-<footer style="height: 100px;">
+            </tr>
+        </tfoot>
+    </table>
+    <footer style="height: 100px;">
 
-</footer>
+    </footer>
 </body>
 
 </html>
