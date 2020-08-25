@@ -83,7 +83,7 @@ class OperationBalanceController extends Controller
         if (!empty($request->get("to_date"))) {
             $operations->where('operation_date', '<=', Carbon::parse($request->get("to_date")));
         }
-        if ($qute) {
+        if (!empty($request->get("sale_person_id")) && !empty($qute) ) {
             $operations->whereIn('sales_quote_id',$qute);
         }
         $operations = $operations->pluck('id');
