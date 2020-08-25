@@ -30,6 +30,19 @@
                         <div class="ms-auth-container row no-gutters">
                             <div class="col-md-5 mb-3">
                                 <div class="form-group">
+                                <label class="exampleInputPassword1" for="exampleCheck1">Sales Man</label>
+                                    <select class=" form-control" name="sale_person_id" data-live-search="true" >
+                                    <option value='' > Select</option>
+                                        @foreach ($sales as $type)
+                                        <option value='{{$type->id}}' >
+                                            {{ $type->employee_name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-8 mb-3"></div>
+                            <div class="col-md-5 mb-3">
+                                <div class="form-group">
                                     <label class="exampleInputPassword1" for="exampleCheck1">From Date</label>
                                     <input type="date" id="from_date" name="from_date" class="form-control" placeholder="From Date">
                                 </div>

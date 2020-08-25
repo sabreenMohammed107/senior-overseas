@@ -58,6 +58,14 @@
                 <p> To :{{$to}}</p>
             </div>
         </div>
+        @if($sale)
+        <div style="width: 100%;">
+            <div style="display: inline-block; width:80%">
+                <p> Sales Man :{{$sale->employee_name ?? ''}}</p>
+            </div>
+           
+        </div>
+        @endif
         <!--bank-->
 
         <?php

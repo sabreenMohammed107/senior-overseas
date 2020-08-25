@@ -16,7 +16,9 @@ use App\Models\Operation_expense;
 use App\Models\Client;
 
 use App\Models\Bank;
+use App\Models\Employee;
 use App\Models\Operation;
+use App\Models\Sale_quote;
 use File;
 use DB;
 use Log;
@@ -48,7 +50,8 @@ class OperationBalanceController extends Controller
      */
     public function index()
     {
-        return view($this->viewName . 'index');
+        $sales=Employee::all();
+        return view($this->viewName . 'index',compact('sales'));
     }
 
     /**
@@ -71,7 +74,8 @@ class OperationBalanceController extends Controller
     {
         $from = $request->get("from_date");
         $to = $request->get("to_date");
-
+        $sale = $request->get("sale_person_id");
+        $qute = Sale_quote::select('id')->where('sale_person_id', $sale)->pluck('id');
         $operations = Operation::select('id');
         if (!empty($request->get("from_date"))) {
             $operations->where('operation_date', '>=', Carbon::parse($request->get("from_date")));
@@ -79,24 +83,28 @@ class OperationBalanceController extends Controller
         if (!empty($request->get("to_date"))) {
             $operations->where('operation_date', '<=', Carbon::parse($request->get("to_date")));
         }
+        if ($qute) {
+            $operations->whereIn('sales_quote_id',$qute);
+        }
         $operations = $operations->pluck('id');
 
         $sellExpenses = Operation_expense::whereNotNull('sell')->whereIn('operation_id', $operations)->get();
         $buyExpenses = Operation_expense::whereNotNull('buy')->whereIn('operation_id', $operations)->get();
-      
-      
-      
-      
+
+
+
+
         $data = [
             'title' => 'First PDF for Medium',
             'heading' => 'Hello from 99Points.info',
             'sellExpenses' => $sellExpenses,
-          
+
             'buyExpenses' => $buyExpenses,
-           'operations'=>$operations,
-            'from'=>$from,
-            'to'=>$to,
-         
+            'operations' => $operations,
+            'from' => $from,
+            'to' => $to,
+            'sale'=>Employee::where('id',$sale)->first(),
+
 
 
 
