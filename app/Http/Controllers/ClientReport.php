@@ -262,6 +262,7 @@ class ClientReport extends Controller
 
             $filtters->where('client_id', '=', $request->get("client_id"));
         }
+        $filtterTotal = $filtters->get();
         $filtters = $filtters->get()->groupBy('operation_id');
      
         // ----------------- //
@@ -290,7 +291,7 @@ class ClientReport extends Controller
         foreach ($cursIds as $cur) {
             $total = 0;
            
-         $total =  $filtters->where('client_id', $client_id)->where('currency_id', '=', $cur)->sum('credit') -  $filtters->where('client_id', $client_id)->where('currency_id', '=', $cur)->sum('depit');
+         $total =  $filtterTotal->where('client_id', $client_id)->where('currency_id', '=', $cur)->sum('credit') -  $filtterTotal->where('client_id', $client_id)->where('currency_id', '=', $cur)->sum('depit');
             $name=Currency::where('id','=',$cur)->first();
             $totalNum = $total;
             $total = Terbilang::make($total, " -  $name->currency_name");

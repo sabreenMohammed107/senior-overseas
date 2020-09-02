@@ -61,7 +61,7 @@
                             <a href="{{ route('client-report.index') }}" class="btn btn-dark mx-2"> Cancel</a>
 
                             <input type="submit" id="search_button" value="Search" class="btn btn-success ">
-
+                            <a href="{{ route('fetch-client-Allreport.fetch') }}" target="_blank" class="btn btn-dark mx-2"> Get Totals</a>
                             <button type="submit" formtarget="_blank" class="btn btn-info d-inline-block">Client Report</button>
 
                         </div>
