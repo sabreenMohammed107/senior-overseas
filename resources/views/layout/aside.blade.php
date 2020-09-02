@@ -127,7 +127,7 @@
 
 </li>
 @endif
-
+@if (Auth::user()->role_id==1 )
 <!-- Reports  --> 
 <li class="menu-item">
 <a href="#" class="has-chevron" data-toggle="collapse" data-target="#Reports" aria-expanded="false"
@@ -142,7 +142,7 @@
 <li> <a href="{{ route('earn-balance.index') }}">Earning Statment</a> </li>
 <li> <a href="{{ route('operation-balance.index') }}">Operation Statment</a> </li>
 
-
+@endif
 
 
 
