@@ -76,7 +76,7 @@
                             <?php
                             $index = 0;
                             ?>
-                            @foreach($filtters as $Reports)
+                            @foreach($filtters as $Report)
                             <tr>
                                 <td>{{$index+1}}</td>
                                 <td>@if($Report[$index]->operation)
