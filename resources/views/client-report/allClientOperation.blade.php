@@ -76,9 +76,9 @@
                             @foreach($filtters as $index => $Report)
                             <tr>
                                 <td>{{$index+1}}</td>
-                                <td> {{App\Models\Financial_entry::where('client_id', $Report->client_id)->where('currency_id', 1)->sum('credit') - App\Models\Financial_entry::where('client_id', $Report->client_id)->where('currency_id', 1)->sum('depit')}}</td>
-                                <td>{{App\Models\Financial_entry::where('client_id', $Report->client_id)->where('currency_id', 2)->sum('credit') - App\Models\Financial_entry::where('client_id', $Report->client_id)->where('currency_id', 2)->sum('depit')}}</td>
-                                <td>{{App\Models\Financial_entry::where('client_id', $Report->client_id)->where('currency_id', 3)->sum('credit') - App\Models\Financial_entry::where('client_id', $Report->client_id)->where('currency_id', 3)->sum('depit')}}</td>
+                                <td> {{App\Models\Financial_entry::where('client_id', $Report->client_id)->where('$Report->currency_id', 1)->sum('credit') - App\Models\Financial_entry::where('client_id', $Report->client_id)->where('currency_id', 1)->sum('depit')}}</td>
+                                <td>{{App\Models\Financial_entry::where('client_id', $Report->client_id)->where('$Report->currency_id', 2)->sum('credit') - App\Models\Financial_entry::where('client_id', $Report->client_id)->where('currency_id', 2)->sum('depit')}}</td>
+                                <td>{{App\Models\Financial_entry::where('client_id', $Report->client_id)->where('$Report->currency_id', 3)->sum('credit') - App\Models\Financial_entry::where('client_id', $Report->client_id)->where('currency_id', 3)->sum('depit')}}</td>
                                 <td>@if($Report->operation){{$Report->operation->operation_code}}@endif</td>
                             </tr>
                             @endforeach

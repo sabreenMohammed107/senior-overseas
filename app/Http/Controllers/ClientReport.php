@@ -266,17 +266,22 @@ class ClientReport extends Controller
      
         // ----------------- //
         $curs = [];
+        $index = 0;
         foreach ($filtters as $row) {
-            $cur = $row->currency->currency_name;
-            array_push($curs, $cur);
+
+             $cur = $row[$index]->currency->currency_name;
+             array_push($curs, $cur);
+            $index++;
         }
         $curs = array_unique($curs);
         $totals = [];
         $total = 0;
         $cursIds = [];
+        $two=0;
         foreach ($filtters as $row) {
-            $cursId = $row->currency_id;
+            $cursId = $row[$two]->currency_id;
             array_push($cursIds, $cursId);
+            $two++;
         }
         $cursIds = array_unique($cursIds);
 
