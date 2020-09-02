@@ -77,20 +77,25 @@
                             $index=0;
                             ?>
                             @foreach($filtters as  $Reports)
-                            {{$Reports}}
+                            <tr>
+                                <td>{{$Reports[ $index]->id}}</td>
+                                <td>{{$Reports[ $index]->id}}</td>
+                                <td>{{$Reports[ $index]->id}}</td>
+                                <td>{{$Reports[ $index]->id}}</td>
+                            </tr>
 
-                            @foreach($Reports as  $Report)
-                            {{--<tr>
+                            {{-- @foreach($Reports as  $Report)
+                         <tr>
                                 <td>{{$index+1}}</td>
                                 <td> {{$Report->where('$Report[$index]->currency_id', 1)->sum('credit') - $Report->where('$Report[$index]->currency_id', 1)->sum('depit')}}</td>
                                 <td> {{$Report->where('$Report[$index]->currency_id', 1)->sum('credit') - $Report->where('$Report[$index]->currency_id', 1)->sum('depit')}}</td>
                                 <td> {{$Report->where('$Report[$index]->currency_id', 1)->sum('credit') - $Report->where('$Report[$index]->currency_id', 1)->sum('depit')}}</td>
                                 <td>@if($Report[$index]->operation){{$Report[$index]->operation->operation_code}}@endif</td>
-                            </tr>--}}
+                            </tr>
                             <?php
                             $index++;
                             ?>
-                                @endforeach
+                                @endforeach--}}
                             @endforeach
                             </tr>
                         </tbody>
