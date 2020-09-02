@@ -77,8 +77,9 @@
                             $index=0;
                             ?>
                             @foreach($filtters as  $Reports)
+                            {{$Reports}}
+
                             @foreach($Reports as  $Report)
-                            {{$Report}}
                             {{--<tr>
                                 <td>{{$index+1}}</td>
                                 <td> {{$Report->where('$Report[$index]->currency_id', 1)->sum('credit') - $Report->where('$Report[$index]->currency_id', 1)->sum('depit')}}</td>
