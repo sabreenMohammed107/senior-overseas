@@ -61,7 +61,8 @@
                             <a href="{{ route('client-report.index') }}" class="btn btn-dark mx-2"> Cancel</a>
 
                             <input type="submit" id="search_button" value="Search" class="btn btn-success ">
-                            <a href="{{ route('fetch-client-Allreport.fetch') }}" target="_blank" class="btn btn-dark mx-2"> Get Totals</a>
+                            <input type="submit" id="link_button" value="Get Totals" class="btn btn-dark mx-2">
+
                             <button type="submit" formtarget="_blank" class="btn btn-info d-inline-block">Client Report</button>
 
                         </div>
@@ -69,7 +70,7 @@
 
                 </div>
                 <div id="report">
-                    
+
                     @include('client-report.report')
                 </div>
             </div>
@@ -83,7 +84,6 @@
 
 
 <script type="text/javascript">
-
     $(document).ready(function() {
         $('#search_button').click(function() {
             event.preventDefault();
@@ -109,6 +109,31 @@
                         $('#report').html(result);
                     },
                 });
+            }
+        });
+        $('#link_button').click(function() {
+                event.preventDefault();
+                var OR = document.getElementById("client_id").value;
+
+                if (OR == '') {
+                    $('#clientrror').css('display', 'block');
+                } else {
+                    $('#clientrror').css('display', 'none');
+                    $.ajax({
+                            type: 'GET',
+                            url: "{{ route('fetch-client-Allreport.fetch') }}",
+                            data: {
+                                client_id: $('#client_id').val(),
+                                from_date: $('#from_date').val(),
+                                to_date: $('#to_date').val(),
+
+                            },
+                            success: function(data) {
+                                let pdfWindow = window.open("");
+                                pdfWindow.document.write("<iframe style='border: none;' width='100%' height='100%' src='data:application/pdf;base64, " + encodeURI(data) + "'></iframe> <style> body{margin:0;}</style>")
+                            }
+                        },
+                    });
             }
         });
     });
