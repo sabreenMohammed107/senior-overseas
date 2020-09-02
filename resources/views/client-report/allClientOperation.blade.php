@@ -84,7 +84,7 @@
                                 <td>{{$Reports[ $index]->id}}</td>
                             </tr>
 
-                            {{-- @foreach($Reports as  $Report)
+                            {{-- 
                          <tr>
                                 <td>{{$index+1}}</td>
                                 <td> {{$Report->where('$Report[$index]->currency_id', 1)->sum('credit') - $Report->where('$Report[$index]->currency_id', 1)->sum('depit')}}</td>
@@ -95,7 +95,7 @@
                             <?php
                             $index++;
                             ?>
-                                @endforeach--}}
+                              --}}
                             @endforeach
                             </tr>
                         </tbody>
