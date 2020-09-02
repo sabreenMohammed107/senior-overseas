@@ -35,7 +35,9 @@
       <li> <a href="{{ route('agent.index') }}" >Agents</a> </li>
       <li> <a href="{{ route('expenses.index') }}">Expenses</a> </li>
       <li> <a href="{{ route('container.index') }}">Containers </a> </li>
+      @if (Auth::user()->role_id==1 )
       <li> <a href="{{ route('employee.index') }}">Employees </a> </li>
+      @endif
       <li> <a href="{{ route('bank-account.index') }}">Bank Accounts</a> </li>
       <!-- <li> <a href="{{ route('currency.index') }}">Currencies</a> </li> -->
       <li> <a href="{{ route('commodity.index') }}">Commodity</a> </li>

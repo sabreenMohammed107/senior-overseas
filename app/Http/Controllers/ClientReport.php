@@ -234,12 +234,83 @@ class ClientReport extends Controller
             'client_name' => $client->client_name,
             'curs' => $curs,
             'totals' => $totals,
-            'content' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.'
         ];
 
 
         $title = "My Report";
         $pdf = PDF::loadView($this->viewName . 'clientReport', $data);
+        return $pdf->stream('medium.pdf'); // to open in blank page
+
+    }
+
+
+    public function fetchAllReport(Request $request)
+    {
+        $client_id = $request->input('client_id');
+        $from_date =$request->input('from_date');
+        $to_date = $request->input('to_date');
+        $client = Client::where('id', '=', $client_id)->first();
+        $filtters = Financial_entry::orderBy('currency_id')->orderBy('entry_date');
+
+        if (!empty($request->get("from_date"))) {
+            $filtters->where('entry_date', '>=', Carbon::parse($request->get("from_date")));
+        }
+        if (!empty($request->get("to_date"))) {
+            $filtters->where('entry_date', '<=', Carbon::parse($request->get("to_date")));
+        }
+        if (!empty($request->get("client_id"))) {
+
+            $filtters->where('client_id', '=', $request->get("client_id"));
+        }
+        $filtters = $filtters->get()->groupBy('operation_id');
+     
+        // ----------------- //
+        $curs = [];
+        foreach ($filtters as $row) {
+            $cur = $row->currency->currency_name;
+            array_push($curs, $cur);
+        }
+        $curs = array_unique($curs);
+        $totals = [];
+        $total = 0;
+        $cursIds = [];
+        foreach ($filtters as $row) {
+            $cursId = $row->currency_id;
+            array_push($cursIds, $cursId);
+        }
+        $cursIds = array_unique($cursIds);
+
+
+
+
+        foreach ($cursIds as $cur) {
+            $total = 0;
+           
+         $total =  $filtters->where('client_id', $client_id)->where('currency_id', '=', $cur)->sum('credit') -  $filtters->where('client_id', $client_id)->where('currency_id', '=', $cur)->sum('depit');
+            $name=Currency::where('id','=',$cur)->first();
+            $totalNum = $total;
+            $total = Terbilang::make($total, " -  $name->currency_name");
+            $obj = new Collection();
+            $obj->cur = $name->currency_name;
+            $obj->total = strtoupper($total);
+            $obj->num = $totalNum;
+
+            array_push($totals, $obj);
+        }
+        $data = [
+            'title' => 'First PDF for Medium',
+            'heading' => 'Hello from 99Points.info',
+            'filtters' => $filtters,
+            'from_date' => $from_date,
+            'to_date' => $to_date,
+            'client_name' => $client->client_name,
+            'curs' => $curs,
+            'totals' => $totals,
+        ];
+
+
+        $title = "My Report";
+        $pdf = PDF::loadView($this->viewName . 'allClientOperation', $data);
         return $pdf->stream('medium.pdf'); // to open in blank page
 
     }
