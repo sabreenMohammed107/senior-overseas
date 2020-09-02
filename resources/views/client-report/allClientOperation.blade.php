@@ -69,6 +69,7 @@
                                 <th>EGP</th>
                                 <th>USD</th>
                                 <th>URE </th>
+                                <th>Transaction Type</th>
                                 <th>Operation code</th>
                             </tr>
                         </thead>
@@ -102,6 +103,7 @@
 
                                     @endif
                                 </td>
+                                <td>@if($Report[$index]->type){{$Report[$index]->type->trans_type}}@endif</td>
                                 <td>@if($Report[$index]->operation){{$Report[$index]->operation->operation_code}}@endif</td>
                             </tr>
                             <?php
