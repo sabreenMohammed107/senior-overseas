@@ -84,20 +84,8 @@
                                 <td>{{$Reports[ $index]->id}}</td>
                             </tr>
 
-                            {{-- 
-                         <tr>
-                                <td>{{$index+1}}</td>
-                                <td> {{$Report->where('$Report[$index]->currency_id', 1)->sum('credit') - $Report->where('$Report[$index]->currency_id', 1)->sum('depit')}}</td>
-                                <td> {{$Report->where('$Report[$index]->currency_id', 1)->sum('credit') - $Report->where('$Report[$index]->currency_id', 1)->sum('depit')}}</td>
-                                <td> {{$Report->where('$Report[$index]->currency_id', 1)->sum('credit') - $Report->where('$Report[$index]->currency_id', 1)->sum('depit')}}</td>
-                                <td>@if($Report[$index]->operation){{$Report[$index]->operation->operation_code}}@endif</td>
-                            </tr>
-                            <?php
-                            $index++;
-                            ?>
-                              --}}
-                            @endforeach
-                            </tr>
+                        @endforeach
+                        
                         </tbody>
                     </table>
                 </div>
