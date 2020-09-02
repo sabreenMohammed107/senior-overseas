@@ -144,9 +144,7 @@ Route::get('/notifications/{id}', 'UserNotificationsController@show')->name('not
 
 /*-------------------------Reports----------------------------------*/
 Route::resource('/client-report', 'ClientReport');
-Route::get('fetch-client-report/fetch', 'ClientReport@fetchReport')->name('fetch-client-report.fetch');
-Route::get('fetch-client-Allreport/fetch', 'ClientReport@fetchAllReport')->name('fetch-client-Allreport.fetch');
-
+Route::get('fetch-client-report/fetch', 'ClientReport@fetchAllReport')->name('fetch-client-report.fetch');
 
 
 /*-------------------------Supplier Reports----------------------------------*/
