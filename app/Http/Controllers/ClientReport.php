@@ -268,7 +268,6 @@ class ClientReport extends Controller
         $curs = [];
         $index = 0;
         foreach ($filtters as $row) {
-
              $cur = $row[$index]->currency->currency_name;
              array_push($curs, $cur);
             $index++;
