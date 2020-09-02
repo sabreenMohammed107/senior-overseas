@@ -234,6 +234,7 @@ class ClientReport extends Controller
             'client_name' => $client->client_name,
             'curs' => $curs,
             'totals' => $totals,
+            
         ];
 
 
