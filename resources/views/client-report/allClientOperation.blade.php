@@ -73,20 +73,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
-                            $index=0;
-                            ?>
-                            @foreach($filtters as  $Report)
+                           
+                            @foreach($filtters as  $Reports)
+                            @foreach($Reports as  $index => $Report)
                             <tr>
                                 <td>{{$index+1}}</td>
-                                <td> {{App\Models\Financial_entry::where('client_id', $Report[$index]->client_id)->where('currency_id', 1)->sum('credit') - App\Models\Financial_entry::where('client_id', $Report[$index]->client_id)->where('currency_id', 1)->sum('depit')}}</td>
-                                <td>{{App\Models\Financial_entry::where('client_id', $Report[$index]->client_id)->where('currency_id', 2)->sum('credit') - App\Models\Financial_entry::where('client_id', $Report[$index]->client_id)->where('currency_id', 2)->sum('depit')}}</td>
-                                <td>{{App\Models\Financial_entry::where('client_id', $Report[$index]->client_id)->where('currency_id', 3)->sum('credit') - App\Models\Financial_entry::where('client_id', $Report[$index]->client_id)->where('currency_id', 3)->sum('depit')}}</td>
-                                <td>@if($Report[$index]->operation){{$Report[$index]->operation->operation_code}}@endif</td>
+                                <td> {{App\Models\Financial_entry::where('client_id', $Report->client_id)->where('currency_id', 1)->sum('credit') - App\Models\Financial_entry::where('client_id', $Report->client_id)->where('currency_id', 1)->sum('depit')}}</td>
+                                <td>{{App\Models\Financial_entry::where('client_id', $Report->client_id)->where('currency_id', 2)->sum('credit') - App\Models\Financial_entry::where('client_id', $Report->client_id)->where('currency_id', 2)->sum('depit')}}</td>
+                                <td>{{App\Models\Financial_entry::where('client_id', $Report->client_id)->where('currency_id', 3)->sum('credit') - App\Models\Financial_entry::where('client_id', $Report->client_id)->where('currency_id', 3)->sum('depit')}}</td>
+                                <td>@if($Report->operation){{$Report->operation->operation_code}}@endif</td>
                             </tr>
-                            <?php
-                            $index++;
-                            ?>
+                            @endforeach
                             @endforeach
                             </tr>
                         </tbody>
