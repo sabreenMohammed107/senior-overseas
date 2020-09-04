@@ -285,6 +285,7 @@ class ClientReport extends Controller
             if(!$ff->operation_id){
                 array_push($test, $ff);
             }
+        }
         //-----------------End----------------//
         // ----------------- //
         $curs = [];
