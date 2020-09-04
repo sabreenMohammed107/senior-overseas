@@ -264,7 +264,7 @@ class ClientReport extends Controller
 
             $filtters->where('client_id', '=', $request->get("client_id"));
         }
-        $operationIds = $filtters->distinct()->pluck('operation_id');
+        $operationIds = $filtters->whereNotNull('operation_id')->distinct()->pluck('operation_id');
         $filtterTotal = $filtters->get();
 
 
@@ -272,11 +272,7 @@ class ClientReport extends Controller
         $test = array();
         foreach ($operationIds as $op) {
             foreach ($filtterTotal as $ff) {
-                if(!$ff->operation_id){
-                    array_push($test, $ff);
-                }
-
-                if ($ff->operation_id == $op) {
+                 if ($ff->operation_id == $op) {
                     array_push($test, $ff);
                 break; 
                 }
@@ -285,7 +281,10 @@ class ClientReport extends Controller
             }
         }
 
-
+        foreach ($filtterTotal as $ff) {
+            if(!$ff->operation_id){
+                array_push($test, $ff);
+            }
         //-----------------End----------------//
         // ----------------- //
         $curs = [];
