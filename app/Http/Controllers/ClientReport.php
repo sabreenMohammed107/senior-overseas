@@ -265,7 +265,21 @@ class ClientReport extends Controller
             $filtters->where('client_id', '=', $request->get("client_id"));
         }
         $operationIds = $filtters->whereNotNull('operation_id')->distinct()->pluck('operation_id');
-        $filtterTotal = $filtters->get();
+
+
+        $new = Financial_entry::orderBy('currency_id')->orderBy('entry_date');
+
+        if (!empty($request->get("from_date"))) {
+            $new->where('entry_date', '>=', Carbon::parse($request->get("from_date")));
+        }
+        if (!empty($request->get("to_date"))) {
+            $new->where('entry_date', '<=', Carbon::parse($request->get("to_date")));
+        }
+        if (!empty($request->get("client_id"))) {
+
+            $new->where('client_id', '=', $request->get("client_id"));
+        }
+        $filtterTotal = $new->get();
 
 
 
