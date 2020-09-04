@@ -244,6 +244,7 @@ class ClientReport extends Controller
 
     }
 
+// App\Models\Financial_entry::where('client_id', $Report[$index]->client_id)->where('operation_id', $Report[$index]->operation_id)->where('currency_id', 1)->sum('credit') - App\Models\Financial_entry::where('client_id', $Report[$index]->client_id)->where('operation_id', $Report[$index]->operation_id)->where('currency_id', 1)->sum('depit')}}
 
     public function fetchAllReport(Request $request)
     {
@@ -264,7 +265,15 @@ class ClientReport extends Controller
             $filtters->where('client_id', '=', $request->get("client_id"));
         }
         $filtterTotal = $filtters->get();
-        $filtters = $filtters->get()->groupBy('operation_id');
+        $filtters = $filtters->whereNotNull('operation_id')->get()->groupBy('operation_id');
+        $filtter1 = $filtters->whereNull('operation_id')->get()->groupBy('operation_id');
+        $test=array();
+
+        //-----------------New----------------//
+        array_push($test, $filtters);
+        array_push($test, $filtter1);
+        dd($test);
+       //-----------------End----------------//
      
         // ----------------- //
         $curs = [];
