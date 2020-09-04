@@ -273,9 +273,7 @@ class ClientReport extends Controller
                 //-----------------New----------------//
         array_push($test, $filtterss);
         array_push($test, $filtter1);
-        dd($filtter1);
        //-----------------End----------------//
-     
         // ----------------- //
         $curs = [];
         $index = 0;
@@ -316,7 +314,7 @@ class ClientReport extends Controller
         $data = [
             'title' => 'First PDF for Medium',
             'heading' => 'Hello from 99Points.info',
-            'filtters' => $filtters,
+            'filtters' => $test,
             'from_date' => $from_date,
             'to_date' => $to_date,
             'client_name' => $client->client_name,
