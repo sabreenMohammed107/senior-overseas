@@ -75,13 +75,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
-                            $index = 0;
-                            ?>
+                          
                             @foreach($filtters as $Reports)
 
 
-                            @foreach($Reports as $Report)
+                            @foreach($Reports as $index=> $Report)
 
                             <tr>
                                 <td>{{$index+1}}</td>
