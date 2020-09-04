@@ -83,20 +83,19 @@
                                 @if($Report->operation)
                                 <td>
                                    
-                                    @foreach($operationIds as $opId)
-                                    @if($Report->operation_id == $opId)
+                                  
+                                    @if($Report->operation_id )
                                     {{
                                         App\Models\Financial_entry::where('client_id', $Report->client_id)->where('operation_id', $Report->operation_id)->where('currency_id', 1)->sum('credit') - App\Models\Financial_entry::where('client_id', $Report->client_id)->where('operation_id', $Report->operation_id)->where('currency_id', 1)->sum('depit')}}
 
                                     @endif
-                                    @break
-                                    @endforeach
+                                  
                                 </td>
                                 @else
                                 <td>
 
                                     @if($Report->currency_id ==1)
-                                    {{$Report->depit ?? ''}}
+                                    {{$Report->depit ?? ''}}  {{$Report->credit ?? ''}}
                                     @endif
 
                                 </td>
@@ -104,20 +103,19 @@
                                 @if($Report->operation)
                                 <td>
                                    
-                                    @foreach($operationIds as $opId)
-                                    @if($Report->operation_id == $opId)
+                                   
+                                    @if($Report->operation_id)
                                     {{
                                         App\Models\Financial_entry::where('client_id', $Report->client_id)->where('operation_id', $Report->operation_id)->where('currency_id', 2)->sum('credit') - App\Models\Financial_entry::where('client_id', $Report->client_id)->where('operation_id', $Report->operation_id)->where('currency_id', 2)->sum('depit')}}
 
                                     @endif
-                                    @break
-                                    @endforeach
+                                   
                                 </td>
                                 @else
                                 <td>
 
                                     @if($Report->currency_id ==2)
-                                    {{$Report->depit ?? ''}}
+                                    {{$Report->depit ?? ''}}  {{$Report->credit ?? ''}}
                                     @endif
 
                                 </td>
@@ -125,20 +123,19 @@
                                 @if($Report->operation)
                                 <td>
                                    
-                                    @foreach($operationIds as $opId)
-                                    @if($Report->operation_id == $opId)
+                                   
+                                    @if($Report->operation_id)
                                     {{
                                         App\Models\Financial_entry::where('client_id', $Report->client_id)->where('operation_id', $Report->operation_id)->where('currency_id', 3)->sum('credit') - App\Models\Financial_entry::where('client_id', $Report->client_id)->where('operation_id', $Report->operation_id)->where('currency_id', 3)->sum('depit')}}
 
                                     @endif
-                                    @break
-                                    @endforeach
+                                  
                                 </td>
                                 @else
                                 <td>
 
                                     @if($Report->currency_id ==3)
-                                    {{$Report->depit ?? ''}}
+                                    {{$Report->depit ?? ''}}  {{$Report->credit ?? ''}}
                                     @endif
 
                                 </td>
