@@ -275,8 +275,10 @@ class ClientReport extends Controller
                 if(!$ff->operation_id){
                     array_push($test, $ff);
                 }
+
                 if ($ff->operation_id == $op) {
                     array_push($test, $ff);
+                break; 
                 }
 
               
