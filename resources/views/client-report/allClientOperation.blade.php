@@ -66,8 +66,9 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>EGP</th>
                                 <th>USD</th>
+                                <th>EGP</th>
+                              
                                 <th>URE </th>
                                 <th>Transaction Type</th>
                                 <th>Operation code</th>
