@@ -46,9 +46,9 @@ class ClientReport extends Controller
     {
         $rows = Client::orderBy("created_at", "Desc")->get();
         $filtters = [];
-        $totals=[];
-        $curs=[];
-        return view($this->viewName . 'index', compact('rows', 'filtters','curs','totals'));
+        $totals = [];
+        $curs = [];
+        return view($this->viewName . 'index', compact('rows', 'filtters', 'curs', 'totals'));
     }
 
     /**
@@ -110,9 +110,9 @@ class ClientReport extends Controller
 
         foreach ($cursIds as $cur) {
             $total = 0;
-           
-         $total =  $filtters->where('client_id', $client_id)->where('currency_id', '=', $cur)->sum('credit') -  $filtters->where('client_id', $client_id)->where('currency_id', '=', $cur)->sum('depit');
-            $name=Currency::where('id','=',$cur)->first();
+
+            $total =  $filtters->where('client_id', $client_id)->where('currency_id', '=', $cur)->sum('credit') -  $filtters->where('client_id', $client_id)->where('currency_id', '=', $cur)->sum('depit');
+            $name = Currency::where('id', '=', $cur)->first();
             $totalNum = $total;
             $total = Terbilang::make($total, " -  $name->currency_name");
             $obj = new Collection();
@@ -122,7 +122,7 @@ class ClientReport extends Controller
 
             array_push($totals, $obj);
         }
-        return view($this->viewName . 'report', compact('rows', 'filtters','curs','totals'))->render();
+        return view($this->viewName . 'report', compact('rows', 'filtters', 'curs', 'totals'))->render();
     }
 
     /**
@@ -174,7 +174,7 @@ class ClientReport extends Controller
     public function fetchReport(Request $request)
     {
         $client_id = $request->input('client_id');
-        $from_date =$request->input('from_date');
+        $from_date = $request->input('from_date');
         $to_date = $request->input('to_date');
         $client = Client::where('id', '=', $client_id)->first();
         $filtters = Financial_entry::orderBy('currency_id')->orderBy('entry_date');
@@ -190,8 +190,8 @@ class ClientReport extends Controller
             $filtters->where('client_id', '=', $request->get("client_id"));
         }
         $filtters = $filtters->get();
-       
-       
+
+
         // ----------------- //
         $curs = [];
         foreach ($filtters as $row) {
@@ -213,9 +213,9 @@ class ClientReport extends Controller
 
         foreach ($cursIds as $cur) {
             $total = 0;
-           
-         $total =  $filtters->where('client_id', $client_id)->where('currency_id', '=', $cur)->sum('credit') -  $filtters->where('client_id', $client_id)->where('currency_id', '=', $cur)->sum('depit');
-            $name=Currency::where('id','=',$cur)->first();
+
+            $total =  $filtters->where('client_id', $client_id)->where('currency_id', '=', $cur)->sum('credit') -  $filtters->where('client_id', $client_id)->where('currency_id', '=', $cur)->sum('depit');
+            $name = Currency::where('id', '=', $cur)->first();
             $totalNum = $total;
             $total = Terbilang::make($total, " -  $name->currency_name");
             $obj = new Collection();
@@ -234,7 +234,7 @@ class ClientReport extends Controller
             'client_name' => $client->client_name,
             'curs' => $curs,
             'totals' => $totals,
-            
+
         ];
 
 
@@ -244,12 +244,12 @@ class ClientReport extends Controller
 
     }
 
-// App\Models\Financial_entry::where('client_id', $Report[$index]->client_id)->where('operation_id', $Report[$index]->operation_id)->where('currency_id', 1)->sum('credit') - App\Models\Financial_entry::where('client_id', $Report[$index]->client_id)->where('operation_id', $Report[$index]->operation_id)->where('currency_id', 1)->sum('depit')}}
+    // App\Models\Financial_entry::where('client_id', $Report[$index]->client_id)->where('operation_id', $Report[$index]->operation_id)->where('currency_id', 1)->sum('credit') - App\Models\Financial_entry::where('client_id', $Report[$index]->client_id)->where('operation_id', $Report[$index]->operation_id)->where('currency_id', 1)->sum('depit')}}
 
     public function fetchAllReport(Request $request)
     {
         $client_id = $request->input('client_id');
-        $from_date =$request->input('from_date');
+        $from_date = $request->input('from_date');
         $to_date = $request->input('to_date');
         $client = Client::where('id', '=', $client_id)->first();
         $filtters = Financial_entry::orderBy('currency_id')->orderBy('entry_date');
@@ -264,25 +264,40 @@ class ClientReport extends Controller
 
             $filtters->where('client_id', '=', $request->get("client_id"));
         }
-        $operationIds=$filtters->distinct()->pluck('operation_id');
+        $operationIds = $filtters->distinct()->pluck('operation_id');
         $filtterTotal = $filtters->get();
-       
 
 
-       //-----------------End----------------//
+
+        $test = array();
+        foreach ($operationIds as $op) {
+            foreach ($filtterTotal as $ff) {
+                if(!$ff->operation_id){
+                    array_push($test, $ff);
+                }
+                if ($ff->operation_id == $op) {
+                    array_push($test, $ff);
+                }
+
+                break;
+            }
+        }
+
+
+        //-----------------End----------------//
         // ----------------- //
         $curs = [];
         $index = 0;
         foreach ($filtters as $row) {
-             $cur = $row[$index]->currency->currency_name;
-             array_push($curs, $cur);
+            $cur = $row[$index]->currency->currency_name;
+            array_push($curs, $cur);
             $index++;
         }
         $curs = array_unique($curs);
         $totals = [];
         $total = 0;
         $cursIds = [];
-        $two=0;
+        $two = 0;
         foreach ($filtters as $row) {
             $cursId = $row[$two]->currency_id;
             array_push($cursIds, $cursId);
@@ -295,9 +310,9 @@ class ClientReport extends Controller
 
         foreach ($cursIds as $cur) {
             $total = 0;
-           
-         $total =  $filtterTotal->where('client_id', $client_id)->where('currency_id', '=', $cur)->sum('credit') -  $filtterTotal->where('client_id', $client_id)->where('currency_id', '=', $cur)->sum('depit');
-            $name=Currency::where('id','=',$cur)->first();
+
+            $total =  $filtterTotal->where('client_id', $client_id)->where('currency_id', '=', $cur)->sum('credit') -  $filtterTotal->where('client_id', $client_id)->where('currency_id', '=', $cur)->sum('depit');
+            $name = Currency::where('id', '=', $cur)->first();
             $totalNum = $total;
             $total = Terbilang::make($total, " -  $name->currency_name");
             $obj = new Collection();
@@ -310,8 +325,8 @@ class ClientReport extends Controller
         $data = [
             'title' => 'First PDF for Medium',
             'heading' => 'Hello from 99Points.info',
-            'filtters' => $filtterTotal,
-            'operationIds'=>$operationIds,
+            'filtters' => $test,
+            'operationIds' => $operationIds,
             'from_date' => $from_date,
             'to_date' => $to_date,
             'client_name' => $client->client_name,
