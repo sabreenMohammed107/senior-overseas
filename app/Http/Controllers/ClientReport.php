@@ -279,7 +279,7 @@ class ClientReport extends Controller
                     array_push($test, $ff);
                 }
 
-                break;
+              
             }
         }
 
