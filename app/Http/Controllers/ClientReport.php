@@ -266,10 +266,10 @@ class ClientReport extends Controller
         }
         $filtterTotal = $filtters->get();
         $filtters = $filtters->whereNotNull('operation_id')->get()->groupBy('operation_id');
-        $filtter1 = $filtters->Where('operation_id',null)->groupBy('operation_id');
+        $filtter1 = $filtters->Where('operation_id',null)->groupBy('operation_id')->toArray();
         $test=array();
 
-        //-----------------New----------------//
+                //-----------------New----------------//
         array_push($test, $filtters);
         array_push($test, $filtter1);
         dd($test);
