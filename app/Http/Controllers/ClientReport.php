@@ -264,16 +264,11 @@ class ClientReport extends Controller
 
             $filtters->where('client_id', '=', $request->get("client_id"));
         }
+        $operationIds=$filtters->distinct()->pluck('operation_id');
         $filtterTotal = $filtters->get();
-        $filtter1 =$filtters->where('operation_id',null)->get();
-        $filtterss = $filtters->whereNotNull('operation_id')->get()->groupBy('operation_id');
-        $operationIds=$filtters->pluck('operation_id');
-        $test=array();
-        
-dd($operationIds);
-                //-----------------New----------------//
-        array_push($test, $filtterss);
-        array_push($test, $filtter1);
+       
+
+
        //-----------------End----------------//
         // ----------------- //
         $curs = [];
@@ -315,7 +310,8 @@ dd($operationIds);
         $data = [
             'title' => 'First PDF for Medium',
             'heading' => 'Hello from 99Points.info',
-            'filtters' => $test,
+            'filtters' => $filtterTotal,
+            'operationIds'=>$operationIds,
             'from_date' => $from_date,
             'to_date' => $to_date,
             'client_name' => $client->client_name,
