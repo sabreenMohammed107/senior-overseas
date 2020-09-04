@@ -265,7 +265,7 @@ class ClientReport extends Controller
             $filtters->where('client_id', '=', $request->get("client_id"));
         }
         $filtterTotal = $filtters->get();
-        $filtter1 = $filtters->whereNull('operation_id')->get();
+        $filtter1 =$filtterTotal->where('operation_id',null)->get();
         $filtterss = $filtters->whereNotNull('operation_id')->get()->groupBy('operation_id');
       
         $test=array();
@@ -273,7 +273,7 @@ class ClientReport extends Controller
                 //-----------------New----------------//
         array_push($test, $filtterss);
         array_push($test, $filtter1);
-        dd($filtterTotal);
+        dd($filtter1);
        //-----------------End----------------//
      
         // ----------------- //
