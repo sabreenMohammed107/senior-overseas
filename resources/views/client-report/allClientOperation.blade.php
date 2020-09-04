@@ -95,7 +95,7 @@
                                 <td>
 
                                     @if($Report->currency_id ==1)
-                                    {{$Report->depit ?? ''}}  {{$Report->credit ?? ''}}
+                                    {{$Report->credit ?? '-'}}{{$Report->depit ?? ''}}  
                                     @endif
 
                                 </td>
@@ -115,7 +115,7 @@
                                 <td>
 
                                     @if($Report->currency_id ==2)
-                                    {{$Report->depit ?? ''}}  {{$Report->credit ?? ''}}
+                                    {{$Report->credit ?? '-'}}{{$Report->depit ?? ''}} 
                                     @endif
 
                                 </td>
@@ -135,7 +135,7 @@
                                 <td>
 
                                     @if($Report->currency_id ==3)
-                                    {{$Report->depit ?? ''}}  {{$Report->credit ?? ''}}
+                                    {{$Report->credit ?? '-'}}{{$Report->depit ?? ''}}  
                                     @endif
 
                                 </td>
