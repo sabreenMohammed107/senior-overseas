@@ -302,7 +302,7 @@ class ClientReport extends Controller
             }
         }
         
-       $test=collect($test)->sortBy('entry_date')->toArray();
+       $test=collect($test)->sortBy('entry_date');
         //-----------------End----------------//
         // ----------------- //
         $curs = [];
