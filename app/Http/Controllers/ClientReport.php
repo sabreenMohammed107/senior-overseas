@@ -281,13 +281,16 @@ class ClientReport extends Controller
         }
         $filtterTotal = $new->get();
 
+      
+        $test = array();
+
         foreach ($filtterTotal as $ff) {
             if(!$ff->operation_id){
                 array_push($test, $ff);
             }
         }
 
-        $test = array();
+
         foreach ($operationIds as $op) {
             foreach ($filtterTotal as $ff) {
                  if ($ff->operation_id == $op) {
