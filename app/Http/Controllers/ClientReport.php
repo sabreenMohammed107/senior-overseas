@@ -267,7 +267,7 @@ class ClientReport extends Controller
         $operationIds = $filtters->whereNotNull('operation_id')->distinct()->pluck('operation_id');
 
 
-        $new = Financial_entry::orderBy('currency_id')->orderBy('entry_date');
+        $new = Financial_entry::orderBy('currency_id')->orderBy('entry_date', "Asc");
 
         if (!empty($request->get("from_date"))) {
             $new->where('entry_date', '>=', Carbon::parse($request->get("from_date")));
@@ -281,7 +281,11 @@ class ClientReport extends Controller
         }
         $filtterTotal = $new->get();
 
-
+        foreach ($filtterTotal as $ff) {
+            if(!$ff->operation_id){
+                array_push($test, $ff);
+            }
+        }
 
         $test = array();
         foreach ($operationIds as $op) {
@@ -295,11 +299,7 @@ class ClientReport extends Controller
             }
         }
 
-        foreach ($filtterTotal as $ff) {
-            if(!$ff->operation_id){
-                array_push($test, $ff);
-            }
-        }
+       
         //-----------------End----------------//
         // ----------------- //
         $curs = [];
