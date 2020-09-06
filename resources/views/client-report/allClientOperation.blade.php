@@ -72,8 +72,8 @@
                                 <th>USD</th>
 
                                 <th>URE </th>
-                                <th>Transaction Type</th>
-                                <th>Operation code</th>
+                                <th>Type</th>
+                                <th>Op Code</th>
                             </tr>
                         </thead>
                         <tbody>
