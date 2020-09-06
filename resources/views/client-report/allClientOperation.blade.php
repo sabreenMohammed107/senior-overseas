@@ -66,8 +66,10 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>USD</th>
+                                <th>Date</th>
                                 <th>EGP</th>
+
+                                <th>USD</th>
 
                                 <th>URE </th>
                                 <th>Transaction Type</th>
@@ -80,62 +82,66 @@
 
                             <tr>
                                 <td>{{$index+1}}</td>
+                                <td> <?php $date = date_create($Report->entry_date) ?>
+                                    {{ date_format($date,'Y-m-d') }}
+                                </td>
+
                                 @if($Report->operation)
                                 <td>
-                                   
-                                  
-                                    @if($Report->operation_id )
-                                    {{
-                                        App\Models\Financial_entry::where('client_id', $Report->client_id)->where('operation_id', $Report->operation_id)->where('currency_id', 1)->sum('credit') - App\Models\Financial_entry::where('client_id', $Report->client_id)->where('operation_id', $Report->operation_id)->where('currency_id', 1)->sum('depit')}}
 
-                                    @endif
-                                  
-                                </td>
-                                @else
-                                <td>
 
-                                    @if($Report->currency_id ==1)
-                                    {{$Report->credit ?? '-'}}{{$Report->depit ?? ''}}  
-                                    @endif
-
-                                </td>
-                                @endif
-                                @if($Report->operation)
-                                <td>
-                                   
-                                   
                                     @if($Report->operation_id)
                                     {{
                                         App\Models\Financial_entry::where('client_id', $Report->client_id)->where('operation_id', $Report->operation_id)->where('currency_id', 2)->sum('credit') - App\Models\Financial_entry::where('client_id', $Report->client_id)->where('operation_id', $Report->operation_id)->where('currency_id', 2)->sum('depit')}}
 
                                     @endif
-                                   
+
                                 </td>
                                 @else
                                 <td>
 
                                     @if($Report->currency_id ==2)
-                                    {{$Report->credit ?? '-'}}{{$Report->depit ?? ''}} 
+                                    {{$Report->credit ?? '-'}}{{$Report->depit ?? ''}}
                                     @endif
 
                                 </td>
                                 @endif
                                 @if($Report->operation)
                                 <td>
-                                   
-                                   
+
+
+                                    @if($Report->operation_id )
+                                    {{
+                                        App\Models\Financial_entry::where('client_id', $Report->client_id)->where('operation_id', $Report->operation_id)->where('currency_id', 1)->sum('credit') - App\Models\Financial_entry::where('client_id', $Report->client_id)->where('operation_id', $Report->operation_id)->where('currency_id', 1)->sum('depit')}}
+
+                                    @endif
+
+                                </td>
+                                @else
+                                <td>
+
+                                    @if($Report->currency_id ==1)
+                                    {{$Report->credit ?? '-'}}{{$Report->depit ?? ''}}
+                                    @endif
+
+                                </td>
+                                @endif
+                                @if($Report->operation)
+                                <td>
+
+
                                     @if($Report->operation_id)
                                     {{
                                         App\Models\Financial_entry::where('client_id', $Report->client_id)->where('operation_id', $Report->operation_id)->where('currency_id', 3)->sum('credit') - App\Models\Financial_entry::where('client_id', $Report->client_id)->where('operation_id', $Report->operation_id)->where('currency_id', 3)->sum('depit')}}
 
                                     @endif
-                                  
+
                                 </td>
                                 @else
                                 <td>
 
                                     @if($Report->currency_id ==3)
-                                    {{$Report->credit ?? '-'}}{{$Report->depit ?? ''}}  
+                                    {{$Report->credit ?? '-'}}{{$Report->depit ?? ''}}
                                     @endif
 
                                 </td>
