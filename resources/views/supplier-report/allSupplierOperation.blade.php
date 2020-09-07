@@ -94,16 +94,7 @@
 
                                     @if($Report->operation_id)
                                     {{
-                                        App\Models\Financial_entry::where('ocean_carrier_id', $Report->ocean_carrier_id)
-                                        ->orwhere('air_carrier_id', $Report->air_carrier_id)
-                                        ->orwhere('trucking_id', $Report->trucking_id)
-                                        ->orwhere('clearance_id',$Report->clearance_id)
-                                        ->orwhere('agent_id',$Report->agent_id)
-                                         ->where('operation_id', $Report->operation_id)->where('currency_id', 2)->sum('depit') - App\Models\Financial_entry::where('ocean_carrier_id', $Report->ocean_carrier_id)
-                                        ->orwhere('air_carrier_id', $Report->air_carrier_id)
-                                        ->orwhere('trucking_id', $Report->trucking_id)
-                                        ->orwhere('clearance_id',$Report->clearance_id)
-                                        ->orwhere('agent_id',$Report->agent_id)->where('operation_id', $Report->operation_id)->where('currency_id', 2)->sum('credit')}}
+                                        App\Models\Financial_entry::where('trucking_id', $Report->trucking_id)->where('operation_id', $Report->operation_id)->where('currency_id', 1)->sum('depit') - App\Models\Financial_entry::owhere('trucking_id', $Report->trucking_id)->where('operation_id', $Report->operation_id)->where('currency_id', 1)->sum('credit')}}
 
                                     @endif
 
@@ -123,7 +114,7 @@
 
                                     @if($Report->operation_id )
                                     {{
-                                        App\Models\Financial_entry::where('trucking_id', $Report->trucking_id)->where('operation_id', $Report->operation_id)->where('currency_id', 3)->sum('depit') - App\Models\Financial_entry::owhere('trucking_id', $Report->trucking_id)->where('operation_id', $Report->operation_id)->where('currency_id', 3)->sum('credit')}}
+                                        App\Models\Financial_entry::where('trucking_id', $Report->trucking_id)->where('operation_id', $Report->operation_id)->where('currency_id', 1)->sum('depit') - App\Models\Financial_entry::owhere('trucking_id', $Report->trucking_id)->where('operation_id', $Report->operation_id)->where('currency_id', 2)->sum('credit')}}
 
                                     @endif
 
