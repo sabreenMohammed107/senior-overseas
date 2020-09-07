@@ -227,6 +227,212 @@ class SuppliersReport extends Controller
     {
         //
     }
+    public function fetchAllReport(Request $request)
+    {
+        $fristSelect = $request->input('selector_type');
+        $xxselector = $request->input('xxselector');
+
+        $from_date =$request->input('from_date');
+        $to_date =$request->input('to_date');
+
+        $filtters =Financial_entry::orderBy('currency_id')->orderBy('entry_date');
+
+        if (!empty($request->get("from_date"))) {
+            $filtters->where('entry_date', '>=', Carbon::parse($request->get("from_date")));
+        }
+        if (!empty($request->get("to_date"))) {
+            $filtters->where('entry_date', '<=', Carbon::parse($request->get("to_date")));
+        }
+        if ( $fristSelect == 3) {
+            if (!empty($request->get("xxselector"))) {
+                $filtters->where('ocean_carrier_id', '=', $request->get("xxselector"));
+            }
+        }
+        if ( $fristSelect == 4) {
+            if (!empty($request->get("xxselector"))) {
+                $filtters->where('air_carrier_id', '=', $request->get("xxselector"));
+            }
+        }
+
+        if ( $fristSelect == 6) {
+            if (!empty($request->get("xxselector"))) {
+                $filtters->where('trucking_id', '=', $request->get("xxselector"));
+            }
+        }
+        if ( $fristSelect == 5) {
+
+            if (!empty($request->get("xxselector"))) {
+                $filtters->where('clearance_id', '=', $request->get("xxselector"));
+            }
+        }
+        if ( $fristSelect == 7) {
+            if (!empty($request->get("xxselector"))) {
+                $filtters->where('agent_id', '=', $request->get("xxselector"));
+            }
+        }
+
+        if (!empty($request->get("selector_type")) && empty($request->get("xxselector"))) {
+            $filtters->where('trans_type_id', '=', $request->get("selector_type"));
+        }
+        $filtters = $filtters->get();
+//new
+$new =Financial_entry::orderBy('currency_id')->orderBy('entry_date');
+
+if (!empty($request->get("from_date"))) {
+    $new->where('entry_date', '>=', Carbon::parse($request->get("from_date")));
+}
+if (!empty($request->get("to_date"))) {
+    $new->where('entry_date', '<=', Carbon::parse($request->get("to_date")));
+}
+if ( $fristSelect == 3) {
+    if (!empty($request->get("xxselector"))) {
+        $new->where('ocean_carrier_id', '=', $request->get("xxselector"));
+    }
+}
+if ( $fristSelect == 4) {
+    if (!empty($request->get("xxselector"))) {
+        $new->where('air_carrier_id', '=', $request->get("xxselector"));
+    }
+}
+
+if ( $fristSelect == 6) {
+    if (!empty($request->get("xxselector"))) {
+        $new->where('trucking_id', '=', $request->get("xxselector"));
+    }
+}
+if ( $fristSelect == 5) {
+
+    if (!empty($request->get("xxselector"))) {
+        $new->where('clearance_id', '=', $request->get("xxselector"));
+    }
+}
+if ( $fristSelect == 7) {
+    if (!empty($request->get("xxselector"))) {
+        $new->where('agent_id', '=', $request->get("xxselector"));
+    }
+}
+
+if (!empty($request->get("selector_type")) && empty($request->get("xxselector"))) {
+    $new->where('trans_type_id', '=', $request->get("selector_type"));
+}
+$operationIds = $new->whereNotNull('operation_id')->distinct()->pluck('operation_id');
+//end
+//test
+$test = array();
+
+foreach ($filtters as $ff) {
+    if(!$ff->operation_id){
+        array_push($test, $ff);
+    }
+}
+
+
+foreach ($operationIds as $op) {
+    foreach ($filtters as $ff) {
+         if ($ff->operation_id == $op) {
+            array_push($test, $ff);
+        break; 
+        }
+
+      
+    }
+}
+
+$test=collect($test)->sortBy('entry_date');
+//-----------------End----------------//
+$curs = [];
+foreach ($filtters as $row) {
+    if($row->currency){
+        $cur = $row->currency->currency_name;
+
+    }
+    array_push($curs, $cur);
+}
+$curs = array_unique($curs);
+$totals = [];
+$total = 0;
+$cursIds = [];
+foreach ($filtters as $row) {
+    $cursId = $row->currency_id;
+    array_push($cursIds, $cursId);
+}
+$cursIds = array_unique($cursIds);
+
+
+
+$objname='';
+
+foreach ($cursIds as $cur) {
+    $total = 0;
+    foreach ($filtters as $filtter) {
+        if ($filtter->ocean_carrier_id) {
+            $total =  $filtters->where('ocean_carrier_id', $xxselector)->where('currency_id', '=', $cur)->sum('depit') -  $filtters->where('ocean_carrier_id', $xxselector)->where('currency_id', '=', $cur)->sum('credit');
+            $obj=Carrier::where('id', '=', $request->input('xxselector'))->first();
+            $objname=$obj->carrier_name;
+
+        break;
+        } elseif ($filtter->air_carrier_id) {
+            $total =  $filtters->where('air_carrier_id', $xxselector)->where('currency_id', '=', $cur)->sum('depit') -  $filtters->where('air_carrier_id', $xxselector)->where('currency_id', '=', $cur)->sum('credit');
+            $obj=Carrier::where('id', '=', $request->input('xxselector'))->first();
+            $objname=$obj->carrier_name;
+
+        break;
+        } elseif ($filtter->trucking_id) {
+            $total =  $filtters->where('trucking_id', $xxselector)->where('currency_id', '=', $cur)->sum('depit') -  $filtters->where('trucking_id', $xxselector)->where('currency_id', '=', $cur)->sum('credit');
+            $obj=Supplier::where('id', '=', $request->input('xxselector'))->first();
+            $objname=$obj->supplier_name;
+        break;
+        } elseif ($filtter->clearance_id) {
+            $total =  $filtters->where('clearance_id', $xxselector)->where('currency_id', '=', $cur)->sum('depit') -  $filtters->where('clearance_id', $xxselector)->where('currency_id', '=', $cur)->sum('credit');
+            $obj=Supplier::where('id', '=', $request->input('xxselector'))->first();
+            $objname=$obj->supplier_name;
+        break;
+        } elseif ($filtter->agent_id) {
+            $total =  $filtters->where('agent_id', $xxselector)->where('currency_id', '=', $cur)->sum('depit') -  $filtters->where('agent_id', $xxselector)->where('currency_id', '=', $cur)->sum('credit');
+            $obj=Agent::where('id', '=', $request->input('xxselector'))->first();
+            $objname=$obj->agent_name;
+        break;
+        } else {
+            $total =  $filtters->where('trans_type_id',$request->get("selector_type"))->where('currency_id', '=', $cur)->sum('depit') -  $filtters->where('trans_type_id',$request->get("selector_type"))->where('currency_id', '=', $cur)->sum('credit');
+            $obj=Finan_trans_type::where('id', '=', $request->get("selector_type"))->first();
+            $objname=$obj->trans_type;
+
+        break;
+        }
+    }
+    //  $total = Financial_entry::where('client_id', $client_id)->where('currency_id', '=', $cur)->sum('credit') - Financial_entry::where('client_id', $client_id)->where('currency_id', '=', $cur)->sum('depit');
+
+    $name = Currency::where('id', '=', $cur)->first();
+    $totalNum = $total;
+    $total = Terbilang::make($total, " -  $name->currency_name");
+    $obj = new Collection();
+    $obj->cur = $name->currency_name;
+    $obj->total = strtoupper($total);
+    $obj->num = $totalNum;
+
+    array_push($totals, $obj);
+}
+
+
+$finance_type=Finan_trans_type::where('id','=',$request->input('selector_type'))->first();
+$data = [
+    'title' => 'First PDF for Medium',
+    'heading' => 'Hello from 99Points.info',
+    'filtters' => $test,
+    'from_date' => $from_date,
+    'to_date' => $to_date,
+    'selection' =>$finance_type->trans_type,
+    'name'=>$objname,
+    'curs' => $curs,
+    'totals' => $totals,
+    'content' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.'
+];
+
+
+$title = "My Report";
+$pdf = PDF::loadView($this->viewName . 'supplierReport', $data);
+return $pdf->stream('medium.pdf'); // to open in blank page
+    }
     public function fetchReport(Request $request)
     {
         $fristSelect = $request->input('selector_type');
