@@ -91,10 +91,10 @@
                                 @if($Report->operation)
                                 <td>
 
-
+{{$Report->trucking_id}}
                                     @if($Report->operation_id)
                                     {{
-                                        App\Models\Financial_entry::where('trucking_id', $Report->trucking_id)->where('operation_id', $Report->operation_id)->where('currency_id', 2)->sum('depit') - App\Models\Financial_entry::owhere('trucking_id', $Report->trucking_id)->where('operation_id', $Report->operation_id)->where('currency_id', 2)->sum('credit')}}
+                                        App\Models\Financial_entry::where('trucking_id', $Report->trucking_id)->where('operation_id', $Report->operation_id)->where('currency_id', 2)->sum('depit') - App\Models\Financial_entry::where('trucking_id', $Report->trucking_id)->where('operation_id', $Report->operation_id)->where('currency_id', 2)->sum('credit')}}
 
                                     @endif
 
