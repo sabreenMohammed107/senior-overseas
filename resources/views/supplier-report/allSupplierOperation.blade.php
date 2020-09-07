@@ -50,19 +50,20 @@
                 </div> -->
                 <div class="card-body" style="margin-top: 80px;">
                     <h2 style="margin-bottom: 40px;border-bottom:1px solid #000;padding:20px 0px">
-                    Suppliers/Expenses Report</h2>
-                        <div class="formData">
-                    <div class="form_in">
-                        <div class="in_style">Selection: <a>{{$selection}}</a></div>  
-                        <div class="in_style">From Date: <a>{{$from_date }}</a></div>
-                     </div>
+                        Suppliers/Expenses Report</h2>
+                    <div class="formData">
+                        <div class="form_in">
+                            <div class="in_style">Selection: <a>{{$selection}}</a></div>
+                            <div class="in_style">From Date: <a>{{$from_date }}</a></div>
+                        </div>
 
                         <div class="form_in">
-                        <div class="in_style">Name: <a>{{$name}}</a></div> 
-                          
-                        <div class="in_style">To Date: <a>{{$to_date}}</a></div></div>
+                            <div class="in_style">Name: <a>{{$name}}</a></div>
+
+                            <div class="in_style">To Date: <a>{{$to_date}}</a></div>
+                        </div>
                     </div>
-                    </div>
+                </div>
                 <div class="table-responsive-sm">
                     <table id="courseEval" class="dattable table table-striped thead-dark  w-100">
                         <thead>
@@ -94,16 +95,10 @@
 
                                     @if($Report->operation_id)
                                     {{
-                                        App\Models\Financial_entry::where('ocean_carrier_id', $Report->ocean_carrier_id)
-                                        ->orwhere('air_carrier_id', $Report->air_carrier_id)
-                                        ->orwhere('trucking_id', $Report->trucking_id)
-                                        ->orwhere('clearance_id',$Report->clearance_id)
-                                        ->orwhere('agent_id',$Report->agent_id)
-                                         ->where('operation_id', $Report->operation_id)->where('currency_id', 2)->sum('depit') - App\Models\Financial_entry::where('ocean_carrier_id', $Report->ocean_carrier_id)
-                                        ->orwhere('air_carrier_id', $Report->air_carrier_id)
-                                        ->orwhere('trucking_id', $Report->trucking_id)
-                                        ->orwhere('clearance_id',$Report->clearance_id)
-                                        ->orwhere('agent_id',$Report->agent_id)->where('operation_id', $Report->operation_id)->where('currency_id', 2)->sum('credit')}}
+                                        App\Models\Financial_entry::where('trucking_id', $Report->trucking_id)
+                                         ->where('operation_id', $Report->operation_id)->where('currency_id', 2)->sum('depit') -
+                                          App\Models\Financial_entry::where('trucking_id', $Report->trucking_id)
+                                        ->where('operation_id', $Report->operation_id)->where('currency_id', 2)->sum('credit')}}
 
                                     @endif
 
@@ -123,15 +118,10 @@
 
                                     @if($Report->operation_id )
                                     {{
-                                        App\Models\Financial_entry::where('ocean_carrier_id', $Report->ocean_carrier_id)
-                                        ->orwhere('air_carrier_id', $Report->air_carrier_id)
-                                        ->orwhere('trucking_id', $Report->trucking_id)
-                                        ->orwhere('clearance_id',$Report->clearance_id)
-                                        ->orwhere('agent_id',$Report->agent_id)->where('operation_id', $Report->operation_id)->where('currency_id', 1)->sum('depit') - App\Models\Financial_entry::where('ocean_carrier_id', $Report->ocean_carrier_id)
-                                        ->orwhere('air_carrier_id', $Report->air_carrier_id)
-                                        ->orwhere('trucking_id', $Report->trucking_id)
-                                        ->orwhere('clearance_id',$Report->clearance_id)
-                                        ->orwhere('agent_id',$Report->agent_id)->where('operation_id', $Report->operation_id)->where('currency_id', 1)->sum('credit')}}
+                                        App\Models\Financial_entry::where('trucking_id', $Report->trucking_id)
+                                       ->where('operation_id', $Report->operation_id)->where('currency_id', 1)->sum('depit') -
+                                        App\Models\Financial_entry::where('trucking_id', $Report->trucking_id)
+                                       ->where('operation_id', $Report->operation_id)->where('currency_id', 1)->sum('credit')}}
 
                                     @endif
 
@@ -151,15 +141,10 @@
 
                                     @if($Report->operation_id)
                                     {{
-                                        App\Models\Financial_entry::where('ocean_carrier_id', $Report->ocean_carrier_id)
-                                        ->orwhere('air_carrier_id', $Report->air_carrier_id)
-                                        ->orwhere('trucking_id', $Report->trucking_id)
-                                        ->orwhere('clearance_id',$Report->clearance_id)
-                                        ->orwhere('agent_id',$Report->agent_id)->where('operation_id', $Report->operation_id)->where('currency_id', 3)->sum('depit') - App\Models\Financial_entry::where('ocean_carrier_id', $Report->ocean_carrier_id)
-                                        ->orwhere('air_carrier_id', $Report->air_carrier_id)
-                                        ->orwhere('trucking_id', $Report->trucking_id)
-                                        ->orwhere('clearance_id',$Report->clearance_id)
-                                        ->orwhere('agent_id',$Report->agent_id)->where('operation_id', $Report->operation_id)->where('currency_id', 3)->sum('credit')}}
+                                        App\Models\Financial_entry::where('trucking_id', $Report->trucking_id)
+                                       ->where('operation_id', $Report->operation_id)->where('currency_id', 3)->sum('depit') - 
+                                       App\Models\Financial_entry::where('trucking_id', $Report->trucking_id)
+                                       ->where('operation_id', $Report->operation_id)->where('currency_id', 3)->sum('credit')}}
 
                                     @endif
 
@@ -168,7 +153,7 @@
                                 <td>
 
                                     @if($Report->currency_id ==3)
-                                   {{$Report->depit ?? '-'}} {{$Report->credit ?? ''}}
+                                    {{$Report->depit ?? '-'}} {{$Report->credit ?? ''}}
                                     @endif
 
                                 </td>
