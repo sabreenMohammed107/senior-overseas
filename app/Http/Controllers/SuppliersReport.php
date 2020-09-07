@@ -430,7 +430,7 @@ $data = [
 
 
 $title = "My Report";
-$pdf = PDF::loadView($this->viewName . 'supplierReport', $data);
+$pdf = PDF::loadView($this->viewName . 'allSupplierOperation', $data);
 return $pdf->stream('medium.pdf'); // to open in blank page
     }
     public function fetchReport(Request $request)
