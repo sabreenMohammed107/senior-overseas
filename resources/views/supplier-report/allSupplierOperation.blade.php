@@ -93,12 +93,45 @@
                                 <td>
 
 
-                                    @if($Report->operation_id)
+                                @if($Report->ocean_carrier_id)
+                                    {{
+                                        App\Models\Financial_entry::where('ocean_carrier_id', $Report->ocean_carrier_id)
+                                       ->where('operation_id', $Report->operation_id)->where('currency_id', 2)->sum('depit') - 
+                                       App\Models\Financial_entry::where('ocean_carrier_id', $Report->ocean_carrier_id)
+                                       ->where('operation_id', $Report->operation_id)->where('currency_id', 2)->sum('credit')}}
+
+                                    @endif
+                                    @if($Report->air_carrier_id)
+                                    {{
+                                        App\Models\Financial_entry::where('air_carrier_id', $Report->air_carrier_id)
+                                       ->where('operation_id', $Report->operation_id)->where('currency_id', 2)->sum('depit') - 
+                                       App\Models\Financial_entry::where('air_carrier_id', $Report->air_carrier_id)
+                                       ->where('operation_id', $Report->operation_id)->where('currency_id', 2)->sum('credit')}}
+
+                                    @endif
+
+                                    @if($Report->trucking_id)
                                     {{
                                         App\Models\Financial_entry::where('trucking_id', $Report->trucking_id)
-                                         ->where('operation_id', $Report->operation_id)->where('currency_id', 2)->sum('depit') -
-                                          App\Models\Financial_entry::where('trucking_id', $Report->trucking_id)
-                                        ->where('operation_id', $Report->operation_id)->where('currency_id', 2)->sum('credit')}}
+                                       ->where('operation_id', $Report->operation_id)->where('currency_id', 2)->sum('depit') - 
+                                       App\Models\Financial_entry::where('trucking_id', $Report->trucking_id)
+                                       ->where('operation_id', $Report->operation_id)->where('currency_id', 2)->sum('credit')}}
+
+                                    @endif
+                                    @if($Report->clearance_id)
+                                    {{
+                                        App\Models\Financial_entry::where('clearance_id', $Report->clearance_id)
+                                       ->where('operation_id', $Report->operation_id)->where('currency_id', 2)->sum('depit') - 
+                                       App\Models\Financial_entry::where('clearance_id', $Report->clearance_id)
+                                       ->where('operation_id', $Report->operation_id)->where('currency_id', 2)->sum('credit')}}
+
+                                    @endif
+                                    @if($Report->agent_id)
+                                    {{
+                                        App\Models\Financial_entry::where('agent_id', $Report->agent_id)
+                                       ->where('operation_id', $Report->operation_id)->where('currency_id', 2)->sum('depit') - 
+                                       App\Models\Financial_entry::where('agent_id', $Report->agent_id)
+                                       ->where('operation_id', $Report->operation_id)->where('currency_id', 2)->sum('credit')}}
 
                                     @endif
 
@@ -115,12 +148,44 @@
                                 @if($Report->operation)
                                 <td>
 
+                                @if($Report->ocean_carrier_id)
+                                    {{
+                                        App\Models\Financial_entry::where('ocean_carrier_id', $Report->ocean_carrier_id)
+                                       ->where('operation_id', $Report->operation_id)->where('currency_id', 1)->sum('depit') - 
+                                       App\Models\Financial_entry::where('ocean_carrier_id', $Report->ocean_carrier_id)
+                                       ->where('operation_id', $Report->operation_id)->where('currency_id', 1)->sum('credit')}}
 
-                                    @if($Report->operation_id )
+                                    @endif
+                                    @if($Report->air_carrier_id)
+                                    {{
+                                        App\Models\Financial_entry::where('air_carrier_id', $Report->air_carrier_id)
+                                       ->where('operation_id', $Report->operation_id)->where('currency_id', 1)->sum('depit') - 
+                                       App\Models\Financial_entry::where('air_carrier_id', $Report->air_carrier_id)
+                                       ->where('operation_id', $Report->operation_id)->where('currency_id', 1)->sum('credit')}}
+
+                                    @endif
+
+                                    @if($Report->trucking_id)
                                     {{
                                         App\Models\Financial_entry::where('trucking_id', $Report->trucking_id)
-                                       ->where('operation_id', $Report->operation_id)->where('currency_id', 1)->sum('depit') -
-                                        App\Models\Financial_entry::where('trucking_id', $Report->trucking_id)
+                                       ->where('operation_id', $Report->operation_id)->where('currency_id', 1)->sum('depit') - 
+                                       App\Models\Financial_entry::where('trucking_id', $Report->trucking_id)
+                                       ->where('operation_id', $Report->operation_id)->where('currency_id', 1)->sum('credit')}}
+
+                                    @endif
+                                    @if($Report->clearance_id)
+                                    {{
+                                        App\Models\Financial_entry::where('clearance_id', $Report->clearance_id)
+                                       ->where('operation_id', $Report->operation_id)->where('currency_id', 1)->sum('depit') - 
+                                       App\Models\Financial_entry::where('clearance_id', $Report->clearance_id)
+                                       ->where('operation_id', $Report->operation_id)->where('currency_id', 1)->sum('credit')}}
+
+                                    @endif
+                                    @if($Report->agent_id)
+                                    {{
+                                        App\Models\Financial_entry::where('agent_id', $Report->agent_id)
+                                       ->where('operation_id', $Report->operation_id)->where('currency_id', 1)->sum('depit') - 
+                                       App\Models\Financial_entry::where('agent_id', $Report->agent_id)
                                        ->where('operation_id', $Report->operation_id)->where('currency_id', 1)->sum('credit')}}
 
                                     @endif
@@ -137,13 +202,44 @@
                                 @endif
                                 @if($Report->operation)
                                 <td>
+                                @if($Report->ocean_carrier_id)
+                                    {{
+                                        App\Models\Financial_entry::where('ocean_carrier_id', $Report->ocean_carrier_id)
+                                       ->where('operation_id', $Report->operation_id)->where('currency_id', 3)->sum('depit') - 
+                                       App\Models\Financial_entry::where('ocean_carrier_id', $Report->ocean_carrier_id)
+                                       ->where('operation_id', $Report->operation_id)->where('currency_id', 3)->sum('credit')}}
 
+                                    @endif
+                                    @if($Report->air_carrier_id)
+                                    {{
+                                        App\Models\Financial_entry::where('air_carrier_id', $Report->air_carrier_id)
+                                       ->where('operation_id', $Report->operation_id)->where('currency_id', 3)->sum('depit') - 
+                                       App\Models\Financial_entry::where('air_carrier_id', $Report->air_carrier_id)
+                                       ->where('operation_id', $Report->operation_id)->where('currency_id', 3)->sum('credit')}}
 
-                                    @if($Report->operation_id)
+                                    @endif
+
+                                    @if($Report->trucking_id)
                                     {{
                                         App\Models\Financial_entry::where('trucking_id', $Report->trucking_id)
                                        ->where('operation_id', $Report->operation_id)->where('currency_id', 3)->sum('depit') - 
                                        App\Models\Financial_entry::where('trucking_id', $Report->trucking_id)
+                                       ->where('operation_id', $Report->operation_id)->where('currency_id', 3)->sum('credit')}}
+
+                                    @endif
+                                    @if($Report->clearance_id)
+                                    {{
+                                        App\Models\Financial_entry::where('clearance_id', $Report->clearance_id)
+                                       ->where('operation_id', $Report->operation_id)->where('currency_id', 3)->sum('depit') - 
+                                       App\Models\Financial_entry::where('clearance_id', $Report->clearance_id)
+                                       ->where('operation_id', $Report->operation_id)->where('currency_id', 3)->sum('credit')}}
+
+                                    @endif
+                                    @if($Report->agent_id)
+                                    {{
+                                        App\Models\Financial_entry::where('agent_id', $Report->agent_id)
+                                       ->where('operation_id', $Report->operation_id)->where('currency_id', 3)->sum('depit') - 
+                                       App\Models\Financial_entry::where('agent_id', $Report->agent_id)
                                        ->where('operation_id', $Report->operation_id)->where('currency_id', 3)->sum('credit')}}
 
                                     @endif
