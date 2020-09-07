@@ -339,7 +339,6 @@ foreach ($operationIds as $op) {
 }
 
 $test=collect($test)->sortBy('entry_date');
-dd($test);
 //-----------------End----------------//
 $curs = [];
 foreach ($filtters as $row) {
