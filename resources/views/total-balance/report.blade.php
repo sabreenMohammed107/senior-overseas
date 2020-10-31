@@ -3,6 +3,7 @@
 
 <head>
     <title>Ignite UI for jQuery Layout Manager - border layout - initialize from HTML markup</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <!-- Ignite UI for jQuery Required Combined CSS Files -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 

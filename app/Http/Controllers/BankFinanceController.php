@@ -124,14 +124,14 @@ class BankFinanceController extends Controller
                 // }
             }
 
-            if ($fristSelect == 5) {
+            if ($fristSelect == 6) {
                 $obj->trucking_id = $request->input('xxselector');
                 $data = Financial_entry::where('trucking_id',  $request->input('xxselector'))->where('currency_id', '=', $request->input('currency_id'))->sum('depit') - Financial_entry::where('trucking_id', $request->input('xxselector'))->where('currency_id', '=', $request->input('currency_id'))->sum('credit');
                 // if ($request->input('credit') > $data) {
                 //     return redirect()->back()->withInput($request->input())->with('flash_danger', 'Amount Is Not Valid');
                 // }
             }
-            if ($fristSelect == 6) {
+            if ($fristSelect == 5) {
                 $obj->clearance_id = $request->input('xxselector');
                 $data = Financial_entry::where('clearance_id', $request->input('xxselector'))->where('currency_id', '=', $request->input('currency_id'))->sum('depit') - Financial_entry::where('clearance_id', $request->input('xxselector'))->where('currency_id', '=', $request->input('currency_id'))->sum('credit');
                 // if ($request->input('credit') > $data) {
