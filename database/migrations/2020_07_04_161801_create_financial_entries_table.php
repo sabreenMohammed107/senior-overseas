@@ -29,6 +29,7 @@ class CreateFinancialEntriesTable extends Migration
             $table->integer('trucking_id')->unsigned()->nullable();
             $table->integer('clearance_id')->unsigned()->nullable();
             $table->integer('operation_id')->unsigned()->nullable();
+            $table->integer('parent_id')->unsigned()->nullable();
             $table->text('notes')->nullable();
             $table->timestamps();
         });

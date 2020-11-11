@@ -9,7 +9,7 @@ class Financial_entry extends Model
     protected $fillable = [
         'trans_type_id', 'entry_date', 'depit', 'credit', 'cash_box_id',
         'bank_account_id', 'currency_id', 'client_id','ocean_carrier_id',
-        'air_carrier_id', 'agent_id', 'trucking_id', 'clearance_id', 'operation_id','notes'
+        'air_carrier_id', 'agent_id', 'trucking_id', 'clearance_id', 'operation_id','notes','parent_id'
        
     ];
     public function client()
@@ -63,6 +63,12 @@ class Financial_entry extends Model
     public function bank()
     {
         return $this->belongsTo('App\Models\Bank','bank_account_id');
+
+    }
+
+    public function parent()
+    {
+        return $this->belongsTo('App\Models\Financial_entry','parent_id');
 
     }
 

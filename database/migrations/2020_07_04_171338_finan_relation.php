@@ -29,6 +29,7 @@ class FinanRelation extends Migration
             $table->foreign('trucking_id')->references('id')->on('suppliers');
             $table->foreign('clearance_id')->references('id')->on('suppliers');
             $table->foreign('operation_id')->references('id')->on('operations');
+            $table->foreign('parent_id')->references('id')->on('financial_entries');
         });
     }
 
