@@ -182,8 +182,8 @@ class CashFinanceController extends Controller
             $exchangerIn->trans_type_id = Finan_trans_type::where('id', '=', 20)->first()->id;
             $exchangerIn->entry_date = Carbon::parse($request->input('entry_date'));
             $exchangerIn->depit = $request->input('amountIn');
-            $exchangerIn->currency_id = $request->input('currency_id');
-            $exchangerIn->cash_box_id = Cash_box::where('id', '=', $request->input('CashBoxes_inOut'))->first()->currency_id;
+            $exchangerIn->currency_id = Cash_box::where('id', '=', $request->input('CashBoxes_inOut'))->first()->currency_id;
+            $exchangerIn->cash_box_id = $request->input('CashBoxes_inOut');
 
             $exchangerIn->notes = $request->input('notesexchanger');
 
@@ -199,6 +199,7 @@ class CashFinanceController extends Controller
                     $exchanger->save();
 
                     $exchangerIn->parent_id = $exchanger->id;
+                    \Log::info($exchangerIn);
                     $exchangerIn->save();
 
 
@@ -271,8 +272,8 @@ class CashFinanceController extends Controller
 
         $cashExpenseOut = Cashbox_expenses_type::where('id', '=', $editrow->trans_type_id)->where('expense_type', '=', 2)->first();
         $Cashes = Cash_box::where('id', '!=', $Selectrow->id)->get();
-        $cashesObj=Financial_entry::where('parent_id',$id)->first();
-        return view($this->viewName . 'edit', compact('editrow','cashesObj', 'Selectrow', 'Cashes', 'clients', 'dataOther', 'currentBalance', 'dataClient', 'cashExpenseIn', 'cashExpenseOut'));
+        $cashesObj = Financial_entry::where('parent_id', $id)->first();
+        return view($this->viewName . 'edit', compact('editrow', 'cashesObj', 'Selectrow', 'Cashes', 'clients', 'dataOther', 'currentBalance', 'dataClient', 'cashExpenseIn', 'cashExpenseOut'));
     }
 
     /**
@@ -310,7 +311,8 @@ class CashFinanceController extends Controller
 
                 return redirect()->route($this->routeName . 'show', $request->input('cash_box_id'))->with('flash_success', $this->message);
             }
-        }  if ($request->input('tab') == 1) {
+        }
+        if ($request->input('tab') == 1) {
 
 
             $obj->entry_date = Carbon::parse($request->input('entry_date'));
@@ -358,31 +360,30 @@ class CashFinanceController extends Controller
             }
         }
         if ($request->input('tab') == 3) {
-            $cashObj=$this->object::findOrFail($id);
+            $cashObj = $this->object::findOrFail($id);
             $cashObj->entry_date = Carbon::parse($request->input('entry_date'));
             $diffetant = $request->input('amountOut') - $cashObj->credit;
             $cashObj->credit = $cashObj->credit + $diffetant;
             $cashObj->notes = $request->input('notesexchanger');
             $currentBalance = Financial_entry::where('cash_box_id', $cashObj->cash_box_id)->sum('depit') - Financial_entry::where('cash_box_id', $cashObj->cash_box_id)->sum('credit');
-          
-            \Log::info([$cashObj->credit,$currentBalance+$diffetant]);
+
+            \Log::info([$cashObj->credit, $currentBalance + $diffetant]);
             if ($diffetant  > $currentBalance) {
 
                 return redirect()->back()->withInput($request->input())->with('flash_danger', 'Amount Is Not Valid');
-            } 
-            else {
+            } else {
+
                 $cashObj->update();
-                $secondCash=Financial_entry::where('parent_id',$id)->first();
+                $secondCash = Financial_entry::where('parent_id', $id)->first();
                 $secondCash->entry_date = Carbon::parse($request->input('entry_date'));
                 $diffetant = $request->input('amountIn') - $secondCash->depit;
                 $secondCash->depit = $secondCash->depit + $diffetant;
                 $secondCash->notes = $request->input('notesexchanger');
-               
+
                 $secondCash->update();
 
                 return redirect()->route($this->routeName . 'show', $request->input('cash_box_id'))->with('flash_success', $this->message);
             }
-        
         }
 
 
