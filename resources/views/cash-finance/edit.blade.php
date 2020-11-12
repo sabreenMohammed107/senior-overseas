@@ -88,7 +88,7 @@
                             <input type="radio" name="tab" value="2" onclick="show2();" checked /> In
                             <input type="radio" name="tab" value="3" onclick="show3();" disabled /> cashBox to Cash Box
                             @endif
-                            @if($editrow->trans_type_id !== 2 && $editrow->trans_type_id !== 20)
+                            @if($editrow->trans_type_id != 2 && $editrow->trans_type_id != 20)
                             <style>
                                 .hide {
                                     display: none;
