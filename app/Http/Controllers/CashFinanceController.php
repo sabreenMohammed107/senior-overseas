@@ -106,7 +106,6 @@ class CashFinanceController extends Controller
         if ($request->input('tab') == 1) {
             $fristSelect = $request->input('selector_type');
             $obj = new Financial_entry();
-dd($request->input('selector_type'));
             $obj->trans_type_id = Finan_trans_type::where('id', '=', $request->input('selector_type'))->first()->id;
             $obj->entry_date = Carbon::parse($request->input('entry_date'));
             $obj->credit = $request->input('credit');
