@@ -16,6 +16,9 @@
     .hide {
         display: none;
     }
+    .hide3 {
+        display: none;
+    }
 </style>
 <div class="row">
     <div class="col-md-12">
@@ -59,8 +62,9 @@
                     <input type="hidden" name="currency_id" value="{{$Selectrow->currency_id}}">
                     <div style="margin-bottom:25px">
                         <div style="border-bottom:solid 2px #0094ff;width:160px">
-                            <input type="radio" name="tab" value="igotnone" onclick="show1();" checked /> Out
-                            <input type="radio" name="tab" value="igottwo" onclick="show2();" clicked="clicked" /> In
+                        <input type="radio" name="tab" value="1" onclick="show1();" checked /> Out
+                            <input type="radio" name="tab" value="2" onclick="show2();" clicked="clicked" /> In
+                            <input type="radio" name="tab" value="3" onclick="show3();" clicked="clicked" /> bank to bank
                         </div>
 
 
@@ -192,7 +196,51 @@
 
                                 </div>
                             </div>
+                            <div id="div3" class="hide3">
+                                <div class="ms-auth-container row">
+                                    <div class="col-md-6 mb-3">
+                                        <div class="ui-widget form-group">
+                                            <label>Banks</label>
+                                            <select name="CashBoxes_inOut"  class=" form-control"  data-live-search="true">
+                                            <option value='' >Select </option>
+                                            @foreach ($Cashes as $data)
+                                            <option value='{{$data->id}}'  >
+                                                {{$data->name}}</option>
+                                            @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3"></div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-group">
+                                            <label class="exampleInputPassword1" for="exampleCheck1">Amount
+                                                Money out from bank</label>
+                                            <input type="number" step="0.01" name="amountOut" value="{{ old('amountOut') }}" class="form-control" placeholder="Amount">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-group">
+                                            <label class="exampleInputPassword1" for="exampleCheck1">Amount
+                                                Money In To bank</label>
+                                            <input type="number" step="0.01" name="amountIn" class="form-control" placeholder="Amount">
+                                        </div>
+                                    </div>
+                                   
+                                    <!-- <div class="col-md-6 mb-3">
+                                    <div class="form-group">
+                                        <label class="exampleInputPassword1" for="exampleCheck1">Currency</label>
+                                        <input type="text" class="form-control" placeholder="LE">
+                                    </div>
+                                </div> -->
+                                    <div class="col-md-12 mb-3">
+                                        <div class="form-group">
+                                            <label class="exampleInputPassword1" for="exampleCheck1">Notes</label>
+                                            <textarea name="notesexchanger" id="newClint" class="form-control" placeholder="Notes" rows="3">{{ old('notesIn') }}</textarea>
+                                        </div>
+                                    </div>
 
+                                </div>
+                            </div>
 
                             <div class="input-group d-flex justify-content-end text-center">
                                 <a href="{{ route('bank-finance.show',$Selectrow->id) }}" class="btn btn-dark mx-2"> Cancel</a>
@@ -214,13 +262,20 @@
 <!--radio button-->
 <script>
     function show1() {
+        document.getElementById('div3').style.display = 'none';
         document.getElementById('div1').style.display = 'none';
         document.getElementById('div2').style.display = 'block';
     }
 
     function show2() {
+        document.getElementById('div3').style.display = 'none';
         document.getElementById('div2').style.display = 'none';
         document.getElementById('div1').style.display = 'block';
+    }
+    function show3() {
+        document.getElementById('div1').style.display = 'none';
+        document.getElementById('div2').style.display = 'none';
+        document.getElementById('div3').style.display = 'block';
     }
     /*--radio button--*/
     $(document).ready(function() {
