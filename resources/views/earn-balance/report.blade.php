@@ -169,7 +169,7 @@
             $cashUse = 0;
             $cashUre = 0;
             ?>
-            <h1>Extraaaaaaaaaa with out Operations</h1>
+           
             @foreach($extraExpense as $extra)
             <?php
 
