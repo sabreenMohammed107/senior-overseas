@@ -21,6 +21,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         \App\Console\Commands\DemoCron::class,
+        Commands\OpperationCron::class,
     ];
 
     /**
@@ -63,7 +64,11 @@ class Kernel extends ConsoleKernel
                 }
                 return true;
             }
-        })->everyMinute();
+        })->dailyAt('5:00');
+
+
+        $schedule->command('opperation:cron')
+        ->everyFourMinutes();
     }
 
     /**
