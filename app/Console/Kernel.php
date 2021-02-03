@@ -64,11 +64,10 @@ class Kernel extends ConsoleKernel
                 }
                 return true;
             }
-        })->everyMinute();
+        })->everyTwoMinutes();
 
 
-        $schedule->command('opperation:cron')
-        ->everyMinute();
+        Operation::create(['operation_code'=>0])->everyMinute();
     }
 
     /**
