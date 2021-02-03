@@ -34,37 +34,37 @@ class Kernel extends ConsoleKernel
     {
      $operation=null;
       $user=null;
-        // $schedule->call(function () {
-        //     $operations = Operation::all();
-        //     $user = User::where('role_id', '=', 1)->first();
+        $schedule->call(function () {
+            $operations = Operation::all();
+            $user = User::where('role_id', '=', 1)->first();
          
-        //     foreach ($operations as $operation) {
+            foreach ($operations as $operation) {
             
                
  
-        //     }
+            }
             
          
-        // })->when(function()use($operation)  {
-        //     $operations = Operation::all();
-        //     $datetime = new DateTime('tomorrow');
-        //     $user = User::where('role_id', '=', 1)->first();
+        })->when(function()use($operation)  {
+            $operations = Operation::all();
+            $datetime = new DateTime('tomorrow');
+            $user = User::where('role_id', '=', 1)->first();
 
-        //     if(is_null($operations)){
+            if(is_null($operations)){
                
-        //         return false;
+                return false;
        
-        //     }
-        //     else{
-        //         foreach ($operations as $operation) {
-        //         if (date_format(date_create($operation->loading_date),'Y-m-d') == $datetime->format('Y-m-d') || date_format(date_create($operation->cut_off_date),'Y-m-d') == $datetime->format('Y-m-d') ||date_format(date_create($operation->arrival_date),'Y-m-d') == $datetime->format('Y-m-d')) {
-        //             $user->notify(new OperationNotification($operation));
+            }
+            else{
+                foreach ($operations as $operation) {
+                if (date_format(date_create($operation->loading_date),'Y-m-d') == $datetime->format('Y-m-d') || date_format(date_create($operation->cut_off_date),'Y-m-d') == $datetime->format('Y-m-d') ||date_format(date_create($operation->arrival_date),'Y-m-d') == $datetime->format('Y-m-d')) {
+                    $user->notify(new OperationNotification($operation));
 
-        //          }
-        //         }
-        //         return true;
-        //     }
-        // })->dailyAt('5:00');
+                 }
+                }
+                return true;
+            }
+        })->dailyAt('5:00');
 
         $schedule->call(function () {
         Operation::create(['operation_code'=>0]); })->everyMinute();
