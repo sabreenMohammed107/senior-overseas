@@ -66,8 +66,8 @@ class Kernel extends ConsoleKernel
             }
         })->dailyAt('5:00');
 
-        $schedule->call(function () {
-        Operation::create(['operation_code'=>0]); })->hourly();
+        // $schedule->call(function () {
+        // Operation::create(['operation_code'=>0]); })->yearly();
     }
 
     /**

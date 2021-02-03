@@ -133,15 +133,25 @@ class OperationsController extends Controller
      */
     public function store(Request $request)
     {
+        $maxDate = date_create(Operation::orderBy('id', 'desc')->value('operation_date'));
+        $maxInDataBase = date_format($maxDate, 'Y');
+        $maxInRequest = date_format(Carbon::parse($request->input('operation_date')), 'Y');
+       
         $max = Operation::orderBy('id', 'desc')->value('operation_code');
+if($maxInDataBase !=  $maxInRequest ){
+    $max = 100;
 
-        if ($max >= 100) {
+}else{
+    if ($max >= 100) {
 
-            $max = $max + 1;
-        } else {
+        $max = $max + 1;
+    } else {
 
-            $max = 100;
-        }
+        $max = 100;
+    }
+
+}
+       
 
 
 
@@ -220,8 +230,8 @@ class OperationsController extends Controller
                 $ocean = Sale_quote_ocean::where('id', '=', $operationObj->sales_quote_ocean_id)->first();
                 $objBuy->buy = $ocean->ocean->price;
                 $objBuy->sell = null;
-                $objBuy->currency_id =$ocean->ocean->currency_id;
-                $objBuy->invoice_statement_flag=1;
+                $objBuy->currency_id = $ocean->ocean->currency_id;
+                $objBuy->invoice_statement_flag = 1;
                 array_push($savingExpense, $objBuy);
                 //another row
                 $objSell = new Collection();
@@ -232,7 +242,7 @@ class OperationsController extends Controller
                 $objSell->buy = null;
                 $objSell->sell = $ocean->price;
                 $objSell->currency_id = $ocean->ocean->currency_id;
-                $objSell->invoice_statement_flag=1;
+                $objSell->invoice_statement_flag = 1;
                 array_push($savingExpense, $objSell);
             }
 
@@ -245,7 +255,7 @@ class OperationsController extends Controller
                 $obj2Buy->buy = $air->air->price;
                 $obj2Buy->sell = null;
                 $obj2Buy->currency_id = $air->currency_id;
-                $obj2Buy->invoice_statement_flag=1;
+                $obj2Buy->invoice_statement_flag = 1;
                 array_push($savingExpense, $obj2Buy);
 
 
@@ -258,7 +268,7 @@ class OperationsController extends Controller
                 $obj2Sell->buy = null;
                 $obj2Sell->sell = $air->price;
                 $obj2Sell->currency_id = $air->currency_id;
-                $obj2Sell->invoice_statement_flag=1;
+                $obj2Sell->invoice_statement_flag = 1;
                 array_push($savingExpense, $obj2Sell);
             }
             if ($request->input('TrackingSelected')) {
@@ -270,7 +280,7 @@ class OperationsController extends Controller
                 $obj3->buy = $truck->truck->car_price;
                 $obj3->sell = null;
                 $obj3->currency_id = $truck->currency_id;
-                $obj3->invoice_statement_flag=1;
+                $obj3->invoice_statement_flag = 1;
                 array_push($savingExpense, $obj3);
                 //another row
                 $obj3Sell = new Collection();
@@ -281,7 +291,7 @@ class OperationsController extends Controller
                 $obj3Sell->buy = null;
                 $obj3Sell->sell = $truck->car_price;
                 $obj3Sell->currency_id = $truck->currency_id;
-                $obj3Sell->invoice_statement_flag=1;
+                $obj3Sell->invoice_statement_flag = 1;
                 array_push($savingExpense, $obj3Sell);
             }
 
@@ -296,7 +306,7 @@ class OperationsController extends Controller
                 $obj4->buy = $sale_quot->clearance_price;
                 $obj4->sell = null;
                 $obj4->currency_id = $sale_quot->clearance_currency_id;
-                $obj4->invoice_statement_flag=1;
+                $obj4->invoice_statement_flag = 1;
                 array_push($savingExpense, $obj4);
                 //another row
                 $obj4Sell = new Collection();
@@ -306,7 +316,7 @@ class OperationsController extends Controller
                 $obj4Sell->buy = null;
                 $obj4Sell->sell = $sale_quot->clearance_price;
                 $obj4Sell->currency_id = $sale_quot->clearance_currency_id;
-                $obj4Sell->invoice_statement_flag=1;
+                $obj4Sell->invoice_statement_flag = 1;
                 array_push($savingExpense, $obj4Sell);
             }
             /*-------------------------------*/
@@ -320,7 +330,7 @@ class OperationsController extends Controller
                 $obj5->buy = $sale_quotdoor->door_door_price;
                 $obj5->sell = null;
                 $obj5->currency_id = $sale_quotdoor->door_door_currency_id;
-                $obj5->invoice_statement_flag=1;
+                $obj5->invoice_statement_flag = 1;
                 array_push($savingExpense, $obj5);
                 //another row
                 $obj5Sell = new Collection();
@@ -330,7 +340,7 @@ class OperationsController extends Controller
                 $obj5Sell->buy = null;
                 $obj5Sell->sell = $sale_quotdoor->door_door_price;
                 $obj5Sell->currency_id = $sale_quotdoor->door_door_currency_id;
-                $obj5Sell->invoice_statement_flag=1;
+                $obj5Sell->invoice_statement_flag = 1;
                 array_push($savingExpense, $obj5Sell);
             }
             /*--------------------------*/
@@ -403,7 +413,7 @@ class OperationsController extends Controller
         // get expenses
         $expenses = Operation_expense::where('operation_id', '=', $id)->orderBy("id", "Desc")->get();
         // $providers = Expenses_provider_type::all();
-        $providers= Cashbox_expenses_type::whereIN('id', [3,4,5,6,7])->get();
+        $providers = Cashbox_expenses_type::whereIN('id', [3, 4, 5, 6, 7])->get();
         $expenseTypes = Expense::all();
         $expenseCurrency = Currency::all();
         return view($this->viewName . 'edit', compact('row', 'qouts', 'consinee', 'expenses', 'providers', 'expenseTypes', 'expenseCurrency', 'notify', 'clearances', 'doors', 'typeTesting', 'Commodity', 'trackings', 'filtters'));
@@ -483,7 +493,7 @@ class OperationsController extends Controller
             'operation_id' => $request->input('operation_id'),
 
             'note' => $request->input('note'),
-            'invoice_statement_flag'=>1,
+            'invoice_statement_flag' => 1,
 
         ];
 
@@ -491,7 +501,7 @@ class OperationsController extends Controller
 
             $data['expenses_type_id'] = $request->input('expenses_type_id');
         }
-       
+
 
 
         if ($request->input('currency_id')) {
@@ -507,27 +517,22 @@ class OperationsController extends Controller
 
                 $data['cashbox_expenses_types_id'] = $request->input('selector_type');
             }
-    
+
             if (!empty($request->get("selector_type")) && $request->input('selector_type') == 3) {
                 $data['ocean_carrier_id'] = $request->input('xxselector');
-    
             }
             if (!empty($request->get("selector_type")) && $request->input('selector_type')  == 4) {
                 $data['air_carrier_id'] = $request->input('xxselector');
-    
             }
-    
+
             if (!empty($request->get("selector_type")) && $request->input('selector_type')  == 6) {
                 $data['trucking_id'] = $request->input('xxselector');
-    
             }
             if (!empty($request->get("selector_type")) && $request->input('selector_type') == 5) {
                 $data['clearance_id'] = $request->input('xxselector');
-    
             }
             if (!empty($request->get("selector_type")) && $request->input('selector_type') == 7) {
                 $data['agent_id'] = $request->input('xxselector');
-    
             }
 
             Operation_expense::create($data);
@@ -536,14 +541,14 @@ class OperationsController extends Controller
         if ($request->input('sell')) {
             $data['buy'] = null;
             $data['sell'] = $request->input('sell');
-            $data['cashbox_expenses_types_id'] =null;
-            $data['ocean_carrier_id'] =null;
-            $data['air_carrier_id'] =null;
+            $data['cashbox_expenses_types_id'] = null;
+            $data['ocean_carrier_id'] = null;
+            $data['air_carrier_id'] = null;
             $data['trucking_id'] = null;
             $data['clearance_id'] = null;
-            $data['agent_id'] =null;
+            $data['agent_id'] = null;
 
-            
+
             Operation_expense::create($data);
         }
 
@@ -569,7 +574,7 @@ class OperationsController extends Controller
 
             $data['expenses_type_id'] = $request->input('expenses_type_id');
         }
-      
+
         if ($request->input('currency_id')) {
 
             $data['currency_id'] = $request->input('currency_id');
@@ -636,9 +641,9 @@ class OperationsController extends Controller
 
 
                 $obj->entry_date = $row->operation_date;
-                    $obj->credit = $sellRow->sell* $row->container_counts;
+                $obj->credit = $sellRow->sell * $row->container_counts;
 
-                
+
 
                 $obj->client_id = $row->shipper_id;
                 $obj->notes = $row->notes;
@@ -674,9 +679,9 @@ class OperationsController extends Controller
                 }
 
                 $obj->entry_date = $row->operation_date;
-                    $obj->depit = $buyRow->buy * $row->container_counts;
+                $obj->depit = $buyRow->buy * $row->container_counts;
 
-               
+
 
 
                 $obj->notes = $row->notes;
@@ -693,7 +698,7 @@ class OperationsController extends Controller
 
                 $obj->entry_date = $row->operation_date;
                 $obj->credit = $rowOther->sell;
-                $obj->client_id =$row->shipper_id;
+                $obj->client_id = $row->shipper_id;
                 $obj->notes = $row->notes;
                 $obj->currency_id = $rowOther->currency_id;
                 $obj->save();
@@ -709,20 +714,20 @@ class OperationsController extends Controller
                 $obj->entry_date = $row->operation_date;
                 $obj->depit = $buyOther->buy;
                 // $obj->client_id = $row->shipper_id;
-                if($buyOther->ocean_carrier_id!=null){
+                if ($buyOther->ocean_carrier_id != null) {
                     $obj->ocean_carrier_id = $buyOther->ocean_carrier_id;
                 }
-                if($buyOther->air_carrier_id!=null){
-                    $obj->air_carrier_id = $buyOther->air_carrier_id;   
+                if ($buyOther->air_carrier_id != null) {
+                    $obj->air_carrier_id = $buyOther->air_carrier_id;
                 }
-                if($buyOther->clearance_id!=null){
-                    $obj->clearance_id = $buyOther->clearance_id;  
+                if ($buyOther->clearance_id != null) {
+                    $obj->clearance_id = $buyOther->clearance_id;
                 }
-                if($buyOther->trucking_id!=null){
-                    $obj->trucking_id = $buyOther->trucking_id;  
+                if ($buyOther->trucking_id != null) {
+                    $obj->trucking_id = $buyOther->trucking_id;
                 }
-                if($buyOther->agent_id!=null){
-                    $obj->agent_id = $buyOther->agent_id;  
+                if ($buyOther->agent_id != null) {
+                    $obj->agent_id = $buyOther->agent_id;
                 }
                 $obj->notes = $buyOther->notes;
                 $obj->currency_id = $buyOther->currency_id;
@@ -740,22 +745,22 @@ class OperationsController extends Controller
     {
         $rows = Operation::orderBy("id", "Desc")->get();
         // This  $data array will be passed to our PDF blade
-           $data = [
-              'title' => 'First PDF for Medium',
-              'heading' => 'Hello from 99Points.info',
-              'rows' => $rows,
-              'content' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.' 
-                ];
+        $data = [
+            'title' => 'First PDF for Medium',
+            'heading' => 'Hello from 99Points.info',
+            'rows' => $rows,
+            'content' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.'
+        ];
 
-       
+
         $title = "My Report";
-        $pdf = PDF::loadView($this->viewName . 'pdf_view2',$data);
+        $pdf = PDF::loadView($this->viewName . 'pdf_view2', $data);
         return $pdf->stream('medium.pdf'); // to open in blank page
 
 
-       // return $pdf->dawnload('medium.pdf');  to open in blank page
+        // return $pdf->dawnload('medium.pdf');  to open in blank page
 
-       
+
     }
 
     function selector_type(Request $request)
