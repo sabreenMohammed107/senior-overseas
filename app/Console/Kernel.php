@@ -64,11 +64,11 @@ class Kernel extends ConsoleKernel
                 }
                 return true;
             }
-        })->dailyAt('5:00');
+        })->everyMinute();
 
 
         $schedule->command('opperation:cron')
-        ->everyFourMinutes();
+        ->everyMinute();
     }
 
     /**
