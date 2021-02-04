@@ -123,7 +123,7 @@ class CashBoxController extends Controller
         $carrencies=Currency::all();
         // $currentBalance = Financial_entry::where('cash_box_id', $id)->sum('depit') - Financial_entry::where('cash_box_id', $id)->sum('credit');
       
-        return view($this->viewName . 'edit', compact('row','carrencies', ));
+        return view($this->viewName . 'edit', compact('row','carrencies'));
     }
 
     /**
