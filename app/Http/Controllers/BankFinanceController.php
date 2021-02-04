@@ -47,7 +47,7 @@ class BankFinanceController extends Controller
     {
         $rows = Bank::orderBy("created_at", "Desc")->get();
 
-        return view($this->viewName . 'index', compact('rows',));
+        return view($this->viewName . 'index', compact('rows'));
     }
 
     /**

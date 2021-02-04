@@ -47,7 +47,7 @@ class CashFinanceController extends Controller
     {
         $rows = Cash_box::orderBy("created_at", "Desc")->get();
 
-        return view($this->viewName . 'index', compact('rows',));
+        return view($this->viewName . 'index', compact('rows'));
     }
 
     /**
