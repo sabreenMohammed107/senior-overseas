@@ -121,7 +121,7 @@ class BankController extends Controller
       
         $carrencies=Currency::all();
       
-        return view($this->viewName . 'edit', compact('row','carrencies', ));
+        return view($this->viewName . 'edit', compact('row','carrencies'));
     }
 
     /**
