@@ -139,15 +139,15 @@ class OperationsController extends Controller
        
         $max = Operation::orderBy('id', 'desc')->value('operation_code');
 if($maxInDataBase !=  $maxInRequest ){
-    $max = 100;
+    $max = 1;
 
 }else{
-    if ($max >= 100) {
+    if ($max >= 1) {
 
         $max = $max + 1;
     } else {
 
-        $max = 100;
+        $max = 1;
     }
 
 }
