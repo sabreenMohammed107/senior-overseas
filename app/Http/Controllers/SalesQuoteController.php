@@ -82,7 +82,6 @@ class SalesQuoteController extends Controller
 
 
         return view($this->viewName . 'createSelect', compact(
-
             'carriers',
             'ranges',
             'aols',
@@ -91,8 +90,7 @@ class SalesQuoteController extends Controller
             'airs',
             'cars',
             'oceans',
-            'suppliers',
-
+            'suppliers'
         ));
     }
     public function gotosave(Request $request)
