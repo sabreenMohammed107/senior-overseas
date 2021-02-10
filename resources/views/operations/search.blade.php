@@ -1,5 +1,5 @@
 <div class="ms-auth-container row">
-	<input type="hidden" name="shipper_id" value="{{$sale_qoute->client->id ?? 'Client ( Shipper )' }}">
+	<input type="hidden" name="shipper_id" value="{{$sale_qoute->client->id ?? 0 }}">
 	<div class="col-md-6 mb-3">
 		<div class="form-group">
 			<label class="exampleInputPassword1" for="exampleCheck1">Client ( Shipper )</label>
@@ -327,7 +327,7 @@
 				@endforeach
 			</select>
 		</div>
-		
+
 	</div>
 	<div class="col-md-6 mb-3">
 		<div class="form-group">

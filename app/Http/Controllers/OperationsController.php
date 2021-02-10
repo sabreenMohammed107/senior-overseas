@@ -123,8 +123,8 @@ class OperationsController extends Controller
         $notify = Client::all();
         $Commodity = Commodity::all();
         $clearancesSuppliers = Supplier::where('supplier_type_id', '=', 2)->get();
-
-        return view($this->viewName . 'search', compact('row', 'consinee', 'notify', 'Commodity', 'sale_qoute', 'typeTesting',  'filtters', 'trackings', 'clients', 'clearancesSuppliers', 'clearances', 'doors'))->render();
+        $shippings=Shipping_type::all();
+        return view($this->viewName . 'search', compact('shippings','row', 'consinee', 'notify', 'Commodity', 'sale_qoute', 'typeTesting',  'filtters', 'trackings', 'clients', 'clearancesSuppliers', 'clearances', 'doors'))->render();
     }
 
     /**
