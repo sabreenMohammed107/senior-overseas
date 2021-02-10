@@ -351,6 +351,7 @@
 								</div>
 								<div class="col-md-6 mb-3">
 									<div class="ui-widget form-group">
+									
 										<label>Notify</label>
 										<select class="form-control" disabled data-live-search="true" name="notify_id">
 											<option value="">Select ...</option>
