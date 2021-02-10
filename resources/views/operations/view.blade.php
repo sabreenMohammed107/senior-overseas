@@ -40,7 +40,8 @@
 											<option value="">Select ...</option>
 											@foreach ($qouts as $data)
 											<option value='{{$data->id}}' {{ $data->id == $row->sales_quote_id ? 'selected' : '' }}>
-												{{$data->quote_code}}</option>
+												{{$data->quote_code}}
+											</option>
 											@endforeach
 										</select>
 									</div>
@@ -111,12 +112,12 @@
 
 
 
-																					<div class="col-md-6 mb-3">
-																<div class="form-group">
-																	<label class="exampleInputPassword1" for="exampleCheck1">*Clearance supplier</label>
-																	<input type="text" value="{{ $row->sale->supplier->supplier_name  ??'' }}" class="form-control" placeholder="Clearance supplier" disabled>
-																</div>
-															</div>
+																						<div class="col-md-6 mb-3">
+																							<div class="form-group">
+																								<label class="exampleInputPassword1" for="exampleCheck1">*Clearance supplier</label>
+																								<input type="text" value="{{ $row->sale->supplier->supplier_name  ??'' }}" class="form-control" placeholder="Clearance supplier" disabled>
+																							</div>
+																						</div>
 
 
 																						<div class="col-md-6 mb-3">
@@ -131,7 +132,8 @@
 																								<select class=" form-control" data-live-search="true" disabled>
 																									@foreach ($clearances as $type)
 																									<option value='{{$type->id}}' {{ $type->id == $row->sale->clearance_currency_id ? 'selected' : '' }}>
-																										{{ $type->currency_name}}</option>
+																										{{ $type->currency_name}}
+																									</option>
 																									@endforeach
 																								</select>
 																							</div>
@@ -165,7 +167,8 @@
 																								<select class=" form-control" data-live-search="true" disabled>
 																									@foreach ($doors as $type)
 																									<option value='{{$type->id}}' {{ $type->id == $row->sale->door_door_currency_id ? 'selected' : '' }}>
-																										{{ $type->currency_name}}</option>
+																										{{ $type->currency_name}}
+																									</option>
 																									@endforeach
 																								</select>
 																							</div>
@@ -230,26 +233,32 @@
 												@if($typeTesting==0)
 												<td>@if($filter->air->carrier)
 													{{$filter->air->carrier->carrier_name}}
-													@endif</td>
+													@endif
+												</td>
 												<td>{{$filter->air->slide_range}}</td>
 
 												<td>@if($filter->air->aol)
 													{{$filter->air->aol->port_name}} - {{$filter->air->aol->country->country_name}}
-													@endif</td>
+													@endif
+												</td>
 												<td>@if($filter->air->aod)
 													{{$filter->air->aod->port_name}} - {{$filter->air->aod->country->country_name}}
-													@endif</td>
+													@endif
+												</td>
 												<td>{{$filter->air->notes}}</td>
 												@else
 												<td>@if($filter->ocean->carrier)
 													{{$filter->ocean->carrier->carrier_name}}
-													@endif</td>
+													@endif
+												</td>
 												<td>@if($filter->ocean->pol)
 													{{$filter->ocean->pol->port_name}} - {{$filter->ocean->pol->country->country_name}}
-													@endif</td>
+													@endif
+												</td>
 												<td>@if($filter->ocean->pod)
 													{{$filter->ocean->pod->port_name}} - {{$filter->ocean->pod->country->country_name}}
-													@endif</td>
+													@endif
+												</td>
 												<td> {{$filter->ocean->transit_time}}</td>
 												<td>{{$filter->ocean->notes}}</td>
 												@endif
@@ -298,16 +307,20 @@
 															<td>{{$index+1}}</td>
 															<td>@if($track->truck->supplier)
 																{{$track->truck->supplier->supplier_name}}
-																@endif</td>
+																@endif
+															</td>
 															<td>@if($track->truck->pol)
 																{{$track->truck->pol->port_name}} - {{$track->truck->pol->country->country_name}}
-																@endif</td>
+																@endif
+															</td>
 															<td>@if($track->truck->pod)
 																{{$track->truck->pod->port_name}} - {{$track->truck->pod->country->country_name}}
-																@endif</td>
+																@endif
+															</td>
 															<td>@if($track->truck->car)
 																{{$track->truck->car->car_type}}
-																@endif</td>
+																@endif
+															</td>
 															<td>{{$track->truck->transit_time}}</td>
 															<td>{{$track->truck->notes}}</td>
 															<td>
@@ -344,20 +357,21 @@
 											<option value="">Select ...</option>
 											@foreach ($consinee as $type)
 											<option value='{{$type->id}}' {{ $type->id == $row->consignee_id ? 'selected' : '' }}>
-												{{ $type->client_name}}</option>
+												{{ $type->client_name}}
+											</option>
 											@endforeach
 										</select>
 									</div>
 								</div>
 								<div class="col-md-6 mb-3">
 									<div class="ui-widget form-group">
-									
 										<label>Notify</label>
 										<select class="form-control" disabled data-live-search="true" name="notify_id">
 											<option value="">Select ...</option>
 											@foreach ($notify as $type)
 											<option value='{{$type->id}}' {{ $type->id == $row->notify_id ? 'selected' : '' }}>
-												{{ $type->client_name}}</option>
+												{{ $type->client_name}}
+											</option>
 											@endforeach
 										</select>
 									</div>
@@ -435,7 +449,8 @@
 											<option value="">Select ...</option>
 											@foreach ($Commodity as $type)
 											<option value='{{$type->id}}' {{ $type->id == $row->commodity_id ? 'selected' : '' }}>
-												{{ $type->name}}</option>
+												{{ $type->name}}
+											</option>
 											@endforeach
 										</select>
 									</div>
@@ -512,7 +527,7 @@
 															</tr>
 														</thead>
 														<tbody>
-															
+
 
 															@foreach($expenses as $index => $expense)
 															<tr>
@@ -525,14 +540,16 @@
 																<td>{{$expense->sell}}</td>
 																<td>@if($expense->provider)
 																	{{$expense->provider->provider_type}}
-																	@endif</td>
-																	<td>@if($expense->automatic==1)
+																	@endif
+																</td>
+																<td>@if($expense->automatic==1)
 																	YES
 																	@else NO
 																	@endif</td>
 																<td>@if($expense->currency)
 																	{{$expense->currency->currency_name}}
-																	@endif</td>
+																	@endif
+																</td>
 																<td>
 
 																</td>
