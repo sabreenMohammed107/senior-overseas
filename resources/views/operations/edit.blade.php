@@ -43,7 +43,8 @@
 											<option value="">Select ...</option>
 											@foreach ($qouts as $data)
 											<option value='{{$data->id}}' {{ $data->id == $row->sales_quote_id ? 'selected' : '' }}>
-												{{$data->quote_code}}</option>
+												{{$data->quote_code}}
+											</option>
 											@endforeach
 										</select>
 									</div>
@@ -134,7 +135,8 @@
 																								<select class=" form-control" data-live-search="true" disabled>
 																									@foreach ($clearances as $type)
 																									<option value='{{$type->id}}' {{ $type->id == $row->sale->clearance_currency_id ? 'selected' : '' }}>
-																										{{ $type->currency_name}}</option>
+																										{{ $type->currency_name}}
+																									</option>
 																									@endforeach
 																								</select>
 																							</div>
@@ -168,7 +170,8 @@
 																								<select class=" form-control" data-live-search="true" disabled>
 																									@foreach ($doors as $type)
 																									<option value='{{$type->id}}' {{ $type->id == $row->sale->door_door_currency_id ? 'selected' : '' }}>
-																										{{ $type->currency_name}}</option>
+																										{{ $type->currency_name}}
+																									</option>
 																									@endforeach
 																								</select>
 																							</div>
@@ -233,26 +236,32 @@
 												@if($typeTesting==0)
 												<td>@if($filter->air->carrier)
 													{{$filter->air->carrier->carrier_name}}
-													@endif</td>
+													@endif
+												</td>
 												<td>{{$filter->air->slide_range}}</td>
 
 												<td>@if($filter->air->aol)
 													{{$filter->air->aol->port_name}} - {{$filter->air->aol->country->country_name}}
-													@endif</td>
+													@endif
+												</td>
 												<td>@if($filter->air->aod)
 													{{$filter->air->aod->port_name}} - {{$filter->air->aod->country->country_name}}
-													@endif</td>
+													@endif
+												</td>
 												<td>{{$filter->air->notes}}</td>
 												@else
 												<td>@if($filter->ocean->carrier)
 													{{$filter->ocean->carrier->carrier_name}}
-													@endif</td>
+													@endif
+												</td>
 												<td>@if($filter->ocean->pol)
 													{{$filter->ocean->pol->port_name}} - {{$filter->ocean->pol->country->country_name}}
-													@endif</td>
+													@endif
+												</td>
 												<td>@if($filter->ocean->pod)
 													{{$filter->ocean->pod->port_name}} - {{$filter->ocean->pod->country->country_name}}
-													@endif</td>
+													@endif
+												</td>
 												<td> {{$filter->ocean->transit_time}}</td>
 												<td>{{$filter->ocean->notes}}</td>
 												@endif
@@ -301,16 +310,20 @@
 															<td>{{$index+1}}</td>
 															<td>@if($track->truck->supplier)
 																{{$track->truck->supplier->supplier_name}}
-																@endif</td>
+																@endif
+															</td>
 															<td>@if($track->truck->pol)
 																{{$track->truck->pol->port_name}} - {{$track->truck->pol->country->country_name}}
-																@endif</td>
+																@endif
+															</td>
 															<td>@if($track->truck->pod)
 																{{$track->truck->pod->port_name}} - {{$track->truck->pod->country->country_name}}
-																@endif</td>
+																@endif
+															</td>
 															<td>@if($track->truck->car)
 																{{$track->truck->car->car_type}}
-																@endif</td>
+																@endif
+															</td>
 															<td>{{$track->truck->transit_time}}</td>
 															<td>{{$track->truck->notes}}</td>
 															<td>
@@ -347,7 +360,8 @@
 											<option value="">Select ...</option>
 											@foreach ($consinee as $type)
 											<option value='{{$type->id}}' {{ $type->id == $row->consignee_id ? 'selected' : '' }}>
-												{{ $type->client_name}}</option>
+												{{ $type->client_name}}
+											</option>
 											@endforeach
 										</select>
 									</div>
@@ -359,7 +373,21 @@
 											<option value="">Select ...</option>
 											@foreach ($notify as $type)
 											<option value='{{$type->id}}' {{ $type->id == $row->notify_id ? 'selected' : '' }}>
-												{{ $type->client_name}}</option>
+												{{ $type->client_name}}
+											</option>
+											@endforeach
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6 mb-3">
+									<div class="ui-widget form-group">
+										<label>Shipping Type</label>
+										<select class="form-control" data-live-search="true" name="shipping_id">
+											<option value="">Select ...</option>
+											@foreach ($shippings as $type)
+											<option value='{{$type->id}}' {{ $type->id == $row->shipping_id ? 'selected' : '' }}>
+												{{ $type->text}}
+											</option>
 											@endforeach
 										</select>
 									</div>
@@ -401,7 +429,7 @@
 										<input type="date" name="arrival_date" value="{{ date_format($datee,'Y-m-d') }}" class="form-control" placeholder="Loading Date">
 									</div>
 								</div>
-								
+
 							</div>
 
 							<div style="border-bottom:solid #0094ff 2px;">
@@ -435,7 +463,8 @@
 											<option value="">Select ...</option>
 											@foreach ($Commodity as $type)
 											<option value='{{$type->id}}' {{ $type->id == $row->commodity_id ? 'selected' : '' }}>
-												{{ $type->name}}</option>
+												{{ $type->name}}
+											</option>
 											@endforeach
 										</select>
 									</div>
@@ -523,10 +552,12 @@
 																<td>{{$expense->sell}}</td>
 																<td>@if($expense->provider)
 																	{{$expense->provider->expenses_name}}
-																	@endif</td>
+																	@endif
+																</td>
 																<td>@if($expense->currency)
 																	{{$expense->currency->currency_name}}
-																	@endif</td>
+																	@endif
+																</td>
 																<td>
 																	@if($expense->automatic!=1)
 																	<a href="#" class="btn btn-info d-inline-block" data-toggle="modal" data-target="#addSubCat{{$expense->id}}">edit</a>
@@ -567,7 +598,8 @@
 																										<option value="">Select ...</option>
 																										@foreach ($expenseTypes as $data)
 																										<option value='{{$data->id}}' {{ $data->id == $expense->expenses_type_id ? 'selected' : '' }}>
-																											{{$data->expense_name}}</option>
+																											{{$data->expense_name}}
+																										</option>
 																										@endforeach
 																									</select>
 
@@ -612,11 +644,12 @@
 																							<div class="col-md-6 mb-3">
 																								<div class="ui-widget form-group">
 																									<label>Currency</label>
-																									<select name="currency_id" disabled  class=" form-control" data-live-search="true">
+																									<select name="currency_id" disabled class=" form-control" data-live-search="true">
 																										<option value="">Select ...</option>
 																										@foreach ($expenseCurrency as $data)
 																										<option value='{{$data->id}}' {{ $data->id == $expense->currency_id ? 'selected' : '' }}>
-																											{{$data->currency_name}}</option>
+																											{{$data->currency_name}}
+																										</option>
 																										@endforeach
 																									</select>
 
@@ -696,7 +729,8 @@
 											<option value="">Select ...</option>
 											@foreach ($expenseTypes as $data)
 											<option value='{{$data->id}}'>
-												{{$data->expense_name}}</option>
+												{{$data->expense_name}}
+											</option>
 											@endforeach
 										</select>
 
@@ -722,7 +756,8 @@
 											<option>Select ...</option>
 											@foreach ($providers as $data)
 											<option value='{{$data->id}}'>
-												{{$data->expenses_name}}</option>
+												{{$data->expenses_name}}
+											</option>
 											@endforeach
 
 										</select>
@@ -746,7 +781,8 @@
 											<option value="">Select ...</option>
 											@foreach ($expenseCurrency as $data)
 											<option value='{{$data->id}}'>
-												{{$data->currency_name}}</option>
+												{{$data->currency_name}}
+											</option>
 											@endforeach
 										</select>
 

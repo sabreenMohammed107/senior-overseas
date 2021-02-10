@@ -25,6 +25,7 @@ use App\Models\Cashbox_expenses_type;
 use App\Models\Finan_trans_type;
 use App\Models\Financial_entry;
 use App\Models\Agent;
+use App\Models\Shipping_type;
 use Illuminate\Database\Eloquent\Collection;
 use File;
 use DB;
@@ -90,7 +91,8 @@ class OperationsController extends Controller
         $notify = Client::all();
         $Commodity = Commodity::all();
         $clearancesSuppliers = Supplier::where('supplier_type_id', '=', 2)->get();
-        return view($this->viewName . 'create', compact('qouts', 'qoutsFake', 'sale_qoute', 'consinee', 'notify', 'Commodity', 'typeTesting',  'filtters', 'trackings', 'clients', 'clearancesSuppliers', 'clearances', 'doors'));
+        $shippings=Shipping_type::all();
+        return view($this->viewName . 'create', compact('shippings','qouts', 'qoutsFake', 'sale_qoute', 'consinee', 'notify', 'Commodity', 'typeTesting',  'filtters', 'trackings', 'clients', 'clearancesSuppliers', 'clearances', 'doors'));
 
         // return view($this->viewName . 'create');
     }
@@ -172,6 +174,11 @@ if($maxInDataBase !=  $maxInRequest ){
 
 
         ];
+
+        if ($request->input('shipping_id')) {
+
+            $data['shipping_id'] = $request->input('shipping_id');
+        }
         if ($request->input('sales_quote_id_fake')) {
 
             $data['sales_quote_id'] = $request->input('sales_quote_id_fake');
@@ -381,8 +388,8 @@ if($maxInDataBase !=  $maxInRequest ){
         $doors = Currency::all();
         // get expenses
         $expenses = Operation_expense::where('operation_id', '=', $id)->orderBy("id", "Desc")->get();
-
-        return view($this->viewName . 'view', compact('row', 'qouts', 'consinee', 'notify', 'expenses', 'clearances', 'doors', 'typeTesting', 'Commodity', 'trackings', 'filtters'));
+        $shippings=Shipping_type::all();
+        return view($this->viewName . 'view', compact('shippings','row', 'qouts', 'consinee', 'notify', 'expenses', 'clearances', 'doors', 'typeTesting', 'Commodity', 'trackings', 'filtters'));
     }
 
     /**
@@ -416,7 +423,8 @@ if($maxInDataBase !=  $maxInRequest ){
         $providers = Cashbox_expenses_type::whereIN('id', [3, 4, 5, 6, 7])->get();
         $expenseTypes = Expense::all();
         $expenseCurrency = Currency::all();
-        return view($this->viewName . 'edit', compact('row', 'qouts', 'consinee', 'expenses', 'providers', 'expenseTypes', 'expenseCurrency', 'notify', 'clearances', 'doors', 'typeTesting', 'Commodity', 'trackings', 'filtters'));
+        $shippings=Shipping_type::all();
+        return view($this->viewName . 'edit', compact('shippings','row', 'qouts', 'consinee', 'expenses', 'providers', 'expenseTypes', 'expenseCurrency', 'notify', 'clearances', 'doors', 'typeTesting', 'Commodity', 'trackings', 'filtters'));
     }
 
     /**
@@ -455,6 +463,10 @@ if($maxInDataBase !=  $maxInRequest ){
         if ($request->input('commodity_id')) {
 
             $data['commodity_id'] = $request->input('commodity_id');
+        }
+        if ($request->input('shipping_id')) {
+
+            $data['shipping_id'] = $request->input('shipping_id');
         }
 
         $this->object::findOrFail($id)->update($data);

@@ -34,6 +34,7 @@ class CreateOperationsTable extends Migration
             $table->integer('sales_quote_ocean_id')->unsigned()->nullable();
             $table->integer('sales_quote_air_id')->unsigned()->nullable();
             $table->integer('sales_quote_tracking_id')->unsigned()->nullable();
+            $table->integer('shipping_id')->unsigned()->nullable();
             $table->text('notes')->nullable();
             $table->timestamps();
         });

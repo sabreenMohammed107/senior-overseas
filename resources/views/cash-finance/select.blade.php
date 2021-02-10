@@ -51,7 +51,7 @@
               <th>Debit</th>
               <th>Credit</th>
               <th>Transaction Data</th>
-            
+              <th>Notes</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -64,8 +64,9 @@
               <td>{{$row->credit}}</td>
               <td>  <?php $date = date_create($row->entry_date) ?>
                                     {{ date_format($date,'Y-m-d') }}</td>
-            
+                                    <td>{{$row->notes}}</td>
               <td>
+            
               <a href="{{ route('cash-finance.edit',$row->id) }}" class="btn btn-info d-inline-block">edit</a>
                                     <a href="#" onclick="destroy('this cash-finance','{{$row->id}}')" class="btn d-inline-block btn-danger">delete</a>
                                     <form id="delete_{{$row->id}}" action="{{ route('cash-finance.destroy', $row->id) }}" method="POST" style="display: none;">

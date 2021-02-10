@@ -51,7 +51,7 @@
                                 <th>Debit</th>
                                 <th>Credit</th>
                                 <th>Transaction Data</th>
-
+                                <th>Notes</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -64,7 +64,7 @@
                                 <td>{{$row->credit}}</td>
                                 <td> <?php $date = date_create($row->entry_date) ?>
                                     {{ date_format($date,'Y-m-d') }}</td>
-
+                                    <td>{{$row->notes}}</td>
                                 <td>
                                     <a href="{{ route('bank-finance.edit',$row->id) }}" class="btn btn-info d-inline-block">edit</a>
                                     <a href="#" onclick="destroy('this bank-finance','{{$row->id}}')" class="btn d-inline-block btn-danger">delete</a>

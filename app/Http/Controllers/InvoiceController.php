@@ -85,15 +85,41 @@ class InvoiceController extends Controller
      */
     public function store(Request $request)
     {
+
+        $maxDate = date_create(Invoice::orderBy('id', 'desc')->value('invoice_date'));
+        $maxInDataBase = date_format($maxDate, 'Y');
+        $maxInRequest = date_format(Carbon::parse($request->input('invoice_date')), 'Y');
+
         $max = Invoice::orderBy('id', 'desc')->value('invoice_no');
-
-        if ($max >= 100) {
-
-            $max = $max + 1;
+        if ($maxInDataBase !=  $maxInRequest) {
+            $max = 1;
         } else {
+            if ($max >= 1) {
 
-            $max = 100;
+                $max = $max + 1;
+            } else {
+
+                $max = 1;
+            }
         }
+
+
+
+
+
+
+
+
+
+        // $max = Invoice::orderBy('id', 'desc')->value('invoice_no');
+
+        // if ($max >= 100) {
+
+        //     $max = $max + 1;
+        // } else {
+
+        //     $max = 100;
+        // }
 
 
         $data = [
@@ -238,30 +264,26 @@ class InvoiceController extends Controller
         $totals = [];
         $total = 0;
         foreach ($curs as $cur) {
-            $total=0;
+            $total = 0;
             foreach ($rows as $row) {
                 if ($row->currency->currency_name === $cur) {
-                    if($row->automatic==1){
-                        $total = $total + ($row->sell *$row->operation->container_counts);
-                    }else{
-                        $total = $total + ($row->sell *1);
+                    if ($row->automatic == 1) {
+                        $total = $total + ($row->sell * $row->operation->container_counts);
+                    } else {
+                        $total = $total + ($row->sell * 1);
                     }
-                  
-                  
                 }
-               
             }
-            $totalNum=$total;
-            $total=Terbilang::make($total, " - $cur");
+            $totalNum = $total;
+            $total = Terbilang::make($total, " - $cur");
             $obj = new Collection();
             $obj->cur = $cur;
-            $obj->total =strtoupper($total);
+            $obj->total = strtoupper($total);
             $obj->num = $totalNum;
-           
+
             array_push($totals, $obj);
-           
         }
-      
+
         // six hundred and fifty-four thousand, three hundred and twenty-one dollars
         // This  $data array will be passed to our PDF blade
 
@@ -271,7 +293,7 @@ class InvoiceController extends Controller
             'rows' => $rows,
             'invoice' => $invoice,
             'curs' => $curs,
-            'totals'=>$totals,
+            'totals' => $totals,
             'content' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.'
         ];
 
@@ -289,7 +311,7 @@ class InvoiceController extends Controller
     public function printStatmentPDF($id)
     {
         $invoice = Invoice::where('id', '=', $id)->first();
-        $rows = Operation_expense::where('operation_id', '=', $invoice->operation_id)->whereNotNull('sell')->where('invoice_statement_flag', '=',2 )->orderBy("id", "Desc")->get();
+        $rows = Operation_expense::where('operation_id', '=', $invoice->operation_id)->whereNotNull('sell')->where('invoice_statement_flag', '=', 2)->orderBy("id", "Desc")->get();
         $curs = [];
         foreach ($rows as $row) {
             $cur = $row->currency->currency_name;
@@ -299,30 +321,26 @@ class InvoiceController extends Controller
         $totals = [];
         $total = 0;
         foreach ($curs as $cur) {
-            $total=0;
+            $total = 0;
             foreach ($rows as $row) {
                 if ($row->currency->currency_name === $cur) {
-                    if($row->automatic==1){
-                        $total = $total + ($row->sell *$row->operation->container_counts);
-                    }else{
-                        $total = $total + ($row->sell *1);
+                    if ($row->automatic == 1) {
+                        $total = $total + ($row->sell * $row->operation->container_counts);
+                    } else {
+                        $total = $total + ($row->sell * 1);
                     }
-                  
-                  
                 }
-               
             }
-            $totalNum=$total;
-            $total=Terbilang::make($total, " - $cur");
+            $totalNum = $total;
+            $total = Terbilang::make($total, " - $cur");
             $obj = new Collection();
             $obj->cur = $cur;
             $obj->total = strtoupper($total);
             $obj->num = $totalNum;
-           
+
             array_push($totals, $obj);
-          
         }
- 
+
         // This  $data array will be passed to our PDF blade
         $data = [
             'title' => 'First PDF for Medium',
@@ -330,7 +348,7 @@ class InvoiceController extends Controller
             'rows' => $rows,
             'invoice' => $invoice,
             'curs' => $curs,
-            'totals'=>$totals,
+            'totals' => $totals,
             'content' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.'
         ];
 

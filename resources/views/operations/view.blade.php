@@ -362,6 +362,19 @@
 									</div>
 								</div>
 								<div class="col-md-6 mb-3">
+									<div class="ui-widget form-group">
+										<label>Shipping Type</label>
+										<select class="form-control" disabled data-live-search="true" name="shipping_id">
+											<option value="">Select ...</option>
+											@foreach ($shippings as $type)
+											<option value='{{$type->id}}' {{ $type->id == $row->shipping_id ? 'selected' : '' }}>
+												{{ $type->text}}
+											</option>
+											@endforeach
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6 mb-3">
 									<div class="form-group">
 										<label class="exampleInputPassword1" for="exampleCheck1">Containers Counts</label>
 										<input readonly type="text" class="form-control" value="{{$row->container_counts}}" name="container_counts" placeholder="Containers Counts">

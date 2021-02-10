@@ -32,6 +32,7 @@
                                 <th>Operation Code</th>
                                 <th>Operation Date</th>
                                 <th>Shipper</th>
+                                <th>Pl_no</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -42,12 +43,15 @@
 
                                 <td>{{$row->operation_code}}</td>
                                 <td><?php $date = date_create($row->operation_date) ?>
-                                    {{ date_format($date,'Y-m-d') }}</td>
+                                    {{ date_format($date,'Y-m-d') }}
+                                </td>
                                 <td>@if($row->shipper)
                                     {{$row->shipper->client_name}}
-                                    @endif</td>
+                                    @endif
+                                </td>
+                                <td>{{$row-> pl_no}}</td>
                                 <td>
-                                <a href="{{ route('operations.show',$row->id) }}" class="btn btn-info d-inline-block" role="button" data-role="button" disabled='disabled'>view</a>
+                                    <a href="{{ route('operations.show',$row->id) }}" class="btn btn-info d-inline-block" role="button" data-role="button" disabled='disabled'>view</a>
 
                                     @if($row->account_confirm==1)
                                     <button class="btn btn-info d-inline-block" disabled>edit</button>
