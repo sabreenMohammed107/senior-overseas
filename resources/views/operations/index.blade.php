@@ -66,13 +66,14 @@
                                         @method('DELETE')
                                         <button type="submit" value=""></button>
                                     </form>
-
+                                    @if (Auth::user()->role_id==1 || Auth::user()->role_id==5 )
                                     <a href="#" onclick="sendAccount('operations','{{$row->id}}')" class="btn d-inline-block btn-dark">Send To Account</a>
                                     <form id="send_{{$row->id}}" action="{{ route('aaa', $row->id) }}" method="POST" style="display: none;">
                                         @csrf
 
                                         <button type="submit" value=""></button>
                                     </form>
+                                    @endif
                                     @endif
                                 </td>
                             </tr>
