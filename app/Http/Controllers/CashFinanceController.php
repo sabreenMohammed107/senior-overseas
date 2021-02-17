@@ -154,15 +154,15 @@ class CashFinanceController extends Controller
         if ($request->input('tab') == 2 || $request->input('tab') == 1) {
             $currentBalance = Financial_entry::where('cash_box_id', $request->input('cash_box_id'))->sum('depit') - Financial_entry::where('cash_box_id', $request->input('cash_box_id'))->sum('credit');
 
-            if ($request->input('credit') > $currentBalance) {
+            // if ($request->input('credit') > $currentBalance) {
 
-                return redirect()->back()->withInput($request->input())->with('flash_danger', 'Amount Is Not Valid');
-            } else {
+            //     return redirect()->back()->withInput($request->input())->with('flash_danger', 'Amount Is Not Valid');
+            // } else {
                 DB::transaction(function () use ($obj,  $request) {
 
                     $obj->save();
                 });
-            }
+            // }
             return redirect()->route($this->routeName . 'show', $request->input('cash_box_id'))->with('flash_success', $this->message);
         }
         //cash exchanger
@@ -186,10 +186,10 @@ class CashFinanceController extends Controller
 
             $exchangerIn->notes = $request->input('notesexchanger');
 
-            if ($request->input('amountOut') > $currentBalanceexchanger) {
+            // if ($request->input('amountOut') > $currentBalanceexchanger) {
 
-                return redirect()->back()->withInput($request->input())->with('flash_danger', 'Amount Is Not Valid');
-            } else {
+            //     return redirect()->back()->withInput($request->input())->with('flash_danger', 'Amount Is Not Valid');
+            // } else {
                 DB::beginTransaction();
                 try {
                     // Disable foreign key checks!
@@ -212,7 +212,7 @@ class CashFinanceController extends Controller
 
                     return redirect()->back()->withInput()->with('flash_danger', $e->getMessage());
                 }
-            }
+            // }
             return redirect()->route($this->routeName . 'show', $request->input('cash_box_id'))->with('flash_success', $this->message);
         }
     }
@@ -299,17 +299,17 @@ class CashFinanceController extends Controller
 
             $currentBalance = Financial_entry::where('cash_box_id', $obj->cash_box_id)->sum('depit') - Financial_entry::where('cash_box_id', $obj->cash_box_id)->sum('credit');
 
-            if ($diffetant  > $Clientdata || $diffetant > $currentBalance) {
+            // if ($diffetant  > $Clientdata || $diffetant > $currentBalance) {
 
-                return redirect()->back()->withInput($request->input())->with('flash_danger', 'Amount Is Not Valid');
-            } else {
+                // return redirect()->back()->withInput($request->input())->with('flash_danger', 'Amount Is Not Valid');
+            // } else {
                 $obj->update();
 
 
 
 
                 return redirect()->route($this->routeName . 'show', $request->input('cash_box_id'))->with('flash_success', $this->message);
-            }
+            // }
         }
         if ($request->input('tab') == 1) {
 
@@ -346,17 +346,17 @@ class CashFinanceController extends Controller
             $currentBalance = Financial_entry::where('cash_box_id', $obj->cash_box_id)->sum('depit') - Financial_entry::where('cash_box_id', $obj->cash_box_id)->sum('credit');
 
 
-            if ($diffetant  > $currentBalance || $diffetant > $currentBalance) {
+            // if ($diffetant  > $currentBalance || $diffetant > $currentBalance) {
 
-                return redirect()->back()->withInput($request->input())->with('flash_danger', 'Amount Is Not Valid');
-            } else {
+                // return redirect()->back()->withInput($request->input())->with('flash_danger', 'Amount Is Not Valid');
+            // } else {
                 $obj->update();
 
 
 
 
                 return redirect()->route($this->routeName . 'show', $request->input('cash_box_id'))->with('flash_success', $this->message);
-            }
+            // }
         }
         if ($request->input('tab') == 3) {
             $cashObj = $this->object::findOrFail($id);
@@ -367,10 +367,10 @@ class CashFinanceController extends Controller
             $currentBalance = Financial_entry::where('cash_box_id', $cashObj->cash_box_id)->sum('depit') - Financial_entry::where('cash_box_id', $cashObj->cash_box_id)->sum('credit');
 
             \Log::info([$cashObj->credit, $currentBalance + $diffetant]);
-            if ($diffetant  > $currentBalance) {
+            // if ($diffetant  > $currentBalance) {
 
-                return redirect()->back()->withInput($request->input())->with('flash_danger', 'Amount Is Not Valid');
-            } else {
+                // return redirect()->back()->withInput($request->input())->with('flash_danger', 'Amount Is Not Valid');
+            // } else {
 
                 $cashObj->update();
                 $secondCash = Financial_entry::where('parent_id', $id)->first();
@@ -382,11 +382,11 @@ class CashFinanceController extends Controller
                 $secondCash->update();
 
                 return redirect()->route($this->routeName . 'show', $request->input('cash_box_id'))->with('flash_success', $this->message);
-            }
+            // }
         }
 
 
-        return redirect()->route($this->routeName . 'show', $request->input('cash_box_id'))->with('flash_success', $this->message);
+        // return redirect()->route($this->routeName . 'show', $request->input('cash_box_id'))->with('flash_success', $this->message);
     }
 
     /**

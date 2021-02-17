@@ -312,17 +312,17 @@ class BankFinanceController extends Controller
 
             $currentBalance = Financial_entry::where('bank_account_id', $obj->bank_account_id)->sum('depit') - Financial_entry::where('bank_account_id', $obj->bank_account_id)->sum('credit');
 
-            if ($obj->depit  > $Clientdata || $obj->depit > $currentBalance) {
+            // if ($obj->depit  > $Clientdata || $obj->depit > $currentBalance) {
 
-                return redirect()->back()->withInput($request->input())->with('flash_danger', 'Amount Is Not Valid');
-            } else {
+                // return redirect()->back()->withInput($request->input())->with('flash_danger', 'Amount Is Not Valid');
+            // } else {
                 $obj->update();
 
 
 
 
                 return redirect()->route($this->routeName . 'show', $request->input('bank_account_id'))->with('flash_success', $this->message);
-            }
+            // }
         } 
         if ($request->input('tab') == 1) {
 
@@ -361,17 +361,17 @@ class BankFinanceController extends Controller
              $currentBalance = Financial_entry::where('bank_account_id', $obj->bank_account_id)->sum('depit') - Financial_entry::where('bank_account_id', $obj->bank_account_id)->sum('credit');
 
 
-            if ($diffetant  > $currentBalance || $diffetant > $currentBalance) {
+            // if ($diffetant  > $currentBalance || $diffetant > $currentBalance) {
 
-                return redirect()->back()->withInput($request->input())->with('flash_danger', 'Amount Is Not Valid');
-            } else {
+            //     return redirect()->back()->withInput($request->input())->with('flash_danger', 'Amount Is Not Valid');
+            // } else {
                 $obj->update();
 
 
 
 
                 return redirect()->route($this->routeName . 'show', $request->input('bank_account_id'))->with('flash_success', $this->message);
-            }
+            // }
         }
         if ($request->input('tab') == 3) {
             $cashObj = $this->object::findOrFail($id);
@@ -382,10 +382,10 @@ class BankFinanceController extends Controller
             $currentBalance = Financial_entry::where('bank_account_id', $cashObj->bank_account_id)->sum('depit') - Financial_entry::where('bank_account_id', $cashObj->bank_account_id)->sum('credit');
 
             \Log::info([$cashObj->credit, $currentBalance + $diffetant]);
-            if ($diffetant  > $currentBalance) {
+            // if ($diffetant  > $currentBalance) {
 
-                return redirect()->back()->withInput($request->input())->with('flash_danger', 'Amount Is Not Valid');
-            } else {
+            //     return redirect()->back()->withInput($request->input())->with('flash_danger', 'Amount Is Not Valid');
+            // } else {
 
                 $cashObj->update();
                 $secondCash = Financial_entry::where('parent_id', $id)->first();
@@ -398,7 +398,7 @@ class BankFinanceController extends Controller
 
                 return redirect()->route($this->routeName . 'show', $request->input('bank_account_id'))->with('flash_success', $this->message);
             }
-        }
+        // }
 
 
         return redirect()->route($this->routeName . 'show', $request->input('bank_account_id'))->with('flash_success', $this->message);
