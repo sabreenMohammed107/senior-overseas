@@ -172,14 +172,72 @@
            
             @foreach($extraExpense as $extra)
             <?php
+if(Carbon\Carbon::parse($from)){
+    $gyp = App\Models\Financial_entry::where('trans_type_id', $extra->id)->where('currency_id', 2)
+    ->where('entry_date', '>=', Carbon\Carbon::parse($from))
+    ->sum('credit');
 
-            $gyp = App\Models\Financial_entry::where('trans_type_id', $extra->id)->where('currency_id', 2)
-            ->where('entry_date', '>=', Carbon\Carbon::parse($from))
-            ->where('entry_date', '<=', Carbon\Carbon::parse($to))->sum('credit');
-            $use = App\Models\Financial_entry::where('trans_type_id', $extra->id)->where('currency_id', 1)->where('entry_date', '>=', Carbon\Carbon::parse($from))
-            ->where('entry_date', '<=', Carbon\Carbon::parse($to))->sum('credit');
-            $ure = App\Models\Financial_entry::where('trans_type_id', $extra->id)->where('currency_id', 3)->where('entry_date', '>=', Carbon\Carbon::parse($from))
-            ->where('entry_date', '<=', Carbon\Carbon::parse($to))->sum('credit');
+}elseif(Carbon\Carbon::parse($to)){
+    $gyp = App\Models\Financial_entry::where('trans_type_id', $extra->id)->where('currency_id', 2)
+  
+    ->where('entry_date', '<=', Carbon\Carbon::parse($to))->sum('credit');
+
+}elseif(Carbon\Carbon::parse($to) && Carbon\Carbon::parse($from)){
+    $gyp = App\Models\Financial_entry::where('trans_type_id', $extra->id)->where('currency_id', 2)
+    ->where('entry_date', '>=', Carbon\Carbon::parse($from))
+    ->where('entry_date', '<=', Carbon\Carbon::parse($to))->sum('credit');
+
+}else{
+    $gyp = App\Models\Financial_entry::where('trans_type_id', $extra->id)->where('currency_id', 2)
+   ->sum('credit');
+
+}
+      //usd
+if(Carbon\Carbon::parse($from)){
+    $use = App\Models\Financial_entry::where('trans_type_id', $extra->id)->where('currency_id', 1)
+    ->where('entry_date', '>=', Carbon\Carbon::parse($from))
+    ->sum('credit');
+
+}elseif(Carbon\Carbon::parse($to)){
+    $use = App\Models\Financial_entry::where('trans_type_id', $extra->id)->where('currency_id', 1)
+    
+    ->where('entry_date', '<=', Carbon\Carbon::parse($to))->sum('credit');
+
+}elseif(Carbon\Carbon::parse($to) && Carbon\Carbon::parse($from)){
+    $use = App\Models\Financial_entry::where('trans_type_id', $extra->id)->where('currency_id', 1)
+    ->where('entry_date', '>=', Carbon\Carbon::parse($from))
+    ->where('entry_date', '<=', Carbon\Carbon::parse($to))->sum('credit');
+
+}else{
+    $use = App\Models\Financial_entry::where('trans_type_id', $extra->id)->where('currency_id', 1)
+  ->sum('credit');
+}
+  //ure
+  if(Carbon\Carbon::parse($from)){
+    $ure = App\Models\Financial_entry::where('trans_type_id', $extra->id)->where('currency_id', 3)
+    ->where('entry_date', '>=', Carbon\Carbon::parse($from))
+    ->sum('credit');
+
+}elseif(Carbon\Carbon::parse($to)){
+    $ure = App\Models\Financial_entry::where('trans_type_id', $extra->id)->where('currency_id', 3)
+    
+    ->where('entry_date', '<=', Carbon\Carbon::parse($to))->sum('credit');
+
+}elseif(Carbon\Carbon::parse($to) && Carbon\Carbon::parse($from)){
+    $ure = App\Models\Financial_entry::where('trans_type_id', $extra->id)->where('currency_id', 3)
+    ->where('entry_date', '>=', Carbon\Carbon::parse($from))
+    ->where('entry_date', '<=', Carbon\Carbon::parse($to))->sum('credit');
+
+}else{
+    $ure = App\Models\Financial_entry::where('trans_type_id', $extra->id)->where('currency_id', 3)
+   ->sum('credit');
+  
+}
+
+          
+           
+           
+           
             $cashEgp = $cashEgp + $gyp;
             $cashUse = $cashUse + $use;
             $cashUre = $cashUre + $ure;
