@@ -37,7 +37,7 @@ class ExpensesController extends Controller
     {
         $rows = Expense::orderBy("created_at", "Desc")->get();
        
-        return view($this->viewName . 'index', compact('rows',));
+        return view($this->viewName . 'index', compact('rows'));
     }
 
     /**

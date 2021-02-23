@@ -34,12 +34,11 @@ class EarnReportController extends Controller
     public function __construct(Financial_entry $object)
     {
         $this->middleware('auth');
-
         $this->object = $object;
         $this->viewName = 'earn-balance.';
         $this->routeName = 'earn-balance.';
         $this->message = 'The Data has been saved';
-        $this->errormessage = 'check Your Data ';
+        $this->errormessage = 'check Your Data';
     }
     /**
      * Display a listing of the resource.
@@ -48,7 +47,7 @@ class EarnReportController extends Controller
      */
     public function index()
     {
-        return view($this->viewName . 'index');
+        return view($this->viewName .'index');
     }
 
     /**
