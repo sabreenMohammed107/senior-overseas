@@ -483,9 +483,17 @@ if($maxInDataBase !=  $maxInRequest ){
     public function destroy($id)
     {
         $row = Operation::where('id', '=', $id)->first();
-
+$expens=Operation_expense::where('operation_id',$id)->get();
 
         try {
+            //new Edit Delete Expensice 23-2-2021
+            if($expens){
+                foreach($expens as $exp){
+                    $exp->delete();
+                }
+               
+            }
+        
             $row->delete();
         } catch (QueryException $q) {
 

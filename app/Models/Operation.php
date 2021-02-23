@@ -19,6 +19,7 @@ class Operation extends Model
         return $this->hasMeny('App\Models\Operation_expense','operation_id','id');
 
     }
+
     public function shipper()
     {
         return $this->belongsTo('App\Models\Client','shipper_id');
