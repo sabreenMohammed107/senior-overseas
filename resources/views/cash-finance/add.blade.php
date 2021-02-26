@@ -19,6 +19,9 @@
     .hide3 {
         display: none;
     }
+    .hide4 {
+        display: none;
+    }
 </style>
 <div class="row">
     <div class="col-md-12">
@@ -65,6 +68,8 @@
                             <input type="radio" name="tab" value="1" onclick="show1();" checked /> Out
                             <input type="radio" name="tab" value="2" onclick="show2();" clicked="clicked" /> In
                             <input type="radio" name="tab" value="3" onclick="show3();" clicked="clicked" /> cashBox to Cash Box
+                            <input type="radio" name="tab" value="4" onclick="show4();" clicked="clicked" /> cashBox to Bank
+
                         </div>
 
 
@@ -242,6 +247,53 @@
                                 </div>
                             </div>
 
+                            <!-- new cashbox /bank -->
+                            <div id="div4" class="hide4">
+                                <div class="ms-auth-container row">
+                                    <div class="col-md-6 mb-3">
+                                        <div class="ui-widget form-group">
+                                            <label>Banks</label>
+                                            <select name="banks_inOut"  class=" form-control"  data-live-search="true">
+                                            <option value='' >Select </option>
+                                            @foreach ($banks as $data)
+                                            <option value='{{$data->id}}'  >
+                                                {{$data->name}}</option>
+                                            @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3"></div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-group">
+                                            <label class="exampleInputPassword1" for="exampleCheck1">Amount
+                                                Money out from CashBox</label>
+                                            <input type="number" step="0.01" name="amountOutBank" value="{{ old('amountOutBank') }}" class="form-control" placeholder="Amount">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-group">
+                                            <label class="exampleInputPassword1" for="exampleCheck1">Amount
+                                                Money In To Bank</label>
+                                            <input type="number" step="0.01" name="amountInBank" class="form-control" placeholder="Amount">
+                                        </div>
+                                    </div>
+                                   
+                                    <!-- <div class="col-md-6 mb-3">
+                                    <div class="form-group">
+                                        <label class="exampleInputPassword1" for="exampleCheck1">Currency</label>
+                                        <input type="text" class="form-control" placeholder="LE">
+                                    </div>
+                                </div> -->
+                                    <div class="col-md-12 mb-3">
+                                        <div class="form-group">
+                                            <label class="exampleInputPassword1" for="exampleCheck1">Notes</label>
+                                            <textarea name="notesexchangerBank" id="newClint" class="form-control" placeholder="Notes" rows="3">{{ old('notesexchangerBank') }}</textarea>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- End cashbox /bank -->
                             <div class="input-group d-flex justify-content-end text-center">
                                 <a href="{{ route('cash-finance.show',$Selectrow->id) }}" class="btn btn-dark mx-2"> Cancel</a>
                                 <!-- <input type="button" value="Cancel" class="btn btn-dark mx-2" data-dismiss="modal" aria-label="Close"> -->
@@ -262,20 +314,29 @@
 <!--radio button-->
 <script>
     function show1() {
+        document.getElementById('div4').style.display = 'none';
         document.getElementById('div3').style.display = 'none';
         document.getElementById('div1').style.display = 'none';
         document.getElementById('div2').style.display = 'block';
     }
 
     function show2() {
+        document.getElementById('div4').style.display = 'none';
         document.getElementById('div3').style.display = 'none';
         document.getElementById('div2').style.display = 'none';
         document.getElementById('div1').style.display = 'block';
     }
     function show3() {
+        document.getElementById('div4').style.display = 'none';
         document.getElementById('div1').style.display = 'none';
         document.getElementById('div2').style.display = 'none';
         document.getElementById('div3').style.display = 'block';
+    }
+    function show4() {
+        document.getElementById('div4').style.display = 'block';
+        document.getElementById('div1').style.display = 'none';
+        document.getElementById('div2').style.display = 'none';
+        document.getElementById('div3').style.display = 'none';
     }
     /*--radio button--*/
     $(document).ready(function() {
