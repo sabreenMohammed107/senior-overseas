@@ -82,7 +82,7 @@
                             <input type="radio" name="tab" value="4" onclick="show4();" checked />Bank to cashBox
 
                             @endif
-                            @if($editrow->trans_type_id ==20)
+                            @if($editrow->trans_type_id == 20)
                             <style>
                                 .hide {
                                     display: none;
@@ -102,7 +102,7 @@
                             <input type="radio" name="tab" value="4" onclick="show4();" checked />Bank to cashBox
                             @endif
 
-                            @if($editrow->trans_type_id ==2)
+                            @if($editrow->trans_type_id == 2)
                             <style>
                                 .hide2 {
                                     display: none;
