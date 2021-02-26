@@ -65,7 +65,7 @@
                             <?php
                             echo $editrow->trans_type_id;
                             ?>
-                            @if($editrow->trans_type_id == '21' )
+                            @if($editrow->trans_type_id === 21 )
                             <style>
                                 .hide {
                                     display: none;
@@ -85,7 +85,7 @@
                             <input type="radio" name="tab" value="4" onclick="show4();" checked />Bank to cashBox
 
                             @endif
-                            @if($editrow->trans_type_id == '20')
+                            @if($editrow->trans_type_id === 20)
                             <style>
                                 .hide {
                                     display: none;
@@ -105,7 +105,7 @@
                             <input type="radio" name="tab" value="4" onclick="show4();" checked />Bank to cashBox
                             @endif
 
-                            @if($editrow->trans_type_id == '2')
+                            @if($editrow->trans_type_id === 2)
                             <style>
                                 .hide2 {
                                     display: none;
@@ -124,7 +124,7 @@
                             <input type="radio" name="tab" value="3" onclick="show3();" disabled /> Bank to Bank
                             <input type="radio" name="tab" value="4" onclick="show4();" checked />Bank to cashBox
                             @endif
-                            @if($editrow->trans_type_id != '2' && $editrow->trans_type_id != '20' && $editrow->trans_type_id != '21')
+                            @if($editrow->trans_type_id !== 2 && $editrow->trans_type_id !== 20 && $editrow->trans_type_id !== 21)
                             <style>
                                 .hide {
                                     display: none;
