@@ -62,6 +62,9 @@
                     <div style="margin-bottom:25px">
                         <div style="border-bottom:solid 2px #0094ff;width:360px">
                             <!-- new Bank -->
+                            <?php
+                            echo $editrow->trans_type_id;
+                            ?>
                             @if($editrow->trans_type_id == 21 )
                             <style>
                                 .hide {
