@@ -60,8 +60,7 @@
                     <input type="hidden" name="cash_box_id" value="{{$Selectrow->id}}">
                     <input type="hidden" name="currency_id" value="{{$Selectrow->currency_id}}">
                     <div style="margin-bottom:25px">
-                        <div style="border-bottom:solid 2px #0094ff;width:160px">
-                         <!-- new Bank -->
+                    <div style="border-bottom:solid 2px #0094ff;width:360px">                         <!-- new Bank -->
                          @if($editrow->trans_type_id == 21 )
                             <style>
 
@@ -75,10 +74,10 @@
                                     display: none;
                                 }
                             </style>
-                            <input type="radio" name="tab" value="1" onclick="show1();" checked /> Out
+                            <input type="radio" name="tab" value="1" onclick="show1();" disabled /> Out
                             <input type="radio" name="tab" value="2" onclick="show2();" disabled /> In
                             <input type="radio" name="tab" value="3" onclick="show3();" disabled /> cashBox to Cash Box
-                            <input type="radio" name="tab" value="4" onclick="show4();" disabled /> cashBox to Bank
+                            <input type="radio" name="tab" value="4" onclick="show4();" checked  /> cashBox to Bank
 
                             @endif
                             <!-- end Bank -->

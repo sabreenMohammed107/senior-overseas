@@ -64,7 +64,7 @@
                     <input type="hidden" name="cash_box_id" value="{{$Selectrow->id}}">
                     <input type="hidden" name="currency_id" value="{{$Selectrow->currency_id}}">
                     <div style="margin-bottom:25px">
-                        <div style="border-bottom:solid 2px #0094ff;width:160px">
+                        <div style="border-bottom:solid 2px #0094ff;width:360px">
                             <input type="radio" name="tab" value="1" onclick="show1();" checked /> Out
                             <input type="radio" name="tab" value="2" onclick="show2();" clicked="clicked" /> In
                             <input type="radio" name="tab" value="3" onclick="show3();" clicked="clicked" /> cashBox to Cash Box

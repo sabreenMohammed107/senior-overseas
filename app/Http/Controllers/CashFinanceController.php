@@ -233,8 +233,8 @@ class CashFinanceController extends Controller
             $exchangerIn->trans_type_id = Finan_trans_type::where('id', '=', 21)->first()->id;
             $exchangerIn->entry_date = Carbon::parse($request->input('entry_date'));
             $exchangerIn->depit = $request->input('amountInBank');
-            $exchangerIn->currency_id = Cash_box::where('id', '=', $request->input('banks_inOut'))->first()->currency_id;
-            $exchangerIn->cash_box_id = $request->input('banks_inOut');
+            $exchangerIn->currency_id = Bank::where('id', '=', $request->input('banks_inOut'))->first()->currency_id;
+            $exchangerIn->bank_account_id = $request->input('banks_inOut');
 
             $exchangerIn->notes = $request->input('notesexchangerBank');
 

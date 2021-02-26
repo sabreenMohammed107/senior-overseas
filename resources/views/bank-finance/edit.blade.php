@@ -60,19 +60,46 @@
                     <input type="hidden" name="bank_account_id" value="{{$Selectrow->id}}">
                     <input type="hidden" name="currency_id" value="{{$Selectrow->currency_id}}">
                     <div style="margin-bottom:25px">
-                        <div style="border-bottom:solid 2px #0094ff;width:160px">
-                        @if($editrow->trans_type_id ==20)
+                        <div style="border-bottom:solid 2px #0094ff;width:360px">
+                            <!-- new Bank -->
+                            @if($editrow->trans_type_id == 21 )
                             <style>
                                 .hide {
                                     display: none;
                                 }
+
                                 .hide2 {
+                                    display: none;
+                                }
+
+                                .hide3 {
                                     display: none;
                                 }
                             </style>
                             <input type="radio" name="tab" value="1" onclick="show1();" disabled /> Out
                             <input type="radio" name="tab" value="2" onclick="show2();" disabled /> In
-                            <input type="radio" name="tab" value="3" onclick="show3();" checked />  Bank to Bank
+                            <input type="radio" name="tab" value="3" onclick="show3();" disabled /> Bank to Bank
+                            <input type="radio" name="tab" value="4" onclick="show4();" checked />Bank to cashBox
+
+                            @endif
+                            @if($editrow->trans_type_id ==20)
+                            <style>
+                                .hide {
+                                    display: none;
+                                }
+
+                                .hide2 {
+                                    display: none;
+                                }
+
+                                .hide4 {
+                                    display: none;
+                                }
+                            </style>
+                            <input type="radio" name="tab" value="1" onclick="show1();" disabled /> Out
+                            <input type="radio" name="tab" value="2" onclick="show2();" disabled /> In
+                            <input type="radio" name="tab" value="3" onclick="show3();" checked /> Bank to Bank
+                            <input type="radio" name="tab" value="4" onclick="show4();" checked />Bank to cashBox
                             @endif
 
                             @if($editrow->trans_type_id ==2)
@@ -80,26 +107,38 @@
                                 .hide2 {
                                     display: none;
                                 }
+
                                 .hide3 {
+                                    display: none;
+                                }
+
+                                .hide4 {
                                     display: none;
                                 }
                             </style>
                             <input type="radio" name="tab" value="1" onclick="show1();" disabled /> Out
                             <input type="radio" name="tab" value="2" onclick="show2();" checked /> In
-                            <input type="radio" name="tab" value="3" onclick="show3();" disabled />  Bank to Bank
+                            <input type="radio" name="tab" value="3" onclick="show3();" disabled /> Bank to Bank
+                            <input type="radio" name="tab" value="4" onclick="show4();" checked />Bank to cashBox
                             @endif
-                            @if($editrow->trans_type_id != 2 && $editrow->trans_type_id != 20)
+                            @if($editrow->trans_type_id != 2 && $editrow->trans_type_id != 20 && $editrow->trans_type_id != 21)
                             <style>
                                 .hide {
                                     display: none;
                                 }
+
                                 .hide3 {
+                                    display: none;
+                                }
+
+                                .hide4 {
                                     display: none;
                                 }
                             </style>
                             <input type="radio" name="tab" value="1" onclick="show1();" checked /> Out
                             <input type="radio" name="tab" value="2" onclick="show2();" disabled /> In
                             <input type="radio" name="tab" value="3" onclick="show3();" disabled /> Bank to Bank
+                            <input type="radio" name="tab" value="4" onclick="show4();" checked />Bank to cashBox
 
                             @endif
                         </div>
@@ -194,7 +233,8 @@
                                                 <option value=" ">Select ...</option>
                                                 @foreach ($clients as $type)
                                                 <option value='{{$type->id}}' {{ $type->id == $editrow->client_id ? 'selected' : '' }}>
-                                                    {{ $type->client_name}}</option>
+                                                    {{ $type->client_name}}
+                                                </option>
                                                 @endforeach
 
                                             </select>
@@ -240,12 +280,13 @@
                                     <div class="col-md-6 mb-3">
                                         <div class="ui-widget form-group">
                                             <label>Banks</label>
-                                            <select name="CashBoxes_inOut" disabled class=" form-control"  data-live-search="true">
-                                            <option value='' >Select </option>
-                                            @foreach ($Cashes as $data)
-                                            <option  value='{{$data->id}}' @if($cashesObj){{ $data->id == $cashesObj->cash_box_id ? 'selected' : '' }}@endif >
-                                                {{$data->name}}</option>
-                                            @endforeach
+                                            <select name="CashBoxes_inOut" disabled class=" form-control" data-live-search="true">
+                                                <option value=''>Select </option>
+                                                @foreach ($Cashes as $data)
+                                                <option value='{{$data->id}}' @if($cashesObj){{ $data->id == $cashesObj->cash_box_id ? 'selected' : '' }}@endif>
+                                                    {{$data->name}}
+                                                </option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -261,10 +302,10 @@
                                         <div class="form-group">
                                             <label class="exampleInputPassword1" for="exampleCheck1">Amount
                                                 Money In To Bank</label>
-                                            <input type="number" @if($cashesObj)value="{{$cashesObj->depit}}" @endif step="0.01" name="amountIn"  class="form-control" placeholder="Amount">
+                                            <input type="number" @if($cashesObj)value="{{$cashesObj->depit}}" @endif step="0.01" name="amountIn" class="form-control" placeholder="Amount">
                                         </div>
                                     </div>
-                                   
+
                                     <!-- <div class="col-md-6 mb-3">
                                     <div class="form-group">
                                         <label class="exampleInputPassword1" for="exampleCheck1">Currency</label>
@@ -280,7 +321,53 @@
 
                                 </div>
                             </div>
+                            <!-- new Bank -->
+                            <div id="div4" class="hide4">
+                                <div class="ms-auth-container row">
+                                    <div class="col-md-6 mb-3">
+                                        <div class="ui-widget form-group">
+                                            <label>Cash Box</label>
+                                            <select name="CashBoxes_inOut" disabled class=" form-control" data-live-search="true">
+                                                <option value=''>Select </option>
+                                                @foreach ($banksCashes as $data)
+                                                <option value='{{$data->id}}' @if($cashesObjBank){{ $data->id == $cashesObjBank->cash_box_id ? 'selected' : '' }}@endif>
+                                                    {{$data->name}}
+                                                </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3"></div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-group">
+                                            <label class="exampleInputPassword1" for="exampleCheck1">Amount
+                                                Money out from Bank</label>
+                                            <input type="number" step="0.01" name="amountOutBank" value="{{$editrow->credit}}" value="{{ old('depit') }}" class="form-control" placeholder="Amount">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-group">
+                                            <label class="exampleInputPassword1" for="exampleCheck1">Amount
+                                                Money In To Bank</label>
+                                            <input type="number" @if($cashesObjBank)value="{{$cashesObjBank->depit}}" @endif step="0.01" name="amountInBank" class="form-control" placeholder="Amount">
+                                        </div>
+                                    </div>
 
+                                    <!-- <div class="col-md-6 mb-3">
+                                    <div class="form-group">
+                                        <label class="exampleInputPassword1" for="exampleCheck1">Currency</label>
+                                        <input type="text" class="form-control" placeholder="LE">
+                                    </div>
+                                </div> -->
+                                    <div class="col-md-12 mb-3">
+                                        <div class="form-group">
+                                            <label class="exampleInputPassword1" for="exampleCheck1">Notes</label>
+                                            <textarea name="notesexchangerBank" id="newClint" class="form-control" placeholder="Notes" rows="3">@if($cashesObjBank){{$cashesObjBank->notes}}@endif</textarea>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
                             <div class="input-group d-flex justify-content-end text-center">
                                 <a href="{{ route('bank-finance.show',$Selectrow->id) }}" class="btn btn-dark mx-2"> Cancel</a>
                                 <!-- <input type="button" value="Cancel" class="btn btn-dark mx-2" data-dismiss="modal" aria-label="Close"> -->
@@ -301,20 +388,31 @@
 <!--radio button-->
 <script>
     function show1() {
+        document.getElementById('div4').style.display = 'none';
         document.getElementById('div3').style.display = 'none';
         document.getElementById('div1').style.display = 'none';
         document.getElementById('div2').style.display = 'block';
     }
 
     function show2() {
+        document.getElementById('div4').style.display = 'none';
         document.getElementById('div3').style.display = 'none';
         document.getElementById('div2').style.display = 'none';
         document.getElementById('div1').style.display = 'block';
     }
+
     function show3() {
+        document.getElementById('div4').style.display = 'none';
         document.getElementById('div1').style.display = 'none';
         document.getElementById('div2').style.display = 'none';
         document.getElementById('div3').style.display = 'block';
+    }
+
+    function show4() {
+        document.getElementById('div4').style.display = 'block';
+        document.getElementById('div1').style.display = 'none';
+        document.getElementById('div2').style.display = 'none';
+        document.getElementById('div3').style.display = 'none';
     }
     /*--radio button--*/
     $(document).ready(function() {

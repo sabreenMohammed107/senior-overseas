@@ -13,6 +13,7 @@ use App\Models\Supplier;
 use App\Models\Agent;
 use App\Models\Cashbox_expenses_type;
 use App\Models\Carrier;
+use App\Models\Cash_box;
 use File;
 use DB;
 use Log;
@@ -71,7 +72,8 @@ class BankFinanceController extends Controller
         $cashExpenseIn = Cashbox_expenses_type::where('expense_type', '=', 1)->get();
         $cashExpenseOut = Cashbox_expenses_type::where('expense_type', '=', 2)->get();
         $Cashes = Bank::where('id', '!=', $id)->get();
-        return view($this->viewName . 'add', compact('Selectrow', 'Cashes','clients', 'currentBalance', 'cashExpenseOut', 'cashExpenseIn'));
+        $banksCashes=Cash_box::all();
+        return view($this->viewName . 'add', compact('Selectrow','banksCashes', 'Cashes','clients', 'currentBalance', 'cashExpenseOut', 'cashExpenseIn'));
     }
     /**
      * Store a newly created resource in storage.
@@ -229,6 +231,57 @@ class BankFinanceController extends Controller
             }
             return redirect()->route($this->routeName . 'show', $request->input('bank_account_id'))->with('flash_success', $this->message);
         }
+        //bank exchanger
+        
+         if ($request->input('tab') == 4) {
+            $currentBalanceexchanger = Financial_entry::where('bank_account_id', $request->input('bank_account_id'))->sum('depit') - Financial_entry::where('bank_account_id', $request->input('bank_account_id'))->sum('credit');
+            $exchanger = new Financial_entry();
+            $exchanger->trans_type_id = Finan_trans_type::where('id', '=', 21)->first()->id;
+            $exchanger->entry_date = Carbon::parse($request->input('entry_date'));
+            $exchanger->credit = $request->input('amountOutBank');
+            $exchanger->currency_id = $request->input('currency_id');
+            $exchanger->bank_account_id = $request->input('bank_account_id');
+            $exchanger->notes = $request->input('notesexchangerBank');
+
+
+            $exchangerIn = new Financial_entry();
+            $exchangerIn->trans_type_id = Finan_trans_type::where('id', '=', 20)->first()->id;
+            $exchangerIn->entry_date = Carbon::parse($request->input('entry_date'));
+            $exchangerIn->depit = $request->input('amountInBank');
+            $exchangerIn->currency_id = Cash_box::where('id', '=', $request->input('banks_inOut'))->first()->currency_id;
+            $exchangerIn->cash_box_id = $request->input('banks_inOut');
+
+            $exchangerIn->notes = $request->input('notesexchangerBank');
+
+            // if ($request->input('amountOut') > $currentBalanceexchanger) {
+
+            //     return redirect()->back()->withInput($request->input())->with('flash_danger', 'Amount Is Not Valid');
+            // } else {
+                DB::beginTransaction();
+                try {
+                    // Disable foreign key checks!
+                    DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+
+                    $exchanger->save();
+
+                    $exchangerIn->parent_id = $exchanger->id;
+                    \Log::info($exchangerIn);
+                    $exchangerIn->save();
+
+
+                    DB::commit();
+                    // Enable foreign key checks!
+                    DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+                    return redirect()->route($this->routeName . 'show', $request->input('bank_account_id'))->with('flash_success', $this->message);
+                } catch (\Throwable $e) {
+                    // throw $th;
+                    DB::rollback();
+
+                    return redirect()->back()->withInput()->with('flash_danger', $e->getMessage());
+                }
+            // }
+            return redirect()->route($this->routeName . 'show', $request->input('bank_account_id'))->with('flash_success', $this->message);
+        }
     }
 
     /**
@@ -286,7 +339,9 @@ class BankFinanceController extends Controller
         $cashExpenseOut = Cashbox_expenses_type::where('id', '=', $editrow->trans_type_id)->where('expense_type', '=', 2)->first();
         $Cashes = Bank::where('id', '!=', $Selectrow->id)->get();
         $cashesObj = Financial_entry::where('parent_id', $id)->first();
-        return view($this->viewName . 'edit', compact('editrow', 'Selectrow','Cashes','cashesObj', 'clients', 'dataOther', 'currentBalance', 'dataClient', 'cashExpenseIn', 'cashExpenseOut'));
+        $banksCashes=Cash_box::all();
+        $cashesObjBank= Financial_entry::where('parent_id', $id)->first();
+        return view($this->viewName . 'edit', compact('editrow', 'Selectrow','banksCashes','cashesObjBank','Cashes','cashesObj', 'clients', 'dataOther', 'currentBalance', 'dataClient', 'cashExpenseIn', 'cashExpenseOut'));
     }
 
     /**
@@ -399,7 +454,33 @@ class BankFinanceController extends Controller
                 return redirect()->route($this->routeName . 'show', $request->input('bank_account_id'))->with('flash_success', $this->message);
             }
         // }
+// bank exchanger
+if ($request->input('tab') == 4) {
+    $cashesObjBank = $this->object::findOrFail($id);
+    $cashesObjBank->entry_date = Carbon::parse($request->input('entry_date'));
+    $diffetant = $request->input('amountOutBank') - $cashesObjBank->credit;
+    $cashesObjBank->credit = $cashesObjBank->credit + $diffetant;
+    $cashesObjBank->notes = $request->input('notesexchangerBank');
+    $currentBalance = Financial_entry::where('bank_account_id', $cashesObjBank->bank_account_id)->sum('depit') - Financial_entry::where('bank_account_id', $cashesObjBank->bank_account_id)->sum('credit');
 
+    \Log::info([$cashesObjBank->credit, $currentBalance + $diffetant]);
+    // if ($diffetant  > $currentBalance) {
+
+    //     return redirect()->back()->withInput($request->input())->with('flash_danger', 'Amount Is Not Valid');
+    // } else {
+
+        $cashesObjBank->update();
+        $secondCash = Financial_entry::where('parent_id', $id)->first();
+        $secondCash->entry_date = Carbon::parse($request->input('entry_date'));
+        $diffetant = $request->input('amountInBank') - $secondCash->depit;
+        $secondCash->depit = $secondCash->depit + $diffetant;
+        $secondCash->notes = $request->input('notesexchangerBank');
+
+        $secondCash->update();
+
+        return redirect()->route($this->routeName . 'show', $request->input('bank_account_id'))->with('flash_success', $this->message);
+    }
+// }
 
         return redirect()->route($this->routeName . 'show', $request->input('bank_account_id'))->with('flash_success', $this->message);
       }
