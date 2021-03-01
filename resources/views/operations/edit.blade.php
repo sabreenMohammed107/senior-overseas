@@ -439,8 +439,8 @@
 
 								<div class="col-md-6 mb-3">
 									<div class="form-group">
-										<label class="exampleInputPassword1" for="exampleCheck1">PL No</label>
-										<input type="text" value="{{$row->pl_no}}" name="pl_no" class="form-control" placeholder="PL No">
+										<label class="exampleInputPassword1" for="exampleCheck1">BL No</label>
+										<input type="text" value="{{$row->pl_no}}" name="pl_no" class="form-control" placeholder="BL No">
 									</div>
 								</div>
 								<div class="col-md-6 mb-3">
@@ -477,6 +477,27 @@
 										<input type="date" name="cut_off_date" value="{{ date_format($date2,'Y-m-d') }}" class="form-control" placeholder="cut-off date">
 									</div>
 								</div>
+								<!-- Add new Numbers -->
+								<div class="col-md-6 mb-3">
+									<div class="form-group">
+										<label class="exampleInputPassword1" for="exampleCheck1">Tracking inv.no</label>
+
+										<input type="text" name="tracking_inv_no" value="{{$row->tracking_inv_no}}" class="form-control" placeholder="Tracking inv.no">
+									</div>
+								</div>
+								<div class="col-md-6 mb-3">
+									<div class="form-group">
+										<label class="exampleInputPassword1" for="exampleCheck1">Clearance inv.no</label>
+										<input type="text" name="clearance_inv_no" value="{{$row->clearance_inv_no}}" class="form-control" placeholder="Clearance inv.no">
+									</div>
+								</div>
+								<div class="col-md-6 mb-3">
+									<div class="form-group">
+										<label class="exampleInputPassword1" for="exampleCheck1">Agent inv.no</label>
+										<input type="text" name="agent_inv_no" value="{{$row->agent_inv_no}}" class="form-control" placeholder="Agent inv.no">
+									</div>
+								</div>
+								<!-- End new Numbers -->
 							</div>
 							<div class="col-md-6 mb-3">
 								<div class="form-group">

@@ -32,7 +32,7 @@
                                 <th>Operation Code</th>
                                 <th>Operation Date</th>
                                 <th>Shipper</th>
-                                <th>Pl_no</th>
+                                <th>Bl_no</th>
                                 <th>Action</th>
                             </tr>
                         </thead>

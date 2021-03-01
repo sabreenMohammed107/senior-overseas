@@ -91,8 +91,8 @@ class OperationsController extends Controller
         $notify = Client::all();
         $Commodity = Commodity::all();
         $clearancesSuppliers = Supplier::where('supplier_type_id', '=', 2)->get();
-        $shippings=Shipping_type::all();
-        return view($this->viewName . 'create', compact('shippings','qouts', 'qoutsFake', 'sale_qoute', 'consinee', 'notify', 'Commodity', 'typeTesting',  'filtters', 'trackings', 'clients', 'clearancesSuppliers', 'clearances', 'doors'));
+        $shippings = Shipping_type::all();
+        return view($this->viewName . 'create', compact('shippings', 'qouts', 'qoutsFake', 'sale_qoute', 'consinee', 'notify', 'Commodity', 'typeTesting',  'filtters', 'trackings', 'clients', 'clearancesSuppliers', 'clearances', 'doors'));
 
         // return view($this->viewName . 'create');
     }
@@ -123,8 +123,8 @@ class OperationsController extends Controller
         $notify = Client::all();
         $Commodity = Commodity::all();
         $clearancesSuppliers = Supplier::where('supplier_type_id', '=', 2)->get();
-        $shippings=Shipping_type::all();
-        return view($this->viewName . 'search', compact('shippings','row', 'consinee', 'notify', 'Commodity', 'sale_qoute', 'typeTesting',  'filtters', 'trackings', 'clients', 'clearancesSuppliers', 'clearances', 'doors'))->render();
+        $shippings = Shipping_type::all();
+        return view($this->viewName . 'search', compact('shippings', 'row', 'consinee', 'notify', 'Commodity', 'sale_qoute', 'typeTesting',  'filtters', 'trackings', 'clients', 'clearancesSuppliers', 'clearances', 'doors'))->render();
     }
 
     /**
@@ -138,22 +138,20 @@ class OperationsController extends Controller
         $maxDate = date_create(Operation::orderBy('id', 'desc')->value('operation_date'));
         $maxInDataBase = date_format($maxDate, 'Y');
         $maxInRequest = date_format(Carbon::parse($request->input('operation_date')), 'Y');
-       
+
         $max = Operation::orderBy('id', 'desc')->value('operation_code');
-if($maxInDataBase !=  $maxInRequest ){
-    $max = 1;
+        if ($maxInDataBase !=  $maxInRequest) {
+            $max = 1;
+        } else {
+            if ($max >= 1) {
 
-}else{
-    if ($max >= 1) {
+                $max = $max + 1;
+            } else {
 
-        $max = $max + 1;
-    } else {
+                $max = 1;
+            }
+        }
 
-        $max = 1;
-    }
-
-}
-       
 
 
 
@@ -388,8 +386,8 @@ if($maxInDataBase !=  $maxInRequest ){
         $doors = Currency::all();
         // get expenses
         $expenses = Operation_expense::where('operation_id', '=', $id)->orderBy("id", "Desc")->get();
-        $shippings=Shipping_type::all();
-        return view($this->viewName . 'view', compact('shippings','row', 'qouts', 'consinee', 'notify', 'expenses', 'clearances', 'doors', 'typeTesting', 'Commodity', 'trackings', 'filtters'));
+        $shippings = Shipping_type::all();
+        return view($this->viewName . 'view', compact('shippings', 'row', 'qouts', 'consinee', 'notify', 'expenses', 'clearances', 'doors', 'typeTesting', 'Commodity', 'trackings', 'filtters'));
     }
 
     /**
@@ -423,8 +421,8 @@ if($maxInDataBase !=  $maxInRequest ){
         $providers = Cashbox_expenses_type::whereIN('id', [3, 4, 5, 6, 7])->get();
         $expenseTypes = Expense::all();
         $expenseCurrency = Currency::all();
-        $shippings=Shipping_type::all();
-        return view($this->viewName . 'edit', compact('shippings','row', 'qouts', 'consinee', 'expenses', 'providers', 'expenseTypes', 'expenseCurrency', 'notify', 'clearances', 'doors', 'typeTesting', 'Commodity', 'trackings', 'filtters'));
+        $shippings = Shipping_type::all();
+        return view($this->viewName . 'edit', compact('shippings', 'row', 'qouts', 'consinee', 'expenses', 'providers', 'expenseTypes', 'expenseCurrency', 'notify', 'clearances', 'doors', 'typeTesting', 'Commodity', 'trackings', 'filtters'));
     }
 
     /**
@@ -448,6 +446,11 @@ if($maxInDataBase !=  $maxInRequest ){
             'cut_off_date' => Carbon::parse($request->input('cut_off_date')),
             'booking_no' => $request->input('booking_no'),
             'notes' => $request->input('notes'),
+            //add new numbers
+            'tracking_inv_no' => $request->input('tracking_inv_no'),
+            'clearance_inv_no' => $request->input('clearance_inv_no'),
+            'agent_inv_no' => $request->input('agent_inv_no'),
+            //end new numbers
 
 
         ];
@@ -483,17 +486,16 @@ if($maxInDataBase !=  $maxInRequest ){
     public function destroy($id)
     {
         $row = Operation::where('id', '=', $id)->first();
-$expens=Operation_expense::where('operation_id',$id)->get();
+        $expens = Operation_expense::where('operation_id', $id)->get();
 
         try {
             //new Edit Delete Expensice 23-2-2021
-            if($expens){
-                foreach($expens as $exp){
+            if ($expens) {
+                foreach ($expens as $exp) {
                     $exp->delete();
                 }
-               
             }
-        
+
             $row->delete();
         } catch (QueryException $q) {
 

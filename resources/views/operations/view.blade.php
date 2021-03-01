@@ -427,8 +427,8 @@
 
 								<div class="col-md-6 mb-3">
 									<div class="form-group">
-										<label class="exampleInputPassword1" for="exampleCheck1">PL No</label>
-										<input type="text" readonly value="{{$row->pl_no}}" name="pl_no" class="form-control" placeholder="PL No">
+										<label class="exampleInputPassword1" for="exampleCheck1">BL No</label>
+										<input type="text" readonly value="{{$row->pl_no}}" name="pl_no" class="form-control" placeholder="BL No">
 									</div>
 								</div>
 								<div class="col-md-6 mb-3">
