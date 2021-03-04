@@ -13,6 +13,7 @@ use PDF;
 use Terbilang;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
+
 use Illuminate\Database\QueryException;
 
 class InvoiceController extends Controller
@@ -300,6 +301,7 @@ class InvoiceController extends Controller
 
         $title = "My Report";
         $pdf = PDF::loadView($this->viewName . 'invoceTemp', $data);
+        $pdf->save(storage_path().'_filename.pdf');
         return $pdf->stream('medium.pdf'); // to open in blank page
 
 

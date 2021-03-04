@@ -5,8 +5,9 @@
 
     <title>Report</title>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+   
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <style type="text/css">
         /* =============================================================
@@ -111,7 +112,7 @@
                     </div>
                     <hr>
                     <div class="table-responsive-sm">
-                        <table class="table table-striped">
+                        <table class="table table-striped" width="100%">
                             <thead class="bg-blue-200 text-white">
                                 <tr>
                                     <th class="center">Item</th>

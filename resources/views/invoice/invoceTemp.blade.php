@@ -127,7 +127,7 @@
                                 <tr>
                                     <td>{{$index+1}}</td>
                                     <td class="left strong">{{$row->provider->expenses_name ?? ''}}</td>
-                                    <td class="left">{{ $row->operation->container_counts}}@if($row->operation->ocean) <span>X</span>  @endif {{$row->operation->ocean->ocean->container->container_size ?? ''}} {{ $row->operation->ocean->ocean->container->container_type ?? ''}}</td>
+                                    <td class="left">{{ $row->operation->container_counts}} @if($row->operation->ocean) <span>X</span>  @endif {{$row->operation->ocean->ocean->container->container_size ?? ''}} {{ $row->operation->ocean->ocean->container->container_type ?? ''}}</td>
                                     <td class="right">{{$row->sell}}</td>
                                     <td class="center"><i class="fas fa-rupee-sign"></i>{{$row->currency->currency_name}}</td>
                                     <td class="right"><i class="fas fa-rupee-sign"></i>
