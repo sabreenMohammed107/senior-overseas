@@ -422,6 +422,7 @@ class OperationsController extends Controller
         $expenseTypes = Expense::all();
         $expenseCurrency = Currency::all();
         $shippings = Shipping_type::all();
+
         return view($this->viewName . 'edit', compact('shippings', 'row', 'qouts', 'consinee', 'expenses', 'providers', 'expenseTypes', 'expenseCurrency', 'notify', 'clearances', 'doors', 'typeTesting', 'Commodity', 'trackings', 'filtters'));
     }
 

@@ -289,6 +289,9 @@ class InvoiceController extends Controller
         // This  $data array will be passed to our PDF blade
 
         $data = [
+            'cssLink'=>' https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css',
+            'jquryLink'=>' <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>',
+            'bootstap'=>' <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>',
             'title' => 'First PDF for Medium',
             'heading' => 'Hello from 99Points.info',
             'rows' => $rows,
