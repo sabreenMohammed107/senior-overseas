@@ -130,7 +130,7 @@ Route::get('/sendInvoice', 'InvoiceController@sendInvoice')->name('sendInvoice')
 Route::get('/customer/print-pdf/{id}', 'InvoiceController@printInvoicePDF')->name('customer.printpdf');
 Route::get('/customer/print-statment/{id}', 'InvoiceController@printStatmentPDF')->name('customer.printstatment');
 
-
+Route::get('/update.Taxable', 'InvoiceController@updateTaxable')->name('update.Taxable');
 /*-------------------------Statment----------------------------------*/
 Route::resource('/account-statment', 'AccountStatmentController');
 Route::get('selector_statment/fetch', 'AccountStatmentController@selector_type')->name('selector_statment.fetch');

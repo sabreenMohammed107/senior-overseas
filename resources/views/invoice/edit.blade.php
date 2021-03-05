@@ -287,5 +287,33 @@ else {
 
 }
    }
+
+
+   function fillCheck(id) {
+        var confirmed = 0;
+
+        if ($('input[name=confirmed' + id + ']').prop('checked')) {
+
+            confirmed = 1;
+        } else {
+            confirmed = 0;
+        }
+alert(id);
+        $.ajax({
+            url: "{{route('update.Taxable')}}",
+            method: "Get",
+            data: {
+                confirmed: confirmed,
+             
+                id: id,
+
+            },
+            success: function(result) {
+              alert(result);
+                $('#commentarea').html(result);
+               
+            }
+        });
+    }
 </script>
 @endsection

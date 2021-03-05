@@ -217,6 +217,8 @@ class InvoiceController extends Controller
         return view($this->viewName . 'statment_table', compact('expensesInvoice', 'expensesStatment'))->render();
     }
 
+
+   
     /**
      * Update the specified resource in storage.
      *
@@ -224,6 +226,26 @@ class InvoiceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    public function updateTaxable(Request $request)
+    {
+        
+        $id=$request->input('id');
+        $confirmed=$request->input('confirmed');
+       
+     
+        $obj=Operation_expense::where('id',$id)->first();
+        $obj->update(['has_tax' => $confirmed]);
+      
+        $expensesStatment = Operation_expense::where('operation_id', '=', $obj->operation_id)->whereNotNull('sell')->where('invoice_statement_flag', '=', 2)->orderBy("id", "Desc")->get();
+        $expensesInvoice = Operation_expense::where('operation_id', '=',  $obj->operation_id)->whereNotNull('sell')->where('invoice_statement_flag', '=', 1)->orderBy("id", "Desc")->get();
+
+
+        return view($this->viewName . 'statment_table', compact('expensesInvoice', 'expensesStatment'))->render();
+  
+      
+    }
+
     public function update(Request $request, $id)
     {
         //
@@ -266,21 +288,49 @@ class InvoiceController extends Controller
         $total = 0;
         foreach ($curs as $cur) {
             $total = 0;
+            $subtotal=0;
+            $vat=0;
             foreach ($rows as $row) {
                 if ($row->currency->currency_name === $cur) {
                     if ($row->automatic == 1) {
                         $total = $total + ($row->sell * $row->operation->container_counts);
+                        if($row->has_tax == 1){
+                            $subtotal= $subtotal + (($row->sell*0.14) * $row->operation->container_counts);
+                            // $vat=$vat+($total -$subtotal);
+                        }
+                        
                     } else {
                         $total = $total + ($row->sell * 1);
+                        if($row->has_tax == 1){
+                            $subtotal= $subtotal + (($row->sell*0.14) * 1);
+                            // $vat=$vat+($total -$subtotal);
+                        }
                     }
                 }
             }
             $totalNum = $total;
             $total = Terbilang::make($total, " - $cur");
+
+            $subtotalNum = $subtotal;
+            $subtotal = Terbilang::make($subtotal, " - $cur");
+            
+
+            // $vatNum = $vat;
+            // $vat = Terbilang::make($vat, " - $cur");
+
+
             $obj = new Collection();
             $obj->cur = $cur;
             $obj->total = strtoupper($total);
             $obj->num = $totalNum;
+
+          
+
+            $obj->subtotal = strtoupper($subtotal);
+            $obj->subtotalnum = $subtotalNum;
+
+            // $obj->vat = strtoupper($vat);
+            // $obj->vatnum = $vatNum;
 
             array_push($totals, $obj);
         }

@@ -155,13 +155,41 @@
 
                                     <tr>
                                         <td class="left">
-                                            <strong>total - {{$cur}}</strong>
+                                            <strong>sub total - {{$cur}}</strong>
                                         </td>
                                         @foreach($totals as $total)
                                         @if($total->cur===$cur)
                                         <td class="right"><i class="fas fa-rupee-sign"></i>
 
                                         {{" " . number_format($total->num, 2, '.', ',')  }}  <br>{{$total->total}}</td>
+                                        @endif
+                                        @endforeach
+                                    </tr>
+
+                                    <tr>
+                                        <td class="left">
+                                            <strong>vat - {{$cur}}</strong>
+                                        </td>
+                                        @foreach($totals as $total)
+                                        @if($total->cur===$cur)
+                                        <td class="right"><i class="fas fa-rupee-sign"></i>
+
+                                        {{" " . number_format($total->subtotalnum, 2, '.', ',')  }}  <br>{{$total->subtotal}}</td>
+                                        @endif
+                                        @endforeach
+                                    </tr>
+                                    <tr>
+                                        <td class="left">
+                                            <strong>total - {{$cur}}</strong>
+                                        </td>
+                                        @foreach($totals as $total)
+                                        @if($total->cur===$cur)
+                                        <td class="right"><i class="fas fa-rupee-sign"></i>
+
+                                        {{" " . number_format(($total->num + $total->subtotalnum), 2, '.',',')  }}  <br>
+                                       
+                                        {{ \Terbilang::make($total->num + $total->subtotalnum, " - $cur")}}
+                                    </td>
                                         @endif
                                         @endforeach
                                     </tr>

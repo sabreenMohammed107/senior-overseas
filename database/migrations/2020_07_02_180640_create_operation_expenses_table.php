@@ -30,7 +30,7 @@ class CreateOperationExpensesTable extends Migration
            
             $table->integer('currency_id')->unsigned()->nullable();
             $table->integer('invoice_statement_flag')->nullable();
-            
+            $table->integer('has_tax')->nullable();
             $table->text('note')->nullable();
             $table->timestamps();
         });

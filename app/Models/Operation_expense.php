@@ -11,7 +11,7 @@ class Operation_expense extends Model
          'buy','sell', 'cashbox_expenses_types_id','currency_id','note','automatic','invoice_statement_flag',
          'ocean_carrier_id',
         'air_carrier_id', 'agent_id', 'trucking_id', 'clearance_id',
-     
+     'has_tax'
     ];
     public function operation()
     {
