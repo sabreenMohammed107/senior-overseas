@@ -29,11 +29,11 @@
         .form_in {
             display: inline-block;
             width: 50%;
-            height: 250px;
+            /* height: 250px; */
         }
 
         .in_style {
-            margin: 20px;
+            margin: 5px 20px;
         }
     </style>
 </head>
