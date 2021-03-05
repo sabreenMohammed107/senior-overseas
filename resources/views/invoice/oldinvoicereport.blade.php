@@ -48,38 +48,39 @@
 
                 <!-- <div class="card-header bg-primary text-white border-0" style="height: 110px;">
                     <h5 style="font-size: 30px;margin-left:50px">Over Seas Egypt
-                        <img style="background-color: #FFF;float:right;margin:5px 20px" src="{{asset('adminasset/img/logo.png')}}" alt="logo" width="150" height="100" />
+                        <img style="background-color: #FFF;float:right;margin:5px 20px" src="{{ asset('adminasset/img/logo.png')}}" alt="logo" width="150" height="100" />
                     </h5>
                     <p style="font-size: 20px;margin-left:50px">Professional frieght forwarder</p>
                 </div> -->
-                <div style="float:left;width:20%;height:100px">
-                <img style="background-color: #FFF;"  width="100%" src="{{ public_path('adminasset/img/logo.png') }}">
-                </div>
-                <div style="float:left;width:70%;height:100px">
-                 <h3 style="text-align: right;">INVOICE</h3>
-                </div>
-               
                 <div class="card-body">
 
-                    <!-- new Editing -->
+                    <div class=" col-md-12 mb-4" style="margin-top:100px">
+                        <h2 style="margin-bottom: 40px;">
+                            Invoice No: <a>{{$invoice->invoice_no}}</a></h2>
+                        <div class="form_in">
 
-                    <div class=" col-md-12" style="margin-top:100px">
-                    <div class="in_style">Date: <a>
+                            <div class="in_style">Date: <a>
                                     <?php $dateinvoice = date_create($invoice->invoice_date)
                                     ?>
                                     {{ date_format($dateinvoice,'Y-m-d') ?? '' }}
 
                                 </a></div>
-                                <hr>
-                                <div class=" col-md-12 " style="margin-top:50px">
-                    <div class="form_in">
-                        
-                    <div class="in_style">to: <a>{{$invoice->operation->sale->client->client_name ?? '' }} <br> {{$invoice->operation->sale->client->address ?? '' }}</a></div>
+                            <div class="in_style">Cur: <a>@foreach($curs as $cur){{$cur}} @endforeach</a></div>
+                            <div class="in_style">Ref#: <a>{{$invoice->operation->operation_code}}</a></div>
+                            <div class="in_style">Tracking start point: <a>{{$invoice->operation->tracking->truck->pol->port_name ?? '' }}</a></div>
+                            <div class="in_style">Tracking end point: <a>{{$invoice->operation->tracking->truck->pod->port_name ?? '' }}</a></div>
+                            <div class="in_style">truck container type: <a>{{$invoice->operation->tracking->truck->car->car_type ?? '' }}</a></div>
+
+                            <div class="in_style">to: <a>{{$invoice->operation->sale->client->client_name ?? '' }} <br> {{$invoice->operation->sale->client->address ?? '' }}</a></div>
 
 
-</div>
-<div class="form_in">
-<div class="in_style">
+                        </div>
+
+                        <div class="form_in">
+
+                            <div class="in_style">BL NO: <a>{{$invoice->operation->pl_no}}</a></div>
+                            <div class="in_style">Volume: <a>{{$invoice->operation->container_counts }} @if($invoice->operation->ocean) <span>X</span>  @endif {{$invoice->operation->ocean->ocean->container->container_size ?? ''}} {{ $invoice->operation->ocean->ocean->container->container_type ?? ''}}</a></div>
+                            <div class="in_style">
                                 @if($invoice->operation->ocean)
                                 <span>Pol </span>
                                 @elseif($invoice->operation->air)
@@ -97,30 +98,23 @@
                                 <span></span>
                                 @endif
                                 <a>{{$invoice->operation->ocean->ocean->pod->port_name ?? '' }}{{$invoice->operation->air->air->aod->port_name ?? '' }}</a></div>
-</div>
-                </div>
-                    </div>
-                    <div class="table-responsive-sm">
-                        <table class="table table-striped">
-                            <thead class="bg-blue-200 text-white">
-                                <tr>
-                                    <th class="center">Ref#</th>
-                                    <th>B/L#</th>
-                                    <th>Volume</th>
-                                    <th class="right">Loding Date</th>
-                                   
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <td>{{$invoice->operation->operation_code}}</td>
-                                <td>{{$invoice->operation->pl_no}}</td>
-                                <td>{{$invoice->operation->container_counts }} @if($invoice->operation->ocean) <span>X</span>  @endif {{$invoice->operation->ocean->ocean->container->container_size ?? ''}} {{ $invoice->operation->ocean->ocean->container->container_type ?? ''}}</td>
-                                <td> <?php $dateinvoice = date_create($invoice->operation->loading_date)
+                                 <div class="in_style">Loading Date: <a>
+                                    <?php $dateinvoice = date_create($invoice->operation->loading_date)
                                     ?>
-                                    {{ date_format($dateinvoice,'Y-m-d') ?? '' }}</td>
-                            </tbody>
-                        </table>
+                                    {{ date_format($dateinvoice,'Y-m-d') ?? '' }}
+                                </a></div>
+
+                                <div class="in_style">Arrival Date: <a>
+                                    <?php $dateinvoice2 = date_create($invoice->operation->arrival_date)
+                                    ?>
+                                    {{ date_format($dateinvoice2,'Y-m-d') ?? '' }}
+                                </a></div>
+
+
+                        </div>
                     </div>
+                    <!-- new Editing -->
+                    
                     <!-- End -->
                     <hr>
                     <div class="table-responsive-sm">
