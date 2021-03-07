@@ -8348,24 +8348,25 @@
                     <img style="background-color: #FFF;" width="100%" src="{{ public_path('adminasset/img/logo.png') }}">
                 </div>
                 <div style="float:left;width:70%;height:100px">
-                    <h3 style="text-align: right;">INVOICE</h3>
+                    <h3 style="margin-left:330px">INVOICE</h3>
                 </div>
 
                 <div class="card-body">
 
                     <!-- new Editing -->
 
-                    <div class="row" style="margin-top:100px">
-                        <div class="col-md-6"></div>
-                        <div class="col-md-6">
-                            <div class="in_style">Date: <a>
+                    <div class=" col-md-12 " style="margin-top:100px">
+                      
+                        <div   style="float: right;">
+                            <div class="in_style" style="padding: 0 50px">Date: <a>
                                     <?php $dateinvoice = date_create($invoice->invoice_date)
                                     ?>
                                     {{ date_format($dateinvoice,'Y-m-d') ?? '' }}
 
                                 </a></div>
                         </div>
-                    </div>
+                  
+<br>
 
                     <hr>
                     <div class=" col-md-12 " style="margin-top:50px">
@@ -8376,7 +8377,7 @@
 
                         </div>
                         <div class="form_in">
-                            <div class="in_style">
+                            <div class="in_style" style="margin-left:120px">
                                 @if($invoice->operation->ocean)
                                 <span>Pol </span>
                                 @elseif($invoice->operation->air)
@@ -8386,7 +8387,7 @@
                                 @endif
                                 <a>{{$invoice->operation->ocean->ocean->pol->port_name ?? '' }}{{$invoice->operation->air->air->aol->port_name ?? '' }}</a>
                             </div>
-                            <div class="in_style">
+                            <div class="in_style" style="margin-left:120px">
                                 @if($invoice->operation->ocean)
                                 <span>Pod </span>
                                 @elseif($invoice->operation->air)
