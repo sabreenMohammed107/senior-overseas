@@ -233,7 +233,7 @@
                             @if($total->cur===$cur)
                             <td>
 
-                                {{" " . number_format($total->num, 2, '.', ',')  }} <br>{{$total->total}}
+                                {{" " . number_format($total->num, 2, '.', ',')  }} <br>
                             </td>
                             @endif
                             @endforeach
@@ -247,7 +247,7 @@
                             @if($total->cur===$cur)
                             <td>
 
-                                {{" " . number_format($total->subtotalnum, 2, '.', ',')  }} <br>{{$total->subtotal}}
+                                {{" " . number_format($total->subtotalnum, 2, '.', ',')  }} <br>
                             </td>
                             @endif
                             @endforeach
