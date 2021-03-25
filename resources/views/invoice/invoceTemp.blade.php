@@ -51,7 +51,7 @@
         }
 
         .logo img {
-            width: 15%;
+            width: 30%;
         }
 
         .headerr .logo-date {
@@ -99,13 +99,14 @@
         <div class="headerr">
 
             <div class="logo">
-                <img src="{{ public_path('adminasset/img/logo.png') }}" alt="">
+                <img src="{{ public_path('adminasset/img/logo.png') }}"  alt="">
             </div>
             <div class="logo-name">
-                <h2>INVOICE</h2>
+                <h1>INVOICE</h1>
             </div>
             <div style="clear: both;"></div>
         </div>
+        <hr>
 
         <div class="headerr">
             <div class="logo2">
@@ -122,7 +123,7 @@
             <div style="clear: both;"></div>
         </div>
 
-
+<hr>
         <!-- next section -->
         <div class="hero">
             <div class="logo2">
@@ -158,7 +159,7 @@
         <!-- table -->
         <div class="hero">
             <table width="100%">
-                <thead style="border-bottom: 1px solid #ccc;">
+                <thead style="border-bottom: 1px solid #ccc; background:#333;color:#fff">
                 <tr>
                     <th>Ref#</th>
                     <th>B/L#</th>
@@ -183,7 +184,7 @@
         <div class="hero" style="margin-top:20px">
             <table width="100%">
                 <thead style=" border-bottom:1px solid #ccc;
-                border-width: thin; ">
+                border-width: thin;background:#333 ;color:#fff ">
                     <tr>
                         <th>Item</th>
                         <th>Description</th>
@@ -219,10 +220,9 @@
             </table>
         </div>
         <div class="hero">
-            <div class="hero-data">
+            <div class="hero-data" style="width: 100%;">
                 <table width="100%">
-                    <tbody style=" border-bottom-style: solid;
-                        border-width: thin; ">
+                    <tbody >
                         @foreach($curs as $cur)
 
                         <tr>
