@@ -10,7 +10,7 @@ class Operation_expense extends Model
         'operation_id', 'expenses_type_id',
          'buy','sell', 'cashbox_expenses_types_id','currency_id','note','automatic','invoice_statement_flag',
          'ocean_carrier_id',
-        'air_carrier_id', 'agent_id', 'trucking_id', 'clearance_id',
+        'air_carrier_id', 'agent_id', 'trucking_id', 'clearance_id','cashbox_id',
      'has_tax'
     ];
     public function operation()
@@ -43,6 +43,8 @@ class Operation_expense extends Model
         return $this->belongsTo('App\Models\Agent','agent_id');
 
     }
+
+  
     public function type()
     {
         return $this->belongsTo('App\Models\Expense','expenses_type_id');

@@ -25,6 +25,7 @@ use App\Models\Cashbox_expenses_type;
 use App\Models\Finan_trans_type;
 use App\Models\Financial_entry;
 use App\Models\Agent;
+use App\Models\Cash_box;
 use App\Models\Shipping_type;
 use Illuminate\Database\Eloquent\Collection;
 use File;
@@ -418,7 +419,7 @@ class OperationsController extends Controller
         // get expenses
         $expenses = Operation_expense::where('operation_id', '=', $id)->orderBy("id", "Desc")->get();
         // $providers = Expenses_provider_type::all();
-        $providers = Cashbox_expenses_type::whereIN('id', [3, 4, 5, 6, 7])->get();
+        $providers = Cashbox_expenses_type::whereIN('id', [3, 4, 5, 6, 7,8])->get();
         $expenseTypes = Expense::all();
         $expenseCurrency = Currency::all();
         $shippings = Shipping_type::all();
@@ -557,7 +558,10 @@ class OperationsController extends Controller
             if (!empty($request->get("selector_type")) && $request->input('selector_type') == 7) {
                 $data['agent_id'] = $request->input('xxselector');
             }
-
+            if (!empty($request->get("selector_type")) && $request->input('selector_type') == 8) {
+                //get cash-box on currency
+                $data['cashbox_id'] = Cash_box::where('currency_id','=',$request->input('currency_id'))->first()->id;
+            }
             Operation_expense::create($data);
         }
 
@@ -661,6 +665,10 @@ class OperationsController extends Controller
 
                     $obj->trans_type_id = Finan_trans_type::where('id', '=', 17)->first()->id;
                 }
+                if ($sellRow->cashbox_expenses_types_id == 8) {
+
+                    $obj->trans_type_id = Finan_trans_type::where('id', '=', 23)->first()->id;
+                }
 
 
                 $obj->entry_date = $row->operation_date;
@@ -699,6 +707,12 @@ class OperationsController extends Controller
 
                     $obj->trans_type_id = Finan_trans_type::where('id', '=', 12)->first()->id;
                     $obj->agent_id = $row->sale->agent_id;
+                }
+
+                if ($buyRow->cashbox_expenses_types_id == 8) {
+
+                    $obj->trans_type_id = Finan_trans_type::where('id', '=', 22)->first()->id;
+                    $obj->cashbox_id = $row->sale->cashbox_id;
                 }
 
                 $obj->entry_date = $row->operation_date;
@@ -751,6 +765,9 @@ class OperationsController extends Controller
                 }
                 if ($buyOther->agent_id != null) {
                     $obj->agent_id = $buyOther->agent_id;
+                }
+                if ($buyOther->cashbox_id != null) {
+                    $obj->cash_box_id = $buyOther->cashbox_id;
                 }
                 $obj->notes = $buyOther->notes;
                 $obj->currency_id = $buyOther->currency_id;
