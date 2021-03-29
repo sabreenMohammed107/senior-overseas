@@ -119,6 +119,9 @@
                 <p>Date : <span>
                         {{ date_format($dateinvoice,'Y-m-d') ?? '' }}
                     </span></p>
+                    <p>Invoice # : <span>
+                        {{ $invoice->invoice_no }}
+                    </span></p>
             </div>
             <div style="clear: both;"></div>
         </div>
