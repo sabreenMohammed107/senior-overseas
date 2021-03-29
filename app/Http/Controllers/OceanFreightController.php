@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Agent;
 use Illuminate\Http\Request;
 use App\Models\Ocean_freight_rate;
 use App\Models\Carrier;
@@ -46,8 +47,9 @@ class OceanFreightController extends Controller
         $pods = Port::all();
         $currencies = Currency::all();
         $containers = Container::all();
+        $agents=Agent::all();
 
-        return view($this->viewName . 'index', compact('rows', 'carriers', 'pols', 'pods', 'currencies', 'containers'));
+        return view($this->viewName . 'index', compact('rows', 'carriers', 'pols', 'pods', 'currencies', 'containers','agents'));
     }
 
     /**

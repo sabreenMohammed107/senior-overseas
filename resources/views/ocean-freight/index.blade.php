@@ -45,27 +45,32 @@
                                 <td>{{$row->code}}</td>
                                 <!-- <td>
                                     {{$row->ocean_freight}}</td>-->
-                                <td> 
+                                <td>
                                     @if($row->carrier)
                                     {{$row->carrier->carrier_name}}
                                     @endif
                                 </td>
                                 <td> @if($row->pol)
                                     {{$row->pol->port_name}} - {{$row->pol->country->country_name}}
-                                    @endif</td>
+                                    @endif
+                                </td>
                                 <td> @if($row->pod)
                                     {{$row->pod->port_name}} - {{$row->pod->country->country_name}}
-                                    @endif</td>
+                                    @endif
+                                </td>
                                 <td> @if($row->container)
-                                {{$row->container->container_size}}-{{$row->container->container_type}} 
-                                    @endif</td>
+                                    {{$row->container->container_size}}-{{$row->container->container_type}}
+                                    @endif
+                                </td>
                                 <td> {{$row->price}}</td>
                                 <td> @if($row->currency)
                                     {{$row->currency->currency_name}}
-                                    @endif</td>
+                                    @endif
+                                </td>
                                 <td> {{$row->transit_time}}</td>
-                                <td>   <?php $date = date_create($row->validity_date) ?>
-                                {{ date_format($date,'Y-m-d') }}</td>
+                                <td> <?php $date = date_create($row->validity_date) ?>
+                                    {{ date_format($date,'Y-m-d') }}
+                                </td>
 
                                 <td>
                                     <a href="{{ route('ocean-freight.edit',$row->id) }}" class="btn btn-info d-inline-block">edit</a>
@@ -103,7 +108,7 @@
             <div class="modal-body">
                 <div class="ms-auth-container row no-gutters">
                     <div class="col-12 p-3">
-                    <form action="{{route('ocean-freight.store')}}" method="POST" >
+                        <form action="{{route('ocean-freight.store')}}" method="POST">
                             {{ csrf_field() }}
                             <div class="ms-auth-container row">
                                 <!-- <div class="col-md-6 mb-3">
@@ -116,10 +121,11 @@
                                     <div class="ui-widget form-group">
                                         <label>Carrier Name</label>
                                         <select name="carrier_id" class=" form-control" data-live-search="true">
-                                        <option value="">Select ...</option>
+                                            <option value="">Select ...</option>
                                             @foreach ($carriers as $type)
                                             <option value='{{$type->id}}'>
-                                                {{ $type->carrier_name}}</option>
+                                                {{ $type->carrier_name}}
+                                            </option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -130,15 +136,16 @@
                                         <input type="number" step="0.01" name="price" class="form-control" placeholder="Price">
                                     </div>
                                 </div>
-                               
+
                                 <div class="col-md-6 mb-3">
                                     <div class="ui-widget form-group">
                                         <label>Pol</label>
                                         <select name="pol_id" class=" form-control" data-live-search="true">
-                                        <option value="">Select ...</option>
+                                            <option value="">Select ...</option>
                                             @foreach ($pols as $type)
                                             <option value='{{$type->id}}'>
-                                                {{ $type->port_name}} - {{$type->country->country_name}}</option>
+                                                {{ $type->port_name}} - {{$type->country->country_name}}
+                                            </option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -147,10 +154,11 @@
                                     <div class="ui-widget form-group">
                                         <label>Pod</label>
                                         <select name="pod_id" class=" form-control" data-live-search="true">
-                                        <option value="">Select ...</option>
+                                            <option value="">Select ...</option>
                                             @foreach ($pods as $type)
                                             <option value='{{$type->id}}'>
-                                                {{ $type->port_name}} - {{$type->country->country_name}}</option>
+                                                {{ $type->port_name}} - {{$type->country->country_name}}
+                                            </option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -159,10 +167,11 @@
                                     <div class="ui-widget form-group">
                                         <label>Container</label>
                                         <select name="container_id" class=" form-control" data-live-search="true">
-                                        <option value="">Select ...</option>
+                                            <option value="">Select ...</option>
                                             @foreach ($containers as $type)
                                             <option value='{{$type->id}}'>
-                                            {{$type->container_size}}-{{$type->container_type}}</option>
+                                                {{$type->container_size}}-{{$type->container_type}}
+                                            </option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -171,10 +180,11 @@
                                     <div class="ui-widget form-group">
                                         <label>Currency</label>
                                         <select name="currency_id" required class="form-control" data-live-search="true">
-                                        <option value="">Select ...</option>
+                                            <option value="">Select ...</option>
                                             @foreach ($currencies as $type)
                                             <option value='{{$type->id}}'>
-                                                {{ $type->currency_name}}</option>
+                                                {{ $type->currency_name}}
+                                            </option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -191,6 +201,30 @@
                                         <input type="date" name="validity_date" class="form-control" placeholder="Validitiy Date">
                                     </div>
                                 </div>
+
+                                <!-- new Data -->
+                                <div class="col-md-8 mb-3">
+                                    <div class="ui-widget form-group">
+                                        <input type="radio" id="import" name="gender" value="import" checked>
+                                        <label for="import">import</label>
+                                        <input type="radio" id="export" name="gender" value="export">
+                                        <label for="export">export</label>
+                                    </div>
+                                </div>
+                                <div id="agent_id" class="col-md-6 mb-3">
+                                    <div class="ui-widget form-group">
+                                        <label>Agent</label>
+                                        <select name="agent_id"  class="form-control" data-live-search="true">
+                                            <option value="">Select ...</option>
+                                            @foreach ($agents as $type)
+                                            <option value='{{$type->id}}'>
+                                                {{ $type->name}}
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- End New Data -->
                                 <div class="col-md-6 mb-3">
                                     <div class="form-group">
                                         <label class="exampleInputPassword1" for="exampleCheck1">Notes</label>
@@ -211,4 +245,25 @@
     </div>
 </div>
 <!-- /Add new Modal -->
+@endsection
+
+
+@section('scripts')
+
+<script>
+    $(document).ready(function() {
+        $(document).ready(function() {
+            $("input[name$='gender']").click(function() {
+                var test = $(this).val();
+                if (test == 'export') {
+                    $("#agent_id").hide();
+                } else {
+                    $("#agent_id").show();
+                }
+
+
+            });
+        });
+    });
+</script>
 @endsection
