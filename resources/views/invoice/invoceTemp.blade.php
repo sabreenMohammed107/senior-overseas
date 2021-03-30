@@ -223,13 +223,14 @@
             </table>
         </div>
         <div class="hero">
-            <div class="hero-data" style="width: 100%;">
-                <table width="100%">
+            <div class="hero-data" style="width: 50%;margin-left:50%">
+           
+                <table width="100%" style="font-size: 14px;" >
                     <tbody >
                         @foreach($curs as $cur)
 
                         <tr>
-                      <td style="width: 50%;"></td>
+                     
                             <td>
                                 <strong>sub total - {{$cur}}</strong>
                             </td>
@@ -244,7 +245,7 @@
                         </tr>
 
                         <tr>
-                        <td style="width: 50%;"></td>
+                      
                             <td>
                                 <strong>vat - {{$cur}}</strong>
                             </td>
@@ -258,7 +259,7 @@
                             @endforeach
                         </tr>
                         <tr>
-                        <td style="width: 50%;"></td>
+                      
                             <td>
                                 <strong>total - {{$cur}}</strong>
                             </td>
