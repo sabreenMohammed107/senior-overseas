@@ -749,24 +749,36 @@ class OperationsController extends Controller
                 $obj->trans_type_id = Finan_trans_type::where('id', '=', 18)->first()->id;
 
                 $obj->entry_date = $row->operation_date;
-                $obj->depit = $buyOther->buy;
+                // $obj->depit = $buyOther->buy;
                 // $obj->client_id = $row->shipper_id;
                 if ($buyOther->ocean_carrier_id != null) {
+                    $obj->depit = $buyOther->buy;
+                    $obj->credit = null;
                     $obj->ocean_carrier_id = $buyOther->ocean_carrier_id;
                 }
                 if ($buyOther->air_carrier_id != null) {
+                    $obj->depit = $buyOther->buy;
+                    $obj->credit = null;
                     $obj->air_carrier_id = $buyOther->air_carrier_id;
                 }
                 if ($buyOther->clearance_id != null) {
+                    $obj->depit = $buyOther->buy;
+                    $obj->credit = null;
                     $obj->clearance_id = $buyOther->clearance_id;
                 }
                 if ($buyOther->trucking_id != null) {
+                    $obj->depit = $buyOther->buy;
+                    $obj->credit = null;
                     $obj->trucking_id = $buyOther->trucking_id;
                 }
                 if ($buyOther->agent_id != null) {
+                    $obj->depit = $buyOther->buy;
+                    $obj->credit = null;
                     $obj->agent_id = $buyOther->agent_id;
                 }
                 if ($buyOther->cashbox_id != null) {
+                    $obj->credit = $buyOther->buy;
+                    $obj->depit = null;
                     $obj->cash_box_id = $buyOther->cashbox_id;
                 }
                 $obj->notes = $buyOther->notes;
