@@ -230,7 +230,7 @@
 
                         <tr>
                       
-                            <td>
+                        <td style="margin-left:30%;">
                                 <strong>sub total - {{$cur}}</strong>
                             </td>
                             @foreach($totals as $total)
@@ -245,7 +245,7 @@
 
                         <tr>
                     
-                            <td>
+                        <td style="margin-left:30%;">
                                 <strong>vat - {{$cur}}</strong>
                             </td>
                             @foreach($totals as $total)
@@ -259,7 +259,7 @@
                         </tr>
                         <tr>
                        
-                            <td>
+                            <td style="margin-left:30%;">
                                 <strong>total - {{$cur}}</strong>
                             </td>
                             @foreach($totals as $total)
