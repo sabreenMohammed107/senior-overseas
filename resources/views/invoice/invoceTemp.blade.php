@@ -15,7 +15,11 @@
         .body {
             box-sizing: border-box;
         }
-
+        .body-page{
+    padding: 35px 0 0;
+  
+    width: 100%;
+}
 
         .container {
             width: 90%;
