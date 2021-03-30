@@ -226,7 +226,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="hero">
+        <div class="hero" style="margin-top: 50px;">
             <div class="hero-data" style="width: 100%">
            
                 <table width="100%" style="font-size: 14px;" >
