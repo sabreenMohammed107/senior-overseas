@@ -287,6 +287,8 @@ class OperationsController extends Controller
                 $obj3->sell = null;
                 $obj3->currency_id = $truck->currency_id;
                 $obj3->invoice_statement_flag = 1;
+                //new 30-3-2021
+                $obj3->expenses_type_id = Expense::where('id','=',22)->first()->id;
                 array_push($savingExpense, $obj3);
                 //another row
                 $obj3Sell = new Collection();
@@ -298,6 +300,8 @@ class OperationsController extends Controller
                 $obj3Sell->sell = $truck->car_price;
                 $obj3Sell->currency_id = $truck->currency_id;
                 $obj3Sell->invoice_statement_flag = 1;
+                  //new 30-3-2021
+                  $obj3->expenses_type_id = Expense::where('id','=',22)->first()->id;
                 array_push($savingExpense, $obj3Sell);
             }
 
