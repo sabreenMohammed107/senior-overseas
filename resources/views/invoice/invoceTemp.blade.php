@@ -229,8 +229,8 @@
                         @foreach($curs as $cur)
 
                         <tr>
-                      
-                        <td style="margin-left:30%;">
+                      <td style="width: 50%;"></td>
+                            <td>
                                 <strong>sub total - {{$cur}}</strong>
                             </td>
                             @foreach($totals as $total)
@@ -244,8 +244,8 @@
                         </tr>
 
                         <tr>
-                    
-                        <td style="margin-left:30%;">
+                        <td style="width: 50%;"></td>
+                            <td>
                                 <strong>vat - {{$cur}}</strong>
                             </td>
                             @foreach($totals as $total)
@@ -258,8 +258,8 @@
                             @endforeach
                         </tr>
                         <tr>
-                       
-                            <td style="margin-left:30%;">
+                        <td style="width: 50%;"></td>
+                            <td>
                                 <strong>total - {{$cur}}</strong>
                             </td>
                             @foreach($totals as $total)
