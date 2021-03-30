@@ -34,7 +34,7 @@
         .hero {
             margin-top: 10px;
             width: 100%;
-            overflow: hidden;
+           
         }
 
         .headerr {
@@ -227,7 +227,7 @@
             </table>
         </div>
         <div class="hero">
-            <div class="hero-data" style="width: 50%;margin-left:50%">
+            <div class="hero-data" style="width: 50%;magin-left:50%">
            
                 <table width="100%" style="font-size: 14px;" >
                     <tbody >
