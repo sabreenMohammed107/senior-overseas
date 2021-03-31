@@ -8,7 +8,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-      
+      @page {
+	header: page-header;
+	footer: page-footer;
+}
+.footer{
+    padding: 5px 10px;
+  
+    width: 60%;margin:auto;text-align:center;margin-top:20px
+}
 
         html,
         body,
@@ -92,6 +100,10 @@
                 border-width: thin; 
                 padding: 20px 0;
 
+        }
+        #table td{
+            border-bottom:none;
+            padding:  8px 0;
         }
     </style>
 </head>
@@ -226,17 +238,17 @@
                 </tbody>
             </table>
         </div>
-        <div class="hero" style="margin-top: 50px;">
+        <div class="hero" style="margin-top: 10px;">
             <div class="hero-data" style="width: 100%">
            
-                <table width="100%" style="font-size: 14px;" >
+                <table width="100%" id="table" style="font-size: 14px;border:none"  cellspacing="0" cellpadding="0">
                     <tbody >
                         @foreach($curs as $cur)
 
                         <tr>
-                     <td style="width: 20%;"></td>
-                     <td style="width: 20%;"></td>
-                     <td style="width: 20%;"></td>
+                     <td style="width: 15%;"></td>
+                     <td style="width: 15%;"></td>
+                     <td style="width: 15%;"></td>
                             <td>
                                 <strong>sub total - {{$cur}}</strong>
                             </td>
@@ -294,6 +306,11 @@
 <div style="clear: both;"></div>
         </div>
 
+    </div>
+    <div class="footer" >
+    <p>Make all transfers and checks payable to <b>OVER SEAS EGYPT </b>
+QNB ACC # 00701-20317446147-53 <br>
+<b> Thank you for your business ! </b></p>
     </div>
 
 </body>
