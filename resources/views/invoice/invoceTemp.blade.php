@@ -249,12 +249,12 @@
                      <td style="width: 15%;"></td>
                      <td style="width: 15%;"></td>
                      <td style="width: 15%;"></td>
-                            <td>
+                            <td style="background-color: #ccc;">
                                 <strong>sub total - {{$cur}}</strong>
                             </td>
                             @foreach($totals as $total)
                             @if($total->cur===$cur)
-                            <td>
+                            <td style="background-color: #ccc;">
 
                                 {{" " . number_format($total->num, 2, '.', ',')  }} <br>
                             </td>
@@ -266,12 +266,12 @@
                         <td style="width: 20%;"></td>
                      <td style="width: 20%;"></td>
                      <td style="width: 20%;"></td>
-                            <td>
+                            <td style="background-color: #ccc;">
                                 <strong>vat - {{$cur}}</strong>
                             </td>
                             @foreach($totals as $total)
                             @if($total->cur===$cur)
-                            <td>
+                            <td style="background-color: #ccc;">
 
                                 {{" " . number_format($total->subtotalnum, 2, '.', ',')  }} <br>
                             </td>
@@ -282,12 +282,12 @@
                         <td style="width: 20%;"></td>
                      <td style="width: 20%;"></td>
                      <td style="width: 20%;"></td>
-                            <td>
+                            <td style="background-color: #ccc;border-bottom:1px solid #333 ">
                                 <strong>total - {{$cur}}</strong>
                             </td>
                             @foreach($totals as $total)
                             @if($total->cur===$cur)
-                            <td>
+                            <td style="background-color: #ccc;border-bottom:1px solid #333">
 
                                 {{" " . number_format(($total->num + $total->subtotalnum), 2, '.',',')  }} <br>
 
@@ -310,6 +310,7 @@
     <div class="footer" >
     <p>Make all transfers and checks payable to <b>OVER SEAS EGYPT </b>
 QNB ACC # 00701-20317446147-53 <br>
+QNB ACC # 00701-20319927487-07<br>
 <b> Thank you for your business ! </b></p>
     </div>
 
