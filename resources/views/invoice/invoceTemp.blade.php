@@ -32,7 +32,6 @@
             right: 0px;
             height: 300px;
           
-            text-align: center;
         }
 
         footer {
