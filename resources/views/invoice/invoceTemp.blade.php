@@ -11,7 +11,7 @@
       @page {
 	header: page-header;
 	footer: page-footer;
-    margin-bottom: 200px;
+    margin-bottom: 100px;
 }
 .footer{
     font-size: 12px;
@@ -19,6 +19,8 @@
   
     width: 60%;margin:auto;text-align:center;margin-top:20px
 }
+footer { position: fixed; bottom: -60px; left: 0px; right: 0px; background-color: lightblue; height: 100px; }
+
 
         html,
         body,
@@ -309,12 +311,14 @@
         </div>
 
     </div>
+    <footer>
     <div class="footer" >
     <p>Make all transfers and checks payable to <b>OVER SEAS EGYPT </b>
 QNB ACC # 00701-20317446147-53 <br>
 QNB ACC # 00701-20319927487-07<br>
 <b> Thank you for your business ! </b></p>
-    </div>
+    </div></footer>
+ 
 
 </body>
 
