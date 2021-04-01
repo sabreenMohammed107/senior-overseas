@@ -11,8 +11,10 @@
       @page {
 	header: page-header;
 	footer: page-footer;
+    margin-bottom: 120px;
 }
 .footer{
+    font-size: 12px;
     padding: 5px 10px;
   
     width: 60%;margin:auto;text-align:center;margin-top:20px
@@ -249,12 +251,12 @@
                      <td style="width: 15%;"></td>
                      <td style="width: 15%;"></td>
                      <td style="width: 15%;"></td>
-                            <td style="background-color: #ccc;">
+                            <td >
                                 <strong>sub total - {{$cur}}</strong>
                             </td>
                             @foreach($totals as $total)
                             @if($total->cur===$cur)
-                            <td style="background-color: #ccc;">
+                            <td >
 
                                 {{" " . number_format($total->num, 2, '.', ',')  }} <br>
                             </td>
@@ -266,12 +268,12 @@
                         <td style="width: 20%;"></td>
                      <td style="width: 20%;"></td>
                      <td style="width: 20%;"></td>
-                            <td style="background-color: #ccc;">
+                            <td >
                                 <strong>vat - {{$cur}}</strong>
                             </td>
                             @foreach($totals as $total)
                             @if($total->cur===$cur)
-                            <td style="background-color: #ccc;">
+                            <td >
 
                                 {{" " . number_format($total->subtotalnum, 2, '.', ',')  }} <br>
                             </td>
@@ -282,12 +284,12 @@
                         <td style="width: 20%;"></td>
                      <td style="width: 20%;"></td>
                      <td style="width: 20%;"></td>
-                            <td style="background-color: #ccc;border-bottom:1px solid #333 ">
+                            <td style="background-color: #eee;border-bottom:1px solid #333 ">
                                 <strong>total - {{$cur}}</strong>
                             </td>
                             @foreach($totals as $total)
                             @if($total->cur===$cur)
-                            <td style="background-color: #ccc;border-bottom:1px solid #333">
+                            <td style="background-color: #eee;border-bottom:1px solid #333">
 
                                 {{" " . number_format(($total->num + $total->subtotalnum), 2, '.',',')  }} <br>
 
