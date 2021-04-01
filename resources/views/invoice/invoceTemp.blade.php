@@ -253,7 +253,7 @@ QNB ACC # 00701-20319927487-07<br>
         <div class="hero" style="margin-top: 10px;">
             <div class="hero-data" style="width: 100%">
            
-                <table width="100%" id="table" style="font-size: 14px;border:none"  cellspacing="0" cellpadding="0">
+                <table width="100%" id="table" style="font-size: 14px;border:none"  cellspacing="0" cellpadding="0" page-break-inside: auto;>
                 <thead >
                     <tr>
                         <th colspan="3"></th>
