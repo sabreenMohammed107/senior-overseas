@@ -12,7 +12,7 @@
             header: page-header;
             footer: page-footer;
             margin-bottom: 100px;
-            margin-top: 320px;
+            
         }
 
         .footer {
@@ -24,7 +24,7 @@
             text-align: center;
             margin-top: 20px
         }
-
+        footer .page:after { content: counter(page, upper-roman); }
         header {
             position: fixed;
             left: 0px;
