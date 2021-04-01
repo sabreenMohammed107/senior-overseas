@@ -47,9 +47,9 @@ class OceanFreightController extends Controller
         $pods = Port::all();
         $currencies = Currency::all();
         $containers = Container::all();
-        $agents=Agent::all();
+        $agents = Agent::all();
 
-        return view($this->viewName . 'index', compact('rows', 'carriers', 'pols', 'pods', 'currencies', 'containers','agents'));
+        return view($this->viewName . 'index', compact('rows', 'carriers', 'pols', 'pods', 'currencies', 'containers', 'agents'));
     }
 
     /**
@@ -70,25 +70,38 @@ class OceanFreightController extends Controller
      */
     public function store(Request $request)
     {
-         //get max code
-         $max = 0;
+        //get max code
+        $max = 0;
 
-         $maxValue = Ocean_freight_rate::orderBy('id', 'desc')->value('code');
-         if ($maxValue != null) {
-             $max = $maxValue + 1;
-         } else {
-             $max = 100;
-         }
+        $maxValue = Ocean_freight_rate::orderBy('id', 'desc')->value('code');
+        if ($maxValue != null) {
+            $max = $maxValue + 1;
+        } else {
+            $max = 100;
+        }
         $data = [
-            'code'=>$max,
+            'code' => $max,
             'ocean_freight' => $request->input('ocean_freight'),
             'price' => $request->input('price'),
             'transit_time' => $request->input('transit_time'),
             'notes' => $request->input('notes'),
-            'validity_date'=>Carbon::parse($request->input('validity_date')),
-           
+            'validity_date' => Carbon::parse($request->input('validity_date')),
+
 
         ];
+
+        if ($request->input('gender') == "import") {
+
+            $data['imp_type'] = 1;
+        } else {
+            $data['imp_type'] = 0;
+        }
+        if ($request->input('agent_id')) {
+
+            $data['agent_id'] = $request->input('agent_id');
+        }else{
+            $data['agent_id'] =null;
+        }
         if ($request->input('carrier_id')) {
 
             $data['carrier_id'] = $request->input('carrier_id');
@@ -109,8 +122,8 @@ class OceanFreightController extends Controller
 
             $data['currency_id'] = $request->input('currency_id');
         }
-    
-       
+
+
         $this->object::create($data);
 
 
@@ -143,8 +156,8 @@ class OceanFreightController extends Controller
         $pods = Port::all();
         $currencies = Currency::all();
         $containers = Container::all();
-
-        return view($this->viewName . 'edit', compact('row', 'carriers', 'pols', 'pods', 'currencies', 'containers'));
+        $agents = Agent::all();
+        return view($this->viewName . 'edit', compact('row', 'carriers', 'pols', 'pods','agents', 'currencies', 'containers'));
     }
 
     /**
@@ -161,10 +174,22 @@ class OceanFreightController extends Controller
             'price' => $request->input('price'),
             'transit_time' => $request->input('transit_time'),
             'notes' => $request->input('notes'),
-            'validity_date'=>Carbon::parse($request->input('validity_date')),
-           
+            'validity_date' => Carbon::parse($request->input('validity_date')),
+
 
         ];
+        if ($request->input('gender') == "import") {
+
+            $data['imp_type'] = 1;
+        } else {
+            $data['imp_type'] = 0;
+        }
+        if ($request->input('agent_id')) {
+
+            $data['agent_id'] = $request->input('agent_id');
+        }else{
+            $data['agent_id'] = null;
+        }
         if ($request->input('carrier_id')) {
 
             $data['carrier_id'] = $request->input('carrier_id');
@@ -185,7 +210,7 @@ class OceanFreightController extends Controller
 
             $data['currency_id'] = $request->input('currency_id');
         }
-    
+
         $this->object::findOrFail($id)->update($data);
 
         return redirect()->route($this->routeName . 'index')->with('flash_success', $this->message);
@@ -200,11 +225,10 @@ class OceanFreightController extends Controller
     public function destroy($id)
     {
         $row = Ocean_freight_rate::where('id', '=', $id)->first();
-       
+
 
         try {
             $row->delete();
-          
         } catch (QueryException $q) {
 
             return redirect()->back()->with('flash_danger', 'You cannot delete related with another...');
@@ -212,5 +236,4 @@ class OceanFreightController extends Controller
 
         return redirect()->route($this->routeName . 'index')->with('flash_success', 'Data Has Been Deleted Successfully !');
     }
-    
 }

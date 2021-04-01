@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Air_rate;
 use App\Models\Carrier;
 use App\Models\Port;
-
+use App\Models\Agent;
 use App\Models\Currency;
 use File;
 use DB;
@@ -45,9 +45,9 @@ class AirRateController extends Controller
         $aols = Port::all();
         $aods = Port::all();
         $currencies = Currency::all();
+        $agents = Agent::all();
 
-
-        return view($this->viewName . 'index', compact('rows', 'carriers', 'aols', 'aods', 'currencies',));
+        return view($this->viewName . 'index', compact('rows', 'carriers', 'aols','agents', 'aods', 'currencies',));
     }
 
     /**
@@ -86,6 +86,18 @@ class AirRateController extends Controller
 
 
         ];
+        if ($request->input('gender') == "import") {
+
+            $data['imp_type'] = 1;
+        } else {
+            $data['imp_type'] = 0;
+        }
+        if ($request->input('agent_id')) {
+
+            $data['agent_id'] = $request->input('agent_id');
+        }else{
+            $data['agent_id'] =null;
+        }
         if ($request->input('air_carrier_id')) {
 
             $data['air_carrier_id'] = $request->input('air_carrier_id');
@@ -137,9 +149,9 @@ class AirRateController extends Controller
         $aols = Port::all();
         $aods = Port::all();
         $currencies = Currency::all();
+        $agents = Agent::all();
 
-
-        return view($this->viewName . 'edit', compact('row', 'carriers', 'aols', 'aods', 'currencies',));
+        return view($this->viewName . 'edit', compact('row', 'carriers', 'aols', 'agents','aods', 'currencies',));
     }
 
     /**
@@ -159,6 +171,18 @@ class AirRateController extends Controller
 
 
         ];
+        if ($request->input('gender') == "import") {
+
+            $data['imp_type'] = 1;
+        } else {
+            $data['imp_type'] = 0;
+        }
+        if ($request->input('agent_id')) {
+
+            $data['agent_id'] = $request->input('agent_id');
+        }else{
+            $data['agent_id'] = null;
+        }
         if ($request->input('air_carrier_id')) {
 
             $data['air_carrier_id'] = $request->input('air_carrier_id');

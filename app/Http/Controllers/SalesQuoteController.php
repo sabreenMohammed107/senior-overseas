@@ -126,6 +126,11 @@ class SalesQuoteController extends Controller
 
                 $filtters->where('slide_range', '=', $request->get("slide_range"));
             }
+            if ($request->get("gender2") == "import") {
+
+                $filtters->where('imp_type', '=', 1);
+            }
+            
         } else {
             $typeTesting = 1;
             $filtters = Ocean_freight_rate::orderBy("created_at", "Desc");
@@ -145,6 +150,10 @@ class SalesQuoteController extends Controller
             if (!empty($request->get("pod_id"))) {
 
                 $filtters->where('pod_id', '=', $request->get("pod_id"));
+            }
+            if ($request->get("gender") == "import") {
+
+                $filtters->where('imp_type', '=', 1);
             }
         }
         $filtters = $filtters->get();

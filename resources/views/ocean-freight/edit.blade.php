@@ -133,6 +133,31 @@
                                         <input type="date" name="validity_date" value="{{ date_format($date,'Y-m-d') }}" class="form-control" placeholder="Validitiy Date">
                                     </div>
                                 </div>
+                                  <!-- new Data -->
+                                  <div class="col-md-8 mb-3">
+                                    <div class="ui-widget form-group">
+                                        <input type="radio" disabled id="import" name="gender" value="import" @if($row->imp_type == 1)checked @endif>
+                                        <label for="import">import</label>
+                                        <input type="radio" disabled id="export" name="gender" value="export" @if($row->imp_type != 1)checked @endif>
+                                        <label for="export">export</label>
+                                    </div>
+                                </div>
+                                <div id="agent_id" class="col-md-6 mb-3">
+                                    <div class="ui-widget form-group">
+                                        <label>Agent</label>
+                                        <select name="agent_id"  class="form-control" data-live-search="true">
+                                            <option value="">@if($row->agent)
+                                                {{$row->agent->agent_name}}
+                                                @endif</option>
+                                            @foreach ($agents as $type)
+                                            <option value='{{$type->id}}'>
+                                                {{ $type->agent_name}}
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- End New Data -->
                                 <div class="col-md-6 mb-3">
                                     <div class="form-group">
                                         <label class="exampleInputPassword1" for="exampleCheck1">Notes</label>
@@ -157,4 +182,23 @@
 
 
 </div>
+@endsection
+@section('scripts')
+
+<script>
+    $(document).ready(function() {
+        $(document).ready(function() {
+            $("input[name$='gender']").click(function() {
+                var test = $(this).val();
+                if (test == 'export') {
+                    $("#agent_id").hide();
+                } else {
+                    $("#agent_id").show();
+                }
+
+
+            });
+        });
+    });
+</script>
 @endsection

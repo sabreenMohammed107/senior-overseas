@@ -9,8 +9,15 @@ class Ocean_freight_rate extends Model
     protected $fillable = [
         'code', 'ocean_freight', 'price', 'carrier_id','pol_id', 'pod_id','container_id','currency_id','transit_time','validity_date','notes'
       
+        ,'agent_id','imp_type'
+      
      
     ];
+    public function agent()
+    {
+        return $this->belongsTo('App\Models\Agent','agent_id');
+
+    }
     public function carrier()
     {
         return $this->belongsTo('App\Models\Carrier','carrier_id');

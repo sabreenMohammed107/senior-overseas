@@ -8,10 +8,15 @@ class Air_rate extends Model
 {
     protected $fillable = [
         'code','air_carrier_id', 'currency_id','aol_id', 'aod_id','slide_range','price'
-        ,'validity_date','notes'
+        ,'validity_date','notes','agent_id','imp_type'
       
      
     ];
+    public function agent()
+    {
+        return $this->belongsTo('App\Models\Agent','agent_id');
+
+    }
     public function carrier()
     {
         return $this->belongsTo('App\Models\Carrier','air_carrier_id');

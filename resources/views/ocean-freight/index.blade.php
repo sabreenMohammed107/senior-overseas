@@ -218,7 +218,7 @@
                                             <option value="">Select ...</option>
                                             @foreach ($agents as $type)
                                             <option value='{{$type->id}}'>
-                                                {{ $type->name}}
+                                                {{ $type->agent_name}}
                                             </option>
                                             @endforeach
                                         </select>
