@@ -3,42 +3,63 @@
 
 <head>
     <meta charset="UTF-8">
-  
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-      @page {
-	header: page-header;
-	footer: page-footer;
-    margin-bottom: 100px;
-}
+        @page {
+            header: page-header;
+            footer: page-footer;
+            margin-bottom: 100px;
+        }
 
-.footer{
-    font-size: 12px;
-    padding: 5px 10px;
-  
-    width: 70%;margin:auto;text-align:center;margin-top:20px
-}
-footer { position: fixed; bottom: -80px; left: 0px; right: 0px;  height: 100px; }
+        .footer {
+            font-size: 12px;
+            padding: 5px 10px;
+
+            width: 70%;
+            margin: auto;
+            text-align: center;
+            margin-top: 20px
+        }
+
+        header {
+            position: fixed;
+            left: 0px;
+            top: 0px;
+            right: 0px;
+            height: 300px;
+          
+            text-align: center;
+        }
+
+        footer {
+            position: fixed;
+            bottom: -80px;
+            left: 0px;
+            right: 0px;
+            height: 100px;
+        }
 
 
         html,
         body,
         .body {
             box-sizing: border-box;
-         
+
         }
-        .body-page{
-    padding: 35px 0 0;
-  
-    width: 100%;
-}
+
+        .body-page {
+            padding: 35px 0 0;
+
+            width: 100%;
+        }
 
         .container {
             width: 90%;
             margin: auto;
-           
+
         }
 
         span {
@@ -49,12 +70,12 @@ footer { position: fixed; bottom: -80px; left: 0px; right: 0px;  height: 100px; 
         .hero {
             margin-top: 10px;
             width: 100%;
-           
+
         }
 
         .headerr {
             margin-top: 0;
-          
+
         }
 
         .headerr .logo,
@@ -100,253 +121,265 @@ footer { position: fixed; bottom: -80px; left: 0px; right: 0px;  height: 100px; 
         table {
             border-collapse: collapse;
         }
-        td{
+
+        td {
             text-align: center;
             color: #333;
-            border-bottom:1px solid #ccc;
-                border-width: thin; 
-                padding: 20px 0;
+            border-bottom: 1px solid #ccc;
+            border-width: thin;
+            padding: 20px 0;
 
         }
-        #table td{
-            border-bottom:none;
+
+        #table td {
+            border-bottom: none;
             padding: 0 !important;
-margin: 0;        }
-td p{
-    padding: 5px !important;
-margin: 0;
-}
+            margin: 0;
+        }
+
+        td p {
+            padding: 5px !important;
+            margin: 0;
+        }
     </style>
 </head>
 
 <body>
-<footer>
-    <div class="footer" >
-    <p>Make all transfers and checks payable to <b>OVER SEAS EGYPT </b></p>
-QNB EGP ACC # 00701-20317446147-53 | QNB USD ACC # 00701-20319927487-07<br>
-<b> Thank you for your business ! </b></p>
-    </div></footer>
-    <div class="container">
 
-        <div class="headerr">
+    <header>
+        <div class="container">
 
-            <div class="logo">
-                <img src="{{ public_path('adminasset/img/logo.png') }}"  alt="">
+            <div class="headerr">
+
+                <div class="logo">
+                    <img src="{{ public_path('adminasset/img/logo.png') }}" alt="">
+                </div>
+                <div class="logo-name">
+                    <h1>INVOICE</h1>
+                </div>
+                <div style="clear: both;"></div>
             </div>
-            <div class="logo-name">
-                <h1>INVOICE</h1>
-            </div>
-            <div style="clear: both;"></div>
-        </div>
-        <hr>
+            <hr>
 
-        <div class="headerr">
-            <div class="logo2">
+            <div class="headerr">
+                <div class="logo2">
 
-            </div>
-            <div class="logo-date">
-                <?php $dateinvoice = date_create($invoice->invoice_date)
-                ?>
+                </div>
+                <div class="logo-date">
+                    <?php $dateinvoice = date_create($invoice->invoice_date)
+                    ?>
 
-                <p>Date : <span>
-                        {{ date_format($dateinvoice,'Y-m-d') ?? '' }}
-                    </span></p>
+                    <p>Date : <span>
+                            {{ date_format($dateinvoice,'Y-m-d') ?? '' }}
+                        </span></p>
                     <p>Invoice # : <span>
-                        {{ $invoice->invoice_no }}
-                    </span></p>
+                            {{ $invoice->invoice_no }}
+                        </span></p>
+                </div>
+                <div style="clear: both;"></div>
             </div>
-            <div style="clear: both;"></div>
+
+            <hr>
+            <!-- next section -->
+            <div class="hero">
+                <div class="logo2">
+                    <!-- <div class="hero-data"> -->
+                    <p>to:<span>{{$invoice->operation->sale->client->client_name ?? '' }}
+                            <br> {{$invoice->operation->sale->client->address ?? '' }}</span></p>
+                    <!-- </div> -->
+                </div>
+                <div class="logo-date">
+                    <p>
+                        @if($invoice->operation->ocean)
+                        Pol:
+                        @elseif($invoice->operation->air)
+                        Aol:
+                        @else
+
+                        @endif
+                        <span>{{$invoice->operation->ocean->ocean->pol->port_name ?? '' }}{{$invoice->operation->air->air->aol->port_name ?? '' }}</span>
+                    </p>
+                    <p> @if($invoice->operation->ocean)
+                        Pod:
+                        @elseif($invoice->operation->air)
+                        Aod:
+                        @else
+
+                        @endif
+                        <span>{{$invoice->operation->ocean->ocean->pod->port_name ?? '' }}{{$invoice->operation->air->air->aod->port_name ?? '' }}</span>
+                    </p>
+                </div>
+                <div style="clear: both;"></div>
+            </div>
         </div>
-
-<hr>
-        <!-- next section -->
-        <div class="hero">
-            <div class="logo2">
-                <!-- <div class="hero-data"> -->
-                <p>to:<span>{{$invoice->operation->sale->client->client_name ?? '' }}
-                        <br> {{$invoice->operation->sale->client->address ?? '' }}</span></p>
-                <!-- </div> -->
+        
+    </header>
+    <footer>
+        <div class="container">
+        <div class="footer">
+            <p>Make all transfers and checks payable to <b>OVER SEAS EGYPT </b></p>
+            QNB EGP ACC # 00701-20317446147-53 | QNB USD ACC # 00701-20319927487-07<br>
+            <b> Thank you for your business ! </b></p>
             </div>
-            <div class="logo-date">
-                <p>
-                    @if($invoice->operation->ocean)
-                    Pol:
-                    @elseif($invoice->operation->air)
-                    Aol:
-                    @else
-
-                    @endif
-                    <span>{{$invoice->operation->ocean->ocean->pol->port_name ?? '' }}{{$invoice->operation->air->air->aol->port_name ?? '' }}</span>
-                </p>
-                <p> @if($invoice->operation->ocean)
-                    Pod:
-                    @elseif($invoice->operation->air)
-                    Aod:
-                    @else
-
-                    @endif
-                    <span>{{$invoice->operation->ocean->ocean->pod->port_name ?? '' }}{{$invoice->operation->air->air->aod->port_name ?? '' }}</span>
-                </p>
-            </div>
-            <div style="clear: both;"></div>
         </div>
-
-        <!-- table -->
-        <div class="hero">
-            <table width="100%">
-                <thead style="border-bottom: 1px solid #ccc; background:#333;color:#fff">
+    </footer>
+    <div class="container">
+    <!-- table -->
+    <div class="hero" style="margin-top:330px;">
+        <table width="100%">
+            <thead style="border-bottom: 1px solid #ccc; background:#333;color:#fff">
                 <tr>
                     <th>Ref#</th>
                     <th>B/L#</th>
                     <th>Volume</th>
                     <th>Loding Date</th>
                 </tr>
-                </thead>
-                <tbody >
-                    <td>{{$invoice->operation->operation_code}}</td>
-                    <td>{{$invoice->operation->pl_no}}</td>
-                    <td>{{$invoice->operation->container_counts }} @if($invoice->operation->ocean) <span>X</span> @endif {{$invoice->operation->ocean->ocean->container->container_size ?? ''}} {{ $invoice->operation->ocean->ocean->container->container_type ?? ''}}</td>
-                    <td> <?php $dateinvoice = date_create($invoice->operation->loading_date)
-                            ?>
-                        {{ date_format($dateinvoice,'Y-m-d') ?? '' }}
-                    </td>
+            </thead>
+            <tbody>
+                <td>{{$invoice->operation->operation_code}}</td>
+                <td>{{$invoice->operation->pl_no}}</td>
+                <td>{{$invoice->operation->container_counts }} @if($invoice->operation->ocean) <span>X</span> @endif {{$invoice->operation->ocean->ocean->container->container_size ?? ''}} {{ $invoice->operation->ocean->ocean->container->container_type ?? ''}}</td>
+                <td> <?php $dateinvoice = date_create($invoice->operation->loading_date)
+                        ?>
+                    {{ date_format($dateinvoice,'Y-m-d') ?? '' }}
+                </td>
 
-                    
-                </tbody>
 
-            </table>
-        </div>
-        <div class="hero" style="margin-top:20px">
-            <table width="100%"  >
-                <thead style=" border-bottom:1px solid #ccc;
+            </tbody>
+
+        </table>
+    </div>
+    <div class="hero" style="margin-top:20px">
+        <table width="100%">
+            <thead style=" border-bottom:1px solid #ccc;
                 border-width: thin;background:#333 ;color:#fff ">
-                    <tr>
-                        <th>Item</th>
-                        <th>Description</th>
-                        <th>Qty</th>
-                        <th>Rate</th>
-                        <th>Cur </th>
-                        <th>Amount</th>
-                    </tr>
-                </thead>
-                <tbody style="">
+                <tr>
+                    <th>Item</th>
+                    <th>Description</th>
+                    <th>Qty</th>
+                    <th>Rate</th>
+                    <th>Cur </th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody style="">
 
-                    @foreach($rows as $index => $row)
-                    <tr>
-                        <td>{{$index+1}}</td>
-                        <td>{{$row->type->expense_name ?? ''}}</td>
-                        <td>{{ $row->operation->container_counts}} @if($row->operation->ocean) <span>X</span> @endif {{$row->operation->ocean->ocean->container->container_size ?? ''}} {{ $row->operation->ocean->ocean->container->container_type ?? ''}}</td>
-                        <td>{{$row->sell}}</td>
-                        <td></i>{{$row->currency->currency_name}}</td>
-                        <td></i>
-                            @if($row->automatic==1)
-                            {{$row->sell *$row->operation->container_counts}}
-                            @else
-                            {{$row->sell *1}}
-                            @endif
-                        </td>
-                    </tr>
-                  
-                    @endforeach
-                 
+                @foreach($rows as $index => $row)
+                <tr>
+                    <td>{{$index+1}}</td>
+                    <td>{{$row->type->expense_name ?? ''}}</td>
+                    <td>{{ $row->operation->container_counts}} @if($row->operation->ocean) <span>X</span> @endif {{$row->operation->ocean->ocean->container->container_size ?? ''}} {{ $row->operation->ocean->ocean->container->container_type ?? ''}}</td>
+                    <td>{{$row->sell}}</td>
+                    <td></i>{{$row->currency->currency_name}}</td>
+                    <td></i>
+                        @if($row->automatic==1)
+                        {{$row->sell *$row->operation->container_counts}}
+                        @else
+                        {{$row->sell *1}}
+                        @endif
+                    </td>
+                </tr>
+
+                @endforeach
 
 
-                </tbody>
-            </table>
-        </div>
-        <div class="hero" style="margin-top: 10px;">
-            <div class="hero-data" style="width: 100%">
-           
-                <table width="100%" id="table" style="font-size: 14px;border:none"  cellspacing="0" cellpadding="0" page-break-inside: auto;>
-                <thead >
+
+            </tbody>
+        </table>
+    </div>
+    <div class="hero" style="margin-top: 10px;">
+        <div class="hero-data" style="width: 100%">
+
+            <table width="100%" id="table" style="font-size: 14px;border:none" cellspacing="0" cellpadding="0" page-break-inside: auto;>
+                <thead>
                     <tr>
                         <th colspan="3"></th>
                         <th style=" border-bottom:1px solid #ccc;
                 border-width: thin;background:#eee ;color:#333 ;padding:8px 0px" colspan="2">Summary</th>
-                        
+
                     </tr>
-                <tbody >
-                        @foreach($curs as $cur)
+                <tbody>
+                    @foreach($curs as $cur)
 
-                        <tr>
-                     <td style="width: 15%;"></td>
-                     <td style="width: 15%;"></td>
-                     <td style="width: 15%;"></td>
-                            <td style="text-align: left;">
-                                <p>Sub total</p>
-                            </td>
-                            @foreach($totals as $total)
-                            @if($total->cur===$cur)
-                            <td style="text-align: right;">
+                    <tr>
+                        <td style="width: 15%;"></td>
+                        <td style="width: 15%;"></td>
+                        <td style="width: 15%;"></td>
+                        <td style="text-align: left;">
+                            <p>Sub total</p>
+                        </td>
+                        @foreach($totals as $total)
+                        @if($total->cur===$cur)
+                        <td style="text-align: right;">
 
-                                {{" " . number_format($total->num, 2, '.', ',')  }} <br>
-                            </td>
-                            @endif
-                            @endforeach
-                        </tr>
-
-                        <tr>
-                        <td style="width: 20%;"></td>
-                     <td style="width: 20%;"></td>
-                     <td style="width: 20%;"></td>
-                            <td >
-                                <p style="text-align: left;padding:0">Vat</p>
-                            </td>
-                            @foreach($totals as $total)
-                            @if($total->cur===$cur)
-                            <td style="text-align: right;padding:0">
-
-                                {{" " . number_format($total->subtotalnum, 2, '.', ',')  }} <br>
-                            </td>
-                            @endif
-                            @endforeach
-                        </tr>
-                        <tr style="padding: 0;">
-                        <td style="width: 20%;"></td>
-                     <td style="width: 20%;"></td>
-                     <td style="width: 20%;"></td>
-                            <td style="background-color: #eee; padding:0">
-                                <p style="text-align: left;font-weight:bold">Total - {{$cur}}</p>
-                            </td>
-                            @foreach($totals as $total)
-                            @if($total->cur===$cur)
-                            <td style="background-color: #eee;text-align:right">
-
-                                {{" " . number_format(($total->num + $total->subtotalnum), 2, '.',',')  }} <br>
-
-                            </td>
-                            @endif
-                            @endforeach
-                        </tr>
-
-                        <tr>
-                        <td style="width: 20%;"></td>
-                     <td style="width: 20%;"></td>
-                     <td style="width: 20%;"></td>
-                           
-                            @foreach($totals as $total)
-                            @if($total->cur===$cur)
-                            <td colspan="2" style="background-color: #eee;border-bottom:1px solid #333;text-align:center;font-weight:bold">
-
-
-                                {{ \Terbilang::make($total->num + $total->subtotalnum, " - $cur")}}
-                            </td>
-                            @endif
-                            @endforeach
-                        </tr>
-
-
+                            {{" " . number_format($total->num, 2, '.', ',')  }} <br>
+                        </td>
+                        @endif
                         @endforeach
+                    </tr>
 
-                    </tbody>
-                </table>
-            </div>
-<div style="clear: both;"></div>
+                    <tr>
+                        <td style="width: 20%;"></td>
+                        <td style="width: 20%;"></td>
+                        <td style="width: 20%;"></td>
+                        <td>
+                            <p style="text-align: left;padding:0">Vat</p>
+                        </td>
+                        @foreach($totals as $total)
+                        @if($total->cur===$cur)
+                        <td style="text-align: right;padding:0">
+
+                            {{" " . number_format($total->subtotalnum, 2, '.', ',')  }} <br>
+                        </td>
+                        @endif
+                        @endforeach
+                    </tr>
+                    <tr style="padding: 0;">
+                        <td style="width: 20%;"></td>
+                        <td style="width: 20%;"></td>
+                        <td style="width: 20%;"></td>
+                        <td style="background-color: #eee; padding:0">
+                            <p style="text-align: left;font-weight:bold">Total - {{$cur}}</p>
+                        </td>
+                        @foreach($totals as $total)
+                        @if($total->cur===$cur)
+                        <td style="background-color: #eee;text-align:right">
+
+                            {{" " . number_format(($total->num + $total->subtotalnum), 2, '.',',')  }} <br>
+
+                        </td>
+                        @endif
+                        @endforeach
+                    </tr>
+
+                    <tr>
+                        <td style="width: 20%;"></td>
+                        <td style="width: 20%;"></td>
+                        <td style="width: 20%;"></td>
+
+                        @foreach($totals as $total)
+                        @if($total->cur===$cur)
+                        <td colspan="2" style="background-color: #eee;border-bottom:1px solid #333;text-align:center;font-weight:bold">
+
+
+                            {{ \Terbilang::make($total->num + $total->subtotalnum, " - $cur")}}
+                        </td>
+                        @endif
+                        @endforeach
+                    </tr>
+
+
+                    @endforeach
+
+                </tbody>
+            </table>
         </div>
+        <div style="clear: both;"></div>
+    </div>
 
     </div>
- 
- 
+
+
 
 </body>
 
