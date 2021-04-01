@@ -27,6 +27,7 @@ footer { position: fixed; bottom: -80px; left: 0px; right: 0px;  height: 100px; 
         body,
         .body {
             box-sizing: border-box;
+         
         }
         .body-page{
     padding: 35px 0 0;
@@ -112,7 +113,7 @@ footer { position: fixed; bottom: -80px; left: 0px; right: 0px;  height: 100px; 
             padding: 0 !important;
 margin: 0;        }
 td p{
-    padding: 0 !important;
+    padding: 5px !important;
 margin: 0;
 }
     </style>
@@ -305,7 +306,7 @@ QNB EGP ACC # 00701-20317446147-53 | QNB USD ACC # 00701-20319927487-07<br>
                      <td style="width: 20%;"></td>
                      <td style="width: 20%;"></td>
                             <td style="background-color: #eee; padding:0">
-                                <p style="text-align: left;">Total - {{$cur}}</p>
+                                <p style="text-align: left;font-weight:bold">Total - {{$cur}}</p>
                             </td>
                             @foreach($totals as $total)
                             @if($total->cur===$cur)
@@ -325,7 +326,7 @@ QNB EGP ACC # 00701-20317446147-53 | QNB USD ACC # 00701-20319927487-07<br>
                            
                             @foreach($totals as $total)
                             @if($total->cur===$cur)
-                            <td colspan="2" style="background-color: #eee;border-bottom:1px solid #333;text-align:left">
+                            <td colspan="2" style="background-color: #eee;border-bottom:1px solid #333;text-align:center;font-weight:bold">
 
 
                                 {{ \Terbilang::make($total->num + $total->subtotalnum, " - $cur")}}
