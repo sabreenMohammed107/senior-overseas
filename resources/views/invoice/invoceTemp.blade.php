@@ -11,7 +11,7 @@
       @page {
 	header: page-header;
 	footer: page-footer;
-    margin-bottom: 120px;
+    margin-bottom: 200px;
 }
 .footer{
     font-size: 12px;
