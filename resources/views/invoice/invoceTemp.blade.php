@@ -109,8 +109,12 @@ footer { position: fixed; bottom: -80px; left: 0px; right: 0px;  height: 100px; 
         }
         #table td{
             border-bottom:none;
-            padding:   0;
-        }
+            padding: 0 !important;
+margin: 0;        }
+td p{
+    padding: 0 !important;
+margin: 0;
+}
     </style>
 </head>
 
@@ -296,18 +300,33 @@ QNB EGP ACC # 00701-20317446147-53 | QNB USD ACC # 00701-20319927487-07<br>
                             @endif
                             @endforeach
                         </tr>
+                        <tr style="padding: 0;">
+                        <td style="width: 20%;"></td>
+                     <td style="width: 20%;"></td>
+                     <td style="width: 20%;"></td>
+                            <td style="background-color: #eee; padding:0">
+                                <p style="text-align: left;">Total - {{$cur}}</p>
+                            </td>
+                            @foreach($totals as $total)
+                            @if($total->cur===$cur)
+                            <td style="background-color: #eee;text-align:right">
+
+                                {{" " . number_format(($total->num + $total->subtotalnum), 2, '.',',')  }} <br>
+
+                            </td>
+                            @endif
+                            @endforeach
+                        </tr>
+
                         <tr>
                         <td style="width: 20%;"></td>
                      <td style="width: 20%;"></td>
                      <td style="width: 20%;"></td>
-                            <td style="background-color: #eee;border-bottom:1px solid #333 ">
-                                <p style="text-align: left;">total - {{$cur}}</p>
-                            </td>
+                           
                             @foreach($totals as $total)
                             @if($total->cur===$cur)
-                            <td style="background-color: #eee;border-bottom:1px solid #333;text-align:right">
+                            <td colspan="2" style="background-color: #eee;border-bottom:1px solid #333;text-align:left">
 
-                                {{" " . number_format(($total->num + $total->subtotalnum), 2, '.',',')  }} <br>
 
                                 {{ \Terbilang::make($total->num + $total->subtotalnum, " - $cur")}}
                             </td>
