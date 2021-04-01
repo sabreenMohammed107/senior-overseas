@@ -12,6 +12,7 @@
             header: page-header;
             footer: page-footer;
             margin-bottom: 100px;
+            margin-top: 320px;
         }
 
         .footer {
