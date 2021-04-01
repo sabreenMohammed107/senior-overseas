@@ -39,6 +39,7 @@ footer { position: fixed; bottom: -60px; left: 0px; right: 0px; background-color
         .container {
             width: 90%;
             margin: auto;
+           
         }
 
         span {
@@ -208,7 +209,7 @@ footer { position: fixed; bottom: -60px; left: 0px; right: 0px; background-color
             </table>
         </div>
         <div class="hero" style="margin-top:20px">
-            <table width="100%">
+            <table width="100%" page-break-inside: auto; >
                 <thead style=" border-bottom:1px solid #ccc;
                 border-width: thin;background:#333 ;color:#fff ">
                     <tr>
@@ -237,9 +238,7 @@ footer { position: fixed; bottom: -60px; left: 0px; right: 0px; background-color
                             @endif
                         </td>
                     </tr>
-                    @if( $index % 5 == 0 ) 
-     @php echo '<div class="page-break"></div>'; @endphp .... 
- @endif
+   
                     @endforeach
 
 
