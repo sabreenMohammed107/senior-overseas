@@ -13,6 +13,9 @@
 	footer: page-footer;
     margin-bottom: 100px;
 }
+.page-break {
+ page-break-after: always;
+}
 .footer{
     font-size: 12px;
     padding: 5px 10px;
@@ -234,7 +237,9 @@ footer { position: fixed; bottom: -60px; left: 0px; right: 0px; background-color
                             @endif
                         </td>
                     </tr>
-
+                    @if( $index % 5 == 0 ) 
+     @php echo '<div class="page-break"></div>'; @endphp .... 
+ @endif
                     @endforeach
 
 
