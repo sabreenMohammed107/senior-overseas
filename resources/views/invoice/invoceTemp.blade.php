@@ -117,7 +117,13 @@ footer { position: fixed; bottom: -60px; left: 0px; right: 0px; background-color
 </head>
 
 <body>
-
+<footer>
+    <div class="footer" >
+    <p>Make all transfers and checks payable to <b>OVER SEAS EGYPT </b>
+QNB ACC # 00701-20317446147-53 <br>
+QNB ACC # 00701-20319927487-07<br>
+<b> Thank you for your business ! </b></p>
+    </div></footer>
     <div class="container">
 
         <div class="headerr">
@@ -209,7 +215,7 @@ footer { position: fixed; bottom: -60px; left: 0px; right: 0px; background-color
             </table>
         </div>
         <div class="hero" style="margin-top:20px">
-            <table width="100%" page-break-inside: auto; >
+            <table width="100%"  >
                 <thead style=" border-bottom:1px solid #ccc;
                 border-width: thin;background:#333 ;color:#fff ">
                     <tr>
@@ -238,9 +244,9 @@ footer { position: fixed; bottom: -60px; left: 0px; right: 0px; background-color
                             @endif
                         </td>
                     </tr>
-   
+                  
                     @endforeach
-
+                 
 
 
                 </tbody>
@@ -315,13 +321,7 @@ footer { position: fixed; bottom: -60px; left: 0px; right: 0px; background-color
         </div>
 
     </div>
-    <footer>
-    <div class="footer" >
-    <p>Make all transfers and checks payable to <b>OVER SEAS EGYPT </b>
-QNB ACC # 00701-20317446147-53 <br>
-QNB ACC # 00701-20319927487-07<br>
-<b> Thank you for your business ! </b></p>
-    </div></footer>
+ 
  
 
 </body>
