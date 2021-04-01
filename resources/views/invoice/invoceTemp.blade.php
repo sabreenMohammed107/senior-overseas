@@ -18,7 +18,7 @@
     font-size: 12px;
     padding: 5px 10px;
   
-    width: 60%;margin:auto;text-align:center;margin-top:20px
+    width: 70%;margin:auto;text-align:center;margin-top:20px
 }
 footer { position: fixed; bottom: -80px; left: 0px; right: 0px;  height: 100px; }
 
@@ -109,7 +109,7 @@ footer { position: fixed; bottom: -80px; left: 0px; right: 0px;  height: 100px; 
         }
         #table td{
             border-bottom:none;
-            padding:  8px 0;
+            padding:   0;
         }
     </style>
 </head>
@@ -117,9 +117,8 @@ footer { position: fixed; bottom: -80px; left: 0px; right: 0px;  height: 100px; 
 <body>
 <footer>
     <div class="footer" >
-    <p>Make all transfers and checks payable to <b>OVER SEAS EGYPT </b>
-QNB ACC # 00701-20317446147-53 <br>
-QNB ACC # 00701-20319927487-07<br>
+    <p>Make all transfers and checks payable to <b>OVER SEAS EGYPT </b></p>
+QNB EGP ACC # 00701-20317446147-53 | QNB USD ACC # 00701-20319927487-07<br>
 <b> Thank you for your business ! </b></p>
     </div></footer>
     <div class="container">
@@ -258,7 +257,7 @@ QNB ACC # 00701-20319927487-07<br>
                     <tr>
                         <th colspan="3"></th>
                         <th style=" border-bottom:1px solid #ccc;
-                border-width: thin;background:#eee ;color:#333 ;padding:8px 0px" colspan="2">Summery</th>
+                border-width: thin;background:#eee ;color:#333 ;padding:8px 0px" colspan="2">Summary</th>
                         
                     </tr>
                 <tbody >
@@ -268,12 +267,12 @@ QNB ACC # 00701-20319927487-07<br>
                      <td style="width: 15%;"></td>
                      <td style="width: 15%;"></td>
                      <td style="width: 15%;"></td>
-                            <td >
-                                <strong>sub total - {{$cur}}</strong>
+                            <td style="text-align: left;">
+                                <p>Sub total</p>
                             </td>
                             @foreach($totals as $total)
                             @if($total->cur===$cur)
-                            <td >
+                            <td style="text-align: right;">
 
                                 {{" " . number_format($total->num, 2, '.', ',')  }} <br>
                             </td>
@@ -286,11 +285,11 @@ QNB ACC # 00701-20319927487-07<br>
                      <td style="width: 20%;"></td>
                      <td style="width: 20%;"></td>
                             <td >
-                                <strong>vat - {{$cur}}</strong>
+                                <p style="text-align: left;padding:0">Vat</p>
                             </td>
                             @foreach($totals as $total)
                             @if($total->cur===$cur)
-                            <td >
+                            <td style="text-align: right;padding:0">
 
                                 {{" " . number_format($total->subtotalnum, 2, '.', ',')  }} <br>
                             </td>
@@ -302,11 +301,11 @@ QNB ACC # 00701-20319927487-07<br>
                      <td style="width: 20%;"></td>
                      <td style="width: 20%;"></td>
                             <td style="background-color: #eee;border-bottom:1px solid #333 ">
-                                <strong>total - {{$cur}}</strong>
+                                <p style="text-align: left;">total - {{$cur}}</p>
                             </td>
                             @foreach($totals as $total)
                             @if($total->cur===$cur)
-                            <td style="background-color: #eee;border-bottom:1px solid #333">
+                            <td style="background-color: #eee;border-bottom:1px solid #333;text-align:right">
 
                                 {{" " . number_format(($total->num + $total->subtotalnum), 2, '.',',')  }} <br>
 
