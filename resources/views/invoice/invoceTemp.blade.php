@@ -11,18 +11,16 @@
       @page {
 	header: page-header;
 	footer: page-footer;
-    margin-bottom: 200px;
+    margin-bottom: 100px;
 }
-.page-break {
- page-break-after: always;
-}
+
 .footer{
     font-size: 12px;
     padding: 5px 10px;
   
     width: 60%;margin:auto;text-align:center;margin-top:20px
 }
-footer { position: fixed; bottom: -60px; left: 0px; right: 0px; background-color: lightblue; height: 100px; }
+footer { position: fixed; bottom: -80px; left: 0px; right: 0px;  height: 100px; }
 
 
         html,
@@ -256,7 +254,14 @@ QNB ACC # 00701-20319927487-07<br>
             <div class="hero-data" style="width: 100%">
            
                 <table width="100%" id="table" style="font-size: 14px;border:none"  cellspacing="0" cellpadding="0">
-                    <tbody >
+                <thead >
+                    <tr>
+                        <th colspan="3"></th>
+                        <th style=" border-bottom:1px solid #ccc;
+                border-width: thin;background:#eee ;color:#333 ;padding:8px 0px" colspan="2">Summery</th>
+                        
+                    </tr>
+                <tbody >
                         @foreach($curs as $cur)
 
                         <tr>
