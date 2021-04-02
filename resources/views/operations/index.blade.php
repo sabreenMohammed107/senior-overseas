@@ -55,18 +55,28 @@
 
                                     @if($row->account_confirm==1)
                                     <button class="btn btn-info d-inline-block" disabled>edit</button>
-                                    <button class="btn d-inline-block btn-danger" disabled>delete</button>
                                     <button class="btn d-inline-block btn-dark" disabled>send To Account</button>
 
                                     @else
                                     <a href="{{ route('operations.edit',$row->id) }}" class="btn btn-info d-inline-block">edit</a>
+                                   
+                                    @endif
+
+
+
+
+                                    
+                                    @if (Auth::user()->role_id == 1 || Auth::user()->role_id == 5)
+                                    @if($row->account_confirm ==1)
                                     <a href="#" onclick="destroy('operations','{{$row->id}}')" class="btn d-inline-block btn-danger">delete</a>
+
                                     <form id="delete_{{$row->id}}" action="{{ route('operations.destroy', $row->id) }}" method="POST" style="display: none;">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" value=""></button>
                                     </form>
-                                    @if (Auth::user()->role_id==1 || Auth::user()->role_id==5 )
+                                    @else
+
                                     <a href="#" onclick="sendAccount('operations','{{$row->id}}')" class="btn d-inline-block btn-dark">Send To Account</a>
                                     <form id="send_{{$row->id}}" action="{{ route('aaa', $row->id) }}" method="POST" style="display: none;">
                                         @csrf
@@ -75,6 +85,16 @@
                                     </form>
                                     @endif
                                     @endif
+@if($row->account_confirm !=1)
+
+<a href="#" onclick="destroy('operations','{{$row->id}}')" class="btn d-inline-block btn-danger">delete</a>
+                                    <form id="delete_{{$row->id}}" action="{{ route('operations.destroy', $row->id) }}" method="POST" style="display: none;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" value=""></button>
+                                    </form>
+                                    @endif
+
                                 </td>
                             </tr>
                             @endforeach

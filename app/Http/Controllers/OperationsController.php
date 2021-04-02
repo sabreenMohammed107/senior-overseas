@@ -493,13 +493,20 @@ class OperationsController extends Controller
     {
         $row = Operation::where('id', '=', $id)->first();
         $expens = Operation_expense::where('operation_id', $id)->get();
-
+        $finance= Financial_entry::where('operation_id', $id)->get();
         try {
             //new Edit Delete Expensice 23-2-2021
             if ($expens) {
                 foreach ($expens as $exp) {
                     $exp->delete();
                 }
+            }
+
+                  //new Edit Delete financeEntry 2-4-2021
+                  if ($finance) {
+                    foreach ($finance as $fin) {
+                        $fin->delete();
+                    }
             }
 
             $row->delete();
