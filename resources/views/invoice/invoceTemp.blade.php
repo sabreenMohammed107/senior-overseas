@@ -9,7 +9,7 @@
     <title>Document</title>
     <style>
         @page {
-           margin-top: 300px;
+           margin-top: 320px;
             margin-bottom: 100px;
             
         }
@@ -21,15 +21,15 @@
             width: 70%;
             margin: auto;
             text-align: center;
-            margin-top: 20px
+            margin-top: 40px
         }
       
         header {
             position: fixed;
            
-            top: -300px;
+            top: -320px;
            
-            height: 300px;
+            height: 320px;
           
         }
 
