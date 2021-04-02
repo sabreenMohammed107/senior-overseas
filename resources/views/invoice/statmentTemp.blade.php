@@ -156,7 +156,7 @@
                     <img src="{{ public_path('adminasset/img/logo.png') }}" alt="">
                 </div>
                 <div class="logo-name">
-                    <h1>INVOICE</h1>
+                    <h1>Statment</h1>
                 </div>
                 <div style="clear: both;"></div>
             </div>
@@ -173,7 +173,7 @@
                     <p>Date : <span>
                             {{ date_format($dateinvoice,'Y-m-d') ?? '' }}
                         </span></p>
-                    <p>Invoice # : <span>
+                    <p>Statment # : <span>
                             {{ $invoice->invoice_no }}
                         </span></p>
                 </div>
