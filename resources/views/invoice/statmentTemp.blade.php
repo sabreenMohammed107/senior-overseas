@@ -303,39 +303,8 @@
                 <tbody>
                     @foreach($curs as $cur)
 
-                    <tr>
-                        <td style="width: 15%;"></td>
-                        <td style="width: 15%;"></td>
-                        <td style="width: 15%;"></td>
-                        <td style="text-align: left;">
-                            <p>Sub total</p>
-                        </td>
-                        @foreach($totals as $total)
-                        @if($total->cur===$cur)
-                        <td style="text-align: right;">
+                   
 
-                            {{" " . number_format($total->num, 2, '.', ',')  }} <br>
-                        </td>
-                        @endif
-                        @endforeach
-                    </tr>
-
-                    <tr>
-                        <td style="width: 20%;"></td>
-                        <td style="width: 20%;"></td>
-                        <td style="width: 20%;"></td>
-                        <td>
-                            <p style="text-align: left;padding:0">Vat</p>
-                        </td>
-                        @foreach($totals as $total)
-                        @if($total->cur===$cur)
-                        <td style="text-align: right;padding:0">
-
-                            {{" " . number_format($total->subtotalnum, 2, '.', ',')  }} <br>
-                        </td>
-                        @endif
-                        @endforeach
-                    </tr>
                     <tr style="padding: 0;">
                         <td style="width: 20%;"></td>
                         <td style="width: 20%;"></td>
@@ -347,7 +316,7 @@
                         @if($total->cur===$cur)
                         <td style="background-color: #eee;text-align:right">
 
-                            {{" " . number_format(($total->num + $total->subtotalnum), 2, '.',',')  }} <br>
+                        {{" " . number_format($total->num, 2, '.', ',')  }} <br> 
 
                         </td>
                         @endif
@@ -364,7 +333,7 @@
                         <td colspan="2" style="background-color: #eee;border-bottom:1px solid #333;text-align:center;font-weight:bold">
 
 
-                            {{ \Terbilang::make($total->num + $total->subtotalnum, " - $cur")}}
+                        {{$total->total}}
                         </td>
                         @endif
                         @endforeach
