@@ -9,8 +9,7 @@
     <title>Document</title>
     <style>
         @page {
-            header: page-header;
-            footer: page-footer;
+           margin-top: 300px;
             margin-bottom: 100px;
             
         }
@@ -24,12 +23,12 @@
             text-align: center;
             margin-top: 20px
         }
-        footer .page:after { content: counter(page, upper-roman); }
+      
         header {
             position: fixed;
-            left: 0px;
-            top: 0px;
-            right: 0px;
+           
+            top: -300px;
+           
             height: 300px;
           
         }
@@ -51,7 +50,7 @@
         }
 
         .body-page {
-            padding: 35px 0 0;
+            /* padding: 35px 0 0; */
 
             width: 100%;
         }
@@ -68,7 +67,7 @@
 
         .headerr,
         .hero {
-            margin-top: 10px;
+            /* margin-top: 10px; */
             width: 100%;
 
         }
@@ -141,6 +140,8 @@
             padding: 5px !important;
             margin: 0;
         }
+    
+   
     </style>
 </head>
 
@@ -223,9 +224,10 @@
             </div>
         </div>
     </footer>
-    <div class="container">
+  
+    <div class="container" >
     <!-- table -->
-    <div class="hero" style="margin-top:330px;">
+    <div class="hero" >
         <table width="100%">
             <thead style="border-bottom: 1px solid #ccc; background:#333;color:#fff">
                 <tr>
@@ -287,7 +289,7 @@
             </tbody>
         </table>
     </div>
-    <div class="hero" style="margin-top: 10px;">
+    <div class="hero" style="margin-top: 20px;">
         <div class="hero-data" style="width: 100%">
 
             <table width="100%" id="table" style="font-size: 14px;border:none" cellspacing="0" cellpadding="0" page-break-inside: auto;>
@@ -379,7 +381,7 @@
 
     </div>
 
-
+<p></p>
 
 </body>
 
