@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Invoice;
 use App\Models\Operation;
+use App\Models\Parameter;
 use App\Models\Operation_expense;
 use File;
 use DB;
@@ -276,6 +277,7 @@ class InvoiceController extends Controller
 
     public function printInvoicePDF($id)
     {
+        $parameter=Parameter::where('name', 'like', '%' . 'vat' . '%')->first();
         $invoice = Invoice::where('id', '=', $id)->first();
         $rows = Operation_expense::where('operation_id', '=', $invoice->operation_id)->whereNotNull('sell')->where('invoice_statement_flag', '=', 1)->orderBy("id", "Desc")->get();
         $curs = [];
@@ -295,14 +297,16 @@ class InvoiceController extends Controller
                     if ($row->automatic == 1) {
                         $total = $total + ($row->sell * $row->operation->container_counts);
                         if($row->has_tax == 1){
-                            $subtotal= $subtotal + (($row->sell*0.14) * $row->operation->container_counts);
+                            //get 0.14 form parameters
+                            $subtotal= $subtotal + (($row->sell* $parameter->value) * $row->operation->container_counts);
                             // $vat=$vat+($total -$subtotal);
                         }
                         
                     } else {
                         $total = $total + ($row->sell * 1);
                         if($row->has_tax == 1){
-                            $subtotal= $subtotal + (($row->sell*0.14) * 1);
+                            //get 0.14 form parameters
+                            $subtotal= $subtotal + (($row->sell* $parameter->value) * 1);
                             // $vat=$vat+($total -$subtotal);
                         }
                     }

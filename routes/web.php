@@ -77,8 +77,9 @@ Route::resource('/role', 'RolesController');
 // Route::get('fetchOcean', 'SalesQuoteController@fetchOcean')->name('fetchOcean');
 // Route::get('fetchTrucking', 'SalesQuoteController@fetchTrucking')->name('fetchTrucking');
 
+//new for parameters as vat=0.14
 
-
+Route::resource('/parameter', 'ParameterController');
 //----------------------------------------------------
 Route::resource('/sale-quote', 'SalesQuoteController');
 Route::get('fetchAir', 'SalesQuoteController@fetchAir')->name('fetchAir');

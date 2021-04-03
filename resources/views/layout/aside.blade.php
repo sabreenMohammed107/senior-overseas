@@ -44,6 +44,7 @@
       <li> <a href="{{ route('country.index') }}">Countries</a> </li>
   
       @endif
+      <li> <a href="{{ route('parameter.index') }}">Parameters</a> </li>
     </ul>
   </li>
   @endif
