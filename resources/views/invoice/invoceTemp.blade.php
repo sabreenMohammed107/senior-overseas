@@ -269,7 +269,7 @@
                 @foreach($rows as $index => $row)
                 <tr>
                     <td>{{$index+1}}</td>
-                    <td> @if($row->automatic == 1) {{$row->type->expense_name }} @else {{$row->provider->expense_name}} @endif</td>
+                    <td> @if($row->automatic == 1)  {{$row->type->expense_name ?? '11'}} @else  {{$row->provider->expense_name ?? '22'}} @endif</td>
                     <td>{{ $row->operation->container_counts}} @if($row->operation->ocean) <span>X</span> @endif {{$row->operation->ocean->ocean->container->container_size ?? ''}} {{ $row->operation->ocean->ocean->container->container_type ?? ''}}</td>
                     <td>{{$row->sell}}</td>
                     <td></i>{{$row->currency->currency_name}}</td>
