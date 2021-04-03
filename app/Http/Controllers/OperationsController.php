@@ -238,6 +238,7 @@ class OperationsController extends Controller
                 $objBuy->sell = null;
                 $objBuy->currency_id = $ocean->ocean->currency_id;
                 $objBuy->invoice_statement_flag = 1;
+               
                 array_push($savingExpense, $objBuy);
                 //another row
                 $objSell = new Collection();
@@ -249,6 +250,7 @@ class OperationsController extends Controller
                 $objSell->sell = $ocean->price;
                 $objSell->currency_id = $ocean->ocean->currency_id;
                 $objSell->invoice_statement_flag = 1;
+               
                 array_push($savingExpense, $objSell);
             }
 
@@ -262,6 +264,8 @@ class OperationsController extends Controller
                 $obj2Buy->sell = null;
                 $obj2Buy->currency_id = $air->currency_id;
                 $obj2Buy->invoice_statement_flag = 1;
+                  //new expression
+                
                 array_push($savingExpense, $obj2Buy);
 
 
@@ -288,7 +292,7 @@ class OperationsController extends Controller
                 $obj3->currency_id = $truck->currency_id;
                 $obj3->invoice_statement_flag = 1;
                 //new 30-3-2021
-                $obj3->expenses_type_id = Expense::where('id','=',22)->first()->id;
+                // $obj3->expenses_type_id = Expense::where('id','=',22)->first()->id;
                 array_push($savingExpense, $obj3);
                 //another row
                 $obj3Sell = new Collection();
@@ -301,7 +305,7 @@ class OperationsController extends Controller
                 $obj3Sell->currency_id = $truck->currency_id;
                 $obj3Sell->invoice_statement_flag = 1;
                   //new 30-3-2021
-                  $obj3Sell->expenses_type_id = Expense::where('id','=',22)->first()->id;
+                //   $obj3Sell->expenses_type_id = Expense::where('id','=',22)->first()->id;
                 array_push($savingExpense, $obj3Sell);
             }
 
