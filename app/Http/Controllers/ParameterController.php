@@ -32,7 +32,7 @@ class ParameterController extends Controller
     {
         $rows = Parameter::orderBy("created_at", "Desc")->get();
       
-        return view($this->viewName . 'index', compact('rows', ));
+        return view($this->viewName . 'index', compact('rows'));
     }
 
     /**
