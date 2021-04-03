@@ -301,7 +301,7 @@ class OperationsController extends Controller
                 $obj3Sell->currency_id = $truck->currency_id;
                 $obj3Sell->invoice_statement_flag = 1;
                   //new 30-3-2021
-                  $obj3->expenses_type_id = Expense::where('id','=',22)->first()->id;
+                  $obj3Sell->expenses_type_id = Expense::where('id','=',22)->first()->id;
                 array_push($savingExpense, $obj3Sell);
             }
 
