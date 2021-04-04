@@ -47,7 +47,7 @@ class AirRateController extends Controller
         $currencies = Currency::all();
         $agents = Agent::all();
 
-        return view($this->viewName . 'index', compact('rows', 'carriers', 'aols','agents', 'aods', 'currencies',));
+        return view($this->viewName . 'index', compact('rows', 'carriers', 'aols','agents', 'aods', 'currencies'));
     }
 
     /**
@@ -151,7 +151,7 @@ class AirRateController extends Controller
         $currencies = Currency::all();
         $agents = Agent::all();
 
-        return view($this->viewName . 'edit', compact('row', 'carriers', 'aols', 'agents','aods', 'currencies',));
+        return view($this->viewName . 'edit', compact('row', 'carriers', 'aols', 'agents','aods', 'currencies'));
     }
 
     /**

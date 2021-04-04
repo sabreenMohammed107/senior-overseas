@@ -40,7 +40,7 @@ class CommodityController extends Controller
 
         $rows = Commodity::orderBy("created_at", "Desc")->get();
 
-        return view($this->viewName . 'index', compact('rows',));
+        return view($this->viewName . 'index', compact('rows'));
     }
 
     /**
@@ -91,7 +91,7 @@ class CommodityController extends Controller
     {
         $row = Commodity::where('id', '=', $id)->first();
       
-        return view($this->viewName . 'edit', compact('row', ));
+        return view($this->viewName . 'edit', compact('row'));
     }
 
     /**

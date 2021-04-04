@@ -33,7 +33,7 @@ class RolesController extends Controller
     {
         $rows = Role::orderBy("created_at", "Desc")->get();
 
-        return view($this->viewName . 'index', compact('rows',));
+        return view($this->viewName . 'index', compact('rows'));
     }
 
     /**
@@ -84,7 +84,7 @@ class RolesController extends Controller
     {
         $row = Role::where('id', '=', $id)->first();
       
-        return view($this->viewName . 'edit', compact('row', ));
+        return view($this->viewName . 'edit', compact('row'));
     }
 
     /**

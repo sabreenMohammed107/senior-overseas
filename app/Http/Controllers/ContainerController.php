@@ -37,7 +37,7 @@ class ContainerController extends Controller
     {
         $rows = Container::orderBy("created_at", "Desc")->get();
        
-        return view($this->viewName . 'index', compact('rows',));
+        return view($this->viewName . 'index', compact('rows'));
     }
 
     /**
@@ -96,7 +96,7 @@ class ContainerController extends Controller
     {
         $row = Container::where('id', '=', $id)->first();
       
-        return view($this->viewName . 'edit', compact('row', ));
+        return view($this->viewName . 'edit', compact('row'));
     }
 
     /**

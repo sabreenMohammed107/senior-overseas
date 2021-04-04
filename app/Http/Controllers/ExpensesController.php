@@ -94,7 +94,7 @@ class ExpensesController extends Controller
     {
         $row = Expense::where('id', '=', $id)->first();
       
-        return view($this->viewName . 'edit', compact('row', ));
+        return view($this->viewName . 'edit', compact('row'));
     }
 
     /**

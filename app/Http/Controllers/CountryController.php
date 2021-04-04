@@ -38,7 +38,7 @@ class CountryController extends Controller
     {
         $rows = Country::orderBy("created_at", "Desc")->get();
       
-        return view($this->viewName . 'index', compact('rows', ));
+        return view($this->viewName . 'index', compact('rows'));
     }
 
     /**
@@ -94,7 +94,7 @@ class CountryController extends Controller
     {
         $row = Country::where('id', '=', $id)->first();
       
-        return view($this->viewName . 'edit', compact('row', ));
+        return view($this->viewName . 'edit', compact('row'));
     }
 
     /**

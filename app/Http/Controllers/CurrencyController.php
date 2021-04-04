@@ -38,7 +38,7 @@ class CurrencyController extends Controller
     {
         $rows = Currency::orderBy("created_at", "Desc")->get();
       
-        return view($this->viewName . 'index', compact('rows', ));
+        return view($this->viewName . 'index', compact('rows'));
     }
 
     /**
@@ -94,7 +94,7 @@ class CurrencyController extends Controller
     {
         $row = Currency::where('id', '=', $id)->first();
       
-        return view($this->viewName . 'edit', compact('row', ));
+        return view($this->viewName . 'edit', compact('row'));
     }
 
     /**
