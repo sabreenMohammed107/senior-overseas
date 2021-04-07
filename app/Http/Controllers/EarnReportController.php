@@ -115,7 +115,7 @@ foreach($opo as $ee){
          * Expenses
          */
        
-       $extraExpense=Cashbox_expenses_type::whereNotIn('id',[2,3,4,5,6,7])->get();
+       $extraExpense=Cashbox_expenses_type::whereNotIn('id',[2,3,4,5,6,7,8])->get();
      
         $data = [
             'title' => 'First PDF for Medium',
