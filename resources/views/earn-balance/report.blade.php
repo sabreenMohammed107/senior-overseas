@@ -8484,11 +8484,11 @@
                     ->sum('credit');
             }
             //usd
-            if ($from) {
+            if ($from && !$to) {
                 $use = App\Models\Financial_entry::where('trans_type_id', $extra->id)->where('currency_id', 1)
                     ->where('entry_date', '>=', Carbon\Carbon::parse($from))
                     ->sum('credit');
-            } elseif ($to) {
+                } elseif ($to && !$from) {
                 $use = App\Models\Financial_entry::where('trans_type_id', $extra->id)->where('currency_id', 1)
 
                     ->where('entry_date', '<=', Carbon\Carbon::parse($to))->sum('credit');
@@ -8501,11 +8501,11 @@
                     ->sum('credit');
             }
             //ure
-            if ($from) {
+            if ($from && !$to) {
                 $ure = App\Models\Financial_entry::where('trans_type_id', $extra->id)->where('currency_id', 3)
                     ->where('entry_date', '>=', Carbon\Carbon::parse($from))
                     ->sum('credit');
-            } elseif ($to) {
+                } elseif ($to && !$from) {
                 $ure = App\Models\Financial_entry::where('trans_type_id', $extra->id)->where('currency_id', 3)
 
                     ->where('entry_date', '<=', Carbon\Carbon::parse($to))->sum('credit');
