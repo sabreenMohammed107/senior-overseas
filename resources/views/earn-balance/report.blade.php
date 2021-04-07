@@ -8465,16 +8465,17 @@
             @foreach($extraExpense as $extra)
             <?php
 
-            if ($from) {
+            if ($from && !$to) {
                 $gyp = App\Models\Financial_entry::where('trans_type_id', $extra->id)->where('currency_id', 2)
                     ->where('entry_date', '>=', Carbon\Carbon::parse($from))
                     ->sum('credit');
-            } elseif ($to) {
+            } elseif ($to && !$from) {
+                
                 $gyp = App\Models\Financial_entry::where('trans_type_id', $extra->id)->where('currency_id', 2)
 
                     ->where('entry_date', '<=', Carbon\Carbon::parse($to))->sum('credit');
             } elseif ($to && $from) {
-         echo ($extra->id);
+       
                 $gyp = App\Models\Financial_entry::where('trans_type_id', $extra->id)->where('currency_id', 2)
                     ->where('entry_date', '>=', Carbon\Carbon::parse($from))
                     ->where('entry_date', '<=', Carbon\Carbon::parse($to))->sum('credit');
