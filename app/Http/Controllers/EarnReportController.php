@@ -106,7 +106,7 @@ class EarnReportController extends Controller
    
 foreach($opo as $ee){
    
-    $sellExpensesEgp += (Operation_expense::whereNotNull('sell')->where('currency_id', 2)->where('operation_id', $ee->id)->where('automatic',1)->sum('sell')*$ee->container_counts) +(Operation_expense::whereNotNull('sell')->where('currency_id', 2)->where('operation_id', $ee->id)->whereNull('automatic')->sum('sell'));
+    $sellExpensesEgp +=1;
     $sellExpensesUse += (Operation_expense::whereNotNull('sell')->where('currency_id', 1)->where('operation_id', $ee->id)->where('automatic',1)->sum('sell')*$ee->container_counts)+ (Operation_expense::whereNotNull('sell')->where('currency_id', 1)->where('operation_id', $ee->id)->whereNull('automatic')->sum('sell'));
     $sellExpensesUre += (Operation_expense::whereNotNull('sell')->where('currency_id', 3)->where('operation_id', $ee->id)->where('automatic',1)->sum('sell')*$ee->container_counts)+ (Operation_expense::whereNotNull('sell')->where('currency_id', 3)->where('operation_id', $ee->id)->whereNull('automatic')->sum('sell'));
     $buyExpensesEgp +=(Operation_expense::whereNotNull('buy')->where('currency_id', 2)->where('operation_id', $ee->id)->where('automatic',1)->sum('buy')*$ee->container_counts) +(Operation_expense::whereNotNull('buy')->where('currency_id', 2)->where('operation_id', $ee->id)->whereNull('automatic')->sum('buy'));
@@ -119,7 +119,7 @@ foreach($opo as $ee){
          * Expenses
          */
        
-       $extraExpense=Cashbox_expenses_type::whereNotIn('id',[2,3,4,5,6,7])->get();
+       $extraExpense=Cashbox_expenses_type::whereNotIn('id',[2,3,4,5,6,7,8])->get();
      
         $data = [
             'title' => 'First PDF for Medium',
