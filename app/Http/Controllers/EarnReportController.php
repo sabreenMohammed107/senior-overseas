@@ -73,9 +73,11 @@ class EarnReportController extends Controller
 
         $opo = Operation::select('*');
         if ($request->get("from_date") && !empty($request->get("from_date"))) {
+            dd("from");
             $opo->where('operation_date', '>=', Carbon::parse($request->get("from_date")));
         }
         if ($request->get("to_date") && !empty($request->get("to_date"))) {
+            dd("to");
             $opo->where('operation_date', '<=', Carbon::parse($request->get("to_date")));
         }
 
