@@ -103,7 +103,7 @@ class EarnReportController extends Controller
     $buyExpensesEgp=0.00;  
     $buyExpensesUse=0.00;  
     $buyExpensesUre=0.00;  
-   
+   dd($opo);
 foreach($opo as $ee){
 //   dd(Operation_expense::whereNotNull('sell')->where('currency_id', 2)->where('operation_id', $ee->id)->where('automatic',1)->sum('sell')*$ee->container_counts) +(Operation_expense::whereNotNull('sell')->where('currency_id', 2)->where('operation_id', $ee->id)->whereNull('automatic')->sum('sell'));
     $sellExpensesUse += (Operation_expense::whereNotNull('sell')->where('currency_id', 1)->where('operation_id', $ee->id)->where('automatic',1)->sum('sell')*$ee->container_counts) + (Operation_expense::whereNotNull('sell')->where('currency_id', 1)->where('operation_id', $ee->id)->whereNull('automatic')->sum('sell'));
