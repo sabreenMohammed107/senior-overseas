@@ -8481,7 +8481,7 @@
                     ->where('entry_date', '<=', Carbon\Carbon::parse($to))
                     ->sum('credit');
                     if($extra->id == 108){
-                        dd([$gyp,$from,$to]);
+                        dd([$gyp,Carbon\Carbon::parse($from),Carbon\Carbon::parse($to)]);
                     }
                   
             } else {
