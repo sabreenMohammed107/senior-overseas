@@ -8477,11 +8477,11 @@
             } elseif ($to && $from) {
        
                 $gyp = App\Models\Financial_entry::where('trans_type_id', $extra->id)->where('currency_id', 2)
-                    ->where('entry_date', '>=', Carbon\Carbon::parse($from))
-                    ->where('entry_date', '<=', Carbon\Carbon::parse($to))
+                    ->where('entry_date', '>=', DATE(Carbon\Carbon::parse($from)))
+                    ->where('entry_date', '<=', DATE(Carbon\Carbon::parse($to)))
                     ->sum('credit');
                     if($extra->id == 108){
-                        dd([$gyp,Carbon\Carbon::parse($from),Carbon\Carbon::parse($to)]);
+                        dd([$gyp,DATE(Carbon\Carbon::parse($from)),DATE(Carbon\Carbon::parse($to))]);
                     }
                   
             } else {
