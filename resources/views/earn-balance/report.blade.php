@@ -8467,22 +8467,20 @@
 
             if ($from && !$to) {
                 $gyp = App\Models\Financial_entry::where('trans_type_id', $extra->id)->where('currency_id', 2)
-                    ->where('entry_date', '>=', Carbon\Carbon::parse($from))
+                ->whereDate('entry_date', '>=', Carbon\Carbon::parse($from)->format('Y-m-d'))
                     ->sum('credit');
             } elseif ($to && !$from) {
                 
                 $gyp = App\Models\Financial_entry::where('trans_type_id', $extra->id)->where('currency_id', 2)
 
-                    ->where('entry_date', '<=', Carbon\Carbon::parse($to))->sum('credit');
+                ->whereDate('entry_date', '<=', Carbon\Carbon::parse($to)->format('Y-m-d'))->sum('credit');
             } elseif ($to && $from) {
        
                 $gyp = App\Models\Financial_entry::where('trans_type_id', $extra->id)->where('currency_id', 2)
                     ->whereDate('entry_date', '>=', Carbon\Carbon::parse($from)->format('Y-m-d'))
                     ->whereDate('entry_date', '<=', Carbon\Carbon::parse($to)->format('Y-m-d'))
                     ->sum('credit');
-                    if($extra->id == 108){
-                        dd([$gyp,Carbon\Carbon::parse($from)->format('Y-m-d'),Carbon\Carbon::parse($to)->format('Y-m-d')]);
-                    }
+                   
                   
             } else {
                 $gyp = App\Models\Financial_entry::where('trans_type_id', $extra->id)->where('currency_id', 2)
@@ -8491,16 +8489,16 @@
             //usd
             if ($from && !$to) {
                 $use = App\Models\Financial_entry::where('trans_type_id', $extra->id)->where('currency_id', 1)
-                    ->where('entry_date', '>=', Carbon\Carbon::parse($from))
+                ->whereDate('entry_date', '>=', Carbon\Carbon::parse($from)->format('Y-m-d'))
                     ->sum('credit');
                 } elseif ($to && !$from) {
                 $use = App\Models\Financial_entry::where('trans_type_id', $extra->id)->where('currency_id', 1)
 
-                    ->where('entry_date', '<=', Carbon\Carbon::parse($to))->sum('credit');
+                ->whereDate('entry_date', '<=', Carbon\Carbon::parse($to)->format('Y-m-d'))->sum('credit');
             } elseif ($to && $from) {
                 $use = App\Models\Financial_entry::where('trans_type_id', $extra->id)->where('currency_id', 1)
-                    ->where('entry_date', '>=', Carbon\Carbon::parse($from))
-                    ->where('entry_date', '<=', Carbon\Carbon::parse($to))->sum('credit');
+                ->whereDate('entry_date', '>=', Carbon\Carbon::parse($from)->format('Y-m-d'))
+                ->whereDate('entry_date', '<=', Carbon\Carbon::parse($to)->format('Y-m-d'))->sum('credit');
             } else {
                 $use = App\Models\Financial_entry::where('trans_type_id', $extra->id)->where('currency_id', 1)
                     ->sum('credit');
@@ -8508,16 +8506,16 @@
             //ure
             if ($from && !$to) {
                 $ure = App\Models\Financial_entry::where('trans_type_id', $extra->id)->where('currency_id', 3)
-                    ->where('entry_date', '>=', Carbon\Carbon::parse($from))
+                ->whereDate('entry_date', '>=', Carbon\Carbon::parse($from)->format('Y-m-d'))
                     ->sum('credit');
                 } elseif ($to && !$from) {
                 $ure = App\Models\Financial_entry::where('trans_type_id', $extra->id)->where('currency_id', 3)
 
-                    ->where('entry_date', '<=', Carbon\Carbon::parse($to))->sum('credit');
+                ->whereDate('entry_date', '<=', Carbon\Carbon::parse($to)->format('Y-m-d'))->sum('credit');
             } elseif ($to && $from) {
                 $ure = App\Models\Financial_entry::where('trans_type_id', $extra->id)->where('currency_id', 3)
-                    ->where('entry_date', '>=', DATE(Carbon\Carbon::parse($from)))
-                    ->where('entry_date', '<=', DATE(Carbon\Carbon::parse($to)))->sum('credit');
+                ->whereDate('entry_date', '>=', Carbon\Carbon::parse($from)->format('Y-m-d'))
+                ->whereDate('entry_date', '<=', Carbon\Carbon::parse($to)->format('Y-m-d'))->sum('credit');
             } else {
                 $ure = App\Models\Financial_entry::where('trans_type_id', $extra->id)->where('currency_id', 3)
                     ->sum('credit');
