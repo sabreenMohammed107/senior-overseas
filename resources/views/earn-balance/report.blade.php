@@ -8478,7 +8478,9 @@
        
                 $gyp = App\Models\Financial_entry::where('trans_type_id', $extra->id)->where('currency_id', 2)
                     ->where('entry_date', '>=', Carbon\Carbon::parse($from))
-                    ->where('entry_date', '<=', Carbon\Carbon::parse($to))->sum('credit');
+                    ->where('entry_date', '<=', Carbon\Carbon::parse($to))
+                    ->sum('credit');
+                    dd([$gyp,$from,$to]);
             } else {
                 $gyp = App\Models\Financial_entry::where('trans_type_id', $extra->id)->where('currency_id', 2)
                     ->sum('credit');
