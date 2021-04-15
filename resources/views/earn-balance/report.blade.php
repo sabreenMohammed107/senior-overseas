@@ -8516,8 +8516,8 @@
                     ->where('entry_date', '<=', Carbon\Carbon::parse($to))->sum('credit');
             } elseif ($to && $from) {
                 $ure = App\Models\Financial_entry::where('trans_type_id', $extra->id)->where('currency_id', 3)
-                    ->where(DATE('entry_date'), '>=', DATE(Carbon\Carbon::parse($from)))
-                    ->where(DATE('entry_date'), '<=', DATE(Carbon\Carbon::parse($to)))->sum('credit');
+                    ->where('entry_date', '>=', DATE(Carbon\Carbon::parse($from)))
+                    ->where('entry_date', '<=', DATE(Carbon\Carbon::parse($to)))->sum('credit');
             } else {
                 $ure = App\Models\Financial_entry::where('trans_type_id', $extra->id)->where('currency_id', 3)
                     ->sum('credit');
