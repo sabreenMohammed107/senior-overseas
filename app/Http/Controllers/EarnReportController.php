@@ -97,12 +97,12 @@ class EarnReportController extends Controller
         // $buyExpensesEgp = Operation_expense::whereNotNull('buy')->where('currency_id', 2)->whereIn('operation_id', $operations)->sum('buy');
         // $buyExpensesUse = Operation_expense::whereNotNull('buy')->where('currency_id', 1)->whereIn('operation_id', $operations)->sum('buy');
         // $buyExpensesUre = Operation_expense::whereNotNull('buy')->where('currency_id', 3)->whereIn('operation_id', $operations)->sum('buy');
-    $sellExpensesEgp=0;  
-    $sellExpensesUse=0;  
-    $sellExpensesUre=0;  
-    $buyExpensesEgp=0;  
-    $buyExpensesUse=0;  
-    $buyExpensesUre=0;  
+    $sellExpensesEgp= number_format(floatval('0', 2, '.', '')); 
+    $sellExpensesUse= number_format(floatval('0', 2, '.', ''));  
+    $sellExpensesUre= number_format(floatval('0', 2, '.', '')); 
+    $buyExpensesEgp= number_format(floatval('0', 2, '.', '')); 
+    $buyExpensesUse= number_format(floatval('0', 2, '.', '')); 
+    $buyExpensesUre= number_format(floatval('0', 2, '.', '')); 
    
 foreach($opo as $ee){
 //   dd(Operation_expense::whereNotNull('sell')->where('currency_id', 2)->where('operation_id', $ee->id)->whereNull('automatic')->sum('sell'));
