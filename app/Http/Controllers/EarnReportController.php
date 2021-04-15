@@ -97,12 +97,12 @@ class EarnReportController extends Controller
         // $buyExpensesEgp = Operation_expense::whereNotNull('buy')->where('currency_id', 2)->whereIn('operation_id', $operations)->sum('buy');
         // $buyExpensesUse = Operation_expense::whereNotNull('buy')->where('currency_id', 1)->whereIn('operation_id', $operations)->sum('buy');
         // $buyExpensesUre = Operation_expense::whereNotNull('buy')->where('currency_id', 3)->whereIn('operation_id', $operations)->sum('buy');
-    $sellExpensesEgp= number_format(floatval('0'), 2, '.', ''); 
-    $sellExpensesUse= number_format(floatval('0'), 2, '.', '');  
-    $sellExpensesUre= number_format(floatval('0'), 2, '.', ''); 
-    $buyExpensesEgp= number_format(floatval('0'), 2, '.', ''); 
-    $buyExpensesUse= number_format(floatval('0'), 2, '.', ''); 
-    $buyExpensesUre= number_format(floatval('0'), 2, '.', ''); 
+    $sellExpensesEgp=0;  
+    $sellExpensesUse=0;  
+    $sellExpensesUre=0;  
+    $buyExpensesEgp=0;  
+    $buyExpensesUse=0;  
+    $buyExpensesUre=0;  
    
 foreach($opo as $ee){
 //   dd(Operation_expense::whereNotNull('sell')->where('currency_id', 2)->where('operation_id', $ee->id)->whereNull('automatic')->sum('sell'));
@@ -114,13 +114,19 @@ foreach($opo as $ee){
     // $buyExpensesUre += (Operation_expense::whereNotNull('buy')->where('currency_id', 3)->where('operation_id', $ee->id)->where('automatic',1)->sum('buy')*$ee->container_counts)+(Operation_expense::whereNotNull('buy')->where('currency_id', 3)->where('operation_id', $ee->id)->whereNull('automatic')->sum('buy'));
 }
 // dd([$sellExpensesEgp, $buyExpensesEgp, $sellExpensesUse, $buyExpensesUse]);
-$sellExpensesEgp +=number_format(floatval((Operation_expense::whereNotNull('sell')->where('currency_id', 2)->where('operation_id', $ee->id)->where('automatic',1)->sum('sell')*$ee->container_counts) +(Operation_expense::whereNotNull('sell')->where('currency_id', 2)->where('operation_id', $ee->id)->whereNull('automatic')->sum('sell'))), 2, '.', '');
-   $sellExpensesUse += number_format(floatval((Operation_expense::whereNotNull('sell')->where('currency_id', 1)->where('operation_id', $ee->id)->where('automatic',1)->sum('sell')*$ee->container_counts)+ (Operation_expense::whereNotNull('sell')->where('currency_id', 1)->where('operation_id', $ee->id)->whereNull('automatic')->sum('sell'))), 2, '.', '');
-   $sellExpensesUre += number_format(floatval((Operation_expense::whereNotNull('sell')->where('currency_id', 3)->where('operation_id', $ee->id)->where('automatic',1)->sum('sell')*$ee->container_counts)+ (Operation_expense::whereNotNull('sell')->where('currency_id', 3)->where('operation_id', $ee->id)->whereNull('automatic')->sum('sell'))), 2, '.', '');
-   $buyExpensesEgp  +=number_format(floatval((Operation_expense::whereNotNull('buy')->where('currency_id', 2)->where('operation_id', $ee->id)->where('automatic',1)->sum('buy')*$ee->container_counts) +(Operation_expense::whereNotNull('buy')->where('currency_id', 2)->where('operation_id', $ee->id)->whereNull('automatic')->sum('buy'))), 2, '.', '');
-    $buyExpensesUse += number_format(floatval((Operation_expense::whereNotNull('buy')->where('currency_id', 1)->where('operation_id', $ee->id)->where('automatic',1)->sum('buy')*$ee->container_counts) +(Operation_expense::whereNotNull('buy')->where('currency_id', 1)->where('operation_id', $ee->id)->whereNull('automatic')->sum('buy'))),2, '.', '');
-    $buyExpensesUre += number_format(floatval( (Operation_expense::whereNotNull('buy')->where('currency_id', 3)->where('operation_id', $ee->id)->where('automatic',1)->sum('buy')*$ee->container_counts)+(Operation_expense::whereNotNull('buy')->where('currency_id', 3)->where('operation_id', $ee->id)->whereNull('automatic')->sum('buy'))), 2, '.', '');
+// $sellExpensesEgp +=number_format(floatval((Operation_expense::whereNotNull('sell')->where('currency_id', 2)->where('operation_id', $ee->id)->where('automatic',1)->sum('sell')*$ee->container_counts) +(Operation_expense::whereNotNull('sell')->where('currency_id', 2)->where('operation_id', $ee->id)->whereNull('automatic')->sum('sell'))), 2, '.', '');
+//    $sellExpensesUse += number_format(floatval((Operation_expense::whereNotNull('sell')->where('currency_id', 1)->where('operation_id', $ee->id)->where('automatic',1)->sum('sell')*$ee->container_counts)+ (Operation_expense::whereNotNull('sell')->where('currency_id', 1)->where('operation_id', $ee->id)->whereNull('automatic')->sum('sell'))), 2, '.', '');
+//    $sellExpensesUre += number_format(floatval((Operation_expense::whereNotNull('sell')->where('currency_id', 3)->where('operation_id', $ee->id)->where('automatic',1)->sum('sell')*$ee->container_counts)+ (Operation_expense::whereNotNull('sell')->where('currency_id', 3)->where('operation_id', $ee->id)->whereNull('automatic')->sum('sell'))), 2, '.', '');
+//    $buyExpensesEgp  +=number_format(floatval((Operation_expense::whereNotNull('buy')->where('currency_id', 2)->where('operation_id', $ee->id)->where('automatic',1)->sum('buy')*$ee->container_counts) +(Operation_expense::whereNotNull('buy')->where('currency_id', 2)->where('operation_id', $ee->id)->whereNull('automatic')->sum('buy'))), 2, '.', '');
+//     $buyExpensesUse += number_format(floatval((Operation_expense::whereNotNull('buy')->where('currency_id', 1)->where('operation_id', $ee->id)->where('automatic',1)->sum('buy')*$ee->container_counts) +(Operation_expense::whereNotNull('buy')->where('currency_id', 1)->where('operation_id', $ee->id)->whereNull('automatic')->sum('buy'))),2, '.', '');
+//     $buyExpensesUre += number_format(floatval( (Operation_expense::whereNotNull('buy')->where('currency_id', 3)->where('operation_id', $ee->id)->where('automatic',1)->sum('buy')*$ee->container_counts)+(Operation_expense::whereNotNull('buy')->where('currency_id', 3)->where('operation_id', $ee->id)->whereNull('automatic')->sum('buy'))), 2, '.', '');
 
+$sellExpensesEgp +=int((Operation_expense::whereNotNull('sell')->where('currency_id', 2)->where('operation_id', $ee->id)->where('automatic',1)->sum('sell')*$ee->container_counts) +(Operation_expense::whereNotNull('sell')->where('currency_id', 2)->where('operation_id', $ee->id)->whereNull('automatic')->sum('sell')));
+   $sellExpensesUse += int((Operation_expense::whereNotNull('sell')->where('currency_id', 1)->where('operation_id', $ee->id)->where('automatic',1)->sum('sell')*$ee->container_counts)+ (Operation_expense::whereNotNull('sell')->where('currency_id', 1)->where('operation_id', $ee->id)->whereNull('automatic')->sum('sell')));
+   $sellExpensesUre += int((Operation_expense::whereNotNull('sell')->where('currency_id', 3)->where('operation_id', $ee->id)->where('automatic',1)->sum('sell')*$ee->container_counts)+ (Operation_expense::whereNotNull('sell')->where('currency_id', 3)->where('operation_id', $ee->id)->whereNull('automatic')->sum('sell')));
+   $buyExpensesEgp  +=int((Operation_expense::whereNotNull('buy')->where('currency_id', 2)->where('operation_id', $ee->id)->where('automatic',1)->sum('buy')*$ee->container_counts) +(Operation_expense::whereNotNull('buy')->where('currency_id', 2)->where('operation_id', $ee->id)->whereNull('automatic')->sum('buy')));
+    $buyExpensesUse += int((Operation_expense::whereNotNull('buy')->where('currency_id', 1)->where('operation_id', $ee->id)->where('automatic',1)->sum('buy')*$ee->container_counts) +(Operation_expense::whereNotNull('buy')->where('currency_id', 1)->where('operation_id', $ee->id)->whereNull('automatic')->sum('buy')));
+    $buyExpensesUre += int((Operation_expense::whereNotNull('buy')->where('currency_id', 3)->where('operation_id', $ee->id)->where('automatic',1)->sum('buy')*$ee->container_counts)+(Operation_expense::whereNotNull('buy')->where('currency_id', 3)->where('operation_id', $ee->id)->whereNull('automatic')->sum('buy')));
 
 
         /**
