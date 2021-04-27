@@ -91,7 +91,7 @@ class OperationBalanceController extends Controller
         $sellExpenses = Operation_expense::whereNotNull('sell')->whereIn('operation_id', $operations)->get();
         $buyExpenses = Operation_expense::whereNotNull('buy')->whereIn('operation_id', $operations)->get();
 
-dd($operations);
+
 
 
         $data = [
