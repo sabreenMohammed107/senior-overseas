@@ -170,10 +170,10 @@
                     <?php $dateinvoice = date_create($invoice->invoice_date)
                     ?>
 
-                    <p>Date : <span>
+                    <p>Date : <span style="color: #333;">
                             {{ date_format($dateinvoice,'Y-m-d') ?? '' }}
                         </span></p>
-                    <p>Invoice # : <span>
+                    <p>Invoice # : <span style="color: #333;">
                             {{ $invoice->invoice_no }}
                         </span></p>
                 </div>
@@ -185,7 +185,7 @@
             <div class="hero">
                 <div class="logo2">
                     <!-- <div class="hero-data"> -->
-                    <p>to:<span>{{$invoice->operation->sale->client->client_name ?? '' }}
+                    <p>To:<span style="color: #333;">{{$invoice->operation->sale->client->client_name ?? '' }}
                             <br> {{$invoice->operation->sale->client->address ?? '' }}</span></p>
                     <!-- </div> -->
                 </div>
